@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>硕大的汤姆</title>
-    <link>https://chenminhua.github.io/</link>
-    <description>Recent content on 硕大的汤姆</description>
+    <title>Posts on 硕大的汤姆</title>
+    <link>https://chenminhua.github.io/posts/</link>
+    <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 18 Mar 2018 23:46:50 +0800</lastBuildDate>
     
-	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
