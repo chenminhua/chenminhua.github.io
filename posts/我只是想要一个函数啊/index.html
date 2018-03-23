@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>硕大的汤姆  | 我只是想要一个函数啊</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.31" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    <link href='https://chenminhua.github.io/dist/main.css' rel='stylesheet' type="text/css" />
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="我只是想要一个函数啊" />
+<meta property="og:description" content="从面向对象说起 面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c&#43;&#43;,java,c#等（严格意义上说，c&#43;&#43;应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。
+显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。
+相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
+对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是
+addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
+person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
+这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
+所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
+闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
+从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。
+function outside() { var a = 0 return function inside() { a&#43;&#43;; console.log(a) } } var f = outside() f() //1 f() //2 f() //3  我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+日常黑spring 最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。
+肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。
+如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/" />
+
+
+
+<meta property="article:published_time" content="2018-03-19T00:52:54&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-03-19T00:52:54&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="我只是想要一个函数啊">
+<meta itemprop="description" content="从面向对象说起 面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c&#43;&#43;,java,c#等（严格意义上说，c&#43;&#43;应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。
+显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。
+相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
+对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是
+addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
+person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
+这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
+所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
+闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
+从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。
+function outside() { var a = 0 return function inside() { a&#43;&#43;; console.log(a) } } var f = outside() f() //1 f() //2 f() //3  我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+日常黑spring 最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。
+肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。
+如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？">
+
+
+<meta itemprop="datePublished" content="2018-03-19T00:52:54&#43;08:00" />
+<meta itemprop="dateModified" content="2018-03-19T00:52:54&#43;08:00" />
+<meta itemprop="wordCount" content="56">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="我只是想要一个函数啊"/>
+<meta name="twitter:description" content="从面向对象说起 面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c&#43;&#43;,java,c#等（严格意义上说，c&#43;&#43;应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。
+显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。
+相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
+对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是
+addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
+person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
+这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
+所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
+闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
+从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。
+function outside() { var a = 0 return function inside() { a&#43;&#43;; console.log(a) } } var f = outside() f() //1 f() //2 f() //3  我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+日常黑spring 最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。
+肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。
+如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://chenminhua.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      硕大的汤姆
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <div class="flex-l mt2 mw8 center">
+    <article class="center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <p class="f6 b helvetica tracked">
+          POSTS
+        </p>
+        <h1 class="f1">
+          我只是想要一个函数啊
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
+        
+
+<h2 id="从面向对象说起">从面向对象说起</h2>
+
+<p>面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。</p>
+
+<p>显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。</p>
+
+<p>相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。</p>
+
+<h2 id="对象的本质">对象的本质</h2>
+
+<p>假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是</p>
+
+<pre><code>addOneYearAge(person)
+</code></pre>
+
+<p><strong>我们拿到一个数据的引用</strong>，然后给其年龄加一。而面向对象的方式则可能是</p>
+
+<pre><code>person.growUpOneYear()
+</code></pre>
+
+<p>这里我们有一个对象，<strong>然后给对象发送了一个消息，通知它发生一些变化</strong>。</p>
+
+<p>这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。</p>
+
+<p>所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。</p>
+
+<h2 id="闭包">闭包</h2>
+
+<p>为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？</p>
+
+<p>从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。</p>
+
+<pre><code class="language-js">function outside() {
+  var a = 0
+  return function inside() {
+    a++;
+    console.log(a)
+  }
+}
+
+var f = outside()
+f()  //1
+f()  //2
+f()  //3
+</code></pre>
+
+<p>我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。</p>
+
+<p>其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。</p>
+
+<h2 id="日常黑spring">日常黑spring</h2>
+
+<p>最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！
+肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。</p>
+
+<p>肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。</p>
+
+<p>如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？</p>
+
+      </div>
+    </article>
+    <aside class="ph3 mt2 mt6-ns">
+      
+
+
+
+
+
+
+
+  <div class="bg-light-gray pa3">
+    <ul>
+      <li class="list b mb3">
+        2 More Posts
+      </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/optional/" class="link ph2 pv2 db black">
+            kotlin中的可空类型
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/" class="link ph2 pv2 db black o-50">
+            我只是想要一个函数啊
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/" class="link ph2 pv2 db black">
+            装逼的艺术
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+    </aside>
+  </div>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://chenminhua.github.io/" >
+    &copy; 2018 硕大的汤姆
+  </a>
+  
+
+
+
+
+
+
+
+
+  </div>
+</footer>
+
+    <script src="https://chenminhua.github.io/dist/app.bundle.js" async></script>
+
+  </body>
+</html>
