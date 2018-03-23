@@ -6,10 +6,27 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Mar 2018 00:52:54 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 23 Mar 2018 19:17:45 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>kotlin中的可空类型</title>
+      <link>https://chenminhua.github.io/posts/optional/</link>
+      <pubDate>Fri, 23 Mar 2018 19:17:45 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/optional/</guid>
+      <description>最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
+fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
+print(getProject(&amp;quot;no such project&amp;quot;)) // null  返回结果是null!!
+kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
+其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，
+projectMapper.getProjectByCode(projectCode): ProjectDO  但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。
+所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。
+by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class
+/** * Annotations are to be recorded in the class file by the compiler * but need not be retained by the VM at run time. This is the default * behavior. */ CLASS,  说白了，它可不会在运行时起作用。</description>
+    </item>
     
     <item>
       <title>对象与闭包</title>
