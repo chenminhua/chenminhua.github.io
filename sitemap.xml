@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chenminhua.github.io/posts/the_rule_of_hole/</loc>
+    <lastmod>2018-03-24T16:52:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chenminhua.github.io/posts/copy_on_write/</loc>
     <lastmod>2018-03-24T08:17:29+08:00</lastmod>
   </url>
@@ -29,7 +34,7 @@
   
   <url>
     <loc>https://chenminhua.github.io/posts/</loc>
-    <lastmod>2018-03-24T08:17:29+08:00</lastmod>
+    <lastmod>2018-03-24T16:52:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -40,7 +45,7 @@
   
   <url>
     <loc>https://chenminhua.github.io/</loc>
-    <lastmod>2018-03-24T08:17:29+08:00</lastmod>
+    <lastmod>2018-03-24T16:52:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
