@@ -3,58 +3,58 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/akka/</loc>
+    <loc>https://chenminhua.github.io/posts/akka/</loc>
     <lastmod>2018-04-01T18:19:00+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</loc>
+    <loc>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</loc>
     <lastmod>2018-03-29T12:38:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/the_rule_of_hole/</loc>
+    <loc>https://chenminhua.github.io/posts/the_rule_of_hole/</loc>
     <lastmod>2018-03-24T16:52:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/copy_on_write/</loc>
+    <loc>https://chenminhua.github.io/posts/copy_on_write/</loc>
     <lastmod>2018-03-24T08:17:29+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/optional/</loc>
+    <loc>https://chenminhua.github.io/posts/optional/</loc>
     <lastmod>2018-03-23T19:17:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</loc>
+    <loc>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</loc>
     <lastmod>2018-03-19T00:52:54+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</loc>
+    <loc>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</loc>
     <lastmod>2018-03-18T23:46:50+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chenminhua.github.io/posts/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chenminhua.github.io/posts/posts/</loc>
-    <lastmod>2018-04-01T18:19:00+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chenminhua.github.io/posts/tags/</loc>
+    <loc>https://chenminhua.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chenminhua.github.io/posts/</loc>
+    <lastmod>2018-04-01T18:19:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/</loc>
     <lastmod>2018-04-01T18:19:00+08:00</lastmod>
     <priority>0</priority>
   </url>

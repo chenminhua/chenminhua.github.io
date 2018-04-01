@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 硕大的汤姆</title>
-    <link>https://chenminhua.github.io/posts/posts/</link>
+    <link>https://chenminhua.github.io/posts/</link>
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Apr 2018 18:19:00 +0800</lastBuildDate>
-    <atom:link href="https://chenminhua.github.io/posts/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Akka</title>
-      <link>https://chenminhua.github.io/posts/posts/akka/</link>
+      <link>https://chenminhua.github.io/posts/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/akka/</guid>
+      <guid>https://chenminhua.github.io/posts/akka/</guid>
       <description>
 
 &lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。&lt;/p&gt;
@@ -89,9 +89,9 @@ fun main(args: Array&amp;lt;String&amp;gt;) {
     
     <item>
       <title>并发与并行</title>
-      <link>https://chenminhua.github.io/posts/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
+      <link>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
       <pubDate>Thu, 29 Mar 2018 12:38:39 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
+      <guid>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
       <description>
 
 &lt;p&gt;很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。&lt;/p&gt;
@@ -134,9 +134,9 @@ fun main(args: Array&amp;lt;String&amp;gt;) {
     
     <item>
       <title>The_rule_of_hole</title>
-      <link>https://chenminhua.github.io/posts/posts/the_rule_of_hole/</link>
+      <link>https://chenminhua.github.io/posts/the_rule_of_hole/</link>
       <pubDate>Sat, 24 Mar 2018 16:52:45 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/the_rule_of_hole/</guid>
+      <guid>https://chenminhua.github.io/posts/the_rule_of_hole/</guid>
       <description>&lt;pre&gt;&lt;code&gt;The rule of hole:
 
 If you fall into a hole, don&#39;t dig
@@ -154,9 +154,9 @@ If you fall into a hole, don&#39;t dig
     
     <item>
       <title>Copy_on_write</title>
-      <link>https://chenminhua.github.io/posts/posts/copy_on_write/</link>
+      <link>https://chenminhua.github.io/posts/copy_on_write/</link>
       <pubDate>Sat, 24 Mar 2018 08:17:29 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/copy_on_write/</guid>
+      <guid>https://chenminhua.github.io/posts/copy_on_write/</guid>
       <description>
 
 &lt;h2 id=&#34;swift中的cow&#34;&gt;swift中的cow&lt;/h2&gt;
@@ -177,9 +177,9 @@ If you fall into a hole, don&#39;t dig
     
     <item>
       <title>kotlin中的可空类型</title>
-      <link>https://chenminhua.github.io/posts/posts/optional/</link>
+      <link>https://chenminhua.github.io/posts/optional/</link>
       <pubDate>Fri, 23 Mar 2018 19:17:45 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/optional/</guid>
+      <guid>https://chenminhua.github.io/posts/optional/</guid>
       <description>&lt;p&gt;最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode) 
@@ -219,9 +219,9 @@ CLASS,
     
     <item>
       <title>我只是想要一个函数啊</title>
-      <link>https://chenminhua.github.io/posts/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
+      <link>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
       <pubDate>Mon, 19 Mar 2018 00:52:54 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
+      <guid>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
       <description>
 
 &lt;h2 id=&#34;从面向对象说起&#34;&gt;从面向对象说起&lt;/h2&gt;
@@ -289,9 +289,9 @@ f()  //3
     
     <item>
       <title>装逼的艺术</title>
-      <link>https://chenminhua.github.io/posts/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
+      <link>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
       <pubDate>Sun, 18 Mar 2018 23:46:50 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
+      <guid>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
       <description>
 
 &lt;p&gt;最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。&lt;/p&gt;
