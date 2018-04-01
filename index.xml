@@ -2,135 +2,328 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>硕大的汤姆</title>
-    <link>https://chenminhua.github.io/</link>
+    <link>https://chenminhua.github.io/posts/</link>
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Apr 2018 18:19:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Akka</title>
-      <link>https://chenminhua.github.io/posts/akka/</link>
+      <link>https://chenminhua.github.io/posts/posts/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/akka/</guid>
-      <description>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。
-actors sending messages changing its state changing its behavior creating more actors
-class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .match(Activity::class.java, { this.onActivity(it) }) .match(Disable::class.java, { this.onDisable(it) }) .build() val disabled = receiveBuilder() .match(Enable::class.java, { this.onEnable(it) }).build() private fun onDisable(disable: Disable) { if (password == disable.password) { log().</description>
+      <guid>https://chenminhua.github.io/posts/posts/akka/</guid>
+      <description>
+
+&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。&lt;/p&gt;
+
+&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
+
+&lt;p&gt;sending messages
+changing its state
+changing its behavior
+creating more actors&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Activity
+
+class Disable(val password: String)
+
+class Enable(val password: String)
+
+class Alarm(val password: String): AbstractLoggingActor() {
+    override fun createReceive(): Receive {
+        return disabled
+    }
+
+    val enabled = receiveBuilder()
+            .match(Activity::class.java, { this.onActivity(it) })
+            .match(Disable::class.java, { this.onDisable(it) })
+            .build()
+
+    val disabled = receiveBuilder()
+            .match(Enable::class.java, { this.onEnable(it) }).build()
+
+    private fun onDisable(disable: Disable) {
+        if (password == disable.password) {
+            log().info(&amp;quot;alarm disabled&amp;quot;)
+            context.become(disabled)
+        } else {
+            log().warning(&amp;quot;wrong password&amp;quot;)
+        }
+    }
+
+    private fun onEnable(enable: Enable) {
+        if (password == enable.password) {
+            log().info(&amp;quot;alarm enabled&amp;quot;)
+            context.become(enabled)
+        } else {
+            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
+        }
+    }
+
+    private fun onActivity(a: Activity) {
+        log().warning(&amp;quot;alarm&amp;quot;)
+    }
+
+    companion object {
+        fun props(password: String) = Props.create(Alarm::class.java, password)
+    }
+}
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+    val system = ActorSystem.create()
+
+    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
+
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>并发与并行</title>
-      <link>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
+      <link>https://chenminhua.github.io/posts/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
       <pubDate>Thu, 29 Mar 2018 12:38:39 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
-      <description>很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。
-并发与并行 并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）
-并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。
-举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&amp;rdquo;请求&amp;rdquo;，先从A手中接过书，然后回到C同学的问题，再用扫码枪扫B同学的书，然后帮A同学办理借书登记。整个过程中，管理员执行的任何一个子任务都不会因为其处理的先后顺序而导致其处理结果的变化。因此我们说，图书管理员的工作是一个可并发的工作（可以&amp;rdquo;同时&amp;rdquo;处理多个任务）。事实上，类比到服务端开发上，图书管理员不过就是一个开放了若干接口（借书，还书，咨询等）的服务器么。
-而随着来图书馆的同学越来越多，尽管图书管理员依旧面对一个可并发的问题，但是其处理问题的速度（计算能力）是有限的，而不停在不同任务之间切换（上下文切换）更增加了他处理问题的时间成本。于是图书馆决定增加两名前台管理员，这就是并行处理问题的方式。
-后端服务通常都是在处理可并发的问题。在不增加计算能力的情况下，通过增加线程（这里的线程是一个抽象的概念，可以理解为一组具有独立上下文的计算资源）的方式可以让服务能够更好的处理并发问题（同时处理多个任务）。当某个任务需要占用较长时间，但并不占用cpu时，服务可以切换去其他任务，让cpu先去处理其他任务，之后再回来。
-矩阵乘法 我们再换个例子，google引以为傲的page rank算法中最关键的一步就是计算两个矩阵的乘积，然后得到不同网页之间的相关性。但是现在的互联网太大了，网页数都是以亿为单位的。计算两个超大矩阵的乘积显然是一个非常耗时的工作。如果用一台计算机算显然是不可能的。
-事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个300,000,000 * 300,000,000的矩阵的乘积，我们可以将其分别划分为9个100,000,000 * 100,000,000的矩阵，一共需要进行27次100,000,000 * 100,000,000的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。
-现在我们的超大矩阵乘法就变成了27个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把100,000,000 * 100,000,000的矩阵继续拆分成 100个10,000,000 * 10,000,000个矩阵，这时候问题就变成了27000个10,000,000 * 10,000,000的矩阵的乘积。
-如果你有27000台服务器的话，这个超大矩阵计算的时间复杂度就降低了27000倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。
-感谢上帝，矩阵乘积是一个可并发问题！！
-一些计算模型 线程与锁：通过开多个线程，我们就可以得到高并发的系统。但是现实往往没有那么简单。在很多时候，多个线程往往会共享同一份数据，这个时候竞态就出现了。为了解决竞态问题，我们可以用锁机制来保护数据的读写。
-函数式编程：不共享可变数据，因此没有副作用，所有的中间状态都是确定的而不是需要通过锁来防止计算过程被影响。由于这些特性，函数式编程天然具备高并发特性，你可以将计算过程分配到不同的地方进行计算，而结果不会有任何改变。这一切看起来是如此完美，而现实往往没有那么简单，现实中的问题也没有这么完美。比如在函数式编程语言haskell中，从类型签名可以看出一个函数是否带有副作用（不纯函数的类型签名都以IO开头）。
-CSP (Communicating Sequential Processes):工作者之间可以通过channel来相互通信，当一个工作者向channel发送信息的时候，默认会阻塞，直到接受者把这条消息拿走。同样接收者也会默认阻塞在拿消息的地方，直到有人向channel发消息并被拿到。CSP的代表语言是golang（但是golang中的channel可以有buffer）
-ACTOR模型：每个工作者都会有一个收件箱,当工作者需要相互通信的时候可以通过向彼此邮箱发消息来实现。和CSP比较来说，可以认为actor是实名邮箱，而csp是匿名邮箱。actor模型的代表语言是erlang。</description>
+      <guid>https://chenminhua.github.io/posts/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
+      <description>
+
+&lt;p&gt;很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。&lt;/p&gt;
+
+&lt;h2 id=&#34;并发与并行&#34;&gt;并发与并行&lt;/h2&gt;
+
+&lt;p&gt;并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）&lt;/p&gt;
+
+&lt;p&gt;并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。&lt;/p&gt;
+
+&lt;p&gt;举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&amp;rdquo;请求&amp;rdquo;，先从A手中接过书，然后回到C同学的问题，再用扫码枪扫B同学的书，然后帮A同学办理借书登记。整个过程中，管理员执行的任何一个子任务都不会因为其处理的先后顺序而导致其处理结果的变化。因此我们说，图书管理员的工作是一个可并发的工作（可以&amp;rdquo;同时&amp;rdquo;处理多个任务）。事实上，类比到服务端开发上，图书管理员不过就是一个开放了若干接口（借书，还书，咨询等）的服务器么。&lt;/p&gt;
+
+&lt;p&gt;而随着来图书馆的同学越来越多，尽管图书管理员依旧面对一个可并发的问题，但是其处理问题的速度（计算能力）是有限的，而不停在不同任务之间切换（上下文切换）更增加了他处理问题的时间成本。于是图书馆决定增加两名前台管理员，这就是并行处理问题的方式。&lt;/p&gt;
+
+&lt;p&gt;后端服务通常都是在处理可并发的问题。在不增加计算能力的情况下，通过增加线程（这里的线程是一个抽象的概念，可以理解为一组具有独立上下文的计算资源）的方式可以让服务能够更好的处理并发问题（同时处理多个任务）。当某个任务需要占用较长时间，但并不占用cpu时，服务可以切换去其他任务，让cpu先去处理其他任务，之后再回来。&lt;/p&gt;
+
+&lt;h2 id=&#34;矩阵乘法&#34;&gt;矩阵乘法&lt;/h2&gt;
+
+&lt;p&gt;我们再换个例子，google引以为傲的page rank算法中最关键的一步就是计算两个矩阵的乘积，然后得到不同网页之间的相关性。但是现在的互联网太大了，网页数都是以亿为单位的。计算两个超大矩阵的乘积显然是一个非常耗时的工作。如果用一台计算机算显然是不可能的。&lt;/p&gt;
+
+&lt;p&gt;事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个300,000,000 * 300,000,000的矩阵的乘积，我们可以将其分别划分为9个100,000,000 * 100,000,000的矩阵，一共需要进行27次100,000,000 * 100,000,000的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。&lt;/p&gt;
+
+&lt;p&gt;现在我们的超大矩阵乘法就变成了27个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把100,000,000 * 100,000,000的矩阵继续拆分成 100个10,000,000 * 10,000,000个矩阵，这时候问题就变成了27000个10,000,000 * 10,000,000的矩阵的乘积。&lt;/p&gt;
+
+&lt;p&gt;如果你有27000台服务器的话，这个超大矩阵计算的时间复杂度就降低了27000倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。&lt;/p&gt;
+
+&lt;p&gt;感谢上帝，矩阵乘积是一个可并发问题！！&lt;/p&gt;
+
+&lt;h2 id=&#34;一些计算模型&#34;&gt;一些计算模型&lt;/h2&gt;
+
+&lt;p&gt;线程与锁：通过开多个线程，我们就可以得到高并发的系统。但是现实往往没有那么简单。在很多时候，多个线程往往会共享同一份数据，这个时候竞态就出现了。为了解决竞态问题，我们可以用锁机制来保护数据的读写。&lt;/p&gt;
+
+&lt;p&gt;函数式编程：不共享可变数据，因此没有副作用，所有的中间状态都是确定的而不是需要通过锁来防止计算过程被影响。由于这些特性，函数式编程天然具备高并发特性，你可以将计算过程分配到不同的地方进行计算，而结果不会有任何改变。这一切看起来是如此完美，而现实往往没有那么简单，现实中的问题也没有这么完美。比如在函数式编程语言haskell中，从类型签名可以看出一个函数是否带有副作用（不纯函数的类型签名都以IO开头）。&lt;/p&gt;
+
+&lt;p&gt;CSP (Communicating Sequential Processes):工作者之间可以通过channel来相互通信，当一个工作者向channel发送信息的时候，默认会阻塞，直到接受者把这条消息拿走。同样接收者也会默认阻塞在拿消息的地方，直到有人向channel发消息并被拿到。CSP的代表语言是golang（但是golang中的channel可以有buffer）&lt;/p&gt;
+
+&lt;p&gt;ACTOR模型：每个工作者都会有一个收件箱,当工作者需要相互通信的时候可以通过向彼此邮箱发消息来实现。和CSP比较来说，可以认为actor是实名邮箱，而csp是匿名邮箱。actor模型的代表语言是erlang。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>The_rule_of_hole</title>
-      <link>https://chenminhua.github.io/posts/the_rule_of_hole/</link>
+      <link>https://chenminhua.github.io/posts/posts/the_rule_of_hole/</link>
       <pubDate>Sat, 24 Mar 2018 16:52:45 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/the_rule_of_hole/</guid>
-      <description>The rule of hole: If you fall into a hole, don&#39;t dig  对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。
-关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。
-上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。
-这是我在工作中学到最重要的一件事：掉坑别挖。</description>
+      <guid>https://chenminhua.github.io/posts/posts/the_rule_of_hole/</guid>
+      <description>&lt;pre&gt;&lt;code&gt;The rule of hole:
+
+If you fall into a hole, don&#39;t dig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。&lt;/p&gt;
+
+&lt;p&gt;关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。&lt;/p&gt;
+
+&lt;p&gt;上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。&lt;/p&gt;
+
+&lt;p&gt;这是我在工作中学到最重要的一件事：掉坑别挖。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Copy_on_write</title>
-      <link>https://chenminhua.github.io/posts/copy_on_write/</link>
+      <link>https://chenminhua.github.io/posts/posts/copy_on_write/</link>
       <pubDate>Sat, 24 Mar 2018 08:17:29 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/copy_on_write/</guid>
-      <description>swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
-那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
-那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&amp;rdquo;写时复制&amp;rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。
-cow与引用计数 英文好的同学建议直接读这篇instagram的原文 在instagram停用了python的垃圾回收。
-linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&amp;rdquo;写时复制&amp;rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&amp;hellip;</description>
+      <guid>https://chenminhua.github.io/posts/posts/copy_on_write/</guid>
+      <description>
+
+&lt;h2 id=&#34;swift中的cow&#34;&gt;swift中的cow&lt;/h2&gt;
+
+&lt;p&gt;swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。&lt;/p&gt;
+
+&lt;p&gt;那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。&lt;/p&gt;
+
+&lt;p&gt;那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&amp;rdquo;写时复制&amp;rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。&lt;/p&gt;
+
+&lt;h2 id=&#34;cow与引用计数&#34;&gt;cow与引用计数&lt;/h2&gt;
+
+&lt;p&gt;英文好的同学建议直接读这篇instagram的原文 &lt;a href=&#34;https://engineering.instagram.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172&#34;&gt;在instagram停用了python的垃圾回收&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&amp;rdquo;写时复制&amp;rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&amp;hellip;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>kotlin中的可空类型</title>
-      <link>https://chenminhua.github.io/posts/optional/</link>
+      <link>https://chenminhua.github.io/posts/posts/optional/</link>
       <pubDate>Fri, 23 Mar 2018 19:17:45 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/optional/</guid>
-      <description>最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
-fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
-print(getProject(&amp;quot;no such project&amp;quot;)) // null  返回结果是null!!
-kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
-其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，
-projectMapper.getProjectByCode(projectCode): ProjectDO  但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。
-所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。
-by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class
-/** * Annotations are to be recorded in the class file by the compiler * but need not be retained by the VM at run time. This is the default * behavior. */ CLASS,  说白了，它可不会在运行时起作用。</description>
+      <guid>https://chenminhua.github.io/posts/posts/optional/</guid>
+      <description>&lt;p&gt;最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;print(getProject(&amp;quot;no such project&amp;quot;))   // null
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;返回结果是null!!&lt;/p&gt;
+
+&lt;p&gt;kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！&lt;/p&gt;
+
+&lt;p&gt;其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;projectMapper.getProjectByCode(projectCode): ProjectDO
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。&lt;/p&gt;
+
+&lt;p&gt;所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。&lt;/p&gt;
+
+&lt;p&gt;by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+  * Annotations are to be recorded in the class file by the compiler
+  * but need not be retained by the VM at run time.  This is the default
+  * behavior.
+  */
+CLASS,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说白了，它可不会在运行时起作用。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>我只是想要一个函数啊</title>
-      <link>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
+      <link>https://chenminhua.github.io/posts/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
       <pubDate>Mon, 19 Mar 2018 00:52:54 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
-      <description>从面向对象说起 面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。
-显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。
-相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
-对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是
-addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
-person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
-这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
-所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
-闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
-从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。
-function outside() { var a = 0 return function inside() { a++; console.log(a) } } var f = outside() f() //1 f() //2 f() //3  我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
-其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
-日常黑spring 下面开启吐槽时间，热爱java或者spring的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。
-最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。
-肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。
-如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？</description>
+      <guid>https://chenminhua.github.io/posts/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
+      <description>
+
+&lt;h2 id=&#34;从面向对象说起&#34;&gt;从面向对象说起&lt;/h2&gt;
+
+&lt;p&gt;面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。&lt;/p&gt;
+
+&lt;p&gt;显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。&lt;/p&gt;
+
+&lt;p&gt;相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。&lt;/p&gt;
+
+&lt;h2 id=&#34;对象的本质&#34;&gt;对象的本质&lt;/h2&gt;
+
+&lt;p&gt;假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;addOneYearAge(person)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;我们拿到一个数据的引用&lt;/strong&gt;，然后给其年龄加一。而面向对象的方式则可能是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;person.growUpOneYear()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里我们有一个对象，&lt;strong&gt;然后给对象发送了一个消息，通知它发生一些变化&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。&lt;/p&gt;
+
+&lt;p&gt;所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。&lt;/p&gt;
+
+&lt;h2 id=&#34;闭包&#34;&gt;闭包&lt;/h2&gt;
+
+&lt;p&gt;为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？&lt;/p&gt;
+
+&lt;p&gt;从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function outside() {
+  var a = 0
+  return function inside() {
+    a++;
+    console.log(a)
+  }
+}
+
+var f = outside()
+f()  //1
+f()  //2
+f()  //3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。&lt;/p&gt;
+
+&lt;p&gt;其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。&lt;/p&gt;
+
+&lt;h2 id=&#34;日常黑spring&#34;&gt;日常黑spring&lt;/h2&gt;
+
+&lt;p&gt;下面开启吐槽时间，热爱java或者spring的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！
+肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。&lt;/p&gt;
+
+&lt;p&gt;肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。&lt;/p&gt;
+
+&lt;p&gt;如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>装逼的艺术</title>
-      <link>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
+      <link>https://chenminhua.github.io/posts/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
       <pubDate>Sun, 18 Mar 2018 23:46:50 +0800</pubDate>
-      
-      <guid>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
-      <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。
-你听过The fin这个乐队吗？
-你知道去年最流行的编程语言是什么吗？
-什么？你连这个游戏都没玩过吗？
-诺兰最新的那部电影你还没看？
-每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。
-点什么酒最有派头 走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。
-伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。
-苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选Macallan纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。
-除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。
-朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。
-喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是taquila。
-不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。
-最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。</description>
+      <guid>https://chenminhua.github.io/posts/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
+      <description>
+
+&lt;p&gt;最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。&lt;/p&gt;
+
+&lt;p&gt;你听过The fin这个乐队吗？&lt;/p&gt;
+
+&lt;p&gt;你知道去年最流行的编程语言是什么吗？&lt;/p&gt;
+
+&lt;p&gt;什么？你连这个游戏都没玩过吗？&lt;/p&gt;
+
+&lt;p&gt;诺兰最新的那部电影你还没看？&lt;/p&gt;
+
+&lt;p&gt;每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。&lt;/p&gt;
+
+&lt;h2 id=&#34;点什么酒最有派头&#34;&gt;点什么酒最有派头&lt;/h2&gt;
+
+&lt;p&gt;走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。&lt;/p&gt;
+
+&lt;p&gt;伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。&lt;/p&gt;
+
+&lt;p&gt;苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选Macallan纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。&lt;/p&gt;
+
+&lt;p&gt;除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。&lt;/p&gt;
+
+&lt;p&gt;朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。&lt;/p&gt;
+
+&lt;p&gt;喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是taquila。&lt;/p&gt;
+
+&lt;p&gt;不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。&lt;/p&gt;
+
+&lt;p&gt;最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。&lt;/p&gt;
+</description>
     </item>
     
   </channel>

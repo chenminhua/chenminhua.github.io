@@ -2,13 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 硕大的汤姆</title>
-    <link>https://chenminhua.github.io/categories/</link>
+    <link>https://chenminhua.github.io/posts/categories/</link>
     <description>Recent content in Categories on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-	<atom:link href="https://chenminhua.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="https://chenminhua.github.io/posts/categories/index.xml" rel="self" type="application/rss+xml" />
     
   </channel>
 </rss>
