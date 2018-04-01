@@ -6,18 +6,20 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Mar 2018 19:07:59 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Apr 2018 18:19:00 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>响应式编程</title>
-      <link>https://chenminhua.github.io/posts/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Fri, 30 Mar 2018 19:07:59 +0800</pubDate>
+      <title>Akka</title>
+      <link>https://chenminhua.github.io/posts/akka/</link>
+      <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
       
-      <guid>https://chenminhua.github.io/posts/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/</guid>
-      <description>【草稿】 响应性，弹性，伸缩性，消息驱动</description>
+      <guid>https://chenminhua.github.io/posts/akka/</guid>
+      <description>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。
+actors sending messages changing its state changing its behavior creating more actors
+class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .match(Activity::class.java, { this.onActivity(it) }) .match(Disable::class.java, { this.onDisable(it) }) .build() val disabled = receiveBuilder() .match(Enable::class.java, { this.onEnable(it) }).build() private fun onDisable(disable: Disable) { if (password == disable.password) { log().</description>
     </item>
     
     <item>

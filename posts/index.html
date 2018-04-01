@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:updated_time" content="2018-03-30T19:07:59&#43;08:00"/>
+<meta property="og:updated_time" content="2018-04-01T18:19:00&#43;08:00"/>
 
 
 
@@ -105,12 +105,14 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/posts/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="link black dim">
-        响应式编程
+      <a href="/posts/akka/" class="link black dim">
+        Akka
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      【草稿】 响应性，弹性，伸缩性，消息驱动
+      akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。
+actors sending messages changing its state changing its behavior creating more actors
+class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .match(Activity::class.java, { this.onActivity(it) }) .match(Disable::class.java, { this.onDisable(it) }) .build() val disabled = receiveBuilder() .match(Enable::class.java, { this.onEnable(it) }).build() private fun onDisable(disable: Disable) { if (password == disable.password) { log().
     </div>
   </div>
 </div>
