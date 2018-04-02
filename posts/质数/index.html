@@ -3,29 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>硕大的汤姆</title>
-<link rel="alternate" type="application/rss" title="RSS" href="https://chenminhua.github.io/index.xml">
+<title>质数 – 硕大的汤姆</title>
 <meta name="created" content="2018-04-02T23:11:22&#43;0800">
 <meta name="modified" content="2018-04-02T23:11:22&#43;0800">
 
-<meta name="description" content="">
+<meta name="description" content="突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？ 先写个判断一个数是不是质数的函数 bool isPrime(int n){ if (n == 1){ return false; }else">
 <meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="硕大的汤姆">
-<meta property="og:url" content="https://chenminhua.github.io/">
+<meta property="og:title" content="质数">
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/">
 
 <meta name="generator" content="Hugo 0.31" />
 
-<link rel="canonical" href="https://chenminhua.github.io/">
+<link rel="canonical" href="https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="style" href="/css/styles.css">
 <link rel="stylesheet" href="/css/styles.css">
 <link rel="stylesheet" href="/css/print.css" media="print">
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "url" : "https://chenminhua.github.io/",
-    "name": "硕大的汤姆",
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "质数",
+    "datePublished": "2018-04-02T23:11:22+08:00",
+    "dateModified": "2018-04-02T23:11:22+08:00",
+    "url" : "https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/",
+    "description": "突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？ 先写个判断一个数是不是质数的函数 bool isPrime(int n){ if (n == 1){ return false; }else",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://chenminhua.github.io/"
@@ -35,6 +37,7 @@
       "name": "硕大的汤姆",
       "url": "https://chenminhua.github.io/",
     }
+  }
 </script>
 
 </head>
@@ -58,16 +61,63 @@
 <nav class="main-menu layout__navigation" role="navigation">
 <h2 class="visually-hidden">Main menu</h2>
 <ul class="navbar">
-<li><a class="active" href="/">Home</a></li>
+<li><a class="" href="/">Home</a></li>
 <li><a class="" href="/about/">About</a></li>
-<li><a class="" href="/posts/">Posts</a></li>
+<li><a class="active" href="/posts/">Posts</a></li>
 </ul>
 </nav>
 
 
 <main class="main layout__main" role="main">
-<article class="single-view">
+<h1 class="title ">质数</h1>
+<article class="section-posts single-view">
+<header>
+</header>
 <div class="content">
+<p>突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？</p>
+
+<p>先写个判断一个数是不是质数的函数</p>
+
+<pre><code class="language-c++">bool isPrime(int n){
+  if (n == 1){
+    return false;
+  }else {
+    for (int i = 2; i &lt;= floor(sqrt(n)); i++){
+      if (n % i == 0){
+          return false;
+      }
+    }
+    return true;
+  }
+}
+</code></pre>
+
+<p>然后调用它</p>
+
+<pre><code class="language-c++">int main()
+{
+  int n;
+  cin &gt;&gt; n;
+  int count = 0;
+  int j = 2;
+  while (true) {
+    if (isPrime(j)){
+      count += 1;
+      cout &lt;&lt; j &lt;&lt; endl;
+      if (count &gt;= n)
+      {
+          break;
+      }
+    }
+    j += 1;
+  }
+}
+</code></pre>
+
+<p>结果显示第1124个质数为9043。</p>
+
+<p>多玩几次，第112个质数为613，第11240个质数为119293。可以发现，质数在慢慢变稀疏。</p>
+
 
 </div>
 </article>
@@ -77,9 +127,9 @@
 
 <aside class="sidebar layout__second-sidebar" role="complementary">
 <section>
-<h4 class="menu"><a class="active" href="/posts/">Posts</a></h4>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
 <ul class="menu">
-<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="active" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
 <li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
 <li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
 <li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>

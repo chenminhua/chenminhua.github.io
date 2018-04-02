@@ -6,8 +6,59 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Apr 2018 23:21:33 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Apr 2018 23:11:22 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>质数</title>
+      <link>https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/</link>
+      <pubDate>Mon, 02 Apr 2018 23:11:22 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/</guid>
+      <description>&lt;p&gt;突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？&lt;/p&gt;
+
+&lt;p&gt;先写个判断一个数是不是质数的函数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;bool isPrime(int n){
+  if (n == 1){
+    return false;
+  }else {
+    for (int i = 2; i &amp;lt;= floor(sqrt(n)); i++){
+      if (n % i == 0){
+          return false;
+      }
+    }
+    return true;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后调用它&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;int main()
+{
+  int n;
+  cin &amp;gt;&amp;gt; n;
+  int count = 0;
+  int j = 2;
+  while (true) {
+    if (isPrime(j)){
+      count += 1;
+      cout &amp;lt;&amp;lt; j &amp;lt;&amp;lt; endl;
+      if (count &amp;gt;= n)
+      {
+          break;
+      }
+    }
+    j += 1;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果显示第1124个质数为9043。&lt;/p&gt;
+
+&lt;p&gt;多玩几次，第112个质数为613，第11240个质数为119293。可以发现，质数在慢慢变稀疏。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>About</title>
