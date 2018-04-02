@@ -6,86 +6,8 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Apr 2018 18:19:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 29 Mar 2018 12:38:39 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Akka</title>
-      <link>https://chenminhua.github.io/posts/akka/</link>
-      <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/akka/</guid>
-      <description>
-
-&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。&lt;/p&gt;
-
-&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
-
-&lt;p&gt;sending messages
-changing its state
-changing its behavior
-creating more actors&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Activity
-
-class Disable(val password: String)
-
-class Enable(val password: String)
-
-class Alarm(val password: String): AbstractLoggingActor() {
-    override fun createReceive(): Receive {
-        return disabled
-    }
-
-    val enabled = receiveBuilder()
-            .match(Activity::class.java, { this.onActivity(it) })
-            .match(Disable::class.java, { this.onDisable(it) })
-            .build()
-
-    val disabled = receiveBuilder()
-            .match(Enable::class.java, { this.onEnable(it) }).build()
-
-    private fun onDisable(disable: Disable) {
-        if (password == disable.password) {
-            log().info(&amp;quot;alarm disabled&amp;quot;)
-            context.become(disabled)
-        } else {
-            log().warning(&amp;quot;wrong password&amp;quot;)
-        }
-    }
-
-    private fun onEnable(enable: Enable) {
-        if (password == enable.password) {
-            log().info(&amp;quot;alarm enabled&amp;quot;)
-            context.become(enabled)
-        } else {
-            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
-        }
-    }
-
-    private fun onActivity(a: Activity) {
-        log().warning(&amp;quot;alarm&amp;quot;)
-    }
-
-    companion object {
-        fun props(password: String) = Props.create(Alarm::class.java, password)
-    }
-}
-
-fun main(args: Array&amp;lt;String&amp;gt;) {
-    val system = ActorSystem.create()
-
-    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
-
-    alarm.tell(Activity(), ActorRef.noSender())
-    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
-    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
-    alarm.tell(Activity(), ActorRef.noSender())
-    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
-    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
     
     <item>
       <title>并发与并行</title>
