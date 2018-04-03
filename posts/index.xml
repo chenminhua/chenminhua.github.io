@@ -6,8 +6,33 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Apr 2018 23:11:22 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Apr 2018 17:48:20 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>你不需要懂这些??</title>
+      <link>https://chenminhua.github.io/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</link>
+      <pubDate>Tue, 03 Apr 2018 17:48:20 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</guid>
+      <description>&lt;p&gt;之前有一阵在写c++，发现指针是一个48位二进制数。我们都知道指针是用来做内存寻址的，而我的机器是64位的，而且如果你去查看一个指针占用的内存大小，也会发现指针确实占用了8个字节。那么，剩下那两个字节干啥去了呢？&lt;/p&gt;
+
+&lt;p&gt;其实今天要聊得不是内存或者指针，而是我在查这个问题答案的时候，找到的&lt;a href=&#34;https://www.zhihu.com/question/27265748&#34;&gt;知乎链接&lt;/a&gt;，以及一个让我不太开心的回答。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;既然是“非专业的业余爱好者”，
+那我告诉你，
+你的问题对于编程来说没有意义。
+没必要关心指针占多少字节
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;某种程度上说，这位大哥说的没错，就算你是一个专业程序员，知道那两个字节是干啥的在绝大多数情况下不能帮你写成更好的代码，盲目陷入底层实现的讨论也容易让人忽视高层抽象的价值。但是这位大哥的回答真的太反智了。为什么业余爱好者不能凭自己的兴趣去完全地掌握c语言，掌握golang，掌握汽车维修，掌握古典吉他。在一个自我教育如此普遍的行业，却有一位“前辈”对着刚入行的年轻人说，知道**没有意义。&lt;/p&gt;
+
+&lt;p&gt;在这个行业里面，确实存在着很多浮躁的东西。深度学习，区块链，AR，VR，新的框架和语言&amp;hellip;市面上充斥着:&amp;ldquo;三十天精通xxx&amp;rdquo;,&amp;ldquo;xxx快速入门&amp;rdquo;之类的书和视频资料。很多老鸟会告诉你，&amp;rdquo;这些都是垃圾，你应该去看xxx的源码，你应该去读xxx的论文&amp;rdquo;，或者，&amp;rdquo;你不需要学这个&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;我反对这些声音，尽管他们可能都是出于好意。我不相信&amp;rdquo;三十天精通&amp;rdquo;这些拙劣的营销术语，但是我相信三十天自我教育的力量。&lt;/p&gt;
+
+&lt;p&gt;事实上，我已经尝试过一些短时快速学习的个人项目，虽然这些项目并没有让我成为一个领域的专家。但是我得到了我想要的，并且乐在其中。这就够了。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>质数</title>
