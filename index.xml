@@ -6,8 +6,45 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Apr 2018 23:46:03 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Apr 2018 13:54:57 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>聊聊抽象</title>
+      <link>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</link>
+      <pubDate>Sun, 08 Apr 2018 13:54:57 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</guid>
+      <description>
+
+&lt;p&gt;不要抽象。&lt;/p&gt;
+
+&lt;p&gt;上面这句是和一个架构师聊天时他说了二十遍的话。这句话对大多数程序员来说，都是非常反直觉的。可以说抽象是计算机软件设计中极为重要的一环，是每个程序员每天都要做的事情。当你在设计一个类来表达一组数据的时候，你正在完成一次抽象；当你设计出一个抽象类或者接口，你正在抽象你的抽象。&lt;/p&gt;
+
+&lt;p&gt;如果你是一个数学家，你应该会对“不要抽象”这四个字嗤之以鼻。数学家喜欢归纳和抽象，并从中发现数学之美。吴军在《数学之美》中甚至直接给出了一个论断：好的数学模型一定简单。&lt;/p&gt;
+
+&lt;p&gt;大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&amp;hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在T恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s the good part of the world.&lt;/p&gt;
+
+&lt;h2 id=&#34;bad-part&#34;&gt;bad part&lt;/h2&gt;
+
+&lt;p&gt;真实世界往往没有那么美好，很多事情未必能通过简单的推导和符号约简来简化。有些时候，我们会努力去识别问题中的一些pattern，或者意外发现一些事物中的相关性。于是你惊喜地发现，只要变化一下看问题的角度，或者提出一些看起来很正确的假设，原本复杂的问题就会变得非常简单！&lt;/p&gt;
+
+&lt;p&gt;但是现实往往没有那么容易讨好，现实中的符号约简往往是一个非常危险的行为。因为你看问题的角度很可能不是最全面的，或者你的假设其实是错的。&lt;/p&gt;
+
+&lt;p&gt;很多时候，大脑处理现实复杂性的唯一方法是把庞大复杂的系统简化，这也是计算机编程中非常有用的机制。但是，如果将其视为理所当然，就会陷入符号简缪论。&lt;/p&gt;
+
+&lt;h2 id=&#34;我们依然需要抽象&#34;&gt;我们依然需要抽象&lt;/h2&gt;
+
+&lt;p&gt;回到文章开头那句话：不要抽象。其实我依旧并不同意这句话。尽管那位前辈说：你还年轻，等你挖的坑够多之后你就明白了。&lt;/p&gt;
+
+&lt;p&gt;抽象是危险的，一味追求简单而完美的模型会把我们带入误区。但如果因此放弃抽象，将现实的bad part直接带入我们设计的系统中，更是一种投鼠忌器的表现，甚至可以说是偷懒并且不负责任的设计。&lt;/p&gt;
+
+&lt;p&gt;其实抽象也好，不抽象也罢，和其他系统设计的问题一样，我们都可以用一个看起来没什么用但是永远正确的词来回答：balance。&lt;/p&gt;
+
+&lt;p&gt;拥抱抽象，但要适可而止。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>答案是什么</title>
