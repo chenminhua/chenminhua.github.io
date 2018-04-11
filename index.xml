@@ -34,7 +34,7 @@ java,php,c++依然是最受企业欢迎的编程语言
       <link>https://chenminhua.github.io/posts/move_slow_and_mend_things/</link>
       <pubDate>Wed, 11 Apr 2018 15:16:31 +0800</pubDate>
       <guid>https://chenminhua.github.io/posts/move_slow_and_mend_things/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/static/facebook1.jpg&#34; alt=&#34;fackbook1&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/images/facebook1.jpg&#34; alt=&#34;fackbook1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&amp;ldquo;move fast and break things&amp;rdquo; 这是fackbook著名的motto，意思是说，在使用新技术和新工具的时候，尽管其可能会有不稳定的地方，但是为了追求开发速度，应当果断使用那些能够提升开发效率的新技术。由于有了facebook的成功背书，很多初创公司都将其引为自己公司的开发宗旨。&lt;/p&gt;
 
@@ -44,7 +44,7 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;事实上前两年，facebook也把他们的Motto改成了&amp;rdquo;move fast with stable infra&amp;rdquo;。你看，facebook也受不了工程师随便break things了。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/static/facebook2.jpg&#34; alt=&#34;fackbook2&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/images/facebook2.jpg&#34; alt=&#34;fackbook2&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;还是那句话，最重要的是平衡。有些时候，与其&amp;rdquo;move fast and break things&amp;rdquo;不如&amp;rdquo;move slow and mend things&amp;rdquo;&lt;/p&gt;
 </description>
