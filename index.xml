@@ -6,8 +6,25 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Apr 2018 23:22:55 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Apr 2018 23:28:35 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>一件让我愤怒的事</title>
+      <link>https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</link>
+      <pubDate>Wed, 18 Apr 2018 23:28:35 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</guid>
+      <description>&lt;p&gt;最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;rdquo;terrible programmer&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。&lt;/p&gt;
+
+&lt;p&gt;很多人都抱有这样的心态，甚至这种结果导向已经成为了一种政治正确。代码写的好坏不重要，赶紧通过测试，修好手上的bug上线才是最重要的。当然我同意修bug很重要（绝大多数情况下优先级最高），但是很多时候，大家都只想着怎么关掉这个bug，而不会想想更重要的一些问题：这是不是一个bug？这个bug是从哪来的？修复这个bug的方式会不会影响到其他逻辑?这个bug后面是不是还藏着别的坑？&lt;/p&gt;
+
+&lt;p&gt;如果你不去思考这些问题，而是快速看一眼Jira,打开debug模式找到问题的原因(比如说，需要在某一段处理逻辑中加一段条件判断，在某种情况下跳过某几行代码的执行)。然后你想，oh，这个bug很好修，我只要多写个if然后在这种情况下跳过这几行代码就行了。你开心的写完这两行代码，提交并发布到测试环境，然后告诉测试那个bug被你修好了。接着去处理你还没处理的那十个新的bug。&lt;/p&gt;
+
+&lt;p&gt;你觉得自己效率很高么？你错了，你糟糕透了，因为你失去了最适合思考和重构代码的时机。你被其他人催着跑，却丢掉了你最重要的东西。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>十年</title>
@@ -30,7 +47,7 @@ java,php,c++依然是最受企业欢迎的编程语言
     </item>
     
     <item>
-      <title>Move slow and mendthings</title>
+      <title>Move slow and mend things</title>
       <link>https://chenminhua.github.io/posts/move_slow_and_mend_things/</link>
       <pubDate>Wed, 11 Apr 2018 15:16:31 +0800</pubDate>
       <guid>https://chenminhua.github.io/posts/move_slow_and_mend_things/</guid>
@@ -47,59 +64,6 @@ java,php,c++依然是最受企业欢迎的编程语言
 &lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/images/facebook2.jpg&#34; alt=&#34;fackbook2&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;还是那句话，最重要的是平衡。有些时候，与其&amp;rdquo;move fast and break things&amp;rdquo;不如&amp;rdquo;move slow and mend things&amp;rdquo;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>如何设计一个系统</title>
-      <link>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Mon, 09 Apr 2018 13:06:26 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</guid>
-      <description>
-
-&lt;h2 id=&#34;描述使用场景&#34;&gt;描述使用场景&lt;/h2&gt;
-
-&lt;p&gt;设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;系统需要能够支持用户发送twitter。
-需要能够支持用户follow（unfollow）其他用户。
-用户可以在自己的timeline上面看到自己follow的用户发送的twitter。
-用户是所有在可以访问我们服务的地区的会使用互联网的人。
-希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;设定约束与假设&#34;&gt;设定约束与假设&lt;/h2&gt;
-
-&lt;p&gt;你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1000，000，000活跃用户
-每天有100,000,000用户
-每天会有100，000，000条新twitter
-24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。
-数据的读写大约为20:1
-......
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。&lt;/p&gt;
-
-&lt;p&gt;此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。&lt;/p&gt;
-
-&lt;h2 id=&#34;高级设计&#34;&gt;高级设计&lt;/h2&gt;
-
-&lt;p&gt;在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。&lt;/p&gt;
-
-&lt;p&gt;我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。&lt;/p&gt;
-
-&lt;h2 id=&#34;设计核心组件&#34;&gt;设计核心组件&lt;/h2&gt;
-
-&lt;p&gt;对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。&lt;/p&gt;
-
-&lt;h2 id=&#34;度量设计&#34;&gt;度量设计&lt;/h2&gt;
-
-&lt;p&gt;完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。&lt;/p&gt;
-
-&lt;p&gt;Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working.
-开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。&lt;/p&gt;
 </description>
     </item>
     
@@ -533,6 +497,59 @@ f()  //3
 &lt;p&gt;不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。&lt;/p&gt;
 
 &lt;p&gt;最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>如何设计一个系统</title>
+      <link>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</guid>
+      <description>
+
+&lt;h2 id=&#34;描述使用场景&#34;&gt;描述使用场景&lt;/h2&gt;
+
+&lt;p&gt;设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;系统需要能够支持用户发送twitter。
+需要能够支持用户follow（unfollow）其他用户。
+用户可以在自己的timeline上面看到自己follow的用户发送的twitter。
+用户是所有在可以访问我们服务的地区的会使用互联网的人。
+希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;设定约束与假设&#34;&gt;设定约束与假设&lt;/h2&gt;
+
+&lt;p&gt;你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1000，000，000活跃用户
+每天有100,000,000用户
+每天会有100，000，000条新twitter
+24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。
+数据的读写大约为20:1
+......
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。&lt;/p&gt;
+
+&lt;p&gt;此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。&lt;/p&gt;
+
+&lt;h2 id=&#34;高级设计&#34;&gt;高级设计&lt;/h2&gt;
+
+&lt;p&gt;在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。&lt;/p&gt;
+
+&lt;p&gt;我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。&lt;/p&gt;
+
+&lt;h2 id=&#34;设计核心组件&#34;&gt;设计核心组件&lt;/h2&gt;
+
+&lt;p&gt;对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。&lt;/p&gt;
+
+&lt;h2 id=&#34;度量设计&#34;&gt;度量设计&lt;/h2&gt;
+
+&lt;p&gt;完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。&lt;/p&gt;
+
+&lt;p&gt;Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working.
+开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。&lt;/p&gt;
 </description>
     </item>
     
