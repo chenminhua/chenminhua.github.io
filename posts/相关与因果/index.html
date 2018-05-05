@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>质数 – 硕大的汤姆</title>
-<meta name="created" content="2018-04-02T23:11:22&#43;0800">
-<meta name="modified" content="2018-04-02T23:11:22&#43;0800">
+<title>相关与因果 – 硕大的汤姆</title>
+<meta name="created" content="2018-05-02T16:22:24&#43;0800">
+<meta name="modified" content="2018-05-02T16:22:24&#43;0800">
 
-<meta name="description" content="突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？ 先写个判断一个数是不是质数的函数 bool isPrime(int n){ if (n == 1){ return false; }else">
+<meta name="description" content="人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百">
 <meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="质数">
-<meta property="og:url" content="https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/">
+<meta property="og:title" content="相关与因果">
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">
 
 <meta name="generator" content="Hugo 0.31" />
 
-<link rel="canonical" href="https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/">
+<link rel="canonical" href="https://chenminhua.github.io/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="style" href="/css/styles.css">
 <link rel="stylesheet" href="/css/styles.css">
@@ -23,11 +23,11 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "质数",
-    "datePublished": "2018-04-02T23:11:22+08:00",
-    "dateModified": "2018-04-02T23:11:22+08:00",
-    "url" : "https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/",
-    "description": "突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？ 先写个判断一个数是不是质数的函数 bool isPrime(int n){ if (n == 1){ return false; }else",
+    "headline": "相关与因果",
+    "datePublished": "2018-05-02T16:22:24+08:00",
+    "dateModified": "2018-05-02T16:22:24+08:00",
+    "url" : "https://chenminhua.github.io/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/",
+    "description": "人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://chenminhua.github.io/"
@@ -69,54 +69,34 @@
 
 
 <main class="main layout__main" role="main">
-<h1 class="title ">质数</h1>
+<h1 class="title ">相关与因果</h1>
 <article class="section-posts single-view">
 <header>
 </header>
 <div class="content">
-<p>突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？</p>
+<p>人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百六十五天（公转周期）&hellip;</p>
 
-<p>先写个判断一个数是不是质数的函数</p>
+<p>很多时候，人们会发现两件事往往同时出现，或者当一件事情发生时另一件往往不会发生。比如（下面都是我瞎说的）：</p>
 
-<pre><code class="language-c++">bool isPrime(int n){
-  if (n == 1){
-    return false;
-  }else {
-    for (int i = 2; i &lt;= floor(sqrt(n)); i++){
-      if (n % i == 0){
-          return false;
-      }
-    }
-    return true;
-  }
-}
-</code></pre>
+<p>爸爸胖很可能儿子也胖。</p>
 
-<p>然后调用它</p>
+<p>喜欢跑马拉松的人很可能爱听hiphop。</p>
 
-<pre><code class="language-c++">int main()
-{
-  int n;
-  cin &gt;&gt; n;
-  int count = 0;
-  int j = 2;
-  while (true) {
-    if (isPrime(j)){
-      count += 1;
-      cout &lt;&lt; j &lt;&lt; endl;
-      if (count &gt;= n)
-      {
-          break;
-      }
-    }
-    j += 1;
-  }
-}
-</code></pre>
+<p>下雨天很可能堵车。</p>
 
-<p>结果显示第1124个质数为9043。</p>
+<p>熬夜会容易长胖。</p>
 
-<p>多玩几次，第112个质数为613，第11240个质数为119293。可以发现，质数在慢慢变稀疏。</p>
+<p>吸烟对环境有好处。</p>
+
+<p>等等，最后一条是不是写错了？其实最后一条是我在twitter看来的，大概是说：吸烟会杀死人类，而人类对环境有害，所以吸烟有益环境保护。这一条论断看似非常离谱，但确是一条比较明确的因果推断。</p>
+
+<p>而熬夜容易长胖这一条呢？一种解释方法是，熬夜的人比较容易吃零食，所以会容易胖（因果推断）。但是我们也可以说，工作压力大的人容易熬夜，工作压力大的人运动太少所以会长胖。这时候长胖和熬夜就变成了相关，换句话说，就算你现在不熬夜了，如果你工作压力还是很大，你依然会胖。</p>
+
+<p>在统计学中，我们总是反反复复地和这两个概念打交道。甚至在统计学创建之前，我们就已经开始进行大量这方法的脑力活动&ndash;预测。</p>
+
+<p>预测，在很多人看来是一种极度不靠谱的行为。我认同这种不靠谱，或者我们给它换一个好听点的名字：不确定性。这种不确定性是如此的确定，如此的科学，如此的贴近事物本质。尽管人们总是试图去对抗这种不确定性，但不可否认，它是不可战胜的。</p>
+
+<p>但这依旧不能阻止人们去预测&ndash;以一种更科学的方式。</p>
 
 
 </div>
@@ -129,7 +109,7 @@
 <section>
 <h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
 <ul class="menu">
-<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="active" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
 <li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
 <li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
 <li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
@@ -137,7 +117,7 @@
 <li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
 <li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
 <li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
-<li><a class="active" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
 <li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
 <li><a class="" href="/posts/the_rule_of_hole/">The rule of hole</a></li>
 <li><a class="" href="/posts/copy_on_write/">Copy on write</a></li>
