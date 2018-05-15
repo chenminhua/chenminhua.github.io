@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<title>Akka – 硕大的汤姆</title>
+<meta name="created" content="2018-04-01T18:19:00&#43;0800">
+<meta name="modified" content="2018-04-01T18:19:00&#43;0800">
+
+<meta name="description" content="akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作">
+<meta property="og:site_name" content="硕大的汤姆">
+<meta property="og:title" content="Akka">
+<meta property="og:url" content="https://chenminhua.github.io/posts/draft/akka/">
+
+<meta name="generator" content="Hugo 0.31" />
+
+<link rel="canonical" href="https://chenminhua.github.io/posts/draft/akka/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="style" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Akka",
+    "datePublished": "2018-04-01T18:19:00+08:00",
+    "dateModified": "2018-04-01T18:19:00+08:00",
+    "url" : "https://chenminhua.github.io/posts/draft/akka/",
+    "description": "akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://chenminhua.github.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "硕大的汤姆",
+      "url": "https://chenminhua.github.io/",
+    }
+  }
+</script>
+
+</head>
+
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header" role="banner">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
+</h1>
+<div class="region header__region">
+
+
+</div>
+</header>
+
+
+
+
+<nav class="main-menu layout__navigation" role="navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="" href="/about/">About</a></li>
+<li><a class="active" href="/posts/">Posts</a></li>
+</ul>
+</nav>
+
+
+<main class="main layout__main" role="main">
+<h1 class="title ">Akka</h1>
+<article class="section-posts single-view">
+<header>
+</header>
+<div class="content">
+
+
+<p>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。</p>
+
+<p>像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。</p>
+
+<p>与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。
+使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。
+Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。
+消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。</p>
+
+<h2 id="actors">actors</h2>
+
+<p>sending messages
+changing its state
+changing its behavior
+creating more actors</p>
+
+<pre><code class="language-kotlin">class Activity
+
+class Disable(val password: String)
+
+class Enable(val password: String)
+
+class Alarm(val password: String): AbstractLoggingActor() {
+    override fun createReceive(): Receive {
+        return disabled
+    }
+
+    val enabled = receiveBuilder()
+            .match(Activity::class.java, { this.onActivity(it) })
+            .match(Disable::class.java, { this.onDisable(it) })
+            .build()
+
+    val disabled = receiveBuilder()
+            .match(Enable::class.java, { this.onEnable(it) }).build()
+
+    private fun onDisable(disable: Disable) {
+        if (password == disable.password) {
+            log().info(&quot;alarm disabled&quot;)
+            context.become(disabled)
+        } else {
+            log().warning(&quot;wrong password&quot;)
+        }
+    }
+
+    private fun onEnable(enable: Enable) {
+        if (password == enable.password) {
+            log().info(&quot;alarm enabled&quot;)
+            context.become(enabled)
+        } else {
+            log().warning(&quot;failed to enable the alarm&quot;)
+        }
+    }
+
+    private fun onActivity(a: Activity) {
+        log().warning(&quot;alarm&quot;)
+    }
+
+    companion object {
+        fun props(password: String) = Props.create(Alarm::class.java, password)
+    }
+}
+
+fun main(args: Array&lt;String&gt;) {
+    val system = ActorSystem.create()
+
+    val alarm = system.actorOf(Alarm.props(&quot;pass&quot;), &quot;alarm&quot;)
+
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Enable(&quot;puss&quot;), ActorRef.noSender())
+    alarm.tell(Enable(&quot;pass&quot;), ActorRef.noSender())
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Disable(&quot;puss&quot;), ActorRef.noSender())
+    alarm.tell(Disable(&quot;pass&quot;), ActorRef.noSender())
+}
+</code></pre>
+
+
+</div>
+</article>
+</main>
+
+
+
+<aside class="sidebar layout__second-sidebar" role="complementary">
+<section>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
+<ul class="menu">
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
+<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
+<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
+<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
+<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
+<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
+<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="active" href="/posts/draft/akka/">Akka</a></li>
+<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
+<li><a class="" href="/posts/the_rule_of_hole/">The rule of hole</a></li>
+<li><a class="" href="/posts/copy_on_write/">Copy on write</a></li>
+<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
+<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
+<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
+<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
+</ul>
+</section>
+</aside>
+
+
+<footer class="footer layout__footer" role="contentinfo">
+<p><span>© 硕大的汤姆</span></p>
+
+
+</footer>
+
+</div>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+</body>
+</html>

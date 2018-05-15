@@ -6,8 +6,46 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 May 2018 16:22:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 May 2018 12:49:25 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Feature_vs_function</title>
+      <link>https://chenminhua.github.io/posts/feature_vs_function/</link>
+      <pubDate>Thu, 10 May 2018 12:49:25 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/feature_vs_function/</guid>
+      <description>&lt;p&gt;最近看到一段关于微服务的视频&lt;a href=&#34;https://www.youtube.com/watch?v=k9QZ4oIOHnk&amp;amp;index=2&amp;amp;list=WL&amp;amp;t=0s&#34;&gt;拆分单体应用&lt;/a&gt;，其中有一段话引起了我的注意：split code by feature not by functionality。&lt;/p&gt;
+
+&lt;p&gt;大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。&lt;/p&gt;
+
+&lt;p&gt;关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别&lt;a href=&#34;https://softwareengineering.stackexchange.com/questions/94164/feature-vs-function&#34;&gt;这个问题&lt;/a&gt;甚至被直接关闭了，理由是这个问题的答案很主观。&lt;/p&gt;
+
+&lt;p&gt;在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。&lt;/p&gt;
+
+&lt;p&gt;function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>spring aop中遇到的一个小问题</title>
+      <link>https://chenminhua.github.io/posts/annotation/</link>
+      <pubDate>Sat, 05 May 2018 18:19:00 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/annotation/</guid>
+      <description>&lt;p&gt;最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。&lt;/p&gt;
+
+&lt;p&gt;然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。&lt;/p&gt;
+
+&lt;p&gt;一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。&lt;/p&gt;
+
+&lt;p&gt;另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。&lt;/p&gt;
+
+&lt;p&gt;spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。&lt;/p&gt;
+
+&lt;p&gt;起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考&lt;a href=&#34;https://stackoverflow.com/questions/4745798/why-java-classes-do-not-inherit-annotations-from-implemented-interfaces&#34;&gt;stackoverflow&lt;/a&gt;。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。&lt;/p&gt;
+
+&lt;p&gt;如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>相关与因果</title>
@@ -293,6 +331,91 @@ java,php,c++依然是最受企业欢迎的编程语言
 &lt;p&gt;&lt;a href=&#34;chenmhgo@gmail.com&#34;&gt;我的邮箱&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;此博客开始于2018年3月。内容多为自由写作，内容可长可短。基本上是在深夜或清晨一次性完成。试图通过自由写作收集思维点滴。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Akka</title>
+      <link>https://chenminhua.github.io/posts/draft/akka/</link>
+      <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/draft/akka/</guid>
+      <description>
+
+&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。&lt;/p&gt;
+
+&lt;p&gt;像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。&lt;/p&gt;
+
+&lt;p&gt;与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。
+使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。
+Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。
+消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。&lt;/p&gt;
+
+&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
+
+&lt;p&gt;sending messages
+changing its state
+changing its behavior
+creating more actors&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class Activity
+
+class Disable(val password: String)
+
+class Enable(val password: String)
+
+class Alarm(val password: String): AbstractLoggingActor() {
+    override fun createReceive(): Receive {
+        return disabled
+    }
+
+    val enabled = receiveBuilder()
+            .match(Activity::class.java, { this.onActivity(it) })
+            .match(Disable::class.java, { this.onDisable(it) })
+            .build()
+
+    val disabled = receiveBuilder()
+            .match(Enable::class.java, { this.onEnable(it) }).build()
+
+    private fun onDisable(disable: Disable) {
+        if (password == disable.password) {
+            log().info(&amp;quot;alarm disabled&amp;quot;)
+            context.become(disabled)
+        } else {
+            log().warning(&amp;quot;wrong password&amp;quot;)
+        }
+    }
+
+    private fun onEnable(enable: Enable) {
+        if (password == enable.password) {
+            log().info(&amp;quot;alarm enabled&amp;quot;)
+            context.become(enabled)
+        } else {
+            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
+        }
+    }
+
+    private fun onActivity(a: Activity) {
+        log().warning(&amp;quot;alarm&amp;quot;)
+    }
+
+    companion object {
+        fun props(password: String) = Props.create(Alarm::class.java, password)
+    }
+}
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+    val system = ActorSystem.create()
+
+    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
+
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
