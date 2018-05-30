@@ -345,6 +345,10 @@ java,php,c++依然是最受企业欢迎的编程语言
 &lt;li&gt;&lt;p&gt;kotlin中可以使用tailrec关键字标记一个存在尾递归的函数，这样编译器就会进行尾递归优化。事实上现在很多的语言和编译器都会自动检测尾递归并自动进行优化，而Kotlin却选择使用了一个关键字。&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;之前看到一篇吐槽Kotlin的文章中提到，为啥创建一个map要写成 mapOf(&amp;ldquo;a&amp;rdquo; to &amp;ldquo;b, &amp;hellip;&amp;rdquo;)，而不是用冒号。从实现的角度来看，这里的to不过是一个infix修饰的函数（可以中缀调用），并返回一个Pair，这种实现方案对于编译器来说不需要做任何附加处理。当然，冒号是一个接受度更高的选择，遗憾的是kotlin似乎并不支持overload冒号，所以在不改动编译器的情况下似乎也没啥好办法。理论上来说，在编译器前插一个处理器魔改一下应该很简单，但是感觉实在没什么必要。更重要的是切记，magic is evil!!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;你可能知道java中的HashMap不是线程安全的，但是在有些场景下你觉得你好像不太在乎线程安全（比如缓存），但是即便如此，你也不应该使用HashMap,因为resize的时候会炸。可以参考这篇&lt;a href=&#34;http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html&#34;&gt;文章&lt;/a&gt;。所以，了解底层实现真的很重要。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在我所见过的大多数的数据库设计以及编程语言的设计中，读锁一般为共享锁，而写锁一般为排他锁。提出这一设计理念的竟然是中国诗人周敦颐：“可远观而不可亵玩焉”。&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
