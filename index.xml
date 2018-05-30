@@ -335,6 +335,17 @@ java,php,c++依然是最受企业欢迎的编程语言
     </item>
     
     <item>
+      <title>Tweets</title>
+      <link>https://chenminhua.github.io/tweets/</link>
+      <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
+      <guid>https://chenminhua.github.io/tweets/</guid>
+      <description>&lt;p&gt;切记永远不要在本地事务中调用远程服务，因为如果远程服务出现了问题，则会拖长事务，导致应用服务器占用太多的数据库连接，在严重情况下会压垮数据库。当然，数据库也应该有负载熔断机制。&lt;/p&gt;
+
+&lt;p&gt;kotlin中可以使用tailrec关键字标记一个存在尾递归的函数，这样编译器就会进行尾递归优化。事实上现在很多的语言和编译器都会自动检测尾递归并自动进行优化，而Kotlin却选择使用了一个关键字。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Akka</title>
       <link>https://chenminhua.github.io/posts/draft/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
