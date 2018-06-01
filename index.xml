@@ -340,6 +340,69 @@ java,php,c++依然是最受企业欢迎的编程语言
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       <guid>https://chenminhua.github.io/tweets/</guid>
       <description>&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;进程通常运行在用户态，这时候进程可以使用CPU和内存来完成一些任务，但是当进程需要对硬件（磁盘，网络）进行操作的时候，就要切换到内核态，完成操作后再切换回用户态。
+由于系统调用涉及进程从用户态到内核态的切换，导致一定的内存空间交换，所以系统调用的开销通常比较昂贵。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;内核的进程调度器维护着各种状态的进程队列，包括一个所有可运行进程的队列，以及一个包括所有休眠进程和僵尸进程的列表。进程调度器的一个重要工作就是决定下一个运行的进程。
+cat /proc/loadavg 可以查看系统负载。当系统负载为0.00时，说明任何进程只有就绪后就可以马上获得CPU,不需要等待。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;nginx和其代理的各个服务直接是通过TCP长连接通信的吗??&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;nginx官方介绍声称，nginx维持1000个非活跃http持久连接只需要2.5M的内存。这得益于其单进程的计算模型（各个worker可以共享内存资源）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;性能问题有趣的地方在于，努力不一定有用。比如你把我前面提过的十种方法里面的后面九种都做了，但是你的服务器水管太细，还是没用。处理性能问题的关键在于找到问题所在，是IO太慢？是带宽不够？是计算能力不够？是数据库可用连接太少？是数据库缓冲池太小导致IO太多？等你找到问题的时候，问题已经解决一大半了。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;请用最快的速度想出十种可能提高网站加载和响应速度的方案：1.增加服务器带宽。2.水平扩展，增加服务数。3.使用CDN。4.使用数据缓存(redis等)。5.检查是不是有数据库慢查询，干掉慢查询。6.增加数据库缓冲池。
+7.减少前端静态文件数量。8.开启server push。9.使用浏览器缓存。10.切分后端接口和前端组件，分批拉取数据，分批渲染组件。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;尽管我们的读写最终可能是指向磁盘的，但是在真正进写时，我们面对的是文件系统。linux将所有的设备（包括网络）都抽象成文件，当调用数据读取时，文件系统会先检查内存（页缓存）中是否有数据，如果没有则去块设备（磁盘）中读取&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Immutability changes everything &amp;ndash; Pat Helland&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;*&lt;em&gt;bounded context&lt;/em&gt; is fucking important&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Microservices != N-Tier + Docker&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You own your SLA or your SLA owns you&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;从npm install上面节省下来的时间都花费到了gradle build上了。心痛。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;如果你的用户一直在查文档，那你一定是做错了什么。如果你的用户一直找不到正确的文档，那你&amp;hellip;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;pattern seems to be the sweet spot of design &amp;ndash; 《Enterprise Integration Patterns - Designing, Building And Deploying Messaging Solutions》&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;BPM (Business process management)的一个例子：bpm收到一个抵押贷款的请求后，发送事件给三个不同的服务: 收入检查，信用检查，房屋评估。这三个服务将它们的结果发给风险管理服务。而风险管理服务再将结果返回给funding服务。我们可以说，bpm将各个业务逻辑步骤外包给了其他服务。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;fail independently&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;性能领域有一条著名的USE(utilization, saturation, errors)方法&amp;mdash;-对于所有的资源，查看它的使用率，饱和度和错误。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;有的人扭曲事实来适应理论，有的人改变理论来适应事实。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;试图用尽可能通俗的方式讲明白CAP的文章到处都是，这篇是我看过的中写的最好的&lt;a href=&#34;http://ksat.me/a-plain-english-introduction-to-cap-theorem/&#34;&gt;CAP&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;[微服务 get started]&lt;a href=&#34;https://cloudncode.blog/2016/07/22/msa-getting-started/&#34;&gt;https://cloudncode.blog/2016/07/22/msa-getting-started/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;有些时候你会突然遇到一些需求，你发现完成这些需求需要去查若干张表，问题是这些表来自不同的服务，你需要group这些数据，甚至有一些排序和分页的需求。我最开始遇到这些问题的时候第一反应是，我的服务划分是不是有问题，他们是不是应该在一个服务里？先别急着否定自己。拆分微服务必然会遇到这种情况，很多时候你需要的不是把这些服务合并起来，而是写一个新的服务，去聚合这些数据，插入到一个新的表或者其他什么存储技术中，直觉告诉我，这个服务很可能会变得非常非常有用。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;[微服务之坑] 微服务所说的每个服务单独开发和部署听起来很美，但是很多时候服务拆分的不好，增加一个feature需要同时更新五个服务。。。当然团队里面可不止你一个feature等着上线。。。事情就会非常糟糕。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;时机很重要。一方面不要过早优化，不能一行代码还没写数据仓库却搭得很好；另一方面，也不能等十个服务都上线了才开始思考基础架构的事情。我觉得，如果一个东西你可以不改任何代码，或者改很少的配置就能够加上的，你可以等需要了再加。而有些东西你现在不做，之后要改一大片才能加上，那最好尽早设计。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Simplicity is the key if you really want to build large distributed systems.&lt;/strong&gt;构建大型分布式系统的唯一方式是让一切都保持尽可能简单，&lt;strong&gt;不能有隐藏的需求和隐藏的依赖&lt;/strong&gt;。不要人为创造复杂度。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;今年OKR中深入学习c++这一项我感觉是要黄了。看书终究还是纸上谈兵，可真要有个复杂的东西让你写吧，又怂了，默默拿起了golang。感觉还是应该先找两个c++的优秀项目多看看，看的多了，也就知道放弃了。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;应该有一个这样的一个进程，它可以watch某一个文件（比如你现在看到的这个文件），然后当其发现这个文件有更新之后，就去调用若干用户配置的社交账号，并将新添加的内容发送到相应的平台上去。这看上去似乎比ifttt更让人放心（至少是更让我放心）。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;magic is evil, framework is magic.记得之前看过亚马逊的一篇文章，内容是说亚马逊不喜欢使用中间件，因为中间件更像是框架而非工具。如果你使用了一个中间件，你就很可能被其绑住。uncle bob也曾经在他著名的关于solid的演讲中提到，一定要make framework outside,不要让你的代码直接依赖框架。我认为这一点在我们做技术选型的时候尤其重要。比如说通信基础架构层，是用dubbo还是grpc? I prefer grpc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;scalability意味着什么？意味着只要你愿意增加机器，增加带宽，你就能得到更好的performace，你就能服务更多的人。反直觉的是，这远远没有听起来那么简单。比如像数据库这种shared resource，就是很难scale out。而在scale out的时候，往往你必须放弃掉一些东西。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I don&amp;rsquo;t plan. If I do, I plan to fail。这句话用在软件架构领域再恰当不过。所有的决策都要有退路，所有的update都要可以rollback。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;卡里乌斯不愧是皇马中流砥柱。&lt;/p&gt;&lt;/li&gt;
+
 &lt;li&gt;&lt;p&gt;按时间倒序的时间轴在互联网行业绝对不是什么新鲜事。比如你现在看到的这条时间轴的实现方式是，我每次都是在这个页面对应的文件顶部添加内容，这让我不禁想到了栈这种数据结构。通常我们认为栈顶的数据相较于栈底的数据更活跃，而这一点和时间轴其实非常相似。&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;切记永远不要在本地事务中调用远程服务，因为如果远程服务出现了问题，则会拖长事务，导致应用服务器占用太多的数据库连接，在严重情况下会压垮数据库。当然，数据库也应该有负载熔断机制。&lt;/p&gt;&lt;/li&gt;
