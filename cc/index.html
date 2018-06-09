@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>Feature_vs_function – 硕大的汤姆</title>
-<meta name="created" content="2018-05-10T12:49:25&#43;0800">
-<meta name="modified" content="2018-05-10T12:49:25&#43;0800">
+<title>代码大全 – 硕大的汤姆</title>
+<meta name="created" content="2018-04-01T23:21:33&#43;0800">
+<meta name="modified" content="2018-04-01T23:21:33&#43;0800">
 
-<meta name="description" content="最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。 大多数项目在一开始往往">
+<meta name="description" content="毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。 软件开发中，准备工作的中">
 <meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="Feature_vs_function">
-<meta property="og:url" content="https://chenminhua.github.io/posts/feature_vs_function/">
+<meta property="og:title" content="代码大全">
+<meta property="og:url" content="https://chenminhua.github.io/cc/">
 
 <meta name="generator" content="Hugo 0.31" />
 
-<link rel="canonical" href="https://chenminhua.github.io/posts/feature_vs_function/">
+<link rel="canonical" href="https://chenminhua.github.io/cc/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="style" href="/css/styles.css">
 <link rel="stylesheet" href="/css/styles.css">
@@ -23,11 +23,11 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Feature_vs_function",
-    "datePublished": "2018-05-10T12:49:25+08:00",
-    "dateModified": "2018-05-10T12:49:25+08:00",
-    "url" : "https://chenminhua.github.io/posts/feature_vs_function/",
-    "description": "最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。 大多数项目在一开始往往",
+    "headline": "代码大全",
+    "datePublished": "2018-04-01T23:21:33+08:00",
+    "dateModified": "2018-04-01T23:21:33+08:00",
+    "url" : "https://chenminhua.github.io/cc/",
+    "description": "毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。 软件开发中，准备工作的中",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://chenminhua.github.io/"
@@ -64,27 +64,54 @@
 <li><a class="" href="/">Home</a></li>
 <li><a class="" href="/about/">About</a></li>
 <li><a class="" href="/tweets/">Tweets</a></li>
-<li><a class="" href="/cc/">代码大全</a></li>
-<li><a class="active" href="/posts/">Posts</a></li>
+<li><a class="active" href="/cc/">代码大全</a></li>
+<li><a class="" href="/posts/">Posts</a></li>
 </ul>
 </nav>
 
 
 <main class="main layout__main" role="main">
-<h1 class="title ">Feature_vs_function</h1>
-<article class="section-posts single-view">
+<h1 class="title ">代码大全</h1>
+<article class="single-view">
 <header>
 </header>
 <div class="content">
-<p>最近看到一段关于微服务的视频<a href="https://www.youtube.com/watch?v=k9QZ4oIOHnk&amp;index=2&amp;list=WL&amp;t=0s">拆分单体应用</a>，其中有一段话引起了我的注意：split code by feature not by functionality。</p>
+<p>毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。</p>
 
-<p>大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。</p>
+<p>软件开发中，准备工作的中心目标就是降低风险。</p>
 
-<p>关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别<a href="https://softwareengineering.stackexchange.com/questions/94164/feature-vs-function">这个问题</a>甚至被直接关闭了，理由是这个问题的答案很主观。</p>
+<p>在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。</p>
 
-<p>在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。</p>
+<p>发现错误的时间要尽可能接近引入该错误的时间。</p>
 
-<p>function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。</p>
+<p>问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。</p>
+
+<p>明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。</p>
+
+<p>确保每个人都知道需求变更的代价。</p>
+
+<p>架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。</p>
+
+<p>好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。</p>
+
+<p>你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。</p>
+
+<p>编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）</p>
+
+<p>设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。</p>
+
+<p>犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。</p>
+
+<p>Design is about tradeoffs and priorities</p>
+
+<p>软件的首要技术使命：管理复杂度。
+软件开发有两类难题：本质的问题和偶然的问题。</p>
+
+<p>高扇入低扇出的设计。</p>
+
+<p>信息隐藏包括两大类：隐藏复杂度和隐藏变化源</p>
+
+<p>找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。</p>
 
 
 </div>
@@ -98,7 +125,7 @@
 <h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
 <ul class="menu">
 <li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="active" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
 <li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
 <li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
 <li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>

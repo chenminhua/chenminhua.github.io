@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>Feature_vs_function – 硕大的汤姆</title>
-<meta name="created" content="2018-05-10T12:49:25&#43;0800">
-<meta name="modified" content="2018-05-10T12:49:25&#43;0800">
+<title>糟糕的高等教育 – 硕大的汤姆</title>
+<meta name="created" content="2018-06-09T22:14:04&#43;0800">
+<meta name="modified" content="2018-06-09T22:14:04&#43;0800">
 
-<meta name="description" content="最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。 大多数项目在一开始往往">
+<meta name="description" content="今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。 细思极恐。 看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。">
 <meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="Feature_vs_function">
-<meta property="og:url" content="https://chenminhua.github.io/posts/feature_vs_function/">
+<meta property="og:title" content="糟糕的高等教育">
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">
 
 <meta name="generator" content="Hugo 0.31" />
 
-<link rel="canonical" href="https://chenminhua.github.io/posts/feature_vs_function/">
+<link rel="canonical" href="https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="style" href="/css/styles.css">
 <link rel="stylesheet" href="/css/styles.css">
@@ -23,11 +23,11 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Feature_vs_function",
-    "datePublished": "2018-05-10T12:49:25+08:00",
-    "dateModified": "2018-05-10T12:49:25+08:00",
-    "url" : "https://chenminhua.github.io/posts/feature_vs_function/",
-    "description": "最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。 大多数项目在一开始往往",
+    "headline": "糟糕的高等教育",
+    "datePublished": "2018-06-09T22:14:04+08:00",
+    "dateModified": "2018-06-09T22:14:04+08:00",
+    "url" : "https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/",
+    "description": "今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。 细思极恐。 看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://chenminhua.github.io/"
@@ -71,20 +71,22 @@
 
 
 <main class="main layout__main" role="main">
-<h1 class="title ">Feature_vs_function</h1>
+<h1 class="title ">糟糕的高等教育</h1>
 <article class="section-posts single-view">
 <header>
 </header>
 <div class="content">
-<p>最近看到一段关于微服务的视频<a href="https://www.youtube.com/watch?v=k9QZ4oIOHnk&amp;index=2&amp;list=WL&amp;t=0s">拆分单体应用</a>，其中有一段话引起了我的注意：split code by feature not by functionality。</p>
+<p>今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。</p>
 
-<p>大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。</p>
+<p>细思极恐。</p>
 
-<p>关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别<a href="https://softwareengineering.stackexchange.com/questions/94164/feature-vs-function">这个问题</a>甚至被直接关闭了，理由是这个问题的答案很主观。</p>
+<p>看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。很久以来，大学已经渐渐淡化了它原本应该有的职能，大家开始渐渐认同所谓的“大学就是用来为进入社会过渡的”，“大学是教会你怎么解决工作生活问题，学会与人沟通的”，“大学是为你以后工作积累人脉的”，“大学就是用来给你谈恋爱的”之类的论述。</p>
 
-<p>在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。</p>
+<p>我不满意这些论述。并不是同意或者反对，就是不满意。</p>
 
-<p>function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。</p>
+<p>对我而言，大学四年过的平静而踏实，有过到处厮混的日子，也有过拼命学习的日子。但是回过头去看这四年，乃至加上后面的三年研究生生活，学校教给我的东西真的太少了。比如对于一个所谓的985高校理工科专业强化班（非计算机专业）的学生来说，居然直到毕业都不知道gcc优化这回事，也不知道怎么做好的构建。但是在国外的很多基础的编程课上，无论是课上还是课后的参考资料中，都会有相关的背景知识，会有大量的编程实践和源码阅读（即使你不是计算机专业，你也可也学到这些知识，至少你可以知道你还不知道这些知识）。</p>
+
+<p>相比本科教育，国内的硕士教育更加糟糕。我有时候觉得，研究生生涯教会我的东西远没有youtube多。</p>
 
 
 </div>
@@ -97,8 +99,8 @@
 <section>
 <h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
 <ul class="menu">
-<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="active" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="active" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
 <li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
 <li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
 <li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
