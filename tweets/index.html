@@ -7,7 +7,7 @@
 <meta name="created" content="2018-04-01T23:21:33&#43;0800">
 <meta name="modified" content="2018-04-01T23:21:33&#43;0800">
 
-<meta name="description" content="在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语">
+<meta name="description" content="无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志 想知道你的程序在使用了哪些系统">
 <meta property="og:site_name" content="硕大的汤姆">
 <meta property="og:title" content="Tweets">
 <meta property="og:url" content="https://chenminhua.github.io/tweets/">
@@ -27,7 +27,7 @@
     "datePublished": "2018-04-01T23:21:33+08:00",
     "dateModified": "2018-04-01T23:21:33+08:00",
     "url" : "https://chenminhua.github.io/tweets/",
-    "description": "在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语",
+    "description": "无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志 想知道你的程序在使用了哪些系统",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://chenminhua.github.io/"
@@ -77,6 +77,12 @@
 </header>
 <div class="content">
 <ol>
+<li><p>无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志</p></li>
+
+<li><p>想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p <pid>。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。</p></li>
+
+<li><p>命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。</p></li>
+
 <li><p>在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。</p></li>
 
 <li><p>现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。</p></li>
