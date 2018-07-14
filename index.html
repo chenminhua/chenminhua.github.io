@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:updated_time" content="2018-06-09T22:14:04&#43;08:00"/>
+<meta property="og:updated_time" content="2018-07-14T18:57:56&#43;08:00"/>
 
 
 
@@ -126,6 +126,60 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" class="color-inherit dim link">
+            面向对象之继承
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          先问大家一个问题，为什么java没有多继承？
+c语言 c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。
+c++ class Animal { private: int size; public: Animal(int size): size(size) {} int getSize() {return size;} virtual void run() = 0; }; class Dog: public Animal { private: int weight; public: Dog(int size, int weight): Animal(size) { this-&gt;weight = weight; } int getWeight() {return weight;} void run() { std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl; } void bark() { std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl; } };  上面的例子中我们可以看到，1.
+        </div>
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" class="color-inherit dim link">
+            面向对象之封装
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          面向对象的第一课一定会讲到其三个基本特征：封装，继承，多态。啥是封装呢？如果你问不同语言的程序员可能会得到不同的回答。一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
+c语言的封装 c语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象c语言》）。但是事实上，c语言有着非常好的封装特性。c程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会include这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
+struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack);  使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack有哪些域？计算size的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
+c++的封装 c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了public，private这些个访问控制符。相比于c语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将c语言里面的各种函数变成类的成员方法。c++之于c的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
+template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements public: void push(T const&amp;); // push element void pop(); // pop element T top() const; // return top element bool empty() const { // return true if empty. return elems.
+        </div>
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/" class="color-inherit dim link">
             糟糕的高等教育
             </a>
@@ -147,70 +201,24 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/feature_vs_function/" class="color-inherit dim link">
-            Feature_vs_function
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
-大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
-关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
-在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。
-        </div>
-          <a href="/posts/feature_vs_function/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/annotation/" class="color-inherit dim link">
-            spring aop中遇到的一个小问题
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。
-然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。
-一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。
-另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。
-spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。
-起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考stackoverflow。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。
-如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。
-        </div>
-          <a href="/posts/annotation/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/feature_vs_function/" class="link black dim">
+              Feature_vs_function
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/annotation/" class="link black dim">
+              spring aop中遇到的一个小问题
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/" class="link black dim">
@@ -221,18 +229,6 @@ spring aop有两种常用的给方法加切面的方式。一种是给方法加a
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/" class="link black dim">
               一件让我愤怒的事
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/%E5%8D%81%E5%B9%B4/" class="link black dim">
-              十年
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/move_slow_and_mend_things/" class="link black dim">
-              Move slow and mend things
             </a>
           </h2>
         

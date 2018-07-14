@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>硕大的汤姆  | 面向对象之继承</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.43" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    <link href='https://chenminhua.github.io/dist/main.css' rel='stylesheet' type="text/css" />
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="面向对象之继承" />
+<meta property="og:description" content="先问大家一个问题，为什么java没有多继承？
+c语言 c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。
+c&#43;&#43; class Animal { private: int size; public: Animal(int size): size(size) {} int getSize() {return size;} virtual void run() = 0; }; class Dog: public Animal { private: int weight; public: Dog(int size, int weight): Animal(size) { this-&gt;weight = weight; } int getWeight() {return weight;} void run() { std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl; } void bark() { std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl; } };  上面的例子中我们可以看到，1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" />
+
+
+
+<meta property="article:published_time" content="2018-07-14T18:57:56&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-07-14T18:57:56&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="面向对象之继承">
+<meta itemprop="description" content="先问大家一个问题，为什么java没有多继承？
+c语言 c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。
+c&#43;&#43; class Animal { private: int size; public: Animal(int size): size(size) {} int getSize() {return size;} virtual void run() = 0; }; class Dog: public Animal { private: int weight; public: Dog(int size, int weight): Animal(size) { this-&gt;weight = weight; } int getWeight() {return weight;} void run() { std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl; } void bark() { std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl; } };  上面的例子中我们可以看到，1.">
+
+
+<meta itemprop="datePublished" content="2018-07-14T18:57:56&#43;08:00" />
+<meta itemprop="dateModified" content="2018-07-14T18:57:56&#43;08:00" />
+<meta itemprop="wordCount" content="225">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="面向对象之继承"/>
+<meta name="twitter:description" content="先问大家一个问题，为什么java没有多继承？
+c语言 c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。
+c&#43;&#43; class Animal { private: int size; public: Animal(int size): size(size) {} int getSize() {return size;} virtual void run() = 0; }; class Dog: public Animal { private: int weight; public: Dog(int size, int weight): Animal(size) { this-&gt;weight = weight; } int getWeight() {return weight;} void run() { std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl; } void bark() { std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl; } };  上面的例子中我们可以看到，1."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://chenminhua.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      硕大的汤姆
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <div class="flex-l mt2 mw8 center">
+    <article class="center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <p class="f6 b helvetica tracked">
+          POSTS
+        </p>
+        <h1 class="f1">
+          面向对象之继承
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
+        
+
+<p>先问大家一个问题，为什么java没有多继承？</p>
+
+<h2 id="c语言">c语言</h2>
+
+<p>c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。</p>
+
+<h2 id="c">c++</h2>
+
+<pre><code class="language-c++">class Animal {
+private:
+    int size;
+public:
+    Animal(int size): size(size) {}
+    int getSize() {return size;}
+    virtual void run() = 0;
+};
+
+class Dog: public Animal {
+private:
+    int weight;
+public:
+    Dog(int size, int weight): Animal(size) {
+        this-&gt;weight = weight;
+    }
+    int getWeight() {return weight;}
+    void run() {
+        std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl;
+    }
+    void bark() {
+        std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl;
+    }
+    
+};
+</code></pre>
+
+<p>上面的例子中我们可以看到，1.子类存储了基类的数据成员，2.子类可以使用基类的方法，3.子类有其自己的构造函数，4.子类可以根据需要添加额外的数据成员和成员函数。</p>
+
+<p>子类和基类之间有一些特殊关系，1.子类可以使用基类的方法（非私有的）；2.基类指针可以在不进行显式转换的情况下指向派生类对象，基类引用也可以在不进行显式转换的情况下引用派生类对象，当然基类指针只能调用基类方法。</p>
+
+<p>那如果一个子类同时继承了两个不同的父类会发生什么呢？</p>
+
+<pre><code class="language-c++">class A{
+public:
+    void funcA() { std::cout &lt;&lt; &quot;A&quot; &lt;&lt; std::endl;};
+};
+class B{
+public:
+    bool funcB() {std::cout &lt;&lt; &quot;B&quot; &lt;&lt; std::endl;};
+};
+class C: public A, public B{};
+
+int main() {
+    C c;
+    c.funcA();
+    c.funcB();
+    return 0;
+}
+</code></pre>
+
+<p>上面的代码运行没什么问题，但是如果两个父类有同样的函数呢？</p>
+
+<pre><code class="language-c++">class A{
+public:
+    void func() { std::cout &lt;&lt; &quot;A&quot; &lt;&lt; std::endl;};
+};
+class B{
+public:
+    bool func() {std::cout &lt;&lt; &quot;B&quot; &lt;&lt; std::endl;};
+};
+class C: public A, public B{};
+
+int main() {
+    C c;
+    c.func();
+    return 0;
+}
+</code></pre>
+
+<p>上面这段代码是编译不过的，因为编译器不知道应该给你链接哪个函数进来。当然还是有办法的，比如在类C里面实现一个func函数，这样编译器就不用去父类里面找函数链接进来。</p>
+
+<pre><code class="language-c++">class C: public A, public B{
+public:
+    void func() {
+        std::cout &lt;&lt; &quot;C&quot; &lt;&lt; std::endl;
+    };
+};
+</code></pre>
+
+<p>c++的语法非常复杂，就类继承这一块而言，就有多重继承，虚继承等等不同用法。说实话这让c++的学习使用门槛明显高于其他语言。对于c++的学习和使用，我一直觉得普通使用者不必强迫自己去背下所有这些语法特性，只用你用得着的部分，尽可能保证代码的可读性。当你需要使用一些复杂特性的时候再去找手册查看就好。</p>
+
+<h2 id="java">java</h2>
+
+<p>相比起c++而言，java语法实在是简单太多了，当然付出的代价是你需要去学很多jvm方面的东西，以及可能牺牲一点性能。现在我们回到文章开头那个问题，为啥java没有多继承？</p>
+
+<p>java没有多继承其实还是之前谈到的那个困境：当一个子类继承了两个父类时，如果其试图调用一个两个父类都有的函数时，应该选择哪个实现？对于c++来说，编译器在编译时会进行一些函数链接，因此这样类型的编程错误会在编译器被发现。但是对于java来说，继承的方法是在运行时连接过来的，这会导致更严重的运行时错误。当然，如果java愿意的话，是可以让编译器检查这种错误并提醒程序员的，但是Gosling的品味让他觉得不应该让程序员写出多继承的类结构，而是应该用其他方法去解决。</p>
+
+<p>然而，从java8开始，java中的interface开始可以提供默认方法，这就导致java也会出现多继承问题。此时编译器会迫使用户去override冲突的方法，也就是像上面c++的例子里面，在子类里面自己实现方法，而不是在运行时去选。</p>
+
+<h2 id="what-about-javascript">what about javascript</h2>
+
+<p>js也有继承，不过不像c++,java那种基于类的继承方式，js使用的是一种基于原型链的继承实现。</p>
+
+<pre><code class="language-js">var o = {
+  a: 2,
+  m: function(){
+    return this.a + 1;
+  }
+};
+
+console.log(o.m()); // 3
+// 当调用 o.m 时,'this'指向了o.
+
+var p = Object.create(o);
+// p是一个继承自 o 的对象
+
+p.a = 4; // 创建 p 的自身属性 a
+console.log(p.m()); // 5
+</code></pre>
+
+<p>在es6中，也开始引入了class，extends等关键字，显然是因为基于类的OO编程有着更好的市场，更容易被程序员接受。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>《设计模式》也好，《代码大全》也好，各种编程圣经都提到一个很重要的设计原则就是：组合优于继承。当然，继承在很多情况下还是很有意义的。继承提供了很好的代码重用，在有些情况下使用组合尽管也能实现这些代码重用，但是并没有继承来的直观。此外，继承的设计也有助于多态的实现。当你的类结构有明显的A is a B的范式时，还是应当考虑使用继承。</p>
+
+      </div>
+    </article>
+    <aside class="ph3 mt2 mt6-ns">
+      
+
+
+
+
+
+
+
+  <div class="bg-light-gray pa3">
+    <ul>
+      <li class="list b mb3">
+        22 More Posts
+      </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" class="link ph2 pv2 db black o-50">
+            面向对象之继承
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" class="link ph2 pv2 db black">
+            面向对象之封装
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/" class="link ph2 pv2 db black">
+            糟糕的高等教育
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/feature_vs_function/" class="link ph2 pv2 db black">
+            Feature_vs_function
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/annotation/" class="link ph2 pv2 db black">
+            spring aop中遇到的一个小问题
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/" class="link ph2 pv2 db black">
+            相关与因果
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/" class="link ph2 pv2 db black">
+            一件让我愤怒的事
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E5%8D%81%E5%B9%B4/" class="link ph2 pv2 db black">
+            十年
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/move_slow_and_mend_things/" class="link ph2 pv2 db black">
+            Move slow and mend things
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/" class="link ph2 pv2 db black">
+            聊聊抽象
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/" class="link ph2 pv2 db black">
+            答案是什么
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/" class="link ph2 pv2 db black">
+            数学与经济
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/" class="link ph2 pv2 db black">
+            你不需要懂这些??
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E8%B4%A8%E6%95%B0/" class="link ph2 pv2 db black">
+            质数
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/akka/" class="link ph2 pv2 db black">
+            Akka
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/draft/akka/" class="link ph2 pv2 db black">
+            Akka
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/" class="link ph2 pv2 db black">
+            并发与并行
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/the_rule_of_hole/" class="link ph2 pv2 db black">
+            The_rule_of_hole
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/copy_on_write/" class="link ph2 pv2 db black">
+            Copy_on_write
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/optional/" class="link ph2 pv2 db black">
+            kotlin中的可空类型
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/" class="link ph2 pv2 db black">
+            我只是想要一个函数啊
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/" class="link ph2 pv2 db black">
+            装逼的艺术
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/" class="link ph2 pv2 db black">
+            如何设计一个系统
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+    </aside>
+  </div>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://chenminhua.github.io/" >
+    &copy; 2018 硕大的汤姆
+  </a>
+  
+
+
+
+
+
+
+
+
+  </div>
+</footer>
+
+    <script src="https://chenminhua.github.io/dist/app.bundle.js" async></script>
+
+  </body>
+</html>
