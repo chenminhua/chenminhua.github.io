@@ -1,82 +1,166 @@
 <!DOCTYPE html>
-<html class="nojs" lang="en" dir="ltr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>代码大全 – 硕大的汤姆</title>
-<meta name="created" content="2018-04-01T23:21:33&#43;0800">
-<meta name="modified" content="2018-04-01T23:21:33&#43;0800">
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>硕大的汤姆  | 代码大全</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
 
-<meta name="description" content="毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。 软件开发中，准备工作的中">
-<meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="代码大全">
-<meta property="og:url" content="https://chenminhua.github.io/cc/">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.43" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
 
-<meta name="generator" content="Hugo 0.31" />
+    <link href='https://chenminhua.github.io/dist/main.css' rel='stylesheet' type="text/css" />
+    
+      
+    
 
-<link rel="canonical" href="https://chenminhua.github.io/cc/">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="style" href="/css/styles.css">
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/print.css" media="print">
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "代码大全",
-    "datePublished": "2018-04-01T23:21:33+08:00",
-    "dateModified": "2018-04-01T23:21:33+08:00",
-    "url" : "https://chenminhua.github.io/cc/",
-    "description": "毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。 软件开发中，准备工作的中",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://chenminhua.github.io/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "硕大的汤姆",
-      "url": "https://chenminhua.github.io/",
-    }
-  }
-</script>
+    
 
-</head>
-
-<body>
-<div class="page layout__page layout__sidebar-second">
-<header class="header layout__header" role="banner">
-<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
-<h1 class="header__site-name">
-<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
-</h1>
-<div class="region header__region">
+    <meta property="og:title" content="代码大全" />
+<meta property="og:description" content="毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。
+软件开发中，准备工作的中心目标就是降低风险。
+在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。
+发现错误的时间要尽可能接近引入该错误的时间。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。
+你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。
+编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）
+设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。
+犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。
+Design is about tradeoffs and priorities
+软件的首要技术使命：管理复杂度。 软件开发有两类难题：本质的问题和偶然的问题。 简单性可以通过两种方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度 。
+高扇入低扇出的设计。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源
+找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。
+自上而下策略和自下而上策略的最关键区别在于，前者是一种decomposition策略，而后者是一种composition策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
+记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chenminhua.github.io/cc/" />
 
 
-</div>
-</header>
+
+<meta property="article:published_time" content="2018-04-01T23:21:33&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-04-01T23:21:33&#43;08:00"/>
 
 
 
 
-<nav class="main-menu layout__navigation" role="navigation">
-<h2 class="visually-hidden">Main menu</h2>
-<ul class="navbar">
-<li><a class="" href="/">Home</a></li>
-<li><a class="" href="/about/">About</a></li>
-<li><a class="" href="/tweets/">Tweets</a></li>
-<li><a class="active" href="/cc/">代码大全</a></li>
-<li><a class="" href="/posts/">Posts</a></li>
-</ul>
+
+
+
+
+
+
+
+<meta itemprop="name" content="代码大全">
+<meta itemprop="description" content="毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。
+软件开发中，准备工作的中心目标就是降低风险。
+在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。
+发现错误的时间要尽可能接近引入该错误的时间。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。
+你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。
+编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）
+设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。
+犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。
+Design is about tradeoffs and priorities
+软件的首要技术使命：管理复杂度。 软件开发有两类难题：本质的问题和偶然的问题。 简单性可以通过两种方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度 。
+高扇入低扇出的设计。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源
+找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。
+自上而下策略和自下而上策略的最关键区别在于，前者是一种decomposition策略，而后者是一种composition策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
+记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。">
+
+
+<meta itemprop="datePublished" content="2018-04-01T23:21:33&#43;08:00" />
+<meta itemprop="dateModified" content="2018-04-01T23:21:33&#43;08:00" />
+<meta itemprop="wordCount" content="31">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="代码大全"/>
+<meta name="twitter:description" content="毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。
+软件开发中，准备工作的中心目标就是降低风险。
+在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。
+发现错误的时间要尽可能接近引入该错误的时间。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。
+你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。
+编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）
+设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。
+犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。
+Design is about tradeoffs and priorities
+软件的首要技术使命：管理复杂度。 软件开发有两类难题：本质的问题和偶然的问题。 简单性可以通过两种方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度 。
+高扇入低扇出的设计。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源
+找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。
+自上而下策略和自下而上策略的最关键区别在于，前者是一种decomposition策略，而后者是一种composition策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
+记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://chenminhua.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      硕大的汤姆
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+    </div>
+  </div>
 </nav>
 
+    </div>
+  </header>
 
-<main class="main layout__main" role="main">
-<h1 class="title ">代码大全</h1>
-<article class="single-view">
-<header>
-</header>
-<div class="content">
-<p>毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。</p>
+
+    <main class="pb7" role="main">
+      
+  <div class="flex-l mt2 mw8 center">
+    <article class="center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <p class="f6 b helvetica tracked">
+          
+        </p>
+        <h1 class="f1">
+          代码大全
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
+        <p>毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。</p>
 
 <p>软件开发中，准备工作的中心目标就是降低风险。</p>
 
@@ -119,64 +203,63 @@
 
 <p>记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。</p>
 
-
-</div>
-</article>
-</main>
-
-
-
-<aside class="sidebar layout__second-sidebar" role="complementary">
-<section>
-<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
-<ul class="menu">
-<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
-<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
-<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
-<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
-<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
-<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
-<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
-<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
-<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
-<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
-<li><a class="" href="/posts/draft/akka/">Akka</a></li>
-<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
-<li><a class="" href="/posts/the_rule_of_hole/">The rule of hole</a></li>
-<li><a class="" href="/posts/copy_on_write/">Copy on write</a></li>
-<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
-<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
-<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
-<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
-</ul>
-</section>
-</aside>
+      </div>
+    </article>
+    <aside class="ph3 mt2 mt6-ns">
+      
 
 
-<footer class="footer layout__footer" role="contentinfo">
-<p><span>© 硕大的汤姆</span></p>
 
 
+
+
+
+  <div class="bg-light-gray pa3">
+    <ul>
+      <li class="list b mb3">
+        1 More 
+      </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/tweets/" class="link ph2 pv2 db black">
+            Tweets
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/cc/" class="link ph2 pv2 db black o-50">
+            代码大全
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+    </aside>
+  </div>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://chenminhua.github.io/" >
+    &copy; 2018 硕大的汤姆
+  </a>
+  
+
+
+
+
+
+
+
+
+  </div>
 </footer>
 
-</div>
+    <script src="https://chenminhua.github.io/dist/app.bundle.js" async></script>
 
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-</body>
+  </body>
 </html>
