@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:updated_time" content="2018-07-14T18:57:56&#43;08:00"/>
+<meta property="og:updated_time" content="2018-07-15T10:19:46&#43;08:00"/>
 
 
 
@@ -106,35 +106,19 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF/" class="link black dim">
-        面向对象之继承
+      <a href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="link black dim">
+        聊聊面向对象
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      先问大家一个问题，为什么java没有多继承？
-c语言 c语言里面连类都没有，怎么可能会有继承机制呢？确实没有，尽管事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。
-c++ class Animal { private: int size; public: Animal(int size): size(size) {} int getSize() {return size;} virtual void run() = 0; }; class Dog: public Animal { private: int weight; public: Dog(int size, int weight): Animal(size) { this-&gt;weight = weight; } int getWeight() {return weight;} void run() { std::cout &lt;&lt; &quot;dog run&quot; &lt;&lt; std::endl; } void bark() { std::cout &lt;&lt; &quot;quit dog bark hard&quot; &lt;&lt; std::endl; } };  上面的例子中我们可以看到，1.
-    </div>
-  </div>
-</div>
-
-        </div>
-      
-        <div class="relative w-100  mb4 bg-white">
-          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/posts/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85/" class="link black dim">
-        面向对象之封装
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      面向对象的第一课一定会讲到其三个基本特征：封装，继承，多态。啥是封装呢？如果你问不同语言的程序员可能会得到不同的回答。一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
-c语言的封装 c语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象c语言》）。但是事实上，c语言有着非常好的封装特性。c程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会include这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
+      看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
+谈到OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
+封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
+首先，封装是面向对象独有的吗？
+c语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象c语言》）。但是事实上，c语言有着非常好的封装特性。c程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会include这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
 struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack);  使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack有哪些域？计算size的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
-c++的封装 c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了public，private这些个访问控制符。相比于c语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将c语言里面的各种函数变成类的成员方法。c++之于c的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
-template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements public: void push(T const&amp;); // push element void pop(); // pop element T top() const; // return top element bool empty() const { // return true if empty. return elems.
+c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了public，private这些个访问控制符。相比于c语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将c语言里面的各种函数变成类的成员方法。c++之于c的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
+template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements public: void push(T const&amp;); // push element void pop(); // pop element T top() const; // return top element bool empty() const { // return true if empty.
     </div>
   </div>
 </div>
