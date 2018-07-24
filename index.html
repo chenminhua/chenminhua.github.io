@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:updated_time" content="2018-07-15T10:19:46&#43;08:00"/>
+<meta property="og:updated_time" content="2018-07-23T22:32:00&#43;08:00"/>
 
 
 
@@ -126,6 +126,33 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/" class="color-inherit dim link">
+            三门问题
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          背景 这是一个非常有名的问题，wiki。
+简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。 这时候选手有一次改变自己选择的机会。
+这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
+实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, guest_door, monty_door): if prize_door == guest_door: if prize_door == monty_door: return 0 else: return 0.5 else: if prize_door == monty_door: return 0 if guest_door == monty_door: return 0 return 1 g = build_bbn( f_prize_door, f_guest_door, f_monty_door, domains=dict( prize_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;], guest_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;], monty_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;] ) )  然后我们运行一下,假设选手选了A门，而主持人打开了B门
+        </div>
+          <a href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="color-inherit dim link">
             聊聊面向对象
             </a>
@@ -178,40 +205,18 @@ template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // e
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/feature_vs_function/" class="color-inherit dim link">
-            Feature_vs_function
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
-大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
-关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
-在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。
-        </div>
-          <a href="/posts/feature_vs_function/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/feature_vs_function/" class="link black dim">
+              Feature_vs_function
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/annotation/" class="link black dim">
@@ -228,12 +233,6 @@ function更接近于描述我们想要的功能，比如记账的功能，汇率
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/" class="link black dim">
               一件让我愤怒的事
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/posts/%E5%8D%81%E5%B9%B4/" class="link black dim">
-              十年
             </a>
           </h2>
         

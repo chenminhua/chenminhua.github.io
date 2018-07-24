@@ -6,10 +6,22 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Jul 2018 10:19:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jul 2018 22:32:00 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>三门问题</title>
+      <link>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 23 Jul 2018 22:32:00 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</guid>
+      <description>背景 这是一个非常有名的问题，wiki。
+简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。 这时候选手有一次改变自己选择的机会。
+这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
+实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, guest_door, monty_door): if prize_door == guest_door: if prize_door == monty_door: return 0 else: return 0.5 else: if prize_door == monty_door: return 0 if guest_door == monty_door: return 0 return 1 g = build_bbn( f_prize_door, f_guest_door, f_monty_door, domains=dict( prize_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], guest_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], monty_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;] ) )  然后我们运行一下,假设选手选了A门，而主持人打开了B门</description>
+    </item>
     
     <item>
       <title>聊聊面向对象</title>
@@ -210,7 +222,9 @@ int main() { int n; cin &amp;gt;&amp;gt; n; int count = 0; int j = 2; while (tru
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
+      <description>找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
+在所有弱点中，最大的弱点就是害怕暴露弱点。
+到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
 那些能够独立带领项目向正确方向进行的工程师是最可贵的。
 好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。
 使用c++，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。

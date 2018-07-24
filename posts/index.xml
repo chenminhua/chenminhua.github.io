@@ -6,10 +6,22 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Jul 2018 10:19:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jul 2018 22:32:00 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>三门问题</title>
+      <link>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 23 Jul 2018 22:32:00 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</guid>
+      <description>背景 这是一个非常有名的问题，wiki。
+简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。 这时候选手有一次改变自己选择的机会。
+这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
+实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, guest_door, monty_door): if prize_door == guest_door: if prize_door == monty_door: return 0 else: return 0.5 else: if prize_door == monty_door: return 0 if guest_door == monty_door: return 0 return 1 g = build_bbn( f_prize_door, f_guest_door, f_monty_door, domains=dict( prize_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], guest_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], monty_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;] ) )  然后我们运行一下,假设选手选了A门，而主持人打开了B门</description>
+    </item>
     
     <item>
       <title>聊聊面向对象</title>
