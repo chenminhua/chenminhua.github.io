@@ -7,424 +7,1239 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Jul 2018 22:32:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>三门问题</title>
       <link>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 23 Jul 2018 22:32:00 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</guid>
-      <description>背景 这是一个非常有名的问题，wiki。
-简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。 这时候选手有一次改变自己选择的机会。
-这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
-实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, guest_door, monty_door): if prize_door == guest_door: if prize_door == monty_door: return 0 else: return 0.5 else: if prize_door == monty_door: return 0 if guest_door == monty_door: return 0 return 1 g = build_bbn( f_prize_door, f_guest_door, f_monty_door, domains=dict( prize_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], guest_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;], monty_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;] ) )  然后我们运行一下,假设选手选了A门，而主持人打开了B门</description>
+      <description>
+
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;这是一个非常有名的问题，&lt;a href=&#34;https://en.wikipedia.org/wiki/Monty_Hall_problem&#34;&gt;wiki&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。
+在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。
+这时候选手有一次改变自己选择的机会。&lt;/p&gt;
+
+&lt;p&gt;这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。
+下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。&lt;/p&gt;
+
+&lt;h2 id=&#34;实验&#34;&gt;实验&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from bayesian.bbn import build_bbn
+
+def f_prize_door(prize_door):
+	return 0.33333333
+
+def f_guest_door(guest_door):
+	return 0.33333333
+
+def f_monty_door(prize_door, guest_door, monty_door):
+	if prize_door == guest_door:
+		if prize_door == monty_door:
+			return 0
+		else: 
+			return 0.5
+	else:
+		if prize_door == monty_door:
+			return 0
+		if guest_door == monty_door:
+			return 0
+		return 1
+
+g = build_bbn(
+		f_prize_door,
+		f_guest_door,
+		f_monty_door,
+		domains=dict(
+				prize_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;],
+				guest_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;],
+				monty_door = [&amp;quot;A&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;C&amp;quot;]
+			)
+	)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后我们运行一下,假设选手选了A门，而主持人打开了B门&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python -i montyHall.py
+g.q(guest_door=&amp;quot;A&amp;quot;, monty_door=&amp;quot;B&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+-------------+-------+----------+
+| Node        | Value | Marginal |
++-------------+-------+----------+
+| guest_door  | B     | 0.000000 |
+| guest_door  | C     | 0.000000 |
+| guest_door* | A*    | 1.000000 |
+| monty_door  | A     | 0.000000 |
+| monty_door  | C     | 0.000000 |
+| monty_door* | B*    | 1.000000 |
+| prize_door  | A     | 0.333333 |
+| prize_door  | B     | 0.000000 |
+| prize_door  | C     | 0.666667 |
++-------------+-------+----------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们发现奖品在A门的概率只有在C门的一半。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>聊聊面向对象</title>
       <link>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
       <pubDate>Sun, 15 Jul 2018 10:19:46 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
-      <description>看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
-谈到OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
-封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
-首先，封装是面向对象独有的吗？
-c语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象c语言》）。但是事实上，c语言有着非常好的封装特性。c程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会include这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
-struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack);  使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack有哪些域？计算size的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
-c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了public，private这些个访问控制符。相比于c语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将c语言里面的各种函数变成类的成员方法。c++之于c的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
-template &amp;lt;class T&amp;gt; class Stack { private: std::vector&amp;lt;T&amp;gt; elems; // elements public: void push(T const&amp;amp;); // push element void pop(); // pop element T top() const; // return top element bool empty() const { // return true if empty.</description>
+      <description>
+
+&lt;p&gt;看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了&lt;strong&gt;隐藏信息，拥抱变化&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;谈到OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。&lt;/p&gt;
+
+&lt;h2 id=&#34;封装&#34;&gt;封装&lt;/h2&gt;
+
+&lt;p&gt;一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？&lt;/p&gt;
+
+&lt;p&gt;首先，封装是面向对象独有的吗？&lt;/p&gt;
+
+&lt;p&gt;c语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象c语言》）。但是事实上，c语言有着非常好的封装特性。c程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会include这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-h&#34;&gt;struct Stack;
+typedef struct Stack Stack;
+Stack *newStack();
+void destoryStack(Stack * stack);
+void * popStack();
+void pushStack(void * ele);
+int sizeOfStack(Stack *stack);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack有哪些域？计算size的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。&lt;/p&gt;
+
+&lt;p&gt;c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了public，private这些个访问控制符。相比于c语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将c语言里面的各种函数变成类的成员方法。c++之于c的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-h&#34;&gt;template &amp;lt;class T&amp;gt;
+class Stack {
+private:
+  std::vector&amp;lt;T&amp;gt; elems;    // elements
+
+public:
+  void push(T const&amp;amp;);  // push element
+  void pop();               // pop element
+  T top() const;            // return top element
+  bool empty() const {      // return true if empty.
+      return elems.empty();
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用这个栈的程序员同样include了这个类，但是这时候他其实已经知道了,这个栈底层是用stl里面的vector实现的。幸运的是，他不能直接操作这个vector，因为这个域是private的。&lt;/p&gt;
+
+&lt;p&gt;那么对于市场广阔的java来说呢？在数据封装层面上来看，java和c++是一脉单传的。java程序员喜欢将所有的数据域都写成private的，然后再给他们加上getter和setter。这也让java代码看起来到处都是这些“没有营养，没有技术含量”的东西，而这些代码又确实是“无趣而又不得不做”的。&lt;/p&gt;
+
+&lt;p&gt;what about javascript？连martin fowler的《重构》第二版都打算用javascript写了，js已经是编程界不可回避的话题。然而js确实是一门标准极为混乱的语言，当我们讨论js的时候，我们必须先搞清楚我们在谈论什么。显然单纯的js对象是没有所谓的封装这种特性的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var obj = {
+  foo: &amp;quot;foo&amp;quot;,
+  bar: 1
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你可以任意访问一个对象的域，甚至当你访问一个不存在的域时，它也只会客客气气地返回给你一个&amp;rdquo;undefined&amp;rdquo;，没有编译时检查，没有可用的类型系统。。。于是js，python这些动态类型语言的程序员慢慢形成了这样一种共识，如果一个域是__开头的，则千万不要在外面访问它，算是一种“人工代替编译器”的封装检查吧。幸运的是，es6开始有class，同时babel也让js的编译时检查变得可能。而typescript更进一步地引入了访问控制符和更好的类型系统，一切都越来越像java了。&lt;/p&gt;
+
+&lt;p&gt;简单总结一下，首先，封装并不是面向对象编程语言带来的，c语言程序员写的代码有着非常完美的封装，这种封装不是依赖编译器检查实现的，而是一种&amp;rdquo;you physically can&amp;rsquo;t&amp;rdquo;。c++，java等经典意义上的面向对象语言在引入class之后，通过访问控制符来限制对象数据的访问，这种限制是在编译时实现的（通过一些反射机制，可以在运行时绕过这些访问限制符的控制）。而像js等脚本语言，则在数据封装上做的比较糟糕。&lt;/p&gt;
+
+&lt;p&gt;最后来聊聊为啥封装如此重要？其实本质上，封装是信息隐藏的一种手段，那么为什么需要隐藏这些信息呢？隐藏信息最重要的价值在于隐藏变化源。还是以上面栈的例子来说，如果客户端程序员知道了栈的底层是由vector实现的，并且直接拿到了这个vector，当有一天你想把vector改成array，你需要检查所有客户程序。而隐藏掉底部实现细节则让客户程序不需要关心实现上的变化，这是封装最重要的原因。此外封装对你的代码可读性也会有很好的帮助。&lt;/p&gt;
+
+&lt;h2 id=&#34;继承&#34;&gt;继承&lt;/h2&gt;
+
+&lt;p&gt;继承通常是指几个类之间的关系：1.子类存储了基类的数据成员，2.子类可以使用基类的方法，3.子类有其自己的构造函数，4.子类可以根据需要添加额外的数据成员和成员函数。5.基类指针（或引用）可以在不进行显式转换的情况下指向派生类对象，当然基类指针只能调用基类方法。&lt;/p&gt;
+
+&lt;p&gt;还是先来说说c语言，c语言里面连类都没有，怎么可能会有继承机制呢？事实上，c语言也有办法实现继承，尽管实现起来不够直观，但是在早期的GUI编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象c语言》第四章。有机会我也会写一篇文章来结束一下c语言如何实现继承。&lt;/p&gt;
+
+&lt;p&gt;而在c++中，继承就被玩出了花来。c++的类继承对初学者是非常不友好的。这里举一个简单的例子：如果一个类同时继承两个父类会发生什么？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class A{
+public:
+    void funcA() { std::cout &amp;lt;&amp;lt; &amp;quot;A&amp;quot; &amp;lt;&amp;lt; std::endl;};
+};
+class B{
+public:
+    bool funcB() {std::cout &amp;lt;&amp;lt; &amp;quot;B&amp;quot; &amp;lt;&amp;lt; std::endl;};
+};
+class C: public A, public B{};
+
+int main() {
+    C c;
+    c.funcA();
+    c.funcB();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码运行没什么问题，但是如果两个父类有同样的函数呢？如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class A{
+public:
+    void func() { std::cout &amp;lt;&amp;lt; &amp;quot;A&amp;quot; &amp;lt;&amp;lt; std::endl;};
+};
+class B{
+public:
+    bool func() {std::cout &amp;lt;&amp;lt; &amp;quot;B&amp;quot; &amp;lt;&amp;lt; std::endl;};
+};
+class C: public A, public B{};
+
+int main() {
+    C c;
+    c.func();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这段代码是编译不过的，因为编译器在处理c.func()时不知道应该给你链接哪个函数进来。当然还是有办法的，比如在类C里面实现一个func函数，这样编译器就不用去父类里面找函数链接进来。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;class C: public A, public B{
+public:
+    void func() {
+        std::cout &amp;lt;&amp;lt; &amp;quot;C&amp;quot; &amp;lt;&amp;lt; std::endl;
+    };
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c++的语法非常复杂，就类继承这一块而言，就有多重继承，虚继承等等不同用法。说实话这让c++的学习使用门槛明显高于其他语言。对于c++的学习和使用，我一直觉得普通使用者不必强迫自己去背下所有这些语法特性，只用你用得着的部分，尽可能保证代码的可读性。当你需要使用一些复杂特性的时候再去找手册查看就好。&lt;/p&gt;
+
+&lt;p&gt;相比起c++而言，java语法实在是简单太多了，当然付出的代价是你需要去学很多jvm方面的东西，以及可能牺牲一点性能。请大家思考一个问题，为啥java没有多继承？&lt;/p&gt;
+
+&lt;p&gt;java没有多继承其实还是之前谈到的那个困境：当一个子类继承了两个父类时，如果其试图调用一个两个父类都有的函数时，应该选择哪个实现？对于c++来说，编译器在编译时会进行一些函数链接，因此这样类型的编程错误会在编译器被发现。但是对于java来说，继承的方法是在运行时连接过来的，这会导致更严重的运行时错误。当然，如果java愿意的话，是可以让编译器检查这种错误并提醒程序员的，但是Gosling的品味让他觉得不应该让程序员写出多继承的类结构，而是应该用其他方法去解决。&lt;/p&gt;
+
+&lt;p&gt;然而，从java8开始，java中的interface开始可以提供默认方法，这就导致java也会出现多继承问题。此时编译器会迫使用户去override冲突的方法，也就是像上面c++的例子里面，在子类里面自己实现方法，而不是在运行时去选。&lt;/p&gt;
+
+&lt;p&gt;javascript也有继承，不过不像c++,java那种基于类的继承方式，js使用的是一种基于原型链的继承实现。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var o = {
+  a: 2,
+  m: function(){
+    return this.a + 1;
+  }
+};
+
+console.log(o.m()); // 3
+// 当调用 o.m 时,&#39;this&#39;指向了o.
+
+var p = Object.create(o);
+// p是一个继承自 o 的对象
+
+p.a = 4; // 创建 p 的自身属性 a
+console.log(p.m()); // 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在es6中，也开始引入了class，extends等关键字，显然是因为基于类的OO编程有着更好的市场，更容易被程序员接受。&lt;/p&gt;
+
+&lt;p&gt;《设计模式》也好，《代码大全》也好，各种编程圣经都提到一个很重要的设计原则就是：组合优于继承。当然，继承在很多情况下还是很有意义的。继承提供了很好的代码重用，在有些情况下使用组合尽管也能实现这些代码重用，但是并没有继承来的直观。此外，继承的设计也有助于多态的实现。当你的类结构有明显的A is a B的范式时，还是应当考虑使用继承。&lt;/p&gt;
+
+&lt;h2 id=&#34;多态&#34;&gt;多态&lt;/h2&gt;
+
+&lt;p&gt;面向对象为我们带来的真正最有价值的东西，其实是多态。并非是说封装和继承不重要，就像前文所说的，封装和继承都是早已有之的东西，c语言也可以有着非常良好的封装，而继承在很多时候都不如使用组合来的好。简单一点解释多态就是：“你有一只会叫又会跑的宠物，它可以是一只猫，也可以是一只狗，你让它叫，你听到了汪汪或者喵喵”。&lt;/p&gt;
+
+&lt;p&gt;多态往往是被程序员严重忽视的，即使是有些写了几年代码，看过《设计模式》的程序员也会搞不清楚多态。当然，他们知道什么是多态，他们知道什么叫早期绑定，什么叫晚期绑定。但是c++里面什么时候应该使用虚函数？java中函数的参数类型应该是类还是接口？他们可能就说不清楚了。他们有着一定的代码经验，知道在什么情况下会一般应该怎么写。但是他们不知道为什么要这样做，不这样做的坏处是什么。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;多态最重要的作用，是打断依赖&lt;/strong&gt;，也就是我们整天说的解耦。假设我们需要写一个打印机程序，我们设计了一个打印机的类，其中有一个print方法接受一个File类的对象，并打印其内容。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Printer {
+  func print(File s) {
+    ByteArray content = s.read()
+    ...
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段代码有什么问题？问题就在依赖里面，你的打印机依赖了File类，你的高层模块（Printer）一路调用到底层模块(File)，当File发生改变的时候，你不得不去检查所有使用File的模块是否依旧可以工作。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>糟糕的高等教育</title>
       <link>https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</link>
       <pubDate>Sat, 09 Jun 2018 22:14:04 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</guid>
-      <description>今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。
-细思极恐。
-看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。很久以来，大学已经渐渐淡化了它原本应该有的职能，大家开始渐渐认同所谓的“大学就是用来为进入社会过渡的”，“大学是教会你怎么解决工作生活问题，学会与人沟通的”，“大学是为你以后工作积累人脉的”，“大学就是用来给你谈恋爱的”之类的论述。
-我不满意这些论述。并不是同意或者反对，就是不满意。
-对我而言，大学四年过的平静而踏实，有过到处厮混的日子，也有过拼命学习的日子。但是回过头去看这四年，乃至加上后面的三年研究生生活，学校教给我的东西真的太少了。比如对于一个所谓的985高校理工科专业强化班（非计算机专业）的学生来说，居然直到毕业都不知道gcc优化这回事，也不知道怎么做好的构建。但是在国外的很多基础的编程课上，无论是课上还是课后的参考资料中，都会有相关的背景知识，会有大量的编程实践和源码阅读（即使你不是计算机专业，你也可也学到这些知识，至少你可以知道你还不知道这些知识）。
-相比本科教育，国内的硕士教育更加糟糕。我有时候觉得，研究生生涯教会我的东西远没有youtube多。</description>
+      <description>&lt;p&gt;今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。&lt;/p&gt;
+
+&lt;p&gt;细思极恐。&lt;/p&gt;
+
+&lt;p&gt;看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。很久以来，大学已经渐渐淡化了它原本应该有的职能，大家开始渐渐认同所谓的“大学就是用来为进入社会过渡的”，“大学是教会你怎么解决工作生活问题，学会与人沟通的”，“大学是为你以后工作积累人脉的”，“大学就是用来给你谈恋爱的”之类的论述。&lt;/p&gt;
+
+&lt;p&gt;我不满意这些论述。并不是同意或者反对，就是不满意。&lt;/p&gt;
+
+&lt;p&gt;对我而言，大学四年过的平静而踏实，有过到处厮混的日子，也有过拼命学习的日子。但是回过头去看这四年，乃至加上后面的三年研究生生活，学校教给我的东西真的太少了。比如对于一个所谓的985高校理工科专业强化班（非计算机专业）的学生来说，居然直到毕业都不知道gcc优化这回事，也不知道怎么做好的构建。但是在国外的很多基础的编程课上，无论是课上还是课后的参考资料中，都会有相关的背景知识，会有大量的编程实践和源码阅读（即使你不是计算机专业，你也可也学到这些知识，至少你可以知道你还不知道这些知识）。&lt;/p&gt;
+
+&lt;p&gt;相比本科教育，国内的硕士教育更加糟糕。我有时候觉得，研究生生涯教会我的东西远没有youtube多。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Feature_vs_function</title>
       <link>https://chenminhua.github.io/posts/feature_vs_function/</link>
       <pubDate>Thu, 10 May 2018 12:49:25 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/feature_vs_function/</guid>
-      <description>最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
-大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
-关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
-在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。</description>
+      <description>&lt;p&gt;最近看到一段关于微服务的视频&lt;a href=&#34;https://www.youtube.com/watch?v=k9QZ4oIOHnk&amp;amp;index=2&amp;amp;list=WL&amp;amp;t=0s&#34;&gt;拆分单体应用&lt;/a&gt;，其中有一段话引起了我的注意：split code by feature not by functionality。&lt;/p&gt;
+
+&lt;p&gt;大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。&lt;/p&gt;
+
+&lt;p&gt;关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。feature和function的区别&lt;a href=&#34;https://softwareengineering.stackexchange.com/questions/94164/feature-vs-function&#34;&gt;这个问题&lt;/a&gt;甚至被直接关闭了，理由是这个问题的答案很主观。&lt;/p&gt;
+
+&lt;p&gt;在日常的开发中，我们也常常会混用这两个词，加个feature和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。&lt;/p&gt;
+
+&lt;p&gt;function更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而feature更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function更为抽象，而feature更为具体。function更稳定，而feature更易变。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>spring aop中遇到的一个小问题</title>
       <link>https://chenminhua.github.io/posts/annotation/</link>
       <pubDate>Sat, 05 May 2018 18:19:00 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/annotation/</guid>
-      <description>最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。
-然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。
-一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。
-另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。
-spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。
-起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考stackoverflow。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。
-如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。</description>
+      <description>&lt;p&gt;最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。&lt;/p&gt;
+
+&lt;p&gt;然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。&lt;/p&gt;
+
+&lt;p&gt;一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。&lt;/p&gt;
+
+&lt;p&gt;另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。&lt;/p&gt;
+
+&lt;p&gt;spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。&lt;/p&gt;
+
+&lt;p&gt;起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考&lt;a href=&#34;https://stackoverflow.com/questions/4745798/why-java-classes-do-not-inherit-annotations-from-implemented-interfaces&#34;&gt;stackoverflow&lt;/a&gt;。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。&lt;/p&gt;
+
+&lt;p&gt;如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>相关与因果</title>
       <link>https://chenminhua.github.io/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</link>
       <pubDate>Wed, 02 May 2018 16:22:24 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</guid>
-      <description>人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百六十五天（公转周期）&amp;hellip;
-很多时候，人们会发现两件事往往同时出现，或者当一件事情发生时另一件往往不会发生。比如（下面都是我瞎说的）：
-爸爸胖很可能儿子也胖。
-喜欢跑马拉松的人很可能爱听hiphop。
-下雨天很可能堵车。
-熬夜会容易长胖。
-吸烟对环境有好处。
-等等，最后一条是不是写错了？其实最后一条是我在twitter看来的，大概是说：吸烟会杀死人类，而人类对环境有害，所以吸烟有益环境保护。这一条论断看似非常离谱，但确是一条比较明确的因果推断。
-而熬夜容易长胖这一条呢？一种解释方法是，熬夜的人比较容易吃零食，所以会容易胖（因果推断）。但是我们也可以说，工作压力大的人容易熬夜，工作压力大的人运动太少所以会长胖。这时候长胖和熬夜就变成了相关，换句话说，就算你现在不熬夜了，如果你工作压力还是很大，你依然会胖。
-在统计学中，我们总是反反复复地和这两个概念打交道。甚至在统计学创建之前，我们就已经开始进行大量这方法的脑力活动&amp;ndash;预测。
-预测，在很多人看来是一种极度不靠谱的行为。我认同这种不靠谱，或者我们给它换一个好听点的名字：不确定性。这种不确定性是如此的确定，如此的科学，如此的贴近事物本质。尽管人们总是试图去对抗这种不确定性，但不可否认，它是不可战胜的。
-但这依旧不能阻止人们去预测&amp;ndash;以一种更科学的方式。</description>
+      <description>&lt;p&gt;人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百六十五天（公转周期）&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;很多时候，人们会发现两件事往往同时出现，或者当一件事情发生时另一件往往不会发生。比如（下面都是我瞎说的）：&lt;/p&gt;
+
+&lt;p&gt;爸爸胖很可能儿子也胖。&lt;/p&gt;
+
+&lt;p&gt;喜欢跑马拉松的人很可能爱听hiphop。&lt;/p&gt;
+
+&lt;p&gt;下雨天很可能堵车。&lt;/p&gt;
+
+&lt;p&gt;熬夜会容易长胖。&lt;/p&gt;
+
+&lt;p&gt;吸烟对环境有好处。&lt;/p&gt;
+
+&lt;p&gt;等等，最后一条是不是写错了？其实最后一条是我在twitter看来的，大概是说：吸烟会杀死人类，而人类对环境有害，所以吸烟有益环境保护。这一条论断看似非常离谱，但确是一条比较明确的因果推断。&lt;/p&gt;
+
+&lt;p&gt;而熬夜容易长胖这一条呢？一种解释方法是，熬夜的人比较容易吃零食，所以会容易胖（因果推断）。但是我们也可以说，工作压力大的人容易熬夜，工作压力大的人运动太少所以会长胖。这时候长胖和熬夜就变成了相关，换句话说，就算你现在不熬夜了，如果你工作压力还是很大，你依然会胖。&lt;/p&gt;
+
+&lt;p&gt;在统计学中，我们总是反反复复地和这两个概念打交道。甚至在统计学创建之前，我们就已经开始进行大量这方法的脑力活动&amp;ndash;预测。&lt;/p&gt;
+
+&lt;p&gt;预测，在很多人看来是一种极度不靠谱的行为。我认同这种不靠谱，或者我们给它换一个好听点的名字：不确定性。这种不确定性是如此的确定，如此的科学，如此的贴近事物本质。尽管人们总是试图去对抗这种不确定性，但不可否认，它是不可战胜的。&lt;/p&gt;
+
+&lt;p&gt;但这依旧不能阻止人们去预测&amp;ndash;以一种更科学的方式。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>一件让我愤怒的事</title>
       <link>https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</link>
       <pubDate>Wed, 18 Apr 2018 23:28:35 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</guid>
-      <description>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;rdquo;terrible programmer&amp;rdquo;。
-有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。
-很多人都抱有这样的心态，甚至这种结果导向已经成为了一种政治正确。代码写的好坏不重要，赶紧通过测试，修好手上的bug上线才是最重要的。当然我同意修bug很重要（绝大多数情况下优先级最高），但是很多时候，大家都只想着怎么关掉这个bug，而不会想想更重要的一些问题：这是不是一个bug？这个bug是从哪来的？修复这个bug的方式会不会影响到其他逻辑?这个bug后面是不是还藏着别的坑？
-如果你不去思考这些问题，而是快速看一眼Jira,打开debug模式找到问题的原因(比如说，需要在某一段处理逻辑中加一段条件判断，在某种情况下跳过某几行代码的执行)。然后你想，oh，这个bug很好修，我只要多写个if然后在这种情况下跳过这几行代码就行了。你开心的写完这两行代码，提交并发布到测试环境，然后告诉测试那个bug被你修好了。接着去处理你还没处理的那十个新的bug。
-你觉得自己效率很高么？你错了，你糟糕透了，因为你失去了最适合思考和重构代码的时机。你被其他人催着跑，却丢掉了你最重要的东西。产品经理不会关心你的代码，测试不会关心你的代码，架构师不会关心你的代码，他们只要你把事情搞定。但是你必须关心你的代码，如果有必要的话，fight for your code!
-如果需求要你写出难以维护的代码，你必须站出来发声，别人不会知道这东西有多坑，你必须非常严肃地告诉他们在技术实现上这是一个多么糟糕的主意。否则，你很可能为了一个优先级很低的需求，毁了你优雅的系统设计。
-如果你不关心你的代码，那你永远也写不出好的代码，你的代码也不会成为好的产品。</description>
+      <description>&lt;p&gt;最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;rdquo;terrible programmer&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。&lt;/p&gt;
+
+&lt;p&gt;很多人都抱有这样的心态，甚至这种结果导向已经成为了一种政治正确。代码写的好坏不重要，赶紧通过测试，修好手上的bug上线才是最重要的。当然我同意修bug很重要（绝大多数情况下优先级最高），但是很多时候，大家都只想着怎么关掉这个bug，而不会想想更重要的一些问题：这是不是一个bug？这个bug是从哪来的？修复这个bug的方式会不会影响到其他逻辑?这个bug后面是不是还藏着别的坑？&lt;/p&gt;
+
+&lt;p&gt;如果你不去思考这些问题，而是快速看一眼Jira,打开debug模式找到问题的原因(比如说，需要在某一段处理逻辑中加一段条件判断，在某种情况下跳过某几行代码的执行)。然后你想，oh，这个bug很好修，我只要多写个if然后在这种情况下跳过这几行代码就行了。你开心的写完这两行代码，提交并发布到测试环境，然后告诉测试那个bug被你修好了。接着去处理你还没处理的那十个新的bug。&lt;/p&gt;
+
+&lt;p&gt;你觉得自己效率很高么？你错了，你糟糕透了，因为你失去了最适合思考和重构代码的时机。你被其他人催着跑，却丢掉了你最重要的东西。产品经理不会关心你的代码，测试不会关心你的代码，架构师不会关心你的代码，他们只要你把事情搞定。但是你必须关心你的代码，如果有必要的话，fight for your code!&lt;/p&gt;
+
+&lt;p&gt;如果需求要你写出难以维护的代码，你必须站出来发声，别人不会知道这东西有多坑，你必须非常严肃地告诉他们在技术实现上这是一个多么糟糕的主意。否则，你很可能为了一个优先级很低的需求，毁了你优雅的系统设计。&lt;/p&gt;
+
+&lt;p&gt;如果你不关心你的代码，那你永远也写不出好的代码，你的代码也不会成为好的产品。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>十年</title>
       <link>https://chenminhua.github.io/posts/%E5%8D%81%E5%B9%B4/</link>
       <pubDate>Wed, 11 Apr 2018 23:22:55 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E5%8D%81%E5%B9%B4/</guid>
-      <description>github十年了，这个被戏称为同性交友网站的章鱼猫，度过了十周岁生日。
-十年前，我还在读高一，凯尔特人三巨头即将捧起奥布莱恩杯，利物浦在欧冠半决赛输给了切尔西，那时候我还不知道啥是程序员（那时的梦想是当一个DJ）。当然，那时候也没有github和stackOverflow(同样也创立于2008年)，不知道大家都去哪里抄代码。
-2008年的世界，已经遥远得无法想象。但是就像贝索斯说的“相比于未来十年会发生什么变化而言，未来十年什么不会变是一个更重要的问题”。那么2008-2018，有什么没变呢？
-朝鲜依然在搞核试验 java,php,c++依然是最受企业欢迎的编程语言 詹姆斯依然在骑士队（天真）  事实上，我发现想出几个没变的事物居然比想出几个变化的事物难很多。那么未来十年，在软件开发领域什么是不会变的呢？</description>
+      <description>&lt;p&gt;github十年了，这个被戏称为同性交友网站的章鱼猫，度过了十周岁生日。&lt;/p&gt;
+
+&lt;p&gt;十年前，我还在读高一，凯尔特人三巨头即将捧起奥布莱恩杯，利物浦在欧冠半决赛输给了切尔西，那时候我还不知道啥是程序员（那时的梦想是当一个DJ）。当然，那时候也没有github和stackOverflow(同样也创立于2008年)，不知道大家都去哪里抄代码。&lt;/p&gt;
+
+&lt;p&gt;2008年的世界，已经遥远得无法想象。但是就像贝索斯说的“相比于未来十年会发生什么变化而言，未来十年什么不会变是一个更重要的问题”。那么2008-2018，有什么没变呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;朝鲜依然在搞核试验
+java,php,c++依然是最受企业欢迎的编程语言
+詹姆斯依然在骑士队（天真）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事实上，我发现想出几个没变的事物居然比想出几个变化的事物难很多。那么未来十年，在软件开发领域什么是不会变的呢？&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Move slow and mend things</title>
       <link>https://chenminhua.github.io/posts/move_slow_and_mend_things/</link>
       <pubDate>Wed, 11 Apr 2018 15:16:31 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/move_slow_and_mend_things/</guid>
-      <description>&amp;ldquo;move fast and break things&amp;rdquo; 这是fackbook著名的motto，意思是说，在使用新技术和新工具的时候，尽管其可能会有不稳定的地方，但是为了追求开发速度，应当果断使用那些能够提升开发效率的新技术。由于有了facebook的成功背书，很多初创公司都将其引为自己公司的开发宗旨。
-但是，很多人都误解了这句话，认为只要短期内move fast了，就可以随意的break things，事实上这样做只会让你走得更累也更慢。更重要的一点是著名的破窗理论：“如果你的一扇窗户破了，你不去修复，很快其他窗也会跟着破，房子会变得一片狼藉”。很多人认为为了move fast，就可以稍微放弃一点点对软件质量的要求。但是这样的妥协就像是纵容了一扇破窗，软件会快速腐坏并让你崩溃。
-我也曾经历过由于项目进度紧张而导致没有时间重构代码，没有时间review项目总体设计的情况。实际教训告诉我，宁可加班，宁可项目延期，也不能放弃对代码质量的要求。我司技术vp曾经跟我说，快是衡量一个技术团队的唯一标准。但我相信，这一论述永远要加上保证软件质量的前提。
-事实上前两年，facebook也把他们的Motto改成了&amp;rdquo;move fast with stable infra&amp;rdquo;。你看，facebook也受不了工程师随便break things了。
-还是那句话，最重要的是平衡。有些时候，与其&amp;rdquo;move fast and break things&amp;rdquo;不如&amp;rdquo;move slow and mend things&amp;rdquo;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/images/facebook1.jpg&#34; alt=&#34;fackbook1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;move fast and break things&amp;rdquo; 这是fackbook著名的motto，意思是说，在使用新技术和新工具的时候，尽管其可能会有不稳定的地方，但是为了追求开发速度，应当果断使用那些能够提升开发效率的新技术。由于有了facebook的成功背书，很多初创公司都将其引为自己公司的开发宗旨。&lt;/p&gt;
+
+&lt;p&gt;但是，很多人都误解了这句话，认为只要&lt;strong&gt;短期内&lt;/strong&gt;move fast了，就可以随意的break things，事实上这样做只会让你走得更累也更慢。更重要的一点是著名的破窗理论：“如果你的一扇窗户破了，你不去修复，很快其他窗也会跟着破，房子会变得一片狼藉”。很多人认为为了move fast，就可以稍微放弃一点点对软件质量的要求。但是这样的妥协就像是纵容了一扇破窗，软件会快速腐坏并让你崩溃。&lt;/p&gt;
+
+&lt;p&gt;我也曾经历过由于项目进度紧张而导致没有时间重构代码，没有时间review项目总体设计的情况。实际教训告诉我，宁可加班，宁可项目延期，也不能放弃对代码质量的要求。我司技术vp曾经跟我说，快是衡量一个技术团队的唯一标准。但我相信，这一论述永远要加上保证软件质量的前提。&lt;/p&gt;
+
+&lt;p&gt;事实上前两年，facebook也把他们的Motto改成了&amp;rdquo;move fast with stable infra&amp;rdquo;。你看，facebook也受不了工程师随便break things了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://chenminhua.github.io/images/facebook2.jpg&#34; alt=&#34;fackbook2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;还是那句话，最重要的是平衡。有些时候，与其&amp;rdquo;move fast and break things&amp;rdquo;不如&amp;rdquo;move slow and mend things&amp;rdquo;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>聊聊抽象</title>
       <link>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</link>
       <pubDate>Sun, 08 Apr 2018 13:54:57 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</guid>
-      <description>不要抽象。
-上面这句是和一个架构师聊天时他说了二十遍的话。这句话对大多数程序员来说，都是非常反直觉的。可以说抽象是计算机软件设计中极为重要的一环，是每个程序员每天都要做的事情。当你在设计一个类来表达一组数据的时候，你正在完成一次抽象；当你设计出一个抽象类或者接口，你正在抽象你的抽象。
-如果你是一个数学家，你应该会对“不要抽象”这四个字嗤之以鼻。数学家喜欢归纳和抽象，并从中发现数学之美。吴军在《数学之美》中甚至直接给出了一个论断：好的数学模型一定简单。
-大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&amp;hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在T恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：
-That&amp;rsquo;s the good part of the world.
-bad part 真实世界往往没有那么美好，很多事情未必能通过简单的推导和符号约简来简化。有些时候，我们会努力去识别问题中的一些pattern，或者意外发现一些事物中的相关性。于是你惊喜地发现，只要变化一下看问题的角度，或者提出一些看起来很正确的假设，原本复杂的问题就会变得非常简单！
-但是现实往往没有那么容易讨好，现实中的符号约简往往是一个非常危险的行为。因为你看问题的角度很可能不是最全面的，或者你的假设其实是错的。
-很多时候，大脑处理现实复杂性的唯一方法是把庞大复杂的系统简化，这也是计算机编程中非常有用的机制。但是，如果将其视为理所当然，就会陷入符号简缪论。
-在软件设计中，让分离的概念保持分离几乎是一条真理。尽管很多时候我们会遇到很多看起来相似的概念，让我们忍不住去合并它们，但是倘若引起它们改变的因素是不同的并且不可知的，那你很可能还是要将它们拆开的（很快）。所以有些时候，费力进行抽象带来的边际效益会很低。
-我们依然需要抽象 回到文章开头那句话：不要抽象。其实我依旧并不同意这句话。尽管那位前辈说：你还年轻，等你挖的坑够多之后你就明白了。
-抽象是危险的，一味追求简单而完美的模型会把我们带入误区。但如果因此放弃抽象，将现实的bad part直接带入我们设计的系统中，更是一种投鼠忌器的表现，甚至可以说是偷懒并且不负责任的设计。保持灵活的最好方式是少写代码，而在概念产生明显分化之前，采用相对抽象的概念确实能够帮助你少些很多代码。除此之外，当我们采用“非抽象”方式完成部分系统设计和代码编写的过程中，不断审视自己过去的想法，寻找pattern，也能帮助我们构建更易于理解和维护代码。
-其实抽象也好，不抽象也罢，和其他系统设计的问题一样，我们都可以用一个看起来没什么用但是永远正确的词来回答：balance。你要去平衡开发团队的能力，合作者（需要理解这些概念的人）的数量，对系统边界的影响，开发时长，以及灵活性（能否推翻你当前的选择）等等所有的因素，最终决定抽象的层级。
-拥抱抽象，但要适可而止。</description>
+      <description>
+
+&lt;p&gt;不要抽象。&lt;/p&gt;
+
+&lt;p&gt;上面这句是和一个架构师聊天时他说了二十遍的话。这句话对大多数程序员来说，都是非常反直觉的。可以说抽象是计算机软件设计中极为重要的一环，是每个程序员每天都要做的事情。当你在设计一个类来表达一组数据的时候，你正在完成一次抽象；当你设计出一个抽象类或者接口，你正在抽象你的抽象。&lt;/p&gt;
+
+&lt;p&gt;如果你是一个数学家，你应该会对“不要抽象”这四个字嗤之以鼻。数学家喜欢归纳和抽象，并从中发现数学之美。吴军在《数学之美》中甚至直接给出了一个论断：好的数学模型一定简单。&lt;/p&gt;
+
+&lt;p&gt;大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&amp;hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在T恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s the good part of the world.&lt;/p&gt;
+
+&lt;h2 id=&#34;bad-part&#34;&gt;bad part&lt;/h2&gt;
+
+&lt;p&gt;真实世界往往没有那么美好，很多事情未必能通过简单的推导和符号约简来简化。有些时候，我们会努力去识别问题中的一些pattern，或者意外发现一些事物中的相关性。于是你惊喜地发现，只要变化一下看问题的角度，或者提出一些看起来很正确的假设，原本复杂的问题就会变得非常简单！&lt;/p&gt;
+
+&lt;p&gt;但是现实往往没有那么容易讨好，现实中的符号约简往往是一个非常危险的行为。因为你看问题的角度很可能不是最全面的，或者你的假设其实是错的。&lt;/p&gt;
+
+&lt;p&gt;很多时候，大脑处理现实复杂性的唯一方法是把庞大复杂的系统简化，这也是计算机编程中非常有用的机制。但是，如果将其视为理所当然，就会陷入符号简缪论。&lt;/p&gt;
+
+&lt;p&gt;在软件设计中，让分离的概念保持分离几乎是一条真理。尽管很多时候我们会遇到很多看起来相似的概念，让我们忍不住去合并它们，但是倘若引起它们改变的因素是不同的并且不可知的，那你很可能还是要将它们拆开的（很快）。所以有些时候，费力进行抽象带来的边际效益会很低。&lt;/p&gt;
+
+&lt;h2 id=&#34;我们依然需要抽象&#34;&gt;我们依然需要抽象&lt;/h2&gt;
+
+&lt;p&gt;回到文章开头那句话：不要抽象。其实我依旧并不同意这句话。尽管那位前辈说：你还年轻，等你挖的坑够多之后你就明白了。&lt;/p&gt;
+
+&lt;p&gt;抽象是危险的，一味追求简单而完美的模型会把我们带入误区。但如果因此放弃抽象，将现实的bad part直接带入我们设计的系统中，更是一种投鼠忌器的表现，甚至可以说是偷懒并且不负责任的设计。保持灵活的最好方式是少写代码，而在概念产生明显分化之前，采用相对抽象的概念确实能够帮助你少些很多代码。除此之外，当我们采用“非抽象”方式完成部分系统设计和代码编写的过程中，不断审视自己过去的想法，寻找pattern，也能帮助我们构建更易于理解和维护代码。&lt;/p&gt;
+
+&lt;p&gt;其实抽象也好，不抽象也罢，和其他系统设计的问题一样，我们都可以用一个看起来没什么用但是永远正确的词来回答：balance。你要去平衡开发团队的能力，合作者（需要理解这些概念的人）的数量，对系统边界的影响，开发时长，以及灵活性（能否推翻你当前的选择）等等所有的因素，最终决定抽象的层级。&lt;/p&gt;
+
+&lt;p&gt;拥抱抽象，但要适可而止。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>答案是什么</title>
       <link>https://chenminhua.github.io/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</link>
       <pubDate>Sat, 07 Apr 2018 23:46:03 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
-      <description> 在《认知开发潜能》一书中，我曾读到这样一段关于树的话，大意是：你可以把一棵树看作一个单独的，离散的对象。但事实上，一棵树至少由两个主要系统连接：树叶和空气的处理循环与根和泥土的处理循环。这段话让我开始思考一个问题，我们应该如何告诉一个外星人什么是树?
-让我们一起来试试吧。首先，
-树是一种植物。 主要组成部分是根、干、枝、叶、花、果。  那树有什么特性呢？
-通常长在泥土里。 生长需要水和阳光。 通过叶子进行光合作用（又一个难以解释的概念）。  树是从哪来的？
-balabala进化来的吧。。。（生物学的不好）  方法论 如同我们讨论树的方式一般，通常我们可以从定义、特性、实现、场景、历史、相关、抽象等不同角度去看待事物。下面我们再试试解释下后朋克好了。
-后朋克(post punk)是一种80年代极为流行的音乐流派。 后朋克相对于传统摇滚乐而言更为实验，音乐更另类也更艺术化。 以the cure和new order等乐队为代表的80年代后朋乐队都非常擅长使用合成器技术， 并且作曲非常好听（不像某些朋克乐队）。 后朋克在80年代初流行，但是在80年代中期逐渐走向没落，并逐渐转向了另类摇滚。 后朋克和朋克的关系就像javascript和java的关系一样--没啥关系。 事实上和后朋克常常混起来的是新浪潮和另类摇滚，大多数时候，区分他们也没什么意义。  </description>
+      <description>
+
+&lt;p&gt;在《认知开发潜能》一书中，我曾读到这样一段关于树的话，大意是：你可以把一棵树看作一个单独的，离散的对象。但事实上，一棵树至少由两个主要系统连接：树叶和空气的处理循环与根和泥土的处理循环。这段话让我开始思考一个问题，我们应该如何告诉一个外星人什么是树?&lt;/p&gt;
+
+&lt;p&gt;让我们一起来试试吧。首先，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;树是一种植物。
+主要组成部分是根、干、枝、叶、花、果。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那树有什么特性呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;通常长在泥土里。
+生长需要水和阳光。
+通过叶子进行光合作用（又一个难以解释的概念）。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;树是从哪来的？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;balabala进化来的吧。。。（生物学的不好）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;方法论&#34;&gt;方法论&lt;/h1&gt;
+
+&lt;p&gt;如同我们讨论树的方式一般，通常我们可以从定义、特性、实现、场景、历史、相关、抽象等不同角度去看待事物。下面我们再试试解释下后朋克好了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;后朋克(post punk)是一种80年代极为流行的音乐流派。
+后朋克相对于传统摇滚乐而言更为实验，音乐更另类也更艺术化。
+以the cure和new order等乐队为代表的80年代后朋乐队都非常擅长使用合成器技术，
+并且作曲非常好听（不像某些朋克乐队）。
+后朋克在80年代初流行，但是在80年代中期逐渐走向没落，并逐渐转向了另类摇滚。
+后朋克和朋克的关系就像javascript和java的关系一样--没啥关系。
+事实上和后朋克常常混起来的是新浪潮和另类摇滚，大多数时候，区分他们也没什么意义。
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>数学与经济</title>
       <link>https://chenminhua.github.io/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</link>
       <pubDate>Fri, 06 Apr 2018 22:57:15 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</guid>
-      <description>数学的优势在于，它需要精确定义，而且为多样化的领域提供了共同语言，但是它也有局限性。公式与其基本假设，往往夸大了可以从经济理论预测出来的精密度。比起任何实际的经济而言，许多经济理论，更多关乎一个完全虚构的世界。经济模型可能成为空中楼阁，结构精巧而一无是处。
-当一个经济理论被表达为一个数学公式，就事先假定了它是公正的，而事实往往并非如此。
-亚当·斯密在出版于 1776 年的经典著作《国富论》中，提出了一个非常引入注目的理论——自由市场理论。通过简化假设，他将自由市场的运作描述为受供给和需求力量驱动的典型市场。在这一 18 世纪的伟大经济模型中，他提出了价格将起到核心作用，因为价格表示了稀缺或盈余，并将达成理想的市场状态。亚当·斯密的主要观点是，自由市场可以有效调节生产、分配，就像一只看不见的手。在亚当·斯密的描述中，政府通常如同恶魔，干扰价格信号，扰乱自由市场的均衡机制。
-新古典经济学家简单地认为：人的理性行为是一致的、可预测的、可靠的，并且深深植根于人的自身利益。同时他们还认为，人的理性行为假设在经济模式中很普遍，它可以用术语“经济人”来代表，即结合所有这些特性的一种神秘动物。
-支持自由市场理论的经济学家更有可能认为人是完全理性的，而且他们的行为是在掌握了完全的信息和客观性的前提下做出的。自由市场理论的怀疑者认为，行为和条件不够完美时，自由市场理论也不太可能完美。凯恩斯的研究起点不是完美市场运作的假设，而是基于 20 世纪 30 年代“大萧条”这一现实，他的理论不受限于“经济人”或者其他新古典经济学假设。
-有趣的是，这两种经济学家都可能在数学上达成正确的结论，而得出完全矛盾的经济学理论。更有趣的是，这两种经济学家都在过去40年内被授予了诺贝尔奖。</description>
+      <description>&lt;p&gt;数学的优势在于，它需要精确定义，而且为多样化的领域提供了共同语言，但是它也有局限性。公式与其基本假设，往往夸大了可以从经济理论预测出来的精密度。比起任何实际的经济而言，许多经济理论，更多关乎一个完全虚构的世界。经济模型可能成为空中楼阁，结构精巧而一无是处。&lt;/p&gt;
+
+&lt;p&gt;当一个经济理论被表达为一个数学公式，就事先假定了它是公正的，而事实往往并非如此。&lt;/p&gt;
+
+&lt;p&gt;亚当·斯密在出版于 1776 年的经典著作《国富论》中，提出了一个非常引入注目的理论——自由市场理论。通过简化假设，他将自由市场的运作描述为受供给和需求力量驱动的典型市场。在这一 18 世纪的伟大经济模型中，他提出了价格将起到核心作用，因为价格表示了稀缺或盈余，并将达成理想的市场状态。亚当·斯密的主要观点是，自由市场可以有效调节生产、分配，就像一只看不见的手。在亚当·斯密的描述中，政府通常如同恶魔，干扰价格信号，扰乱自由市场的均衡机制。&lt;/p&gt;
+
+&lt;p&gt;新古典经济学家简单地认为：人的理性行为是一致的、可预测的、可靠的，并且深深植根于人的自身利益。同时他们还认为，人的理性行为假设在经济模式中很普遍，它可以用术语“经济人”来代表，即结合所有这些特性的一种神秘动物。&lt;/p&gt;
+
+&lt;p&gt;支持自由市场理论的经济学家更有可能认为人是完全理性的，而且他们的行为是在掌握了完全的信息和客观性的前提下做出的。自由市场理论的怀疑者认为，行为和条件不够完美时，自由市场理论也不太可能完美。凯恩斯的研究起点不是完美市场运作的假设，而是基于 20 世纪 30 年代“大萧条”这一现实，他的理论不受限于“经济人”或者其他新古典经济学假设。&lt;/p&gt;
+
+&lt;p&gt;有趣的是，这两种经济学家都可能在数学上达成正确的结论，而得出完全矛盾的经济学理论。更有趣的是，这两种经济学家都在过去40年内被授予了诺贝尔奖。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>你不需要懂这些??</title>
       <link>https://chenminhua.github.io/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</link>
       <pubDate>Tue, 03 Apr 2018 17:48:20 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</guid>
-      <description>之前有一阵在写c++，发现指针是一个48位二进制数。我们都知道指针是用来做内存寻址的，而我的机器是64位的，而且如果你去查看一个指针占用的内存大小，也会发现指针确实占用了8个字节。那么，剩下那两个字节干啥去了呢？
-其实今天要聊得不是内存或者指针，而是我在查这个问题答案的时候，找到的知乎链接，以及一个让我不太开心的回答。
-既然是“非专业的业余爱好者”， 那我告诉你， 你的问题对于编程来说没有意义。 没必要关心指针占多少字节  某种程度上说，这位大哥说的没错，就算你是一个专业程序员，知道那两个字节是干啥的在绝大多数情况下不能帮你写成更好的代码，盲目陷入底层实现的讨论也容易让人忽视高层抽象的价值。但是这位大哥的回答真的太反智了。为什么业余爱好者不能凭自己的兴趣去完全地掌握c语言，掌握golang，掌握汽车维修，掌握古典吉他。在一个自我教育如此普遍的行业，却有一位“前辈”对着刚入行的年轻人说，知道**没有意义。
-在这个行业里面，确实存在着很多浮躁的东西。深度学习，区块链，AR，VR，新的框架和语言&amp;hellip;市面上充斥着:&amp;ldquo;三十天精通xxx&amp;rdquo;,&amp;ldquo;xxx快速入门&amp;rdquo;之类的书和视频资料。很多老鸟会告诉你，&amp;rdquo;这些都是垃圾，你应该去看xxx的源码，你应该去读xxx的论文&amp;rdquo;，或者，&amp;rdquo;你不需要学这个&amp;rdquo;。
-我反对这些声音，尽管他们可能都是出于好意。我不相信&amp;rdquo;三十天精通&amp;rdquo;这些拙劣的营销术语，但是我相信三十天自我教育的力量。
-事实上，我已经尝试过一些短时快速学习的个人项目，虽然这些项目并没有让我成为一个领域的专家。但是我得到了我想要的，并且乐在其中。这就够了。</description>
+      <description>&lt;p&gt;之前有一阵在写c++，发现指针是一个48位二进制数。我们都知道指针是用来做内存寻址的，而我的机器是64位的，而且如果你去查看一个指针占用的内存大小，也会发现指针确实占用了8个字节。那么，剩下那两个字节干啥去了呢？&lt;/p&gt;
+
+&lt;p&gt;其实今天要聊得不是内存或者指针，而是我在查这个问题答案的时候，找到的&lt;a href=&#34;https://www.zhihu.com/question/27265748&#34;&gt;知乎链接&lt;/a&gt;，以及一个让我不太开心的回答。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;既然是“非专业的业余爱好者”，
+那我告诉你，
+你的问题对于编程来说没有意义。
+没必要关心指针占多少字节
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;某种程度上说，这位大哥说的没错，就算你是一个专业程序员，知道那两个字节是干啥的在绝大多数情况下不能帮你写成更好的代码，盲目陷入底层实现的讨论也容易让人忽视高层抽象的价值。但是这位大哥的回答真的太反智了。为什么业余爱好者不能凭自己的兴趣去完全地掌握c语言，掌握golang，掌握汽车维修，掌握古典吉他。在一个自我教育如此普遍的行业，却有一位“前辈”对着刚入行的年轻人说，知道**没有意义。&lt;/p&gt;
+
+&lt;p&gt;在这个行业里面，确实存在着很多浮躁的东西。深度学习，区块链，AR，VR，新的框架和语言&amp;hellip;市面上充斥着:&amp;ldquo;三十天精通xxx&amp;rdquo;,&amp;ldquo;xxx快速入门&amp;rdquo;之类的书和视频资料。很多老鸟会告诉你，&amp;rdquo;这些都是垃圾，你应该去看xxx的源码，你应该去读xxx的论文&amp;rdquo;，或者，&amp;rdquo;你不需要学这个&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;我反对这些声音，尽管他们可能都是出于好意。我不相信&amp;rdquo;三十天精通&amp;rdquo;这些拙劣的营销术语，但是我相信三十天自我教育的力量。&lt;/p&gt;
+
+&lt;p&gt;事实上，我已经尝试过一些短时快速学习的个人项目，虽然这些项目并没有让我成为一个领域的专家。但是我得到了我想要的，并且乐在其中。这就够了。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>质数</title>
       <link>https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/</link>
       <pubDate>Mon, 02 Apr 2018 23:11:22 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E8%B4%A8%E6%95%B0/</guid>
-      <description>突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？
-先写个判断一个数是不是质数的函数
-bool isPrime(int n){ if (n == 1){ return false; }else { for (int i = 2; i &amp;lt;= floor(sqrt(n)); i++){ if (n % i == 0){ return false; } } return true; } }  然后调用它
-int main() { int n; cin &amp;gt;&amp;gt; n; int count = 0; int j = 2; while (true) { if (isPrime(j)){ count += 1; cout &amp;lt;&amp;lt; j &amp;lt;&amp;lt; endl; if (count &amp;gt;= n) { break; } } j += 1; } }  结果显示第1124个质数为9043。</description>
+      <description>&lt;p&gt;突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？&lt;/p&gt;
+
+&lt;p&gt;先写个判断一个数是不是质数的函数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;bool isPrime(int n){
+  if (n == 1){
+    return false;
+  }else {
+    for (int i = 2; i &amp;lt;= floor(sqrt(n)); i++){
+      if (n % i == 0){
+          return false;
+      }
+    }
+    return true;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后调用它&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;int main()
+{
+  int n;
+  cin &amp;gt;&amp;gt; n;
+  int count = 0;
+  int j = 2;
+  while (true) {
+    if (isPrime(j)){
+      count += 1;
+      cout &amp;lt;&amp;lt; j &amp;lt;&amp;lt; endl;
+      if (count &amp;gt;= n)
+      {
+          break;
+      }
+    }
+    j += 1;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果显示第1124个质数为9043。&lt;/p&gt;
+
+&lt;p&gt;多玩几次，第112个质数为613，第11240个质数为119293。可以发现，质数在慢慢变稀疏。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Tweets</title>
       <link>https://chenminhua.github.io/tweets/</link>
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
-在所有弱点中，最大的弱点就是害怕暴露弱点。
-到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
-那些能够独立带领项目向正确方向进行的工程师是最可贵的。
-好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。
-使用c++，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。
-什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。
-面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。
-完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等
-自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。
-信息 == 消除不确定性
-隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。
-随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
-如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。
-change is inevitable
-无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志
-想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。
-命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。
-在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。
-现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。
-关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。
-Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.
-get advice early, before you write any code &amp;mdash;- jeff dean</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction&#34;&gt;prefer duplication over the wrong abstraction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？&lt;/p&gt;
+
+&lt;p&gt;在所有弱点中，最大的弱点就是害怕暴露弱点。&lt;/p&gt;
+
+&lt;p&gt;到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。&lt;/p&gt;
+
+&lt;p&gt;那些能够独立带领项目向正确方向进行的工程师是最可贵的。&lt;/p&gt;
+
+&lt;p&gt;好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。&lt;/p&gt;
+
+&lt;p&gt;使用c++，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。&lt;/p&gt;
+
+&lt;p&gt;什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。&lt;/p&gt;
+
+&lt;p&gt;面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。&lt;/p&gt;
+
+&lt;p&gt;完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等&lt;/p&gt;
+
+&lt;p&gt;自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。&lt;/p&gt;
+
+&lt;p&gt;信息 == 消除不确定性&lt;/p&gt;
+
+&lt;p&gt;隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。&lt;/p&gt;
+
+&lt;p&gt;随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。&lt;/p&gt;
+
+&lt;p&gt;如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。&lt;/p&gt;
+
+&lt;p&gt;change is inevitable&lt;/p&gt;
+
+&lt;p&gt;无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志&lt;/p&gt;
+
+&lt;p&gt;想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p &lt;pid&gt;。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。&lt;/p&gt;
+
+&lt;p&gt;命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。&lt;/p&gt;
+
+&lt;p&gt;在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。&lt;/p&gt;
+
+&lt;p&gt;现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。&lt;/p&gt;
+
+&lt;p&gt;关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array&lt;Int&gt;会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。&lt;/p&gt;
+
+&lt;p&gt;Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.&lt;/p&gt;
+
+&lt;p&gt;get advice early, before you write any code  &amp;mdash;- jeff dean&lt;/p&gt;
+
+&lt;p&gt;nginx具有很高的可扩展性（使用模块）。高可用性（worker模型）。低内存消耗。高并发连接。&lt;/p&gt;
+
+&lt;p&gt;nginx在linux上使用了sendfile系统调用，这个系统调用可以将磁盘上的数据直接发送到网络上（不需要通过用户态）&lt;/p&gt;
+
+&lt;p&gt;nginx与apache相比最大的优势在于减少了上下文切换和内存占用&lt;/p&gt;
+
+&lt;p&gt;schemaless =&amp;gt; implicit schema = bad thing.  So use a schema if you can.   &amp;mdash;-martin fowler&lt;/p&gt;
+
+&lt;p&gt;上下文切换：内核切换CPU让其在不同的地址空间上做操作。中断：由物理设备发送给内核的信号，通常是请求I/O服务。&lt;/p&gt;
+
+&lt;p&gt;在高并发竞态场景下使用 CAS (compare-and-swap) 可以防止现在被block后挂起再恢复，这能有效减少不必要的上下文切换，提高performance。其实和数据库乐观锁是一个道理。在很多类似场景下，使用atomic要优于synchronized&lt;/p&gt;
+
+&lt;p&gt;brpc的文档写的真是太好了，人生第一次给百度比心。&lt;/p&gt;
+
+&lt;p&gt;为什么像goroutine或者其他一些协程实现在性能上要优于多线程（这里指系统线程而非用户线程）？本质原因是协程是用户态的，或者说协程是在用户态进行调度的，因此其上下文切换非常之快。但是也正因如此，协程只能跑在一个核上，而且一旦某个协程被阻塞，可能导致整个进程不可用。（但是goroutine却是可以用多核的，因为golang在运行时会起多个线程，并把goroutine调度到线程上）&lt;/p&gt;
+
+&lt;p&gt;全局计数器可能是一个写多读少的并发问题。对于这种类型的问题，在写的时候频繁加锁同步并不理想，可以考虑由各个线程分别计数，在读的时候同步数据。&lt;/p&gt;
+
+&lt;p&gt;程序是类型上的证明，良好的类型系统能保证自身程序不出错。&lt;/p&gt;
+
+&lt;p&gt;Make framework outside, don’t depend on it! 这并不是一件容易的事。&lt;/p&gt;
+
+&lt;p&gt;进程通常运行在用户态，这时候进程可以使用CPU和内存来完成一些任务，但是当进程需要对硬件（磁盘，网络）进行操作的时候，就要切换到内核态，完成操作后再切换回用户态。由于系统调用涉及进程从用户态到内核态的切换，导致一定的内存空间交换，所以系统调用的开销通常比较昂贵。&lt;/p&gt;
+
+&lt;p&gt;内核的进程调度器维护着各种状态的进程队列，包括一个所有可运行进程的队列，以及一个包括所有休眠进程和僵尸进程的列表。进程调度器的一个重要工作就是决定下一个运行的进程。&lt;/p&gt;
+
+&lt;p&gt;cat /proc/loadavg 可以查看系统负载。当系统负载为0.00时，说明任何进程只有就绪后就可以马上获得CPU,不需要等待。&lt;/p&gt;
+
+&lt;p&gt;nginx和其代理的各个服务直接是通过TCP长连接通信的&lt;/p&gt;
+
+&lt;p&gt;nginx官方介绍声称，nginx维持1000个非活跃http持久连接只需要2.5M的内存。这得益于其单进程的计算模型（各个worker可以共享内存资源）&lt;/p&gt;
+
+&lt;p&gt;性能问题有趣的地方在于，努力不一定有用。比如你把我前面提过的十种方法里面的后面九种都做了，但是你的服务器水管太细，还是没用。处理性能问题的关键在于找到问题所在，是IO太慢？是带宽不够？是计算能力不够？是数据库可用连接太少？是数据库缓冲池太小导致IO太多？等你找到问题的时候，问题已经解决一大半了。&lt;/p&gt;
+
+&lt;p&gt;请用最快的速度想出十种可能提高网站加载和响应速度的方案：1.增加服务器带宽。2.水平扩展，增加服务数。3.使用CDN。4.使用数据缓存(redis等)。5.检查是不是有数据库慢查询，干掉慢查询。6.增加数据库缓冲池。7.减少前端静态文件数量。8.开启server push。9.使用浏览器缓存。10.切分后端接口和前端组件，分批拉取数据，分批渲染组件。&lt;/p&gt;
+
+&lt;p&gt;尽管我们的读写最终可能是指向磁盘的，但是在真正进写时，我们面对的是文件系统。linux将所有的设备（包括网络）都抽象成文件，当调用数据读取时，文件系统会先检查内存（页缓存）中是否有数据，如果没有则去块设备（磁盘）中读取&lt;/p&gt;
+
+&lt;p&gt;Immutability changes everything &amp;ndash; Pat Helland &lt;a href=&#34;http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf&#34;&gt;CIDR paper&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;*&lt;em&gt;bounded context&lt;/em&gt; is fucking important&lt;/p&gt;
+
+&lt;p&gt;Microservices != N-Tier + Docker&lt;/p&gt;
+
+&lt;p&gt;You own your SLA or your SLA owns you&lt;/p&gt;
+
+&lt;p&gt;从npm install上面节省下来的时间都花费到了gradle build上了。心痛。&lt;/p&gt;
+
+&lt;p&gt;如果你的用户一直在查文档，那你一定是做错了什么。如果你的用户一直找不到正确的文档，那你&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;pattern seems to be the sweet spot of design &amp;ndash; 《Enterprise Integration Patterns - Designing, Building And Deploying Messaging Solutions》&lt;/p&gt;
+
+&lt;p&gt;BPM (Business process management)的一个例子：bpm收到一个抵押贷款的请求后，发送事件给三个不同的服务: 收入检查，信用检查，房屋评估。这三个服务将它们的结果发给风险管理服务。而风险管理服务再将结果返回给funding服务。我们可以说，bpm将各个业务逻辑步骤外包给了其他服务。&lt;/p&gt;
+
+&lt;p&gt;fail independently&lt;/p&gt;
+
+&lt;p&gt;性能领域有一条著名的USE(utilization, saturation, errors)方法&amp;mdash;-对于所有的资源，查看它的使用率，饱和度和错误。&lt;/p&gt;
+
+&lt;p&gt;有的人扭曲事实来适应理论，有的人改变理论来适应事实。&lt;/p&gt;
+
+&lt;p&gt;试图用尽可能通俗的方式讲明白CAP的文章到处都是，这篇是我看过的中写的最好的&lt;a href=&#34;http://ksat.me/a-plain-english-introduction-to-cap-theorem/&#34;&gt;CAP&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[微服务 get started]&lt;a href=&#34;https://cloudncode.blog/2016/07/22/msa-getting-started/&#34;&gt;https://cloudncode.blog/2016/07/22/msa-getting-started/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;有些时候你会突然遇到一些需求，你发现完成这些需求需要去查若干张表，问题是这些表来自不同的服务，你需要group这些数据，甚至有一些排序和分页的需求。我最开始遇到这些问题的时候第一反应是，我的服务划分是不是有问题，他们是不是应该在一个服务里？先别急着否定自己。拆分微服务必然会遇到这种情况，很多时候你需要的不是把这些服务合并起来，而是写一个新的服务，去聚合这些数据，插入到一个新的表或者其他什么存储技术中，直觉告诉我，这个服务很可能会变得非常非常有用。&lt;/p&gt;
+
+&lt;p&gt;[微服务之坑] 微服务所说的每个服务单独开发和部署听起来很美，但是很多时候服务拆分的不好，增加一个feature需要同时更新五个服务。。。当然团队里面可不止你一个feature等着上线。。。事情就会非常糟糕。&lt;/p&gt;
+
+&lt;p&gt;时机很重要。一方面不要过早优化，不能一行代码还没写数据仓库却搭得很好；另一方面，也不能等十个服务都上线了才开始思考基础架构的事情。如果一个东西你可以不改任何代码，或者改很少的配置就能够加上的，你可以等需要了再加。而有些东西你现在不做，之后要改一大片才能加上，那最好尽早设计。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Simplicity is the key if you really want to build large distributed systems.&lt;/strong&gt;构建大型分布式系统的唯一方式是让一切都保持尽可能简单，&lt;strong&gt;不能有隐藏的需求和隐藏的依赖&lt;/strong&gt;。不要人为创造复杂度。&lt;/p&gt;
+
+&lt;p&gt;今年OKR中深入学习c++这一项我感觉是要黄了。看书终究还是纸上谈兵，可真要有个复杂的东西让你写吧，又怂了，默默拿起了golang。感觉还是应该先找两个c++的优秀项目多看看，看的多了，也就知道放弃了。&lt;/p&gt;
+
+&lt;p&gt;应该有一个这样的一个进程，它可以watch某一个文件（比如你现在看到的这个文件），然后当其发现这个文件有更新之后，就去调用若干用户配置的社交账号，并将新添加的内容发送到相应的平台上去。这看上去似乎比ifttt更让人放心（至少是更让我放心）。&lt;/p&gt;
+
+&lt;p&gt;magic is evil, framework is magic.记得之前看过亚马逊的一篇文章，内容是说亚马逊不喜欢使用中间件，因为中间件更像是框架而非工具。如果你使用了一个中间件，你就很可能被其绑住。uncle bob也曾经在他著名的关于solid的演讲中提到，一定要make framework outside,不要让你的代码直接依赖框架。我认为这一点在我们做技术选型的时候尤其重要。比如说通信基础架构层，是用dubbo还是grpc? I prefer grpc.&lt;/p&gt;
+
+&lt;p&gt;scalability意味着什么？意味着只要你愿意增加机器，增加带宽，你就能得到更好的performace，你就能服务更多的人。反直觉的是，这远远没有听起来那么简单。比如像数据库这种shared resource，就是很难scale out。而在scale out的时候，往往你必须放弃掉一些东西。&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t plan. If I do, I plan to fail。这句话用在软件架构领域再恰当不过。所有的决策都要有退路，所有的update都要可以rollback。&lt;/p&gt;
+
+&lt;p&gt;卡里乌斯不愧是皇马中流砥柱。&lt;/p&gt;
+
+&lt;p&gt;按时间倒序的时间轴在互联网行业绝对不是什么新鲜事。比如你现在看到的这条时间轴的实现方式是，我每次都是在这个页面对应的文件顶部添加内容，这让我不禁想到了栈这种数据结构。通常我们认为栈顶的数据相较于栈底的数据更活跃，而这一点和时间轴其实非常相似。&lt;/p&gt;
+
+&lt;p&gt;切记永远不要在本地事务中调用远程服务，因为如果远程服务出现了问题，则会拖长事务，导致应用服务器占用太多的数据库连接，在严重情况下会压垮数据库。当然，数据库也应该有负载熔断机制。&lt;/p&gt;
+
+&lt;p&gt;kotlin中可以使用tailrec关键字标记一个存在尾递归的函数，这样编译器就会进行尾递归优化。事实上现在很多的语言和编译器都会自动检测尾递归并自动进行优化，而Kotlin却选择使用了一个关键字。&lt;/p&gt;
+
+&lt;p&gt;之前看到一篇吐槽Kotlin的文章中提到，为啥创建一个map要写成 mapOf(&amp;ldquo;a&amp;rdquo; to &amp;ldquo;b, &amp;hellip;&amp;rdquo;)，而不是用冒号。从实现的角度来看，这里的to不过是一个infix修饰的函数（可以中缀调用），并返回一个Pair，这种实现方案对于编译器来说不需要做任何附加处理。当然，冒号是一个接受度更高的选择，遗憾的是kotlin似乎并不支持overload冒号，所以在不改动编译器的情况下似乎也没啥好办法。理论上来说，在编译器前插一个处理器魔改一下应该很简单，但是感觉实在没什么必要。更重要的是切记，magic is evil!!&lt;/p&gt;
+
+&lt;p&gt;你可能知道java中的HashMap不是线程安全的，但是在有些场景下你觉得你好像不太在乎线程安全（比如缓存），但是即便如此，你也不应该使用HashMap,因为resize的时候会炸。可以参考这篇&lt;a href=&#34;http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html&#34;&gt;文章&lt;/a&gt;。所以，了解底层实现真的很重要。&lt;/p&gt;
+
+&lt;p&gt;在我所见过的大多数的数据库设计以及编程语言的设计中，读锁一般为共享锁，而写锁一般为排他锁。提出这一设计理念的竟然是中国诗人周敦颐：“可远观而不可亵玩焉”。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>代码大全</title>
       <link>https://chenminhua.github.io/cc/</link>
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/cc/</guid>
-      <description>毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。
-软件开发中，准备工作的中心目标就是降低风险。
-在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。
-发现错误的时间要尽可能接近引入该错误的时间。
-问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
-明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
-确保每个人都知道需求变更的代价。
-架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
-好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。
-你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。
-编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）
-设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。
-犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。
-Design is about tradeoffs and priorities
-软件的首要技术使命：管理复杂度。 软件开发有两类难题：本质的问题和偶然的问题。 简单性可以通过两种方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度 。
-高扇入低扇出的设计。
-信息隐藏包括两大类：隐藏复杂度和隐藏变化源
-找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。
-自上而下策略和自下而上策略的最关键区别在于，前者是一种decomposition策略，而后者是一种composition策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
-记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。</description>
+      <description>&lt;p&gt;毫无疑问，代码大全是一本每半年需要看一遍的书。此网页记录一些代码大全中我认为对我影响比较深的内容，以及一些个人观点。&lt;/p&gt;
+
+&lt;p&gt;软件开发中，准备工作的中心目标就是降低风险。&lt;/p&gt;
+
+&lt;p&gt;在软件开发中，如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为1000倍理论或者4D理论。&lt;/p&gt;
+
+&lt;p&gt;发现错误的时间要尽可能接近引入该错误的时间。&lt;/p&gt;
+
+&lt;p&gt;问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上gigatron的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。&lt;/p&gt;
+
+&lt;p&gt;明确的需求有助于避免争论，在开始编码之前，需要先把系统的scope画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。&lt;/p&gt;
+
+&lt;p&gt;确保每个人都知道需求变更的代价。&lt;/p&gt;
+
+&lt;p&gt;架构设计的重要组成部分：数据schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。&lt;/p&gt;
+
+&lt;p&gt;好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。&lt;/p&gt;
+
+&lt;p&gt;你思考的内容取决于你是否知道能够表达该思想的词汇，如果你不知道这些词汇，就无法表达出这种思想，甚至不可能形成这种思想。&lt;/p&gt;
+
+&lt;p&gt;编程工具不应该决定你的编程思路。大多数编程原则并不依赖特定的语言，而依赖于你使用语言的方法。（如果你读过object oriented c，你就明白这句话的意思了）&lt;/p&gt;
+
+&lt;p&gt;设计是一个险恶(wicked)的问题，往往只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示说，你必须首先把这个问题解决一遍才能明确定义它，然后再次解决它。&lt;/p&gt;
+
+&lt;p&gt;犯错正是设计的关键——在设计阶段犯错并在设计阶段就解决它。&lt;/p&gt;
+
+&lt;p&gt;Design is about tradeoffs and priorities&lt;/p&gt;
+
+&lt;p&gt;软件的首要技术使命：管理复杂度。
+软件开发有两类难题：本质的问题和偶然的问题。
+简单性可以通过两种方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度
+。&lt;/p&gt;
+
+&lt;p&gt;高扇入低扇出的设计。&lt;/p&gt;
+
+&lt;p&gt;信息隐藏包括两大类：隐藏复杂度和隐藏变化源&lt;/p&gt;
+
+&lt;p&gt;找出系统中容易变化的部分，把不稳定的区域隔离起来。好的程序设计要能够适应变化。&lt;/p&gt;
+
+&lt;p&gt;自上而下策略和自下而上策略的最关键区别在于，前者是一种decomposition策略，而后者是一种composition策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。&lt;/p&gt;
+
+&lt;p&gt;记录你的设计成果，除了设计文档之外，还可以把设计成果记入代码库，wiki，总结邮件。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Akka</title>
       <link>https://chenminhua.github.io/posts/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/akka/</guid>
-      <description>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。
-actors sending messages changing its state changing its behavior creating more actors
-class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .match(Activity::class.java, { this.onActivity(it) }) .match(Disable::class.java, { this.onDisable(it) }) .build() val disabled = receiveBuilder() .match(Enable::class.java, { this.onEnable(it) }).build() private fun onDisable(disable: Disable) { if (password == disable.password) { log().</description>
+      <description>
+
+&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。&lt;/p&gt;
+
+&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
+
+&lt;p&gt;sending messages
+changing its state
+changing its behavior
+creating more actors&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Activity
+
+class Disable(val password: String)
+
+class Enable(val password: String)
+
+class Alarm(val password: String): AbstractLoggingActor() {
+    override fun createReceive(): Receive {
+        return disabled
+    }
+
+    val enabled = receiveBuilder()
+            .match(Activity::class.java, { this.onActivity(it) })
+            .match(Disable::class.java, { this.onDisable(it) })
+            .build()
+
+    val disabled = receiveBuilder()
+            .match(Enable::class.java, { this.onEnable(it) }).build()
+
+    private fun onDisable(disable: Disable) {
+        if (password == disable.password) {
+            log().info(&amp;quot;alarm disabled&amp;quot;)
+            context.become(disabled)
+        } else {
+            log().warning(&amp;quot;wrong password&amp;quot;)
+        }
+    }
+
+    private fun onEnable(enable: Enable) {
+        if (password == enable.password) {
+            log().info(&amp;quot;alarm enabled&amp;quot;)
+            context.become(enabled)
+        } else {
+            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
+        }
+    }
+
+    private fun onActivity(a: Activity) {
+        log().warning(&amp;quot;alarm&amp;quot;)
+    }
+
+    companion object {
+        fun props(password: String) = Props.create(Alarm::class.java, password)
+    }
+}
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+    val system = ActorSystem.create()
+
+    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
+
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>Akka</title>
       <link>https://chenminhua.github.io/posts/draft/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/draft/akka/</guid>
-      <description>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。
-像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。
-与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
-actors sending messages changing its state changing its behavior creating more actors
-class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .</description>
+      <description>
+
+&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。&lt;/p&gt;
+
+&lt;p&gt;像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。&lt;/p&gt;
+
+&lt;p&gt;与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。
+使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。
+Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。
+消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。&lt;/p&gt;
+
+&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
+
+&lt;p&gt;sending messages
+changing its state
+changing its behavior
+creating more actors&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class Activity
+
+class Disable(val password: String)
+
+class Enable(val password: String)
+
+class Alarm(val password: String): AbstractLoggingActor() {
+    override fun createReceive(): Receive {
+        return disabled
+    }
+
+    val enabled = receiveBuilder()
+            .match(Activity::class.java, { this.onActivity(it) })
+            .match(Disable::class.java, { this.onDisable(it) })
+            .build()
+
+    val disabled = receiveBuilder()
+            .match(Enable::class.java, { this.onEnable(it) }).build()
+
+    private fun onDisable(disable: Disable) {
+        if (password == disable.password) {
+            log().info(&amp;quot;alarm disabled&amp;quot;)
+            context.become(disabled)
+        } else {
+            log().warning(&amp;quot;wrong password&amp;quot;)
+        }
+    }
+
+    private fun onEnable(enable: Enable) {
+        if (password == enable.password) {
+            log().info(&amp;quot;alarm enabled&amp;quot;)
+            context.become(enabled)
+        } else {
+            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
+        }
+    }
+
+    private fun onActivity(a: Activity) {
+        log().warning(&amp;quot;alarm&amp;quot;)
+    }
+
+    companion object {
+        fun props(password: String) = Props.create(Alarm::class.java, password)
+    }
+}
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+    val system = ActorSystem.create()
+
+    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
+
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+    alarm.tell(Activity(), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
+    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>并发与并行</title>
       <link>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
       <pubDate>Thu, 29 Mar 2018 12:38:39 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
-      <description>很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。
-并发与并行 并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）
-并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。
-举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&amp;rdquo;请求&amp;rdquo;，先从A手中接过书，然后回到C同学的问题，再用扫码枪扫B同学的书，然后帮A同学办理借书登记。整个过程中，管理员执行的任何一个子任务都不会因为其处理的先后顺序而导致其处理结果的变化。因此我们说，图书管理员的工作是一个可并发的工作（可以&amp;rdquo;同时&amp;rdquo;处理多个任务）。事实上，类比到服务端开发上，图书管理员不过就是一个开放了若干接口（借书，还书，咨询等）的服务器么。
-而随着来图书馆的同学越来越多，尽管图书管理员依旧面对一个可并发的问题，但是其处理问题的速度（计算能力）是有限的，而不停在不同任务之间切换（上下文切换）更增加了他处理问题的时间成本。于是图书馆决定增加两名前台管理员，这就是并行处理问题的方式。
-后端服务通常都是在处理可并发的问题。在不增加计算能力的情况下，通过增加线程（这里的线程是一个抽象的概念，可以理解为一组具有独立上下文的计算资源）的方式可以让服务能够更好的处理并发问题（同时处理多个任务）。当某个任务需要占用较长时间，但并不占用cpu时，服务可以切换去其他任务，让cpu先去处理其他任务，之后再回来。
-矩阵乘法 我们再换个例子，google引以为傲的page rank算法中最关键的一步就是计算两个矩阵的乘积，然后得到不同网页之间的相关性。但是现在的互联网太大了，网页数都是以亿为单位的。计算两个超大矩阵的乘积显然是一个非常耗时的工作。如果用一台计算机算显然是不可能的。
-事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个300,000,000 * 300,000,000的矩阵的乘积，我们可以将其分别划分为9个100,000,000 * 100,000,000的矩阵，一共需要进行27次100,000,000 * 100,000,000的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。
-现在我们的超大矩阵乘法就变成了27个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把100,000,000 * 100,000,000的矩阵继续拆分成 100个10,000,000 * 10,000,000个矩阵，这时候问题就变成了27000个10,000,000 * 10,000,000的矩阵的乘积。
-如果你有27000台服务器的话，这个超大矩阵计算的时间复杂度就降低了27000倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。
-感谢上帝，矩阵乘积是一个可并发问题！！
-一些计算模型 线程与锁：通过开多个线程，我们就可以得到高并发的系统。但是现实往往没有那么简单。在很多时候，多个线程往往会共享同一份数据，这个时候竞态就出现了。为了解决竞态问题，我们可以用锁机制来保护数据的读写。
-函数式编程：不共享可变数据，因此没有副作用，所有的中间状态都是确定的而不是需要通过锁来防止计算过程被影响。由于这些特性，函数式编程天然具备高并发特性，你可以将计算过程分配到不同的地方进行计算，而结果不会有任何改变。这一切看起来是如此完美，而现实往往没有那么简单，现实中的问题也没有这么完美。比如在函数式编程语言haskell中，从类型签名可以看出一个函数是否带有副作用（不纯函数的类型签名都以IO开头）。
-CSP (Communicating Sequential Processes):工作者之间可以通过channel来相互通信，当一个工作者向channel发送信息的时候，默认会阻塞，直到接受者把这条消息拿走。同样接收者也会默认阻塞在拿消息的地方，直到有人向channel发消息并被拿到。CSP的代表语言是golang（但是golang中的channel可以有buffer）
-ACTOR模型：每个工作者都会有一个收件箱,当工作者需要相互通信的时候可以通过向彼此邮箱发消息来实现。和CSP比较来说，可以认为actor是实名邮箱，而csp是匿名邮箱。actor模型的代表语言是erlang。</description>
+      <description>
+
+&lt;p&gt;很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。&lt;/p&gt;
+
+&lt;h2 id=&#34;并发与并行&#34;&gt;并发与并行&lt;/h2&gt;
+
+&lt;p&gt;并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）&lt;/p&gt;
+
+&lt;p&gt;并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。&lt;/p&gt;
+
+&lt;p&gt;举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&amp;rdquo;请求&amp;rdquo;，先从A手中接过书，然后回到C同学的问题，再用扫码枪扫B同学的书，然后帮A同学办理借书登记。整个过程中，管理员执行的任何一个子任务都不会因为其处理的先后顺序而导致其处理结果的变化。因此我们说，图书管理员的工作是一个可并发的工作（可以&amp;rdquo;同时&amp;rdquo;处理多个任务）。事实上，类比到服务端开发上，图书管理员不过就是一个开放了若干接口（借书，还书，咨询等）的服务器么。&lt;/p&gt;
+
+&lt;p&gt;而随着来图书馆的同学越来越多，尽管图书管理员依旧面对一个可并发的问题，但是其处理问题的速度（计算能力）是有限的，而不停在不同任务之间切换（上下文切换）更增加了他处理问题的时间成本。于是图书馆决定增加两名前台管理员，这就是并行处理问题的方式。&lt;/p&gt;
+
+&lt;p&gt;后端服务通常都是在处理可并发的问题。在不增加计算能力的情况下，通过增加线程（这里的线程是一个抽象的概念，可以理解为一组具有独立上下文的计算资源）的方式可以让服务能够更好的处理并发问题（同时处理多个任务）。当某个任务需要占用较长时间，但并不占用cpu时，服务可以切换去其他任务，让cpu先去处理其他任务，之后再回来。&lt;/p&gt;
+
+&lt;h2 id=&#34;矩阵乘法&#34;&gt;矩阵乘法&lt;/h2&gt;
+
+&lt;p&gt;我们再换个例子，google引以为傲的page rank算法中最关键的一步就是计算两个矩阵的乘积，然后得到不同网页之间的相关性。但是现在的互联网太大了，网页数都是以亿为单位的。计算两个超大矩阵的乘积显然是一个非常耗时的工作。如果用一台计算机算显然是不可能的。&lt;/p&gt;
+
+&lt;p&gt;事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个300,000,000 * 300,000,000的矩阵的乘积，我们可以将其分别划分为9个100,000,000 * 100,000,000的矩阵，一共需要进行27次100,000,000 * 100,000,000的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。&lt;/p&gt;
+
+&lt;p&gt;现在我们的超大矩阵乘法就变成了27个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把100,000,000 * 100,000,000的矩阵继续拆分成 100个10,000,000 * 10,000,000个矩阵，这时候问题就变成了27000个10,000,000 * 10,000,000的矩阵的乘积。&lt;/p&gt;
+
+&lt;p&gt;如果你有27000台服务器的话，这个超大矩阵计算的时间复杂度就降低了27000倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。&lt;/p&gt;
+
+&lt;p&gt;感谢上帝，矩阵乘积是一个可并发问题！！&lt;/p&gt;
+
+&lt;h2 id=&#34;一些计算模型&#34;&gt;一些计算模型&lt;/h2&gt;
+
+&lt;p&gt;线程与锁：通过开多个线程，我们就可以得到高并发的系统。但是现实往往没有那么简单。在很多时候，多个线程往往会共享同一份数据，这个时候竞态就出现了。为了解决竞态问题，我们可以用锁机制来保护数据的读写。&lt;/p&gt;
+
+&lt;p&gt;函数式编程：不共享可变数据，因此没有副作用，所有的中间状态都是确定的而不是需要通过锁来防止计算过程被影响。由于这些特性，函数式编程天然具备高并发特性，你可以将计算过程分配到不同的地方进行计算，而结果不会有任何改变。这一切看起来是如此完美，而现实往往没有那么简单，现实中的问题也没有这么完美。比如在函数式编程语言haskell中，从类型签名可以看出一个函数是否带有副作用（不纯函数的类型签名都以IO开头）。&lt;/p&gt;
+
+&lt;p&gt;CSP (Communicating Sequential Processes):工作者之间可以通过channel来相互通信，当一个工作者向channel发送信息的时候，默认会阻塞，直到接受者把这条消息拿走。同样接收者也会默认阻塞在拿消息的地方，直到有人向channel发消息并被拿到。CSP的代表语言是golang（但是golang中的channel可以有buffer）&lt;/p&gt;
+
+&lt;p&gt;ACTOR模型：每个工作者都会有一个收件箱,当工作者需要相互通信的时候可以通过向彼此邮箱发消息来实现。和CSP比较来说，可以认为actor是实名邮箱，而csp是匿名邮箱。actor模型的代表语言是erlang。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>The_rule_of_hole</title>
       <link>https://chenminhua.github.io/posts/the_rule_of_hole/</link>
       <pubDate>Sat, 24 Mar 2018 16:52:45 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/the_rule_of_hole/</guid>
-      <description>The rule of hole: If you fall into a hole, don&#39;t dig  对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。
-关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。
-上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。
-这是我在工作中学到最重要的一件事：掉坑别挖。</description>
+      <description>&lt;pre&gt;&lt;code&gt;The rule of hole:
+
+If you fall into a hole, don&#39;t dig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。&lt;/p&gt;
+
+&lt;p&gt;关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。&lt;/p&gt;
+
+&lt;p&gt;上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。&lt;/p&gt;
+
+&lt;p&gt;这是我在工作中学到最重要的一件事：掉坑别挖。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Copy_on_write</title>
       <link>https://chenminhua.github.io/posts/copy_on_write/</link>
       <pubDate>Sat, 24 Mar 2018 08:17:29 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/copy_on_write/</guid>
-      <description>swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
-那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
-那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&amp;rdquo;写时复制&amp;rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。
-cow与引用计数 英文好的同学建议直接读这篇instagram的原文 在instagram停用了python的垃圾回收。
-linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&amp;rdquo;写时复制&amp;rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&amp;hellip;</description>
+      <description>
+
+&lt;h2 id=&#34;swift中的cow&#34;&gt;swift中的cow&lt;/h2&gt;
+
+&lt;p&gt;swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。&lt;/p&gt;
+
+&lt;p&gt;那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。&lt;/p&gt;
+
+&lt;p&gt;那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&amp;rdquo;写时复制&amp;rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。&lt;/p&gt;
+
+&lt;h2 id=&#34;cow与引用计数&#34;&gt;cow与引用计数&lt;/h2&gt;
+
+&lt;p&gt;英文好的同学建议直接读这篇instagram的原文 &lt;a href=&#34;https://engineering.instagram.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172&#34;&gt;在instagram停用了python的垃圾回收&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&amp;rdquo;写时复制&amp;rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&amp;hellip;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>kotlin中的可空类型</title>
       <link>https://chenminhua.github.io/posts/optional/</link>
       <pubDate>Fri, 23 Mar 2018 19:17:45 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/optional/</guid>
-      <description>最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
-fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
-print(getProject(&amp;quot;no such project&amp;quot;)) // null  返回结果是null!!
-kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
-其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，
-projectMapper.getProjectByCode(projectCode): ProjectDO  但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。
-所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。
-by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class
-/** * Annotations are to be recorded in the class file by the compiler * but need not be retained by the VM at run time. This is the default * behavior. */ CLASS,  说白了，它可不会在运行时起作用。</description>
+      <description>&lt;p&gt;最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;print(getProject(&amp;quot;no such project&amp;quot;))   // null
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;返回结果是null!!&lt;/p&gt;
+
+&lt;p&gt;kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！&lt;/p&gt;
+
+&lt;p&gt;其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;projectMapper.getProjectByCode(projectCode): ProjectDO
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。&lt;/p&gt;
+
+&lt;p&gt;所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。&lt;/p&gt;
+
+&lt;p&gt;by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+  * Annotations are to be recorded in the class file by the compiler
+  * but need not be retained by the VM at run time.  This is the default
+  * behavior.
+  */
+CLASS,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说白了，它可不会在运行时起作用。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>我只是想要一个函数啊</title>
       <link>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
       <pubDate>Mon, 19 Mar 2018 00:52:54 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
-      <description>从面向对象说起 面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。
-显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。
-相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
-对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是
-addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
-person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
-这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
-所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
-闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
-从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。
-function outside() { var a = 0 return function inside() { a++; console.log(a) } } var f = outside() f() //1 f() //2 f() //3  我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
-其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
-日常黑spring 下面开启吐槽时间，热爱java或者spring的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。
-最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。
-肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。
-如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？</description>
+      <description>
+
+&lt;h2 id=&#34;从面向对象说起&#34;&gt;从面向对象说起&lt;/h2&gt;
+
+&lt;p&gt;面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。&lt;/p&gt;
+
+&lt;p&gt;显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。&lt;/p&gt;
+
+&lt;p&gt;相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。&lt;/p&gt;
+
+&lt;h2 id=&#34;对象的本质&#34;&gt;对象的本质&lt;/h2&gt;
+
+&lt;p&gt;假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;addOneYearAge(person)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;我们拿到一个数据的引用&lt;/strong&gt;，然后给其年龄加一。而面向对象的方式则可能是&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;person.growUpOneYear()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里我们有一个对象，&lt;strong&gt;然后给对象发送了一个消息，通知它发生一些变化&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。&lt;/p&gt;
+
+&lt;p&gt;所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。&lt;/p&gt;
+
+&lt;h2 id=&#34;闭包&#34;&gt;闭包&lt;/h2&gt;
+
+&lt;p&gt;为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？&lt;/p&gt;
+
+&lt;p&gt;从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function outside() {
+  var a = 0
+  return function inside() {
+    a++;
+    console.log(a)
+  }
+}
+
+var f = outside()
+f()  //1
+f()  //2
+f()  //3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。&lt;/p&gt;
+
+&lt;p&gt;其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。&lt;/p&gt;
+
+&lt;h2 id=&#34;日常黑spring&#34;&gt;日常黑spring&lt;/h2&gt;
+
+&lt;p&gt;下面开启吐槽时间，热爱java或者spring的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。&lt;/p&gt;
+
+&lt;p&gt;最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！
+肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。&lt;/p&gt;
+
+&lt;p&gt;肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。&lt;/p&gt;
+
+&lt;p&gt;如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>装逼的艺术</title>
       <link>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
       <pubDate>Sun, 18 Mar 2018 23:46:50 +0800</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
-      <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。
-你听过The fin这个乐队吗？
-你知道去年最流行的编程语言是什么吗？
-什么？你连这个游戏都没玩过吗？
-诺兰最新的那部电影你还没看？
-每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。
-点什么酒最有派头 走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。
-伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。
-苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选Macallan纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。
-除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。
-朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。
-喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是taquila。
-不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。
-最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。</description>
+      <description>
+
+&lt;p&gt;最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。&lt;/p&gt;
+
+&lt;p&gt;你听过The fin这个乐队吗？&lt;/p&gt;
+
+&lt;p&gt;你知道去年最流行的编程语言是什么吗？&lt;/p&gt;
+
+&lt;p&gt;什么？你连这个游戏都没玩过吗？&lt;/p&gt;
+
+&lt;p&gt;诺兰最新的那部电影你还没看？&lt;/p&gt;
+
+&lt;p&gt;每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。&lt;/p&gt;
+
+&lt;h2 id=&#34;点什么酒最有派头&#34;&gt;点什么酒最有派头&lt;/h2&gt;
+
+&lt;p&gt;走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。&lt;/p&gt;
+
+&lt;p&gt;伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。&lt;/p&gt;
+
+&lt;p&gt;苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选Macallan纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。&lt;/p&gt;
+
+&lt;p&gt;除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。&lt;/p&gt;
+
+&lt;p&gt;朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。&lt;/p&gt;
+
+&lt;p&gt;喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是taquila。&lt;/p&gt;
+
+&lt;p&gt;不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。&lt;/p&gt;
+
+&lt;p&gt;最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>如何设计一个系统</title>
       <link>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</guid>
-      <description>描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
-系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?
-1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。
-此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。
-高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。
-我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。
-设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。
-度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。
-Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。</description>
+      <description>
+
+&lt;h2 id=&#34;描述使用场景&#34;&gt;描述使用场景&lt;/h2&gt;
+
+&lt;p&gt;设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;系统需要能够支持用户发送twitter。
+需要能够支持用户follow（unfollow）其他用户。
+用户可以在自己的timeline上面看到自己follow的用户发送的twitter。
+用户是所有在可以访问我们服务的地区的会使用互联网的人。
+希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;设定约束与假设&#34;&gt;设定约束与假设&lt;/h2&gt;
+
+&lt;p&gt;你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1000，000，000活跃用户
+每天有100,000,000用户
+每天会有100，000，000条新twitter
+24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。
+数据的读写大约为20:1
+......
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。&lt;/p&gt;
+
+&lt;p&gt;此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。&lt;/p&gt;
+
+&lt;h2 id=&#34;高级设计&#34;&gt;高级设计&lt;/h2&gt;
+
+&lt;p&gt;在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。&lt;/p&gt;
+
+&lt;p&gt;我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。&lt;/p&gt;
+
+&lt;h2 id=&#34;设计核心组件&#34;&gt;设计核心组件&lt;/h2&gt;
+
+&lt;p&gt;对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。&lt;/p&gt;
+
+&lt;h2 id=&#34;度量设计&#34;&gt;度量设计&lt;/h2&gt;
+
+&lt;p&gt;完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。&lt;/p&gt;
+
+&lt;p&gt;Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working.
+开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。&lt;/p&gt;
+</description>
     </item>
     
   </channel>

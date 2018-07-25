@@ -1,175 +1,83 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>硕大的汤姆  | Tweets</title>
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<title>Tweets – 硕大的汤姆</title>
+<meta name="created" content="2018-04-01T23:21:33&#43;0800">
+<meta name="modified" content="2018-04-01T23:21:33&#43;0800">
 
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.43" />
-    
-    
-      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-    
+<meta name="description" content="prefer duplication over the wrong abstraction 找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？ 在所有弱点中，最大的弱点就是害怕暴露弱点。 到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。 那些能够独立带领项目向正确方向进行的工程师是最可贵的。 好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。 使用c&#43;&#43;，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。 什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。 面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。 完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等 自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。 信息 == 消除不确定性 隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。 随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。 如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。 change is inevitable 无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志 想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。 命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。 在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。 现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。 关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。 Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.">
+<meta property="og:site_name" content="硕大的汤姆">
+<meta property="og:title" content="Tweets">
+<meta property="og:url" content="https://chenminhua.github.io/tweets/">
 
-    <link href='https://chenminhua.github.io/dist/main.css' rel='stylesheet' type="text/css" />
-    
-      
-    
+<meta name="generator" content="Hugo 0.43" />
 
-    
+<link rel="canonical" href="https://chenminhua.github.io/tweets/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="style" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Tweets",
+    "datePublished": "2018-04-01T23:21:33+08:00",
+    "dateModified": "2018-04-01T23:21:33+08:00",
+    "url" : "https://chenminhua.github.io/tweets/",
+    "description": "prefer duplication over the wrong abstraction 找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？ 在所有弱点中，最大的弱点就是害怕暴露弱点。 到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。 那些能够独立带领项目向正确方向进行的工程师是最可贵的。 好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。 使用c++，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。 什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。 面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。 完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等 自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。 信息 == 消除不确定性 隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。 随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。 如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。 change is inevitable 无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志 想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。 命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。 在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。 现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。 关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。 Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://chenminhua.github.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "硕大的汤姆",
+      "url": "https://chenminhua.github.io/",
+    }
+  }
+</script>
 
-    <meta property="og:title" content="Tweets" />
-<meta property="og:description" content="找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
-在所有弱点中，最大的弱点就是害怕暴露弱点。
-到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
-那些能够独立带领项目向正确方向进行的工程师是最可贵的。
-好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。
-使用c&#43;&#43;，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。
-什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。
-面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。
-完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等
-自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。
-信息 == 消除不确定性
-隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。
-随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
-如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。
-change is inevitable
-无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志
-想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。
-命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。
-在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。
-现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。
-关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。
-Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.
-get advice early, before you write any code &mdash;- jeff dean" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://chenminhua.github.io/tweets/" />
+</head>
 
-
-
-<meta property="article:published_time" content="2018-04-01T23:21:33&#43;08:00"/>
-
-<meta property="article:modified_time" content="2018-04-01T23:21:33&#43;08:00"/>
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header" role="banner">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
+</h1>
+<div class="region header__region">
 
 
+</div>
+</header>
 
 
 
 
-
-
-
-
-
-<meta itemprop="name" content="Tweets">
-<meta itemprop="description" content="找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
-在所有弱点中，最大的弱点就是害怕暴露弱点。
-到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
-那些能够独立带领项目向正确方向进行的工程师是最可贵的。
-好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。
-使用c&#43;&#43;，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。
-什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。
-面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。
-完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等
-自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。
-信息 == 消除不确定性
-隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。
-随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
-如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。
-change is inevitable
-无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志
-想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。
-命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。
-在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。
-现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。
-关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。
-Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.
-get advice early, before you write any code &mdash;- jeff dean">
-
-
-<meta itemprop="datePublished" content="2018-04-01T23:21:33&#43;08:00" />
-<meta itemprop="dateModified" content="2018-04-01T23:21:33&#43;08:00" />
-<meta itemprop="wordCount" content="246">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tweets"/>
-<meta name="twitter:description" content="找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
-在所有弱点中，最大的弱点就是害怕暴露弱点。
-到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
-那些能够独立带领项目向正确方向进行的工程师是最可贵的。
-好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。
-使用c&#43;&#43;，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。
-什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。
-面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。
-完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等
-自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。
-信息 == 消除不确定性
-隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。
-随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
-如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。
-change is inevitable
-无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志
-想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p 。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。
-命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。
-在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。
-现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。
-关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。
-Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.
-get advice early, before you write any code &mdash;- jeff dean"/>
-
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-
-    
-
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="https://chenminhua.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
-      硕大的汤姆
-    </a>
-    <div class="flex-l items-center">
-      
-      
-
-
-
-
-
-
-
-
-    </div>
-  </div>
+<nav class="main-menu layout__navigation" role="navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="active" href="/tweets/">Tweets</a></li>
+<li><a class="" href="/cc/">代码大全</a></li>
+<li><a class="" href="/posts/">Posts</a></li>
+</ul>
 </nav>
 
-    </div>
-  </header>
 
+<main class="main layout__main" role="main">
+<h1 class="title ">Tweets</h1>
+<article class="single-view">
+<header>
+</header>
+<div class="content">
+<p><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">prefer duplication over the wrong abstraction</a></p>
 
-    <main class="pb7" role="main">
-      
-  <div class="flex-l mt2 mw8 center">
-    <article class="center cf pv5 ph3 ph4-ns mw7">
-      <header>
-        <p class="f6 b helvetica tracked">
-          
-        </p>
-        <h1 class="f1">
-          Tweets
-        </h1>
-      </header>
-      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
-        <p>找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？</p>
+<p>找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？</p>
 
 <p>在所有弱点中，最大的弱点就是害怕暴露弱点。</p>
 
@@ -311,63 +219,67 @@ get advice early, before you write any code &mdash;- jeff dean"/>
 
 <p>在我所见过的大多数的数据库设计以及编程语言的设计中，读锁一般为共享锁，而写锁一般为排他锁。提出这一设计理念的竟然是中国诗人周敦颐：“可远观而不可亵玩焉”。</p>
 
-      </div>
-    </article>
-    <aside class="ph3 mt2 mt6-ns">
-      
+
+</div>
+</article>
+</main>
 
 
 
+<aside class="sidebar layout__second-sidebar" role="complementary">
+<section>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
+<ul class="menu">
+<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
+<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
+<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
+<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
+<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
+<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
+<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
+<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="" href="/posts/akka/">Akka</a></li>
+<li><a class="" href="/posts/draft/akka/">Akka</a></li>
+<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
+<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
+<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
+<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
+<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
+<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
+<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
+</ul>
+</section>
+</aside>
 
 
+<footer class="footer layout__footer" role="contentinfo">
+<p><span>© 硕大的汤姆</span></p>
 
 
-  <div class="bg-light-gray pa3">
-    <ul>
-      <li class="list b mb3">
-        1 More 
-      </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/tweets/" class="link ph2 pv2 db black o-50">
-            Tweets
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/cc/" class="link ph2 pv2 db black">
-            代码大全
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-
-    </aside>
-  </div>
-
-    </main>
-    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://chenminhua.github.io/" >
-    &copy; 2018 硕大的汤姆
-  </a>
-  
-
-
-
-
-
-
-
-
-  </div>
 </footer>
 
-    <script src="https://chenminhua.github.io/dist/app.bundle.js" async></script>
+</div>
 
-  </body>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+</body>
 </html>

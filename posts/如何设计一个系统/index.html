@@ -1,131 +1,81 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>硕大的汤姆  | 如何设计一个系统</title>
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<title>如何设计一个系统 – 硕大的汤姆</title>
+<meta name="created" content="0001-01-01T00:00:00&#43;0000">
+<meta name="modified" content="0001-01-01T00:00:00&#43;0000">
 
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.43" />
-    
-    
-      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-    
+<meta name="description" content="描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。 系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps? 1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。 此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。 高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。 我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。 设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。 度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。 Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。">
+<meta property="og:site_name" content="硕大的汤姆">
+<meta property="og:title" content="如何设计一个系统">
+<meta property="og:url" content="https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">
 
-    <link href='https://chenminhua.github.io/dist/main.css' rel='stylesheet' type="text/css" />
-    
-      
-    
+<meta name="generator" content="Hugo 0.43" />
 
-    
+<link rel="canonical" href="https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="style" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "如何设计一个系统",
+    "datePublished": "0001-01-01T00:00:00Z",
+    "dateModified": "0001-01-01T00:00:00Z",
+    "url" : "https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/",
+    "description": "描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。 系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps? 1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。 此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。 高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。 我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。 设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。 度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。 Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://chenminhua.github.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "硕大的汤姆",
+      "url": "https://chenminhua.github.io/",
+    }
+  }
+</script>
 
-    <meta property="og:title" content="如何设计一个系统" />
-<meta property="og:description" content="描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
-系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?
-1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。
-此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。
-高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。
-我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。
-设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。
-度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。
-Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/" />
+</head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<meta itemprop="name" content="如何设计一个系统">
-<meta itemprop="description" content="描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
-系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?
-1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。
-此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。
-高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。
-我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。
-设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。
-度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。
-Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。">
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header" role="banner">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
+</h1>
+<div class="region header__region">
 
 
-
-<meta itemprop="wordCount" content="47">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="如何设计一个系统"/>
-<meta name="twitter:description" content="描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
-系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?
-1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。
-此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。
-高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。
-我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。
-设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。
-度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。
-Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。"/>
-
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-
-    
-
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="https://chenminhua.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
-      硕大的汤姆
-    </a>
-    <div class="flex-l items-center">
-      
-      
+</div>
+</header>
 
 
 
 
-
-
-
-
-    </div>
-  </div>
+<nav class="main-menu layout__navigation" role="navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="" href="/tweets/">Tweets</a></li>
+<li><a class="" href="/cc/">代码大全</a></li>
+<li><a class="active" href="/posts/">Posts</a></li>
+</ul>
 </nav>
 
-    </div>
-  </header>
 
+<main class="main layout__main" role="main">
+<h1 class="title ">如何设计一个系统</h1>
+<article class="section-posts single-view">
+<header>
+</header>
+<div class="content">
 
-    <main class="pb7" role="main">
-      
-  <div class="flex-l mt2 mw8 center">
-    <article class="center cf pv5 ph3 ph4-ns mw7">
-      <header>
-        <p class="f6 b helvetica tracked">
-          POSTS
-        </p>
-        <h1 class="f1">
-          如何设计一个系统
-        </h1>
-      </header>
-      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
-        
 
 <h2 id="描述使用场景">描述使用场景</h2>
 
@@ -171,210 +121,67 @@ Not using metrics in your development process is like trying to land a plane in 
 <p>Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working.
 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。</p>
 
-      </div>
-    </article>
-    <aside class="ph3 mt2 mt6-ns">
-      
+
+</div>
+</article>
+</main>
 
 
 
+<aside class="sidebar layout__second-sidebar" role="complementary">
+<section>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
+<ul class="menu">
+<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
+<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
+<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
+<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
+<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
+<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
+<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
+<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="" href="/posts/akka/">Akka</a></li>
+<li><a class="" href="/posts/draft/akka/">Akka</a></li>
+<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
+<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
+<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
+<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
+<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
+<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
+<li><a class="active" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
+</ul>
+</section>
+</aside>
 
 
+<footer class="footer layout__footer" role="contentinfo">
+<p><span>© 硕大的汤姆</span></p>
 
 
-  <div class="bg-light-gray pa3">
-    <ul>
-      <li class="list b mb3">
-        22 More Posts
-      </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/" class="link ph2 pv2 db black">
-            三门问题
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="link ph2 pv2 db black">
-            聊聊面向对象
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/" class="link ph2 pv2 db black">
-            糟糕的高等教育
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/feature_vs_function/" class="link ph2 pv2 db black">
-            Feature_vs_function
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/annotation/" class="link ph2 pv2 db black">
-            spring aop中遇到的一个小问题
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/" class="link ph2 pv2 db black">
-            相关与因果
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/" class="link ph2 pv2 db black">
-            一件让我愤怒的事
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E5%8D%81%E5%B9%B4/" class="link ph2 pv2 db black">
-            十年
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/move_slow_and_mend_things/" class="link ph2 pv2 db black">
-            Move slow and mend things
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/" class="link ph2 pv2 db black">
-            聊聊抽象
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/" class="link ph2 pv2 db black">
-            答案是什么
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/" class="link ph2 pv2 db black">
-            数学与经济
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/" class="link ph2 pv2 db black">
-            你不需要懂这些??
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E8%B4%A8%E6%95%B0/" class="link ph2 pv2 db black">
-            质数
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/akka/" class="link ph2 pv2 db black">
-            Akka
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/draft/akka/" class="link ph2 pv2 db black">
-            Akka
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/" class="link ph2 pv2 db black">
-            并发与并行
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/the_rule_of_hole/" class="link ph2 pv2 db black">
-            The_rule_of_hole
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/copy_on_write/" class="link ph2 pv2 db black">
-            Copy_on_write
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/optional/" class="link ph2 pv2 db black">
-            kotlin中的可空类型
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/" class="link ph2 pv2 db black">
-            我只是想要一个函数啊
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/" class="link ph2 pv2 db black">
-            装逼的艺术
-          </a>
-        </li>
-      
-        <li class="list f5 w-100 hover-bg-white nl1">
-          
-          <a href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/" class="link ph2 pv2 db black o-50">
-            如何设计一个系统
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-
-    </aside>
-  </div>
-
-    </main>
-    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://chenminhua.github.io/" >
-    &copy; 2018 硕大的汤姆
-  </a>
-  
-
-
-
-
-
-
-
-
-  </div>
 </footer>
 
-    <script src="https://chenminhua.github.io/dist/app.bundle.js" async></script>
+</div>
 
-  </body>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+</body>
 </html>
