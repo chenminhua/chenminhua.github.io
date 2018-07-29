@@ -446,13 +446,13 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;如果你是一个数学家，你应该会对“不要抽象”这四个字嗤之以鼻。数学家喜欢归纳和抽象，并从中发现数学之美。吴军在《数学之美》中甚至直接给出了一个论断：好的数学模型一定简单。&lt;/p&gt;
 
-&lt;p&gt;大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&amp;hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在T恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：&lt;/p&gt;
+&lt;p&gt;大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&amp;hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在 T 恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：&lt;/p&gt;
 
 &lt;p&gt;That&amp;rsquo;s the good part of the world.&lt;/p&gt;
 
 &lt;h2 id=&#34;bad-part&#34;&gt;bad part&lt;/h2&gt;
 
-&lt;p&gt;真实世界往往没有那么美好，很多事情未必能通过简单的推导和符号约简来简化。有些时候，我们会努力去识别问题中的一些pattern，或者意外发现一些事物中的相关性。于是你惊喜地发现，只要变化一下看问题的角度，或者提出一些看起来很正确的假设，原本复杂的问题就会变得非常简单！&lt;/p&gt;
+&lt;p&gt;真实世界往往没有那么美好，很多事情未必能通过简单的推导和符号约简来简化。有些时候，我们会努力去识别问题中的一些 pattern，或者意外发现一些事物中的相关性。于是你惊喜地发现，只要变化一下看问题的角度，或者提出一些看起来很正确的假设，原本复杂的问题就会变得非常简单！&lt;/p&gt;
 
 &lt;p&gt;但是现实往往没有那么容易讨好，现实中的符号约简往往是一个非常危险的行为。因为你看问题的角度很可能不是最全面的，或者你的假设其实是错的。&lt;/p&gt;
 
@@ -460,11 +460,13 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;在软件设计中，让分离的概念保持分离几乎是一条真理。尽管很多时候我们会遇到很多看起来相似的概念，让我们忍不住去合并它们，但是倘若引起它们改变的因素是不同的并且不可知的，那你很可能还是要将它们拆开的（很快）。所以有些时候，费力进行抽象带来的边际效益会很低。&lt;/p&gt;
 
+&lt;p&gt;感兴趣的朋友可以看看这个演讲 &lt;a href=&#34;https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction&#34;&gt;prefer duplication over the wrong abstraction&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;我们依然需要抽象&#34;&gt;我们依然需要抽象&lt;/h2&gt;
 
 &lt;p&gt;回到文章开头那句话：不要抽象。其实我依旧并不同意这句话。尽管那位前辈说：你还年轻，等你挖的坑够多之后你就明白了。&lt;/p&gt;
 
-&lt;p&gt;抽象是危险的，一味追求简单而完美的模型会把我们带入误区。但如果因此放弃抽象，将现实的bad part直接带入我们设计的系统中，更是一种投鼠忌器的表现，甚至可以说是偷懒并且不负责任的设计。保持灵活的最好方式是少写代码，而在概念产生明显分化之前，采用相对抽象的概念确实能够帮助你少些很多代码。除此之外，当我们采用“非抽象”方式完成部分系统设计和代码编写的过程中，不断审视自己过去的想法，寻找pattern，也能帮助我们构建更易于理解和维护代码。&lt;/p&gt;
+&lt;p&gt;抽象是危险的，一味追求简单而完美的模型会把我们带入误区。但如果因此放弃抽象，将现实的 bad part 直接带入我们设计的系统中，更是一种投鼠忌器的表现，甚至可以说是偷懒并且不负责任的设计。保持灵活的最好方式是少写代码，而在概念产生明显分化之前，采用相对抽象的概念确实能够帮助你少些很多代码。除此之外，当我们采用“非抽象”方式完成部分系统设计和代码编写的过程中，不断审视自己过去的想法，寻找 pattern，也能帮助我们构建更易于理解和维护代码。&lt;/p&gt;
 
 &lt;p&gt;其实抽象也好，不抽象也罢，和其他系统设计的问题一样，我们都可以用一个看起来没什么用但是永远正确的词来回答：balance。你要去平衡开发团队的能力，合作者（需要理解这些概念的人）的数量，对系统边界的影响，开发时长，以及灵活性（能否推翻你当前的选择）等等所有的因素，最终决定抽象的层级。&lt;/p&gt;
 
@@ -606,84 +608,6 @@ java,php,c++依然是最受企业欢迎的编程语言
 &lt;p&gt;结果显示第1124个质数为9043。&lt;/p&gt;
 
 &lt;p&gt;多玩几次，第112个质数为613，第11240个质数为119293。可以发现，质数在慢慢变稀疏。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Akka</title>
-      <link>https://chenminhua.github.io/posts/akka/</link>
-      <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
-      <guid>https://chenminhua.github.io/posts/akka/</guid>
-      <description>
-
-&lt;p&gt;akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。&lt;/p&gt;
-
-&lt;h2 id=&#34;actors&#34;&gt;actors&lt;/h2&gt;
-
-&lt;p&gt;sending messages
-changing its state
-changing its behavior
-creating more actors&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Activity
-
-class Disable(val password: String)
-
-class Enable(val password: String)
-
-class Alarm(val password: String): AbstractLoggingActor() {
-    override fun createReceive(): Receive {
-        return disabled
-    }
-
-    val enabled = receiveBuilder()
-            .match(Activity::class.java, { this.onActivity(it) })
-            .match(Disable::class.java, { this.onDisable(it) })
-            .build()
-
-    val disabled = receiveBuilder()
-            .match(Enable::class.java, { this.onEnable(it) }).build()
-
-    private fun onDisable(disable: Disable) {
-        if (password == disable.password) {
-            log().info(&amp;quot;alarm disabled&amp;quot;)
-            context.become(disabled)
-        } else {
-            log().warning(&amp;quot;wrong password&amp;quot;)
-        }
-    }
-
-    private fun onEnable(enable: Enable) {
-        if (password == enable.password) {
-            log().info(&amp;quot;alarm enabled&amp;quot;)
-            context.become(enabled)
-        } else {
-            log().warning(&amp;quot;failed to enable the alarm&amp;quot;)
-        }
-    }
-
-    private fun onActivity(a: Activity) {
-        log().warning(&amp;quot;alarm&amp;quot;)
-    }
-
-    companion object {
-        fun props(password: String) = Props.create(Alarm::class.java, password)
-    }
-}
-
-fun main(args: Array&amp;lt;String&amp;gt;) {
-    val system = ActorSystem.create()
-
-    val alarm = system.actorOf(Alarm.props(&amp;quot;pass&amp;quot;), &amp;quot;alarm&amp;quot;)
-
-    alarm.tell(Activity(), ActorRef.noSender())
-    alarm.tell(Enable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
-    alarm.tell(Enable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
-    alarm.tell(Activity(), ActorRef.noSender())
-    alarm.tell(Disable(&amp;quot;puss&amp;quot;), ActorRef.noSender())
-    alarm.tell(Disable(&amp;quot;pass&amp;quot;), ActorRef.noSender())
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -911,15 +835,11 @@ CLASS,
 
 &lt;h2 id=&#34;从面向对象说起&#34;&gt;从面向对象说起&lt;/h2&gt;
 
-&lt;p&gt;面向对象编程是一种编程范式，通常会和面向对象一起被提到的编程范式有面向过程和函数式编程等。面向过程的语言代表是clang，而面向对象编程的语言代表则是c++,java,c#等（严格意义上说，c++应该是典型的多范式编程语言），函数式编程的代表则是haskell,Lisp,erlang等。&lt;/p&gt;
-
-&lt;p&gt;显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？我们稍后再来讨论这些问题。&lt;/p&gt;
-
-&lt;p&gt;相信大家都知道，面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。&lt;/p&gt;
+&lt;p&gt;显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。&lt;/p&gt;
 
 &lt;h2 id=&#34;对象的本质&#34;&gt;对象的本质&lt;/h2&gt;
 
-&lt;p&gt;假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加1的功能。非面向对象的写法可能是&lt;/p&gt;
+&lt;p&gt;假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;addOneYearAge(person)
 &lt;/code&gt;&lt;/pre&gt;
@@ -931,7 +851,7 @@ CLASS,
 
 &lt;p&gt;这里我们有一个对象，&lt;strong&gt;然后给对象发送了一个消息，通知它发生一些变化&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;p&gt;这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变person的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。&lt;/p&gt;
+&lt;p&gt;这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。&lt;/p&gt;
 
 &lt;p&gt;所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。&lt;/p&gt;
 
@@ -939,36 +859,38 @@ CLASS,
 
 &lt;p&gt;为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？&lt;/p&gt;
 
-&lt;p&gt;从前我也是这么认为的，直到有一天我读了ruby作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的js中使用了闭包的代码。&lt;/p&gt;
+&lt;p&gt;从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function outside() {
-  var a = 0
+  var a = 0;
   return function inside() {
     a++;
-    console.log(a)
-  }
+    console.log(a);
+  };
 }
 
-var f = outside()
-f()  //1
-f()  //2
-f()  //3
+var f = outside();
+f(); //1
+f(); //2
+f(); //3
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;我们可以看到outside函数返回了一个inside函数，inside函数可以访问outside函数作用域内声明的变量a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当outside返回的时候，a就应该不能访问了，但事实是inside函数可以始终访问到a变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。&lt;/p&gt;
+&lt;p&gt;我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。&lt;/p&gt;
 
 &lt;p&gt;其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。&lt;/p&gt;
 
-&lt;h2 id=&#34;日常黑spring&#34;&gt;日常黑spring&lt;/h2&gt;
+&lt;p&gt;如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。&lt;/p&gt;
 
-&lt;p&gt;下面开启吐槽时间，热爱java或者spring的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。&lt;/p&gt;
+&lt;h2 id=&#34;日常黑-spring&#34;&gt;日常黑 spring&lt;/h2&gt;
 
-&lt;p&gt;最近公司的后端技术栈正在尝试从nodejs转到spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码smooth的感觉一下消失了。不过代码里面到处都是Autowired一个什么Service啊，mapper啊balabala进来的感觉着实让我不爽。当我需要一个函数的时候，我需要写一个接口，再写一个类，在把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！
-肯定有人要说我too yong，让我去了解一下oop再说，或者找uncle bob的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去autowire一个单例的对象。结束。&lt;/p&gt;
+&lt;p&gt;下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我&amp;rdquo;撕逼&amp;rdquo;。&lt;/p&gt;
 
-&lt;p&gt;肯定也会有很多人说这不是spring和java的锅，在jvm中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去method area找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？我一个社会底层小码农，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。&lt;/p&gt;
+&lt;p&gt;最近公司的后端技术栈正在尝试从 nodejs 转到 spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码 smooth 的感觉一下消失了。当我需要一个函数的时候，我需要写一个接口，再写一个类，再把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！
+肯定有人要说我 too yong，让我去了解一下 oop 再说，或者找 uncle bob 的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去 autowire 一个单例的对象。&lt;/p&gt;
 
-&lt;p&gt;如果只考虑代码，spring和java真的不是the right way to do things。但是，现实又怎么会只考虑代码呢？&lt;/p&gt;
+&lt;p&gt;肯定也会有很多人说这不是 spring 和 java 的锅，在 jvm 中，当你需要一个函数时，你只能找到一个对象，然后找到这个对象的类，然后去 method area 找到这个类的各种方法，然后找到你的函数入口。。。真的很蠢啊。而且，难道你还想让运行时来给你背锅吗？作为一名普通程序员，我管你什么运行时编译时，我管你什么内存布局，我只是想要一个函数啊。&lt;/p&gt;
+
+&lt;p&gt;如果只考虑代码，spring 和 java 真的不是 the right way to do things。但是，现实又怎么会只考虑代码呢？&lt;/p&gt;
 </description>
     </item>
     
@@ -981,31 +903,31 @@ f()  //3
 
 &lt;p&gt;最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。&lt;/p&gt;
 
-&lt;p&gt;你听过The fin这个乐队吗？&lt;/p&gt;
+&lt;p&gt;你听过 The fin 这个乐队吗？&lt;/p&gt;
 
 &lt;p&gt;你知道去年最流行的编程语言是什么吗？&lt;/p&gt;
 
-&lt;p&gt;什么？你连这个游戏都没玩过吗？&lt;/p&gt;
+&lt;p&gt;你连这个游戏都没玩过吗？&lt;/p&gt;
 
 &lt;p&gt;诺兰最新的那部电影你还没看？&lt;/p&gt;
 
-&lt;p&gt;每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。&lt;/p&gt;
+&lt;p&gt;每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing 一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。&lt;/p&gt;
 
 &lt;h2 id=&#34;点什么酒最有派头&#34;&gt;点什么酒最有派头&lt;/h2&gt;
 
 &lt;p&gt;走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。&lt;/p&gt;
 
-&lt;p&gt;伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。&lt;/p&gt;
+&lt;p&gt;伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&amp;rdquo;smirnoff 牌伏特加在蒙眼品酒会里被选为最佳&amp;rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。&lt;/p&gt;
 
-&lt;p&gt;苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选Macallan纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。&lt;/p&gt;
+&lt;p&gt;苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt 威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选 Macallan 纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。&lt;/p&gt;
 
 &lt;p&gt;除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。&lt;/p&gt;
 
 &lt;p&gt;朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。&lt;/p&gt;
 
-&lt;p&gt;喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是taquila。&lt;/p&gt;
+&lt;p&gt;喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是 taquila。&lt;/p&gt;
 
-&lt;p&gt;不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在bluffing而已哈哈。&lt;/p&gt;
+&lt;p&gt;不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在 bluffing 而已哈哈。&lt;/p&gt;
 
 &lt;p&gt;最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。&lt;/p&gt;
 </description>
