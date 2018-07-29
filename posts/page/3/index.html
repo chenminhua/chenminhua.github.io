@@ -67,6 +67,24 @@
 <h1 class="title">Posts</h1>
 <article class="section-posts list-view">
 <header>
+<h2 class="title "><a href="/posts/optional/">kotlin中的可空类型</a></h2>
+
+</header>
+<div class="content">
+最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
+fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
+print(getProject(&quot;no such project&quot;)) // null  返回结果是null!!
+kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
+其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，
+projectMapper.getProjectByCode(projectCode): ProjectDO  但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。
+所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。
+by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class
+/** * Annotations are to be recorded in the class file by the compiler * but need not be retained by the VM at run time. This is the default * behavior. */ CLASS,  说白了，它可不会在运行时起作用。
+</div>
+</article>
+
+<article class="section-posts list-view">
+<header>
 <h2 class="title "><a href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></h2>
 
 </header>
@@ -143,6 +161,7 @@ Not using metrics in your development process is like trying to land a plane in 
 <section>
 <h4 class="menu"><a class="active" href="/posts/">Posts</a></h4>
 <ul class="menu">
+<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
 <li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
 <li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
 <li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
