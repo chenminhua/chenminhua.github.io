@@ -122,6 +122,8 @@ public:
 
 <p>那么对于市场广阔的 java 来说呢？在数据封装层面上来看，java 和 c++是一脉单传的。java 程序员喜欢将所有的数据域都写成 private 的，然后再给他们加上 getter 和 setter。这也让 java 代码看起来到处都是这些“没有营养，没有技术含量”的东西，而这些代码又确实是“无趣而又不得不做”的。</p>
 
+<p>java 程序设计一定要最小化 accessibility。通常都有这样几个原则：1.能不提供 mutators 就不提供。2.能 final class 就 final。不要让别人继承。3.能 final field 就 final，这样也可以避免同步，因为不可变类是线程安全的。4.能 private field 就 private，控制访问。</p>
+
 <p>what about javascript？连 martin fowler 的《重构》第二版都打算用 javascript 写了，js 已经是编程界不可回避的话题。然而 js 确实是一门标准极为混乱的语言，当我们讨论 js 的时候，我们必须先搞清楚我们在谈论什么。显然单纯的 js 对象是没有所谓的封装这种特性的。</p>
 
 <pre><code class="language-js">var obj = {
@@ -251,6 +253,8 @@ console.log(p.m()); // 5
 <section>
 <h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
 <ul class="menu">
+<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
+<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
 <li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
 <li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
 <li><a class="active" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>

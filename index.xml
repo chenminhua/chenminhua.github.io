@@ -6,8 +6,68 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 18:54:20 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 Aug 2018 15:43:44 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>需求变更的一致性</title>
+      <link>https://chenminhua.github.io/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+      <pubDate>Thu, 02 Aug 2018 15:43:44 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+      <description>
+
+&lt;p&gt;最近在工作中遇到一次重大需求变更，对业务模型的设计也产生了非常大的影响。基本上就是在地基上挖个洞的那种变更。目前迭代还在进行中，但是我觉得是时候进行一些回顾，来思考这次大型迭代中我们做对和做错了哪些事情了。&lt;/p&gt;
+
+&lt;h1 id=&#34;产品一致性的重要性&#34;&gt;产品一致性的重要性&lt;/h1&gt;
+
+&lt;p&gt;复杂软件通常都会由几个不同模块组成。比如一个做包装功能的产品经理，突然改了一个需求，原本一个包装内只能装一种东西，现在要改成可以装不同的东西。当这个变更发生的时候，另一个可能使用包装的产品经理和相应的程序员都应该被告知，并修改相应的逻辑，并配合其一起上线。可是有时候，做底层功能的这个产品经理和程序员并不足够了解谁在依赖他们，可能就这么稀里糊涂开始写了，写着写着发现这个变更会影响到上层模块。而这时候上层模块正在经历属于它自己的迭代，一切就都搅和在一起了。&lt;/p&gt;
+
+&lt;p&gt;这种重新打地基式的迭代是非常糟糕的，你的团队会失去可用的共同语言，失去对产品的一致理解，失去相互间的信任。&lt;/p&gt;
+
+&lt;p&gt;所以，在项目建设的前期，做好需求调研和设计规划是最重要的。这能帮我们打好基础，让大家达成一定的共识。并且能够在产品方向出现分歧的时候作为一个指引。&lt;/p&gt;
+
+&lt;p&gt;但是，有些时候你很难在早期弄清楚用户到底需要什么，有时候避免不了会出现大的一些需求变更，甚至你会发现自己的模型根本就是错的。这时候你可能会做出一个产品迭代的决定，将现有的模型换掉。而这时候问题就来了。&lt;/p&gt;
+
+&lt;p&gt;你决定从底层的服务开始改起来，上层服务依赖着底层服务，所以上层服务也要改。而上层服务同时还有其他需求正在做，一切就都乱了套了。更可怕的是，你的服务已经上线了，这意味着已经有用户在使用你的软件。所以你要考虑 migration，你要考虑兼容性。于是你要在这段时间内需要搞定太多太多的事情了，或许模型本身并不复杂，但是因为这些问题，这样的迭代会非常困难。&lt;/p&gt;
+
+&lt;p&gt;这种不必要的复杂往往来源于产品的不一致性。当产品从一个合理的模型演变为另一个合理的模型的过程中，为了避免迭代周期过长，敏捷开发会将其拆分为一个一个细粒度的迭代。绝大多数情况下，敏捷开发都是好的。但是如果拆分不当，敏捷也会很危险。比如你把一个底层模块的变更安排在了一个迭代中，而上层模块先去写一些代码兼容它，code base 中会出现很多临时代码，如果这些代码由一些不熟悉这些业务的程序员来编写，或者由一些责任心不强的程序员来编写，就等于挖了一个坑。在这中情况下，应该尽可能让整个系统的功能保持一致性，宁可将底层模块的变更拆分到不同的迭代，也不要出现上下游服务不一致的情况。这需要团队内部充分的沟通，千万不能形成“安分守己”的团队文化。&lt;/p&gt;
+
+&lt;h1 id=&#34;程序员的责任到底是什么&#34;&gt;程序员的责任到底是什么&lt;/h1&gt;
+
+&lt;p&gt;程序员最重要的职责就是维护代码。这里的维护有两个含义，一方面是指让你的代码能够稳定正确地运行。更重要的一点在于，程序员应该为自己代码的整洁性和可维护性战斗。产品经理不会知道这个功能有多难做，你必须不停的告诉他，你必须习惯于不停地 challenge 产品经理，让他只做最重要最合理的需求。&lt;/p&gt;
+
+&lt;p&gt;一个好的技术团队，必须要相互挑战，产品经理站在用户的立场说话，程序员则必须为自己的代码战斗。如果程序员也站到了用户那边，代码就很可能越写越多越写越烂。很多时候，产品经理跑来跟你说一个需求，你乍一听挺合理，但是实现起来非常的困难，你一定不能直接答应下来。先推，让产品明白这东西很难做。再问产品为什么要这个功能，有没有其他方法满足他。产品经理往往会直接给你一个解决方案，但是优秀的程序员要去找到根上的那个问题。&lt;/p&gt;
+
+&lt;p&gt;总之，程序员的工作并不是完成产品经理的需求，而是开发并维护你的代码。这两者，从来都不是一回事。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>我的理想工作环境</title>
+      <link>https://chenminhua.github.io/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Tue, 31 Jul 2018 19:15:01 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</guid>
+      <description>&lt;p&gt;一台顺畅运行并安装完整生产力工具的最新款 macbook pro。&lt;/p&gt;
+
+&lt;p&gt;两块 4k 显示器。&lt;/p&gt;
+
+&lt;p&gt;一张人体工学座椅。&lt;/p&gt;
+
+&lt;p&gt;一张懒人沙发。&lt;/p&gt;
+
+&lt;p&gt;一个大阳台。&lt;/p&gt;
+
+&lt;p&gt;一根弹力绳。&lt;/p&gt;
+
+&lt;p&gt;无糖可乐，或者茶。&lt;/p&gt;
+
+&lt;p&gt;一群志同道合的人。&lt;/p&gt;
+
+&lt;p&gt;快速而自由的网络环境。&lt;/p&gt;
+
+&lt;p&gt;一只猫。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>灵魂与肉体</title>
@@ -162,6 +222,8 @@ public:
 &lt;p&gt;使用这个栈的程序员同样 include 了这个类，但是这时候他其实已经知道了,这个栈底层是用 stl 里面的 vector 实现的。幸运的是，他不能直接操作这个 vector，因为这个域是 private 的。&lt;/p&gt;
 
 &lt;p&gt;那么对于市场广阔的 java 来说呢？在数据封装层面上来看，java 和 c++是一脉单传的。java 程序员喜欢将所有的数据域都写成 private 的，然后再给他们加上 getter 和 setter。这也让 java 代码看起来到处都是这些“没有营养，没有技术含量”的东西，而这些代码又确实是“无趣而又不得不做”的。&lt;/p&gt;
+
+&lt;p&gt;java 程序设计一定要最小化 accessibility。通常都有这样几个原则：1.能不提供 mutators 就不提供。2.能 final class 就 final。不要让别人继承。3.能 final field 就 final，这样也可以避免同步，因为不可变类是线程安全的。4.能 private field 就 private，控制访问。&lt;/p&gt;
 
 &lt;p&gt;what about javascript？连 martin fowler 的《重构》第二版都打算用 javascript 写了，js 已经是编程界不可回避的话题。然而 js 确实是一门标准极为混乱的语言，当我们讨论 js 的时候，我们必须先搞清楚我们在谈论什么。显然单纯的 js 对象是没有所谓的封装这种特性的。&lt;/p&gt;
 
@@ -629,7 +691,9 @@ java,php,c++依然是最受企业欢迎的编程语言
       <link>https://chenminhua.github.io/tweets/</link>
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction&#34;&gt;prefer duplication over the wrong abstraction&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;lambdas 没有名字，所以如果一个 lambda 写的巨长要看半天，就不应该用 lambda,lambda 应该不超过三行。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction&#34;&gt;prefer duplication over the wrong abstraction&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？&lt;/p&gt;
 
@@ -639,59 +703,59 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;那些能够独立带领项目向正确方向进行的工程师是最可贵的。&lt;/p&gt;
 
-&lt;p&gt;好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。&lt;/p&gt;
+&lt;p&gt;好的前端工程师一定要是个“事儿逼”，如果发现后端接口用起来不舒服（参数命名看不懂，http method 不规范，接口命名方式不一致），一定要勇敢地向后端抱怨。相比于默默耕耘的老黄牛，我喜欢和这样的前端团队合作。&lt;/p&gt;
 
-&lt;p&gt;使用c++，如何在进入main函数前执行一些东西？有一种办法被成为bootstrap方法，其实就是在main函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种bootstrap方法。&lt;/p&gt;
+&lt;p&gt;使用 c++，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。&lt;/p&gt;
 
 &lt;p&gt;什么是类型？类型决定了数据对象需要的内存数，决定了如何解释内存中的信息，决定可使用的对数据的操作和方法。&lt;/p&gt;
 
 &lt;p&gt;面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。&lt;/p&gt;
 
-&lt;p&gt;完成bit reverse的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等&lt;/p&gt;
+&lt;p&gt;完成 bit reverse 的最快方式是什么？很多同学都会陷入各种移位运算，逻辑运算之中，可事实上最快的方法是查找表。如果让你写一个服务，用户输入一个数让你返回它是不是质数怎么做？很多同学会开始想怎么判断质数最快，而事实上你应该考虑的是计算尽可能多的质数然后存在数据库里。如果你需要更好地性能，就再加个缓存。遇到问题不要直接去找解决方案，先把问题想想清楚，问题规模大不大？复杂度高不高？是不是热点？要不要高可用？等等&lt;/p&gt;
 
 &lt;p&gt;自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。&lt;/p&gt;
 
 &lt;p&gt;信息 == 消除不确定性&lt;/p&gt;
 
-&lt;p&gt;隐马尔科夫模型：任意时刻t的状态st是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出ot,而且ot仅和st相关（独立输出假设）。&lt;/p&gt;
+&lt;p&gt;隐马尔科夫模型：任意时刻 t 的状态 st 是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。&lt;/p&gt;
 
-&lt;p&gt;随机过程要比随机变量复杂得多，在任何一个时刻t，对应的状态st都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。&lt;/p&gt;
+&lt;p&gt;随机过程要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。&lt;/p&gt;
 
-&lt;p&gt;如果ARP请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作ARP代理。&lt;/p&gt;
+&lt;p&gt;如果 ARP 请求从一个网络的主机发往另一个网络的主机，那么连接这两个网络的路由器就可以回答该请求，这个过程称作 ARP 代理。&lt;/p&gt;
 
 &lt;p&gt;change is inevitable&lt;/p&gt;
 
-&lt;p&gt;无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核ring buffer中的日志&lt;/p&gt;
+&lt;p&gt;无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核 ring buffer 中的日志&lt;/p&gt;
 
-&lt;p&gt;想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看accept系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个pid的系统调用呢？ strace -p &lt;pid&gt;。它的兄弟ltrace则可以帮你跟踪库函数调用，也很有用。&lt;/p&gt;
+&lt;p&gt;想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试 strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看 accept 系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个 pid 的系统调用呢？ strace -p &lt;pid&gt;。它的兄弟 ltrace 则可以帮你跟踪库函数调用，也很有用。&lt;/p&gt;
 
 &lt;p&gt;命名规则应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。&lt;/p&gt;
 
-&lt;p&gt;在网上看到一些关于强弱类型的争论，其中争议较多的是c语言。在我看来c语言本身显然是弱类型的。如果你觉得c语言是强类型的，要么你没怎么写过c语言，要么你压根不知道类型系统是干嘛的。&lt;/p&gt;
+&lt;p&gt;在网上看到一些关于强弱类型的争论，其中争议较多的是 c 语言。在我看来 c 语言本身显然是弱类型的。如果你觉得 c 语言是强类型的，要么你没怎么写过 c 语言，要么你压根不知道类型系统是干嘛的。&lt;/p&gt;
 
-&lt;p&gt;现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用Identity来表示int32了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个int32是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要id的地方返回了int32，突然由于某种原因，你需要让id变成string类型。这时候你的int32类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想c里面的宏，就在预编译阶段解决了这个问题。&lt;/p&gt;
+&lt;p&gt;现在很多编程语言都支持类型别名，比如 type Identity = int32，然后就可以在代码中使用 Identity 来表示 int32 了。很多同学都觉得这种写法有点脱裤子放屁，没啥必要。还有一些同学认识到了这种方式能够达到代码更好的可读性的效果，你可以直接从代码中理解这个 int32 是干嘛用的。其实这种别名还有一个更重要的功能：类型隐藏。假设你现在没有使用这种别名，然后你可能在各个需要 id 的地方返回了 int32，突然由于某种原因，你需要让 id 变成 string 类型。这时候你的 int32 类型已经侵入了你的实现代码的各个部分。而使用了类型别名之后，你的修改就非常可控了，这种信息隐藏帮你隐藏了变化源。其实这种类型别名并不是什么新鲜事，想想 c 里面的宏，就在预编译阶段解决了这个问题。&lt;/p&gt;
 
-&lt;p&gt;关于Kotlin性能的一点看法：首先，其实kotlin没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在jvm上。其次，在选数据结构的时候你必须要小心，比如你需要给一个int数组排序的时候，Array&lt;Int&gt;会比IntArray慢一倍，原因很简单，前者是Integer而后者是int。第三，kotlin可空是有性能问题的，它会调用Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。&lt;/p&gt;
+&lt;p&gt;关于 Kotlin 性能的一点看法：首先，其实 kotlin 没啥性能问题，最多影响个编译速度，至于运行时性能，反正都是字节码跑在 jvm 上。其次，在选数据结构的时候你必须要小心，比如你需要给一个 int 数组排序的时候，Array&lt;Int&gt;会比 IntArray 慢一倍，原因很简单，前者是 Integer 而后者是 int。第三，kotlin 可空是有性能问题的，它会调用 Intrinsics.checkParameterIsNotNull()这类方法，而且这些可空检查会被编译器植入到各个你不在意的角落，在一些热点代码上还是能不用就不用吧。&lt;/p&gt;
 
 &lt;p&gt;Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.&lt;/p&gt;
 
-&lt;p&gt;get advice early, before you write any code  &amp;mdash;- jeff dean&lt;/p&gt;
+&lt;p&gt;get advice early, before you write any code &amp;mdash;- jeff dean&lt;/p&gt;
 
-&lt;p&gt;nginx具有很高的可扩展性（使用模块）。高可用性（worker模型）。低内存消耗。高并发连接。&lt;/p&gt;
+&lt;p&gt;nginx 具有很高的可扩展性（使用模块）。高可用性（worker 模型）。低内存消耗。高并发连接。&lt;/p&gt;
 
-&lt;p&gt;nginx在linux上使用了sendfile系统调用，这个系统调用可以将磁盘上的数据直接发送到网络上（不需要通过用户态）&lt;/p&gt;
+&lt;p&gt;nginx 在 linux 上使用了 sendfile 系统调用，这个系统调用可以将磁盘上的数据直接发送到网络上（不需要通过用户态）&lt;/p&gt;
 
-&lt;p&gt;nginx与apache相比最大的优势在于减少了上下文切换和内存占用&lt;/p&gt;
+&lt;p&gt;nginx 与 apache 相比最大的优势在于减少了上下文切换和内存占用&lt;/p&gt;
 
-&lt;p&gt;schemaless =&amp;gt; implicit schema = bad thing.  So use a schema if you can.   &amp;mdash;-martin fowler&lt;/p&gt;
+&lt;p&gt;schemaless =&amp;gt; implicit schema = bad thing. So use a schema if you can. &amp;mdash;-martin fowler&lt;/p&gt;
 
-&lt;p&gt;上下文切换：内核切换CPU让其在不同的地址空间上做操作。中断：由物理设备发送给内核的信号，通常是请求I/O服务。&lt;/p&gt;
+&lt;p&gt;上下文切换：内核切换 CPU 让其在不同的地址空间上做操作。中断：由物理设备发送给内核的信号，通常是请求 I/O 服务。&lt;/p&gt;
 
-&lt;p&gt;在高并发竞态场景下使用 CAS (compare-and-swap) 可以防止现在被block后挂起再恢复，这能有效减少不必要的上下文切换，提高performance。其实和数据库乐观锁是一个道理。在很多类似场景下，使用atomic要优于synchronized&lt;/p&gt;
+&lt;p&gt;在高并发竞态场景下使用 CAS (compare-and-swap) 可以防止现在被 block 后挂起再恢复，这能有效减少不必要的上下文切换，提高 performance。其实和数据库乐观锁是一个道理。在很多类似场景下，使用 atomic 要优于 synchronized&lt;/p&gt;
 
-&lt;p&gt;brpc的文档写的真是太好了，人生第一次给百度比心。&lt;/p&gt;
+&lt;p&gt;brpc 的文档写的真是太好了，人生第一次给百度比心。&lt;/p&gt;
 
-&lt;p&gt;为什么像goroutine或者其他一些协程实现在性能上要优于多线程（这里指系统线程而非用户线程）？本质原因是协程是用户态的，或者说协程是在用户态进行调度的，因此其上下文切换非常之快。但是也正因如此，协程只能跑在一个核上，而且一旦某个协程被阻塞，可能导致整个进程不可用。（但是goroutine却是可以用多核的，因为golang在运行时会起多个线程，并把goroutine调度到线程上）&lt;/p&gt;
+&lt;p&gt;为什么像 goroutine 或者其他一些协程实现在性能上要优于多线程（这里指系统线程而非用户线程）？本质原因是协程是用户态的，或者说协程是在用户态进行调度的，因此其上下文切换非常之快。但是也正因如此，协程只能跑在一个核上，而且一旦某个协程被阻塞，可能导致整个进程不可用。（但是 goroutine 却是可以用多核的，因为 golang 在运行时会起多个线程，并把 goroutine 调度到线程上）&lt;/p&gt;
 
 &lt;p&gt;全局计数器可能是一个写多读少的并发问题。对于这种类型的问题，在写的时候频繁加锁同步并不理想，可以考虑由各个线程分别计数，在读的时候同步数据。&lt;/p&gt;
 
@@ -699,21 +763,21 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;Make framework outside, don’t depend on it! 这并不是一件容易的事。&lt;/p&gt;
 
-&lt;p&gt;进程通常运行在用户态，这时候进程可以使用CPU和内存来完成一些任务，但是当进程需要对硬件（磁盘，网络）进行操作的时候，就要切换到内核态，完成操作后再切换回用户态。由于系统调用涉及进程从用户态到内核态的切换，导致一定的内存空间交换，所以系统调用的开销通常比较昂贵。&lt;/p&gt;
+&lt;p&gt;进程通常运行在用户态，这时候进程可以使用 CPU 和内存来完成一些任务，但是当进程需要对硬件（磁盘，网络）进行操作的时候，就要切换到内核态，完成操作后再切换回用户态。由于系统调用涉及进程从用户态到内核态的切换，导致一定的内存空间交换，所以系统调用的开销通常比较昂贵。&lt;/p&gt;
 
 &lt;p&gt;内核的进程调度器维护着各种状态的进程队列，包括一个所有可运行进程的队列，以及一个包括所有休眠进程和僵尸进程的列表。进程调度器的一个重要工作就是决定下一个运行的进程。&lt;/p&gt;
 
-&lt;p&gt;cat /proc/loadavg 可以查看系统负载。当系统负载为0.00时，说明任何进程只有就绪后就可以马上获得CPU,不需要等待。&lt;/p&gt;
+&lt;p&gt;cat /proc/loadavg 可以查看系统负载。当系统负载为 0.00 时，说明任何进程只有就绪后就可以马上获得 CPU,不需要等待。&lt;/p&gt;
 
-&lt;p&gt;nginx和其代理的各个服务直接是通过TCP长连接通信的&lt;/p&gt;
+&lt;p&gt;nginx 和其代理的各个服务直接是通过 TCP 长连接通信的&lt;/p&gt;
 
-&lt;p&gt;nginx官方介绍声称，nginx维持1000个非活跃http持久连接只需要2.5M的内存。这得益于其单进程的计算模型（各个worker可以共享内存资源）&lt;/p&gt;
+&lt;p&gt;nginx 官方介绍声称，nginx 维持 1000 个非活跃 http 持久连接只需要 2.5M 的内存。这得益于其单进程的计算模型（各个 worker 可以共享内存资源）&lt;/p&gt;
 
-&lt;p&gt;性能问题有趣的地方在于，努力不一定有用。比如你把我前面提过的十种方法里面的后面九种都做了，但是你的服务器水管太细，还是没用。处理性能问题的关键在于找到问题所在，是IO太慢？是带宽不够？是计算能力不够？是数据库可用连接太少？是数据库缓冲池太小导致IO太多？等你找到问题的时候，问题已经解决一大半了。&lt;/p&gt;
+&lt;p&gt;性能问题有趣的地方在于，努力不一定有用。比如你把我前面提过的十种方法里面的后面九种都做了，但是你的服务器水管太细，还是没用。处理性能问题的关键在于找到问题所在，是 IO 太慢？是带宽不够？是计算能力不够？是数据库可用连接太少？是数据库缓冲池太小导致 IO 太多？等你找到问题的时候，问题已经解决一大半了。&lt;/p&gt;
 
-&lt;p&gt;请用最快的速度想出十种可能提高网站加载和响应速度的方案：1.增加服务器带宽。2.水平扩展，增加服务数。3.使用CDN。4.使用数据缓存(redis等)。5.检查是不是有数据库慢查询，干掉慢查询。6.增加数据库缓冲池。7.减少前端静态文件数量。8.开启server push。9.使用浏览器缓存。10.切分后端接口和前端组件，分批拉取数据，分批渲染组件。&lt;/p&gt;
+&lt;p&gt;请用最快的速度想出十种可能提高网站加载和响应速度的方案：1.增加服务器带宽。2.水平扩展，增加服务数。3.使用 CDN。4.使用数据缓存(redis 等)。5.检查是不是有数据库慢查询，干掉慢查询。6.增加数据库缓冲池。7.减少前端静态文件数量。8.开启 server push。9.使用浏览器缓存。10.切分后端接口和前端组件，分批拉取数据，分批渲染组件。&lt;/p&gt;
 
-&lt;p&gt;尽管我们的读写最终可能是指向磁盘的，但是在真正进写时，我们面对的是文件系统。linux将所有的设备（包括网络）都抽象成文件，当调用数据读取时，文件系统会先检查内存（页缓存）中是否有数据，如果没有则去块设备（磁盘）中读取&lt;/p&gt;
+&lt;p&gt;尽管我们的读写最终可能是指向磁盘的，但是在真正进写时，我们面对的是文件系统。linux 将所有的设备（包括网络）都抽象成文件，当调用数据读取时，文件系统会先检查内存（页缓存）中是否有数据，如果没有则去块设备（磁盘）中读取&lt;/p&gt;
 
 &lt;p&gt;Immutability changes everything &amp;ndash; Pat Helland &lt;a href=&#34;http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf&#34;&gt;CIDR paper&lt;/a&gt;&lt;/p&gt;
 
@@ -723,41 +787,41 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;You own your SLA or your SLA owns you&lt;/p&gt;
 
-&lt;p&gt;从npm install上面节省下来的时间都花费到了gradle build上了。心痛。&lt;/p&gt;
+&lt;p&gt;从 npm install 上面节省下来的时间都花费到了 gradle build 上了。心痛。&lt;/p&gt;
 
 &lt;p&gt;如果你的用户一直在查文档，那你一定是做错了什么。如果你的用户一直找不到正确的文档，那你&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;pattern seems to be the sweet spot of design &amp;ndash; 《Enterprise Integration Patterns - Designing, Building And Deploying Messaging Solutions》&lt;/p&gt;
 
-&lt;p&gt;BPM (Business process management)的一个例子：bpm收到一个抵押贷款的请求后，发送事件给三个不同的服务: 收入检查，信用检查，房屋评估。这三个服务将它们的结果发给风险管理服务。而风险管理服务再将结果返回给funding服务。我们可以说，bpm将各个业务逻辑步骤外包给了其他服务。&lt;/p&gt;
+&lt;p&gt;BPM (Business process management)的一个例子：bpm 收到一个抵押贷款的请求后，发送事件给三个不同的服务: 收入检查，信用检查，房屋评估。这三个服务将它们的结果发给风险管理服务。而风险管理服务再将结果返回给 funding 服务。我们可以说，bpm 将各个业务逻辑步骤外包给了其他服务。&lt;/p&gt;
 
 &lt;p&gt;fail independently&lt;/p&gt;
 
-&lt;p&gt;性能领域有一条著名的USE(utilization, saturation, errors)方法&amp;mdash;-对于所有的资源，查看它的使用率，饱和度和错误。&lt;/p&gt;
+&lt;p&gt;性能领域有一条著名的 USE(utilization, saturation, errors)方法&amp;mdash;-对于所有的资源，查看它的使用率，饱和度和错误。&lt;/p&gt;
 
 &lt;p&gt;有的人扭曲事实来适应理论，有的人改变理论来适应事实。&lt;/p&gt;
 
-&lt;p&gt;试图用尽可能通俗的方式讲明白CAP的文章到处都是，这篇是我看过的中写的最好的&lt;a href=&#34;http://ksat.me/a-plain-english-introduction-to-cap-theorem/&#34;&gt;CAP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;试图用尽可能通俗的方式讲明白 CAP 的文章到处都是，这篇是我看过的中写的最好的&lt;a href=&#34;http://ksat.me/a-plain-english-introduction-to-cap-theorem/&#34;&gt;CAP&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;[微服务 get started]&lt;a href=&#34;https://cloudncode.blog/2016/07/22/msa-getting-started/&#34;&gt;https://cloudncode.blog/2016/07/22/msa-getting-started/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;有些时候你会突然遇到一些需求，你发现完成这些需求需要去查若干张表，问题是这些表来自不同的服务，你需要group这些数据，甚至有一些排序和分页的需求。我最开始遇到这些问题的时候第一反应是，我的服务划分是不是有问题，他们是不是应该在一个服务里？先别急着否定自己。拆分微服务必然会遇到这种情况，很多时候你需要的不是把这些服务合并起来，而是写一个新的服务，去聚合这些数据，插入到一个新的表或者其他什么存储技术中，直觉告诉我，这个服务很可能会变得非常非常有用。&lt;/p&gt;
+&lt;p&gt;有些时候你会突然遇到一些需求，你发现完成这些需求需要去查若干张表，问题是这些表来自不同的服务，你需要 group 这些数据，甚至有一些排序和分页的需求。我最开始遇到这些问题的时候第一反应是，我的服务划分是不是有问题，他们是不是应该在一个服务里？先别急着否定自己。拆分微服务必然会遇到这种情况，很多时候你需要的不是把这些服务合并起来，而是写一个新的服务，去聚合这些数据，插入到一个新的表或者其他什么存储技术中，直觉告诉我，这个服务很可能会变得非常非常有用。&lt;/p&gt;
 
-&lt;p&gt;[微服务之坑] 微服务所说的每个服务单独开发和部署听起来很美，但是很多时候服务拆分的不好，增加一个feature需要同时更新五个服务。。。当然团队里面可不止你一个feature等着上线。。。事情就会非常糟糕。&lt;/p&gt;
+&lt;p&gt;[微服务之坑] 微服务所说的每个服务单独开发和部署听起来很美，但是很多时候服务拆分的不好，增加一个 feature 需要同时更新五个服务。。。当然团队里面可不止你一个 feature 等着上线。。。事情就会非常糟糕。&lt;/p&gt;
 
 &lt;p&gt;时机很重要。一方面不要过早优化，不能一行代码还没写数据仓库却搭得很好；另一方面，也不能等十个服务都上线了才开始思考基础架构的事情。如果一个东西你可以不改任何代码，或者改很少的配置就能够加上的，你可以等需要了再加。而有些东西你现在不做，之后要改一大片才能加上，那最好尽早设计。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Simplicity is the key if you really want to build large distributed systems.&lt;/strong&gt;构建大型分布式系统的唯一方式是让一切都保持尽可能简单，&lt;strong&gt;不能有隐藏的需求和隐藏的依赖&lt;/strong&gt;。不要人为创造复杂度。&lt;/p&gt;
 
-&lt;p&gt;今年OKR中深入学习c++这一项我感觉是要黄了。看书终究还是纸上谈兵，可真要有个复杂的东西让你写吧，又怂了，默默拿起了golang。感觉还是应该先找两个c++的优秀项目多看看，看的多了，也就知道放弃了。&lt;/p&gt;
+&lt;p&gt;今年 OKR 中深入学习 c++这一项我感觉是要黄了。看书终究还是纸上谈兵，可真要有个复杂的东西让你写吧，又怂了，默默拿起了 golang。感觉还是应该先找两个 c++的优秀项目多看看，看的多了，也就知道放弃了。&lt;/p&gt;
 
-&lt;p&gt;应该有一个这样的一个进程，它可以watch某一个文件（比如你现在看到的这个文件），然后当其发现这个文件有更新之后，就去调用若干用户配置的社交账号，并将新添加的内容发送到相应的平台上去。这看上去似乎比ifttt更让人放心（至少是更让我放心）。&lt;/p&gt;
+&lt;p&gt;应该有一个这样的一个进程，它可以 watch 某一个文件（比如你现在看到的这个文件），然后当其发现这个文件有更新之后，就去调用若干用户配置的社交账号，并将新添加的内容发送到相应的平台上去。这看上去似乎比 ifttt 更让人放心（至少是更让我放心）。&lt;/p&gt;
 
-&lt;p&gt;magic is evil, framework is magic.记得之前看过亚马逊的一篇文章，内容是说亚马逊不喜欢使用中间件，因为中间件更像是框架而非工具。如果你使用了一个中间件，你就很可能被其绑住。uncle bob也曾经在他著名的关于solid的演讲中提到，一定要make framework outside,不要让你的代码直接依赖框架。我认为这一点在我们做技术选型的时候尤其重要。比如说通信基础架构层，是用dubbo还是grpc? I prefer grpc.&lt;/p&gt;
+&lt;p&gt;magic is evil, framework is magic.记得之前看过亚马逊的一篇文章，内容是说亚马逊不喜欢使用中间件，因为中间件更像是框架而非工具。如果你使用了一个中间件，你就很可能被其绑住。uncle bob 也曾经在他著名的关于 solid 的演讲中提到，一定要 make framework outside,不要让你的代码直接依赖框架。我认为这一点在我们做技术选型的时候尤其重要。比如说通信基础架构层，是用 dubbo 还是 grpc? I prefer grpc.&lt;/p&gt;
 
-&lt;p&gt;scalability意味着什么？意味着只要你愿意增加机器，增加带宽，你就能得到更好的performace，你就能服务更多的人。反直觉的是，这远远没有听起来那么简单。比如像数据库这种shared resource，就是很难scale out。而在scale out的时候，往往你必须放弃掉一些东西。&lt;/p&gt;
+&lt;p&gt;scalability 意味着什么？意味着只要你愿意增加机器，增加带宽，你就能得到更好的 performace，你就能服务更多的人。反直觉的是，这远远没有听起来那么简单。比如像数据库这种 shared resource，就是很难 scale out。而在 scale out 的时候，往往你必须放弃掉一些东西。&lt;/p&gt;
 
-&lt;p&gt;I don&amp;rsquo;t plan. If I do, I plan to fail。这句话用在软件架构领域再恰当不过。所有的决策都要有退路，所有的update都要可以rollback。&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t plan. If I do, I plan to fail。这句话用在软件架构领域再恰当不过。所有的决策都要有退路，所有的 update 都要可以 rollback。&lt;/p&gt;
 
 &lt;p&gt;卡里乌斯不愧是皇马中流砥柱。&lt;/p&gt;
 
@@ -765,11 +829,11 @@ java,php,c++依然是最受企业欢迎的编程语言
 
 &lt;p&gt;切记永远不要在本地事务中调用远程服务，因为如果远程服务出现了问题，则会拖长事务，导致应用服务器占用太多的数据库连接，在严重情况下会压垮数据库。当然，数据库也应该有负载熔断机制。&lt;/p&gt;
 
-&lt;p&gt;kotlin中可以使用tailrec关键字标记一个存在尾递归的函数，这样编译器就会进行尾递归优化。事实上现在很多的语言和编译器都会自动检测尾递归并自动进行优化，而Kotlin却选择使用了一个关键字。&lt;/p&gt;
+&lt;p&gt;kotlin 中可以使用 tailrec 关键字标记一个存在尾递归的函数，这样编译器就会进行尾递归优化。事实上现在很多的语言和编译器都会自动检测尾递归并自动进行优化，而 Kotlin 却选择使用了一个关键字。&lt;/p&gt;
 
-&lt;p&gt;之前看到一篇吐槽Kotlin的文章中提到，为啥创建一个map要写成 mapOf(&amp;ldquo;a&amp;rdquo; to &amp;ldquo;b, &amp;hellip;&amp;rdquo;)，而不是用冒号。从实现的角度来看，这里的to不过是一个infix修饰的函数（可以中缀调用），并返回一个Pair，这种实现方案对于编译器来说不需要做任何附加处理。当然，冒号是一个接受度更高的选择，遗憾的是kotlin似乎并不支持overload冒号，所以在不改动编译器的情况下似乎也没啥好办法。理论上来说，在编译器前插一个处理器魔改一下应该很简单，但是感觉实在没什么必要。更重要的是切记，magic is evil!!&lt;/p&gt;
+&lt;p&gt;之前看到一篇吐槽 Kotlin 的文章中提到，为啥创建一个 map 要写成 mapOf(&amp;ldquo;a&amp;rdquo; to &amp;ldquo;b, &amp;hellip;&amp;rdquo;)，而不是用冒号。从实现的角度来看，这里的 to 不过是一个 infix 修饰的函数（可以中缀调用），并返回一个 Pair，这种实现方案对于编译器来说不需要做任何附加处理。当然，冒号是一个接受度更高的选择，遗憾的是 kotlin 似乎并不支持 overload 冒号，所以在不改动编译器的情况下似乎也没啥好办法。理论上来说，在编译器前插一个处理器魔改一下应该很简单，但是感觉实在没什么必要。更重要的是切记，magic is evil!!&lt;/p&gt;
 
-&lt;p&gt;你可能知道java中的HashMap不是线程安全的，但是在有些场景下你觉得你好像不太在乎线程安全（比如缓存），但是即便如此，你也不应该使用HashMap,因为resize的时候会炸。可以参考这篇&lt;a href=&#34;http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html&#34;&gt;文章&lt;/a&gt;。所以，了解底层实现真的很重要。&lt;/p&gt;
+&lt;p&gt;你可能知道 java 中的 HashMap 不是线程安全的，但是在有些场景下你觉得你好像不太在乎线程安全（比如缓存），但是即便如此，你也不应该使用 HashMap,因为 resize 的时候会炸。可以参考这篇&lt;a href=&#34;http://mailinator.blogspot.com/2009/06/beautiful-race-condition.html&#34;&gt;文章&lt;/a&gt;。所以，了解底层实现真的很重要。&lt;/p&gt;
 
 &lt;p&gt;在我所见过的大多数的数据库设计以及编程语言的设计中，读锁一般为共享锁，而写锁一般为排他锁。提出这一设计理念的竟然是中国诗人周敦颐：“可远观而不可亵玩焉”。&lt;/p&gt;
 </description>
