@@ -691,7 +691,21 @@ java,php,c++依然是最受企业欢迎的编程语言
       <link>https://chenminhua.github.io/tweets/</link>
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>&lt;p&gt;接受美感&lt;/p&gt;
+      <description>&lt;p&gt;什么决定了一个决策的关键程度？答案是变化的成本。&lt;/p&gt;
+
+&lt;p&gt;系统架构的目标是解决利益相关者的关注点。&lt;/p&gt;
+
+&lt;p&gt;随机过程要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。&lt;/p&gt;
+
+&lt;p&gt;隐马尔科夫模型：任意时刻 t 的状态 st 是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。假设 s1, s2, s3&amp;hellip; 信源发出的信号 o1, o2, o3&amp;hellip; 接收器收到的信号。根据 o1,o2,o3 推测 s1,s2,s3，也就是找到令 p(s1,s2,s3&amp;hellip;|o1,o2,o3&amp;hellip;) 最大的那组 s1,s2,s3&amp;hellip;的值。其中 P(o1,o2,o3&amp;hellip;)为常数&lt;/p&gt;
+
+&lt;p&gt;$$\frac{P(o_1,o_2,o_3&amp;hellip;|s_1,s_2,s_3&amp;hellip;).P(s_1,s_2,s_3&amp;hellip;)}{P(o_1,o_2,o_3&amp;hellip;)}$$&lt;/p&gt;
+
+&lt;p&gt;如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。&lt;/p&gt;
+
+&lt;p&gt;在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。&lt;/p&gt;
+
+&lt;p&gt;接受美感&lt;/p&gt;
 
 &lt;p&gt;Surround yourself with people who inspire you is as important as being talented or working hard&lt;/p&gt;
 
