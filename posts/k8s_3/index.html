@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<title>K8s_3 – 硕大的汤姆</title>
+<meta name="created" content="2018-09-20T21:50:31&#43;0800">
+<meta name="modified" content="2018-09-20T21:50:31&#43;0800">
+
+<meta name="description" content="运行一个 Nginx 到 k8s Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来： kubectl create -f nginx-deployment.yaml  配置文件如下 apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.7.9 ports: - containerPort: 80  一个 YAML 文件，对应到 Kubernetes 中，就是一个 API Object（API 对象）。当你为这个对象的各个字段填好值并提交给 Kubernetes 之后，Kubernetes 就会负责创建出这些对象所定义的容器或者其他类型的 API 资源。 这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。">
+<meta property="og:site_name" content="硕大的汤姆">
+<meta property="og:title" content="K8s_3">
+<meta property="og:url" content="https://chenminhua.github.io/posts/k8s_3/">
+
+<meta name="generator" content="Hugo 0.43" />
+
+<link rel="canonical" href="https://chenminhua.github.io/posts/k8s_3/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="style" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "K8s_3",
+    "datePublished": "2018-09-20T21:50:31+08:00",
+    "dateModified": "2018-09-20T21:50:31+08:00",
+    "url" : "https://chenminhua.github.io/posts/k8s_3/",
+    "description": "运行一个 Nginx 到 k8s Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来： kubectl create -f nginx-deployment.yaml  配置文件如下 apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.7.9 ports: - containerPort: 80  一个 YAML 文件，对应到 Kubernetes 中，就是一个 API Object（API 对象）。当你为这个对象的各个字段填好值并提交给 Kubernetes 之后，Kubernetes 就会负责创建出这些对象所定义的容器或者其他类型的 API 资源。 这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://chenminhua.github.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "硕大的汤姆",
+      "url": "https://chenminhua.github.io/",
+    }
+  }
+</script>
+
+</head>
+
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header" role="banner">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
+</h1>
+<div class="region header__region">
+
+
+</div>
+</header>
+
+
+
+
+<nav class="main-menu layout__navigation" role="navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="" href="/about/">About</a></li>
+<li><a class="" href="/tweets/">Tweets</a></li>
+<li><a class="" href="/cc/">代码大全</a></li>
+<li><a class="active" href="/posts/">Posts</a></li>
+</ul>
+</nav>
+
+
+<main class="main layout__main" role="main">
+<h1 class="title ">K8s_3</h1>
+<article class="section-posts single-view">
+<header>
+</header>
+<div class="content">
+
+
+<h3 id="运行一个-nginx-到-k8s">运行一个 Nginx 到 k8s</h3>
+
+<p>Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来：</p>
+
+<pre><code>kubectl create -f nginx-deployment.yaml
+</code></pre>
+
+<p>配置文件如下</p>
+
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre>
+
+<p>一个 YAML 文件，对应到 Kubernetes 中，就是一个 API Object（API 对象）。当你为这个对象的各个字段填好值并提交给 Kubernetes 之后，Kubernetes 就会负责创建出这些对象所定义的容器或者其他类型的 API 资源。</p>
+
+<p>这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。</p>
+
+<p>Labels 就是一组 key-value 格式的标签。而像 Deployment 这样的控制器对象，就可以通过这个 Labels 字段从 Kubernetes 中过滤出它所关心的被控制对象。比如，在上面这个 YAML 文件中，Deployment 会把所有正在运行的、携带“app: nginx”标签的 Pod 识别为被管理的对象，并确保这些 Pod 的总数严格等于两个。而这个过滤规则的定义，是在 Deployment 的“spec.selector.matchLabels”字段。我们一般称之为：Label Selector。</p>
+
+<p>另外，在 Metadata 中，还有一个与 Labels 格式、层级完全相同的字段叫 Annotations，它专门用来携带 key-value 格式的内部信息。所谓内部信息，指的是对这些信息感兴趣的，是 Kubernetes 组件本身，而不是用户。所以大多数 Annotations，都是在 Kubernetes 运行过程中，被自动加在这个 API 对象上。</p>
+
+<p>一个 Kubernetes 的 API 对象的定义，大多可以分为 Metadata 和 Spec 两个部分。前者存放的是这个对象的元数据，对所有 API 对象来说，这一部分的字段和格式基本上是一样的；而后者存放的，则是属于这个对象独有的定义，用来描述它所要表达的功能。</p>
+
+<p>从 template 中可以看出来，这个 Pod 里只有一个容器，这个容器的镜像（spec.containers.image）是 nginx:1.7.9，这个容器监听端口（containerPort）是 80。</p>
+
+<p>启动之后，运行下面命令查看 pod 启动情况。</p>
+
+<pre><code>k get pods -l app=nginx
+
+k describe pod nginx-deployment-67594d6bf6-5qcwh
+</code></pre>
+
+<p>在 kubectl describe 命令返回的结果中，你可以清楚地看到这个 Pod 的详细信息，比如它的 IP 地址等等。其中，有一个部分值得你特别关注，它就是<strong>Events（事件）。</strong></p>
+
+<p>在 Kubernetes 执行的过程中，对 API 对象的所有重要操作，都会被记录在这个对象的 Events 里，并且显示在 kubectl describe 指令返回的结果中。比如，对于这个 Pod，我们可以看到它被创建之后，被调度器调度（Successfully assigned）到了 node-1，拉取了指定的镜像（pulling image），然后启动了 Pod 里定义的容器（Started container）。</p>
+
+<p>所以，这个部分正是我们将来进行 Debug 的重要依据。<strong>如果有异常发生，你一定要第一时间查看这些 Events</strong>，往往可以看到非常详细的错误信息。</p>
+
+<h2 id="升级">升级</h2>
+
+<p>接下来，如果我们要对这个 Nginx 服务进行升级，我们只要修改这个 YAML 文件即可。</p>
+
+<pre><code>image: nginx:1.8
+</code></pre>
+
+<p>然后执行</p>
+
+<pre><code>kubectl apply -f nginx-deployment.yaml
+# 或者
+kubectl replace -f nginx-deployment.yaml
+</code></pre>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>所谓 Deployment，是一个定义多副本应用（即多个副本 Pod）的对象，此外，Deployment 还负责在 Pod 定义发生变化时，对每个副本进行滚动更新（Rolling Update）。像这样使用一种 API 对象（Deployment）管理另一种 API 对象（Pod）的方法，在 Kubernetes 中，叫作“控制器”模式（controller pattern）。在我们的例子中，Deployment 扮演的正是 Pod 的控制器的角色。</p>
+
+<h2 id="volume">volume</h2>
+
+<p>接下来，我们再在这个 Deployment 中尝试声明一个 Volume。在 Deployment 的 Pod 模板部分添加了一个 volumes 字段，定义了这个 Pod 声明的所有 Volume。它的名字叫作 nginx-vol，类型是 emptyDir。emptyDir 类型其实就等同于我们之前讲过的 Docker 的隐式 Volume 参数，即：不显式声明宿主机目录的 Volume。所以，Kubernetes 也会在宿主机上创建一个临时目录，这个目录将来就会被绑定挂载到容器所声明的 Volume 目录上。而 Pod 中的容器，使用的是 volumeMounts 字段来声明自己要挂载哪个 Volume，并通过 mountPath 字段来定义容器内的 Volume 目录，比如：/usr/share/nginx/html。</p>
+
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: &quot;/usr/share/nginx/html&quot;
+          name: nginx-vol
+      volumes:
+      - name: nginx-vol
+        emptyDir: {}
+</code></pre>
+
+<p>当然，Kubernetes 也提供了显式的 Volume 定义，它叫做 hostPath。比如下面的这个 YAML 文件：</p>
+
+<pre><code>volumes:
+  - name: nginx-vol
+    hostPath: /var/data
+</code></pre>
+
+<p>这样，容器 Volume 挂载的宿主机目录，就变成了/var/data。</p>
+
+<p>在上述修改完成后，我们还是使用 kubectl apply 指令，更新这个 Deployment:</p>
+
+<pre><code>$ kubectl apply -f nginx-deployment.yaml
+</code></pre>
+
+<p>接下来，你可以通过 kubectl get 指令，查看两个 Pod 被逐一更新的过程：</p>
+
+<pre><code>$ kubectl get pods
+NAME                                READY     STATUS              RESTARTS   AGE
+nginx-deployment-5c678cfb6d-v5dlh   0/1       ContainerCreating   0          4s
+nginx-deployment-67594d6bf6-9gdvr   1/1       Running             0          10m
+nginx-deployment-67594d6bf6-v6j7w   1/1       Running             0          10m
+$ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5c678cfb6d-lg9lw   1/1       Running   0          8s
+nginx-deployment-5c678cfb6d-v5dlh   1/1       Running   0          19s
+</code></pre>
+
+<p>从返回结果中，我们可以看到，新旧两个 Pod，被交替创建、删除，最后剩下的就是新版本的 Pod。这个滚动更新的过程，我也会在后续进行详细的讲解。</p>
+
+<p>然后，你可以使用 kubectl describe 查看一下最新的 Pod，就会发现 Volume 的信息已经出现在了 Container 描述部分：</p>
+
+<h2 id="kubectl-exec-命令">kubectl exec 命令</h2>
+
+<p>最后，你还可以使用 kubectl exec 指令，进入到这个 Pod 当中（即容器的 Namespace 中）查看这个 Volume 目录：</p>
+
+<pre><code>kubectl exec -it nginx-deployment-5c678cfb6d-lg9lw -- /bin/bash
+# ls /usr/share/nginx/html
+</code></pre>
+
+<h2 id="删除这个-deployment">删除这个 deployment</h2>
+
+<pre><code>kubectl delete -f nginx-deployment.yaml
+</code></pre>
+
+<p>就可以了。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>在 Kubernetes 中，我们经常会看到它通过一种 API 对象来管理另一种 API 对象，比如 Deployment 和 Pod 之间的关系；而由于 Pod 是“最小”的对象，所以它往往都是被其他对象控制的。这种组合方式，正是 Kubernetes 进行容器编排的重要模式。</p>
+
+<p>而像这样的 Kubernetes API 对象，往往由 Metadata 和 Spec 两部分组成，其中 Metadata 里的 Labels 字段是 Kubernetes 过滤对象的主要手段。</p>
+
+<p>在这些字段里面，容器想要使用的数据卷，也就是 Volume，正是 Pod 的 Spec 字段的一部分。而 Pod 里的每个容器，则需要显式的声明自己要挂载哪个 Volume。</p>
+
+<p>在部署到 Kubernetes 之后，接下来的所有操作，要么通过 kubectl 来执行，要么通过修改 YAML 文件来实现，<strong>就尽量不要再碰 Docker 的命令行了</strong>。</p>
+
+
+</div>
+</article>
+</main>
+
+
+
+<aside class="sidebar layout__second-sidebar" role="complementary">
+<section>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
+<ul class="menu">
+<li><a class="" href="/posts/k8s_2/">K8s_2</a></li>
+<li><a class="active" href="/posts/k8s_3/">K8s_3</a></li>
+<li><a class="" href="/posts/k8s_1/">K8s_1</a></li>
+<li><a class="" href="/posts/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></li>
+<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
+<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
+<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
+<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
+<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
+<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
+<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
+<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
+<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
+<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
+<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="" href="/posts/draft/akka/">Akka</a></li>
+<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
+<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
+<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
+<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
+<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
+<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
+<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
+</ul>
+</section>
+</aside>
+
+
+<footer class="footer layout__footer" role="contentinfo">
+<p><span>© 硕大的汤姆</span></p>
+
+
+</footer>
+
+</div>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+</body>
+</html>

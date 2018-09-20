@@ -6,8 +6,328 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Sep 2018 21:50:31 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Sep 2018 21:50:31 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>K8s_2</title>
+      <link>https://chenminhua.github.io/posts/k8s_2/</link>
+      <pubDate>Thu, 20 Sep 2018 21:50:31 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/k8s_2/</guid>
+      <description>
+
+&lt;h2 id=&#34;搭-dns-vpn&#34;&gt;搭 dns, vpn&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-centos-7&#34;&gt;https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-an-openvpn-server-on-centos-7&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;yum install -y openvpn wget
+wget -O /tmp/easyrsa https://github.com/OpenVPN/easy-rsa-old/archive/2.3.3.tar.gz
+tar xfz /tmp/easyrsa
+mkdir /etc/openvpn/easy-rsa
+cp -rf easy-rsa-old-2.3.3/easy-rsa/2.0/* /etc/openvpn/easy-rsa
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;config-openvpn&#34;&gt;config openvpn&lt;/h2&gt;
+
+&lt;p&gt;先拷贝一份样例配置文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cp /usr/share/doc/openvpn-2.4.6/sample/sample-config-files/server.conf /etc/openvpn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;找到下面这行，取消注释，这告诉客户端将它的 trafic 都走你的 openvpn server。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后修改你的 dns&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;push &amp;quot;dhcp-option DNS 8.8.8.8&amp;quot;
+push &amp;quot;dhcp-option DNS 8.8.4.4&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后开放权限，找到下面两行，取消注释&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;user nobody
+group nobody
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后找到下面这行，取消注释&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;topology subnet
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再修改下面这两行，第一行为注释掉，第二行为添加&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;;tls-auth ta.key 0
+tls-crypt myvpn.tlsauth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存上面的配置文件，并且生成 myvpn.tlsauth&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;openvpn --genkey --secret /etc/openvpn/myvpn.tlsauth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;创建秘钥和证书&#34;&gt;创建秘钥和证书&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir /etc/openvpn/easy-rsa/keys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改 /etc/openvpn/easy-rsa/vars 文件，主要是填上 KEY_CN 和 KEY_NAME&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KEY_CN=openvpn.video4us.top
+KEY_NAME=server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /etc/openvpn/easy-rsa
+./clean-all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./build-ca
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会在 keys 目录下生成 ca.crt，ca.key 两个文件。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./build-key-server server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会在 keys 目录下生成服务端证书。然后运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./build-dh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /etc/openvpn/easy-rsa/keys
+cp dh2048.pem ca.crt server.crt server.key /etc/openvpn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后创建客户端 key&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /etc/openvpn/easy-rsa
+./build-key client
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cp /etc/openvpn/easy-rsa/openssl-1.0.0.cnf /etc/openvpn/easy-rsa/openssl.cnf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;开启-ip-转发&#34;&gt;开启 ip 转发&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# 编辑 /etc/sysctl.conf，添加下面代码
+net.ipv4.ip_forward = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl restart network.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;开启-openvpn-服务端&#34;&gt;开启 openvpn 服务端&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl -f enable openvpn@server.service
+systemctl start openvpn@server.service
+# 查看是否正常启动
+systemctl status openvpn@server.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;配置客户端&#34;&gt;配置客户端&lt;/h2&gt;
+
+&lt;p&gt;先把 ca.crt client.crt client.key myvpn.tlsauth 这几个文件都拷贝到客户端，我把他们都放在了 Home 目录下的.ovpn 目录中。&lt;/p&gt;
+
+&lt;p&gt;然后创建客户端配置文件 ata.ovpn&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client
+tls-client
+ca ~/.ovpn/ca.crt
+cert ~/.ovpn/client.crt
+key ~/.ovpn/client.key
+tls-crypt ~/.ovpn/myvpn.tlsauth
+proto udp
+remote openvpn.video4us.top 1194 udp
+dev tun
+topology subnet
+pull
+user nobody
+group nobody
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;双击运行即可（mac 上安装了 tunnelblick）&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>K8s_3</title>
+      <link>https://chenminhua.github.io/posts/k8s_3/</link>
+      <pubDate>Thu, 20 Sep 2018 21:50:31 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/k8s_3/</guid>
+      <description>
+
+&lt;h3 id=&#34;运行一个-nginx-到-k8s&#34;&gt;运行一个 Nginx 到 k8s&lt;/h3&gt;
+
+&lt;p&gt;Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl create -f nginx-deployment.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置文件如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一个 YAML 文件，对应到 Kubernetes 中，就是一个 API Object（API 对象）。当你为这个对象的各个字段填好值并提交给 Kubernetes 之后，Kubernetes 就会负责创建出这些对象所定义的容器或者其他类型的 API 资源。&lt;/p&gt;
+
+&lt;p&gt;这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。&lt;/p&gt;
+
+&lt;p&gt;Labels 就是一组 key-value 格式的标签。而像 Deployment 这样的控制器对象，就可以通过这个 Labels 字段从 Kubernetes 中过滤出它所关心的被控制对象。比如，在上面这个 YAML 文件中，Deployment 会把所有正在运行的、携带“app: nginx”标签的 Pod 识别为被管理的对象，并确保这些 Pod 的总数严格等于两个。而这个过滤规则的定义，是在 Deployment 的“spec.selector.matchLabels”字段。我们一般称之为：Label Selector。&lt;/p&gt;
+
+&lt;p&gt;另外，在 Metadata 中，还有一个与 Labels 格式、层级完全相同的字段叫 Annotations，它专门用来携带 key-value 格式的内部信息。所谓内部信息，指的是对这些信息感兴趣的，是 Kubernetes 组件本身，而不是用户。所以大多数 Annotations，都是在 Kubernetes 运行过程中，被自动加在这个 API 对象上。&lt;/p&gt;
+
+&lt;p&gt;一个 Kubernetes 的 API 对象的定义，大多可以分为 Metadata 和 Spec 两个部分。前者存放的是这个对象的元数据，对所有 API 对象来说，这一部分的字段和格式基本上是一样的；而后者存放的，则是属于这个对象独有的定义，用来描述它所要表达的功能。&lt;/p&gt;
+
+&lt;p&gt;从 template 中可以看出来，这个 Pod 里只有一个容器，这个容器的镜像（spec.containers.image）是 nginx:1.7.9，这个容器监听端口（containerPort）是 80。&lt;/p&gt;
+
+&lt;p&gt;启动之后，运行下面命令查看 pod 启动情况。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;k get pods -l app=nginx
+
+k describe pod nginx-deployment-67594d6bf6-5qcwh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 kubectl describe 命令返回的结果中，你可以清楚地看到这个 Pod 的详细信息，比如它的 IP 地址等等。其中，有一个部分值得你特别关注，它就是&lt;strong&gt;Events（事件）。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在 Kubernetes 执行的过程中，对 API 对象的所有重要操作，都会被记录在这个对象的 Events 里，并且显示在 kubectl describe 指令返回的结果中。比如，对于这个 Pod，我们可以看到它被创建之后，被调度器调度（Successfully assigned）到了 node-1，拉取了指定的镜像（pulling image），然后启动了 Pod 里定义的容器（Started container）。&lt;/p&gt;
+
+&lt;p&gt;所以，这个部分正是我们将来进行 Debug 的重要依据。&lt;strong&gt;如果有异常发生，你一定要第一时间查看这些 Events&lt;/strong&gt;，往往可以看到非常详细的错误信息。&lt;/p&gt;
+
+&lt;h2 id=&#34;升级&#34;&gt;升级&lt;/h2&gt;
+
+&lt;p&gt;接下来，如果我们要对这个 Nginx 服务进行升级，我们只要修改这个 YAML 文件即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;image: nginx:1.8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl apply -f nginx-deployment.yaml
+# 或者
+kubectl replace -f nginx-deployment.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deployment&#34;&gt;Deployment&lt;/h2&gt;
+
+&lt;p&gt;所谓 Deployment，是一个定义多副本应用（即多个副本 Pod）的对象，此外，Deployment 还负责在 Pod 定义发生变化时，对每个副本进行滚动更新（Rolling Update）。像这样使用一种 API 对象（Deployment）管理另一种 API 对象（Pod）的方法，在 Kubernetes 中，叫作“控制器”模式（controller pattern）。在我们的例子中，Deployment 扮演的正是 Pod 的控制器的角色。&lt;/p&gt;
+
+&lt;h2 id=&#34;volume&#34;&gt;volume&lt;/h2&gt;
+
+&lt;p&gt;接下来，我们再在这个 Deployment 中尝试声明一个 Volume。在 Deployment 的 Pod 模板部分添加了一个 volumes 字段，定义了这个 Pod 声明的所有 Volume。它的名字叫作 nginx-vol，类型是 emptyDir。emptyDir 类型其实就等同于我们之前讲过的 Docker 的隐式 Volume 参数，即：不显式声明宿主机目录的 Volume。所以，Kubernetes 也会在宿主机上创建一个临时目录，这个目录将来就会被绑定挂载到容器所声明的 Volume 目录上。而 Pod 中的容器，使用的是 volumeMounts 字段来声明自己要挂载哪个 Volume，并通过 mountPath 字段来定义容器内的 Volume 目录，比如：/usr/share/nginx/html。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: &amp;quot;/usr/share/nginx/html&amp;quot;
+          name: nginx-vol
+      volumes:
+      - name: nginx-vol
+        emptyDir: {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，Kubernetes 也提供了显式的 Volume 定义，它叫做 hostPath。比如下面的这个 YAML 文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;volumes:
+  - name: nginx-vol
+    hostPath: /var/data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，容器 Volume 挂载的宿主机目录，就变成了/var/data。&lt;/p&gt;
+
+&lt;p&gt;在上述修改完成后，我们还是使用 kubectl apply 指令，更新这个 Deployment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ kubectl apply -f nginx-deployment.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来，你可以通过 kubectl get 指令，查看两个 Pod 被逐一更新的过程：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ kubectl get pods
+NAME                                READY     STATUS              RESTARTS   AGE
+nginx-deployment-5c678cfb6d-v5dlh   0/1       ContainerCreating   0          4s
+nginx-deployment-67594d6bf6-9gdvr   1/1       Running             0          10m
+nginx-deployment-67594d6bf6-v6j7w   1/1       Running             0          10m
+$ kubectl get pods
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-5c678cfb6d-lg9lw   1/1       Running   0          8s
+nginx-deployment-5c678cfb6d-v5dlh   1/1       Running   0          19s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从返回结果中，我们可以看到，新旧两个 Pod，被交替创建、删除，最后剩下的就是新版本的 Pod。这个滚动更新的过程，我也会在后续进行详细的讲解。&lt;/p&gt;
+
+&lt;p&gt;然后，你可以使用 kubectl describe 查看一下最新的 Pod，就会发现 Volume 的信息已经出现在了 Container 描述部分：&lt;/p&gt;
+
+&lt;h2 id=&#34;kubectl-exec-命令&#34;&gt;kubectl exec 命令&lt;/h2&gt;
+
+&lt;p&gt;最后，你还可以使用 kubectl exec 指令，进入到这个 Pod 当中（即容器的 Namespace 中）查看这个 Volume 目录：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl exec -it nginx-deployment-5c678cfb6d-lg9lw -- /bin/bash
+# ls /usr/share/nginx/html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;删除这个-deployment&#34;&gt;删除这个 deployment&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;kubectl delete -f nginx-deployment.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就可以了。&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;在 Kubernetes 中，我们经常会看到它通过一种 API 对象来管理另一种 API 对象，比如 Deployment 和 Pod 之间的关系；而由于 Pod 是“最小”的对象，所以它往往都是被其他对象控制的。这种组合方式，正是 Kubernetes 进行容器编排的重要模式。&lt;/p&gt;
+
+&lt;p&gt;而像这样的 Kubernetes API 对象，往往由 Metadata 和 Spec 两部分组成，其中 Metadata 里的 Labels 字段是 Kubernetes 过滤对象的主要手段。&lt;/p&gt;
+
+&lt;p&gt;在这些字段里面，容器想要使用的数据卷，也就是 Volume，正是 Pod 的 Spec 字段的一部分。而 Pod 里的每个容器，则需要显式的声明自己要挂载哪个 Volume。&lt;/p&gt;
+
+&lt;p&gt;在部署到 Kubernetes 之后，接下来的所有操作，要么通过 kubectl 来执行，要么通过修改 YAML 文件来实现，&lt;strong&gt;就尽量不要再碰 Docker 的命令行了&lt;/strong&gt;。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>K8s_1</title>
