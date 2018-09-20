@@ -6,8 +6,168 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Sep 2018 14:30:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Sep 2018 21:50:31 +0800</lastBuildDate>
     <atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>K8s_1</title>
+      <link>https://chenminhua.github.io/posts/k8s_1/</link>
+      <pubDate>Wed, 19 Sep 2018 21:50:31 +0800</pubDate>
+      <guid>https://chenminhua.github.io/posts/k8s_1/</guid>
+      <description>
+
+&lt;p&gt;本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。&lt;/p&gt;
+
+&lt;h2 id=&#34;auzre&#34;&gt;auzre&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;首先创建一个新的资源组，名字为 ata-op
+az group create --name ata-op --location southeastasia
+
+然后创建创建虚拟网络(vnet,名称为 opvnet)和子网(subnet,名称为 opsubnet)。子网为 10.0.0.0/24。也就是说我们可以使用 10.0.0.0 到 10.0.0.255 的 ip
+az network vnet create -g ata-op -n opvnet --address-prefix 10.0.0.0/24
+az network vnet subnet create -g ata-op --vnet-name opvnet -n opsubnet --address-prefix 10.0.0.0/24
+检查一下虚拟网络和子网有没有建好 az network vnet subnet list -g ata-op --vnet-name opvnet
+
+我们可以开几个公网 ip，其中--allocation-method Static 表示启用固定的公网 ip 。当然其实你只需要一个公网 ip 就够了。
+az network public-ip create -g ata-op -n ata-op-ip1 --allocation-method Static
+az network public-ip create -g ata-op -n ata-op-ip2 --allocation-method Static
+az network public-ip create -g ata-op -n ata-op-ip3 —allocation-method Static
+
+下一步我们来创建三张网卡(nic)，并且给网卡都配上公网 ip 和内部 ip。
+az network nic create -g ata-op --vnet-name opvnet -n ata-op1-nic --subnet opsubnet --private-ip-address 10.0.0.10
+查看一下这张网卡的 ip-config(可以看到，现在只有一个 ip-config，名为 ipconfig1)
+az network nic ip-config list -g ata-op --nic-name ata-op1-nic
+给这张网卡加上 public ip
+az network nic ip-config update -g ata-op -n ipconfig1 --nic-name ata-op1-nic --public-ip-address ata-op-ip1
+也可以在创建的时候直接指定 public-ip
+az network nic create -g ata-op --vnet-name opvnet -n ata-op2-nic --subnet opsubnet --private-ip-address 10.0.0.20 --public-ip-address ata-op-ip2
+az network nic create -g ata-op --vnet-name opvnet -n ata-op3-nic --subnet opsubnet --private-ip-address 10.0.0.30 --public-ip-address ata-op-ip3
+
+最后创建三台虚拟机，使用centos,绑定前面配好的网卡，设置好用户，并提供公钥（用于ssh登录）
+az vm create -g ata-op -n ata-op1 --image CentOS --nics ata-op1-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+az vm create -g ata-op -n ata-op2 --image CentOS —nics ata-op2-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+az vm create -g ata-op -n ata-op3 --image CentOS —nics ata-op3-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;安装一些基本的程序&#34;&gt;安装一些基本的程序&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;yum update -y
+yum install epel-release -y
+yum update -y
+yum install git -y
+yum install zsh -y
+sh -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+
+yum install dstat -y
+yum install epel-release -y
+yum install python-pip -y
+
+## docker
+
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce -y
+systemctl start docker
+
+## 临时关闭selinux（不用重启机器）修改/etc/selinux/config 文件,将 SELINUX=enforcing 改为 SELINUX=disabled。重启机器即可
+setenforce 0
+
+## 安装 kubenetes, kubelet， kubectl, kubeadm
+cat &amp;lt;&amp;lt;EOF &amp;gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+setenforce 0
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl enable kubelet &amp;amp;&amp;amp; systemctl start kubelet
+
+# 我喜欢用k来作为kubectl的别名
+echo &#39;alias k=&amp;quot;kubectl&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
+source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;目前 kubeadm 还不能用于生产环境，但是 kubeadm 的高可用部署很快就会发布了。&lt;/p&gt;
+
+&lt;h2 id=&#34;在-ata-op1-机器上搭建-k8s-master&#34;&gt;在 ata-op1 机器上搭建 k8s master&lt;/h2&gt;
+
+&lt;p&gt;创建 master 配置文件 k8s/kubeadm.yaml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+controllerManagerExtraArgs:
+  horizontal-pod-autoscaler-use-rest-clients: &#39;true&#39;
+  horizontal-pod-autoscaler-sync-period: &#39;10s&#39;
+  node-monitor-grace-period: &#39;10s&#39;
+apiServerExtraArgs:
+  runtime-config: &#39;api/all=true&#39;
+kubernetesVersion: &#39;stable-1.11&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一行代码启动 master&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;kubeadm init --config kubeadm.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;kubeadm 还会提示我们第一次使用 Kubernetes 集群需要的配置命令，其实就是将配置文件拷贝到当前用户的家目录下，kubectl 默认会使用这个目录下的信息来访问集群。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir -p $HOME/.kube
+sudo cp -i /etc/kubenetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+## 同时也可以将配置文件拷贝到其他机器上，包括你自己的开发电脑上
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后运行 k get nodes 查看现在有多少节点。应该还只有一个，而且状态是 NotReady。通过 k describe node ata-op1 我们发现，master not ready 是因为我们还没有网络插件。运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;k get pods -n kube-system
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以看到，coreDNS 和 controller-manager 也都处于 pending 状态，这也是因为 master 节点网络没通导致的。那我们就来一键部署网络插件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;k apply -f https://git.io/weave-kube-1.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;等一会儿，所有的系统 pod 就都可以启动了。k get nodes 看一下，我们发现 master 也起来了。&lt;/p&gt;
+
+&lt;h2 id=&#34;部署-k8s-worker&#34;&gt;部署 k8s worker&lt;/h2&gt;
+
+&lt;p&gt;使用 kubeadm 部署 worker 很简单，使用部署 master 时候命令行返回给你的那条命令就行了&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;kubeadm join 10.0.0.10:6443 --token 5nxo6z.w774jzvsscx13gkx --discovery-token-ca-cert-hash sha256:e698d39975432125c035f8892607e1c70888d8f3c6460da207a3c96b014923be
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;部署-dashboard&#34;&gt;部署 dashboard&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;k apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+k proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;部署存储插件&#34;&gt;部署存储插件&lt;/h2&gt;
+
+&lt;p&gt;很多时候我们需要用数据卷（Volume）把外面宿主机上的目录或者文件挂载进容器的 Mount Namespace 中，从而达到容器和宿主机共享这些目录或者文件的目的。可是，如果你在某一台机器上启动的一个容器，显然无法看到其他机器上的容器在它们的数据卷里写入的文件。&lt;strong&gt;这是容器最典型的特征之一：无状态。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;而容器的持久化存储，就是用来保存容器存储状态的重要手段：存储插件会在容器里挂载一个基于网络或者其他机制的远程数据卷，使得在容器里创建的文件，实际上是保存在远程存储服务器上，或者以分布式的方式保存在多个节点上，而与当前宿主机没有任何绑定关系。这样，无论你在其他哪个宿主机上启动新的容器，都可以请求挂载指定的持久化存储卷，从而访问到数据卷里保存的内容。&lt;strong&gt;这就是“持久化”的含义。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Rook 项目是一个基于 Ceph 的 Kubernetes 存储插件（它后期也在加入对更多存储实现的支持）。不过，不同于对 Ceph 的简单封装，Rook 在自己的实现中加入了水平扩展、迁移、灾难备份、监控等大量的企业级功能，使得这个项目变成了一个完整的、生产级别可用的容器存储插件。&lt;/p&gt;
+
+&lt;p&gt;得益于容器化技术，用两条指令，Rook 就可以把复杂的 Ceph 存储后端部署起来：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;k apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/operator.yaml
+k apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
+
+## 在部署完成后，你就可以看到Rook项目会将自己的Pod放置在由它自己管理的两个Namespace当中：
+kubectl get pods -n rook-ceph-system
+kubectl get pods -n rook-ceph
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，一个基于 Rook 持久化存储集群就以容器的方式运行起来了，而接下来在 Kubernetes 项目上创建的所有 Pod 就能够通过 Persistent Volume（PV）和 Persistent Volume Claim（PVC）的方式，在容器里挂载由 Ceph 提供的数据卷了。而 Rook 项目，则会负责这些数据卷的生命周期管理、灾难备份等运维工作。关于这些容器持久化存储的知识，我会在后续章节中专门讲解。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>敏捷开发</title>

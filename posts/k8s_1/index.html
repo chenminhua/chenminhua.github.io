@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="nojs" lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<title>K8s_1 – 硕大的汤姆</title>
+<meta name="created" content="2018-09-19T21:50:31&#43;0800">
+<meta name="modified" content="2018-09-19T21:50:31&#43;0800">
+
+<meta name="description" content="本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。 auzre 首先创建一个新的资源组，名字为 ata-op az group create --name ata-op --location southeastasia 然后创建创建虚拟网络(vnet,名称为 opvnet)和子网(subnet,名称为 opsubnet)。子网为 10.0.0.0/24。也就是说我们可以使用 10.0.0.0 到 10.0.0.255 的 ip az network vnet create -g ata-op -n opvnet --address-prefix 10.0.0.0/24 az network vnet subnet create -g ata-op --vnet-name opvnet -n opsubnet --address-prefix 10.0.0.0/24 检查一下虚拟网络和子网有没有建好 az network vnet subnet list -g ata-op --vnet-name opvnet 我们可以开几个公网 ip，其中--allocation-method Static 表示启用固定的公网 ip 。当然其实你只需要一个公网 ip 就够了。 az network public-ip create -g ata-op -n ata-op-ip1 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip2 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip3 —allocation-method Static 下一步我们来创建三张网卡(nic)，并且给网卡都配上公网 ip 和内部 ip。 az network nic create -g ata-op --vnet-name opvnet -n ata-op1-nic --subnet opsubnet --private-ip-address 10.">
+<meta property="og:site_name" content="硕大的汤姆">
+<meta property="og:title" content="K8s_1">
+<meta property="og:url" content="https://chenminhua.github.io/posts/k8s_1/">
+
+<meta name="generator" content="Hugo 0.43" />
+
+<link rel="canonical" href="https://chenminhua.github.io/posts/k8s_1/">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="style" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/print.css" media="print">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "K8s_1",
+    "datePublished": "2018-09-19T21:50:31+08:00",
+    "dateModified": "2018-09-19T21:50:31+08:00",
+    "url" : "https://chenminhua.github.io/posts/k8s_1/",
+    "description": "本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。 auzre 首先创建一个新的资源组，名字为 ata-op az group create --name ata-op --location southeastasia 然后创建创建虚拟网络(vnet,名称为 opvnet)和子网(subnet,名称为 opsubnet)。子网为 10.0.0.0/24。也就是说我们可以使用 10.0.0.0 到 10.0.0.255 的 ip az network vnet create -g ata-op -n opvnet --address-prefix 10.0.0.0/24 az network vnet subnet create -g ata-op --vnet-name opvnet -n opsubnet --address-prefix 10.0.0.0/24 检查一下虚拟网络和子网有没有建好 az network vnet subnet list -g ata-op --vnet-name opvnet 我们可以开几个公网 ip，其中--allocation-method Static 表示启用固定的公网 ip 。当然其实你只需要一个公网 ip 就够了。 az network public-ip create -g ata-op -n ata-op-ip1 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip2 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip3 —allocation-method Static 下一步我们来创建三张网卡(nic)，并且给网卡都配上公网 ip 和内部 ip。 az network nic create -g ata-op --vnet-name opvnet -n ata-op1-nic --subnet opsubnet --private-ip-address 10.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://chenminhua.github.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "硕大的汤姆",
+      "url": "https://chenminhua.github.io/",
+    }
+  }
+</script>
+
+</head>
+
+<body>
+<div class="page layout__page layout__sidebar-second">
+<header class="header layout__header" role="banner">
+<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
+<h1 class="header__site-name">
+<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
+</h1>
+<div class="region header__region">
+
+
+</div>
+</header>
+
+
+
+
+<nav class="main-menu layout__navigation" role="navigation">
+<h2 class="visually-hidden">Main menu</h2>
+<ul class="navbar">
+<li><a class="" href="/">Home</a></li>
+<li><a class="" href="/about/">About</a></li>
+<li><a class="" href="/tweets/">Tweets</a></li>
+<li><a class="" href="/cc/">代码大全</a></li>
+<li><a class="active" href="/posts/">Posts</a></li>
+</ul>
+</nav>
+
+
+<main class="main layout__main" role="main">
+<h1 class="title ">K8s_1</h1>
+<article class="section-posts single-view">
+<header>
+</header>
+<div class="content">
+
+
+<p>本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。</p>
+
+<h2 id="auzre">auzre</h2>
+
+<pre><code>首先创建一个新的资源组，名字为 ata-op
+az group create --name ata-op --location southeastasia
+
+然后创建创建虚拟网络(vnet,名称为 opvnet)和子网(subnet,名称为 opsubnet)。子网为 10.0.0.0/24。也就是说我们可以使用 10.0.0.0 到 10.0.0.255 的 ip
+az network vnet create -g ata-op -n opvnet --address-prefix 10.0.0.0/24
+az network vnet subnet create -g ata-op --vnet-name opvnet -n opsubnet --address-prefix 10.0.0.0/24
+检查一下虚拟网络和子网有没有建好 az network vnet subnet list -g ata-op --vnet-name opvnet
+
+我们可以开几个公网 ip，其中--allocation-method Static 表示启用固定的公网 ip 。当然其实你只需要一个公网 ip 就够了。
+az network public-ip create -g ata-op -n ata-op-ip1 --allocation-method Static
+az network public-ip create -g ata-op -n ata-op-ip2 --allocation-method Static
+az network public-ip create -g ata-op -n ata-op-ip3 —allocation-method Static
+
+下一步我们来创建三张网卡(nic)，并且给网卡都配上公网 ip 和内部 ip。
+az network nic create -g ata-op --vnet-name opvnet -n ata-op1-nic --subnet opsubnet --private-ip-address 10.0.0.10
+查看一下这张网卡的 ip-config(可以看到，现在只有一个 ip-config，名为 ipconfig1)
+az network nic ip-config list -g ata-op --nic-name ata-op1-nic
+给这张网卡加上 public ip
+az network nic ip-config update -g ata-op -n ipconfig1 --nic-name ata-op1-nic --public-ip-address ata-op-ip1
+也可以在创建的时候直接指定 public-ip
+az network nic create -g ata-op --vnet-name opvnet -n ata-op2-nic --subnet opsubnet --private-ip-address 10.0.0.20 --public-ip-address ata-op-ip2
+az network nic create -g ata-op --vnet-name opvnet -n ata-op3-nic --subnet opsubnet --private-ip-address 10.0.0.30 --public-ip-address ata-op-ip3
+
+最后创建三台虚拟机，使用centos,绑定前面配好的网卡，设置好用户，并提供公钥（用于ssh登录）
+az vm create -g ata-op -n ata-op1 --image CentOS --nics ata-op1-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+az vm create -g ata-op -n ata-op2 --image CentOS —nics ata-op2-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+az vm create -g ata-op -n ata-op3 --image CentOS —nics ata-op3-nic --admin-username azure --ssh-key-value ~/.ssh/ata.pub
+</code></pre>
+
+<h2 id="安装一些基本的程序">安装一些基本的程序</h2>
+
+<pre><code class="language-sh">yum update -y
+yum install epel-release -y
+yum update -y
+yum install git -y
+yum install zsh -y
+sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+
+yum install dstat -y
+yum install epel-release -y
+yum install python-pip -y
+
+## docker
+
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce -y
+systemctl start docker
+
+## 临时关闭selinux（不用重启机器）修改/etc/selinux/config 文件,将 SELINUX=enforcing 改为 SELINUX=disabled。重启机器即可
+setenforce 0
+
+## 安装 kubenetes, kubelet， kubectl, kubeadm
+cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+setenforce 0
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl enable kubelet &amp;&amp; systemctl start kubelet
+
+# 我喜欢用k来作为kubectl的别名
+echo 'alias k=&quot;kubectl&quot;' &gt;&gt; ~/.zshrc
+source ~/.zshrc
+</code></pre>
+
+<p>目前 kubeadm 还不能用于生产环境，但是 kubeadm 的高可用部署很快就会发布了。</p>
+
+<h2 id="在-ata-op1-机器上搭建-k8s-master">在 ata-op1 机器上搭建 k8s master</h2>
+
+<p>创建 master 配置文件 k8s/kubeadm.yaml</p>
+
+<pre><code class="language-yaml">apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+controllerManagerExtraArgs:
+  horizontal-pod-autoscaler-use-rest-clients: 'true'
+  horizontal-pod-autoscaler-sync-period: '10s'
+  node-monitor-grace-period: '10s'
+apiServerExtraArgs:
+  runtime-config: 'api/all=true'
+kubernetesVersion: 'stable-1.11'
+</code></pre>
+
+<p>一行代码启动 master</p>
+
+<pre><code class="language-sh">kubeadm init --config kubeadm.yaml
+</code></pre>
+
+<p>kubeadm 还会提示我们第一次使用 Kubernetes 集群需要的配置命令，其实就是将配置文件拷贝到当前用户的家目录下，kubectl 默认会使用这个目录下的信息来访问集群。</p>
+
+<pre><code class="language-sh">mkdir -p $HOME/.kube
+sudo cp -i /etc/kubenetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+## 同时也可以将配置文件拷贝到其他机器上，包括你自己的开发电脑上
+</code></pre>
+
+<p>然后运行 k get nodes 查看现在有多少节点。应该还只有一个，而且状态是 NotReady。通过 k describe node ata-op1 我们发现，master not ready 是因为我们还没有网络插件。运行</p>
+
+<pre><code class="language-sh">k get pods -n kube-system
+</code></pre>
+
+<p>我们可以看到，coreDNS 和 controller-manager 也都处于 pending 状态，这也是因为 master 节点网络没通导致的。那我们就来一键部署网络插件</p>
+
+<pre><code class="language-sh">k apply -f https://git.io/weave-kube-1.6
+</code></pre>
+
+<p>等一会儿，所有的系统 pod 就都可以启动了。k get nodes 看一下，我们发现 master 也起来了。</p>
+
+<h2 id="部署-k8s-worker">部署 k8s worker</h2>
+
+<p>使用 kubeadm 部署 worker 很简单，使用部署 master 时候命令行返回给你的那条命令就行了</p>
+
+<pre><code class="language-sh">kubeadm join 10.0.0.10:6443 --token 5nxo6z.w774jzvsscx13gkx --discovery-token-ca-cert-hash sha256:e698d39975432125c035f8892607e1c70888d8f3c6460da207a3c96b014923be
+</code></pre>
+
+<h2 id="部署-dashboard">部署 dashboard</h2>
+
+<pre><code>k apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+k proxy
+</code></pre>
+
+<h2 id="部署存储插件">部署存储插件</h2>
+
+<p>很多时候我们需要用数据卷（Volume）把外面宿主机上的目录或者文件挂载进容器的 Mount Namespace 中，从而达到容器和宿主机共享这些目录或者文件的目的。可是，如果你在某一台机器上启动的一个容器，显然无法看到其他机器上的容器在它们的数据卷里写入的文件。<strong>这是容器最典型的特征之一：无状态。</strong></p>
+
+<p>而容器的持久化存储，就是用来保存容器存储状态的重要手段：存储插件会在容器里挂载一个基于网络或者其他机制的远程数据卷，使得在容器里创建的文件，实际上是保存在远程存储服务器上，或者以分布式的方式保存在多个节点上，而与当前宿主机没有任何绑定关系。这样，无论你在其他哪个宿主机上启动新的容器，都可以请求挂载指定的持久化存储卷，从而访问到数据卷里保存的内容。<strong>这就是“持久化”的含义。</strong></p>
+
+<p>Rook 项目是一个基于 Ceph 的 Kubernetes 存储插件（它后期也在加入对更多存储实现的支持）。不过，不同于对 Ceph 的简单封装，Rook 在自己的实现中加入了水平扩展、迁移、灾难备份、监控等大量的企业级功能，使得这个项目变成了一个完整的、生产级别可用的容器存储插件。</p>
+
+<p>得益于容器化技术，用两条指令，Rook 就可以把复杂的 Ceph 存储后端部署起来：</p>
+
+<pre><code class="language-sh">k apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/operator.yaml
+k apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
+
+## 在部署完成后，你就可以看到Rook项目会将自己的Pod放置在由它自己管理的两个Namespace当中：
+kubectl get pods -n rook-ceph-system
+kubectl get pods -n rook-ceph
+</code></pre>
+
+<p>这样，一个基于 Rook 持久化存储集群就以容器的方式运行起来了，而接下来在 Kubernetes 项目上创建的所有 Pod 就能够通过 Persistent Volume（PV）和 Persistent Volume Claim（PVC）的方式，在容器里挂载由 Ceph 提供的数据卷了。而 Rook 项目，则会负责这些数据卷的生命周期管理、灾难备份等运维工作。关于这些容器持久化存储的知识，我会在后续章节中专门讲解。</p>
+
+
+</div>
+</article>
+</main>
+
+
+
+<aside class="sidebar layout__second-sidebar" role="complementary">
+<section>
+<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
+<ul class="menu">
+<li><a class="active" href="/posts/k8s_1/">K8s_1</a></li>
+<li><a class="" href="/posts/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></li>
+<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
+<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
+<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
+<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
+<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
+<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
+<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
+<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
+<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
+<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
+<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
+<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
+<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
+<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
+<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
+<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
+<li><a class="" href="/posts/draft/akka/">Akka</a></li>
+<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
+<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
+<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
+<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
+<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
+<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
+<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
+</ul>
+</section>
+</aside>
+
+
+<footer class="footer layout__footer" role="contentinfo">
+<p><span>© 硕大的汤姆</span></p>
+
+
+</footer>
+
+</div>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+</body>
+</html>
