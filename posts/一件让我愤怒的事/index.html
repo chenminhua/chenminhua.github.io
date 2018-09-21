@@ -1,82 +1,66 @@
 <!DOCTYPE html>
-<html class="nojs" lang="en" dir="ltr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>一件让我愤怒的事 – 硕大的汤姆</title>
-<meta name="created" content="2018-04-18T23:28:35&#43;0800">
-<meta name="modified" content="2018-04-18T23:28:35&#43;0800">
-
-<meta name="description" content="最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;rdquo;terrible programmer&amp;rdquo;。 有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。 很多人都抱有这样的心态，甚至这种结果导向已经成为了一种政治正确。代码写的好坏不重要，赶紧通过测试，修好手上的bug上线才是最重要的。当然我同意修bug很重要（绝大多数情况下优先级最高），但是很多时候，大家都只想着怎么关掉这个bug，而不会想想更重要的一些问题：这是不是一个bug？这个bug是从哪来的？修复这个bug的方式会不会影响到其他逻辑?这个bug后面是不是还藏着别的坑？ 如果你不去思考这些问题，而是快速看一眼Jira,打开debug模式找到问题的原因(比如说，需要在某一段处理逻辑中加一段条件判断，在某种情况下跳过某几行代码的执行)。然后你想，oh，这个bug很好修，我只要多写个if然后在这种情况下跳过这几行代码就行了。你开心的写完这两行代码，提交并发布到测试环境，然后告诉测试那个bug被你修好了。接着去处理你还没处理的那十个新的bug。 你觉得自己效率很高么？你错了，你糟糕透了，因为你失去了最适合思考和重构代码的时机。你被其他人催着跑，却丢掉了你最重要的东西。产品经理不会关心你的代码，测试不会关心你的代码，架构师不会关心你的代码，他们只要你把事情搞定。但是你必须关心你的代码，如果有必要的话，fight for your code! 如果需求要你写出难以维护的代码，你必须站出来发声，别人不会知道这东西有多坑，你必须非常严肃地告诉他们在技术实现上这是一个多么糟糕的主意。否则，你很可能为了一个优先级很低的需求，毁了你优雅的系统设计。 如果你不关心你的代码，那你永远也写不出好的代码，你的代码也不会成为好的产品。">
-<meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="一件让我愤怒的事">
-<meta property="og:url" content="https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">
-
-<meta name="generator" content="Hugo 0.43" />
-
-<link rel="canonical" href="https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="style" href="/css/styles.css">
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/print.css" media="print">
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "一件让我愤怒的事",
-    "datePublished": "2018-04-18T23:28:35+08:00",
-    "dateModified": "2018-04-18T23:28:35+08:00",
-    "url" : "https://chenminhua.github.io/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/",
-    "description": "最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个\u0026rdquo;terrible programmer\u0026rdquo;。 有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。 很多人都抱有这样的心态，甚至这种结果导向已经成为了一种政治正确。代码写的好坏不重要，赶紧通过测试，修好手上的bug上线才是最重要的。当然我同意修bug很重要（绝大多数情况下优先级最高），但是很多时候，大家都只想着怎么关掉这个bug，而不会想想更重要的一些问题：这是不是一个bug？这个bug是从哪来的？修复这个bug的方式会不会影响到其他逻辑?这个bug后面是不是还藏着别的坑？ 如果你不去思考这些问题，而是快速看一眼Jira,打开debug模式找到问题的原因(比如说，需要在某一段处理逻辑中加一段条件判断，在某种情况下跳过某几行代码的执行)。然后你想，oh，这个bug很好修，我只要多写个if然后在这种情况下跳过这几行代码就行了。你开心的写完这两行代码，提交并发布到测试环境，然后告诉测试那个bug被你修好了。接着去处理你还没处理的那十个新的bug。 你觉得自己效率很高么？你错了，你糟糕透了，因为你失去了最适合思考和重构代码的时机。你被其他人催着跑，却丢掉了你最重要的东西。产品经理不会关心你的代码，测试不会关心你的代码，架构师不会关心你的代码，他们只要你把事情搞定。但是你必须关心你的代码，如果有必要的话，fight for your code! 如果需求要你写出难以维护的代码，你必须站出来发声，别人不会知道这东西有多坑，你必须非常严肃地告诉他们在技术实现上这是一个多么糟糕的主意。否则，你很可能为了一个优先级很低的需求，毁了你优雅的系统设计。 如果你不关心你的代码，那你永远也写不出好的代码，你的代码也不会成为好的产品。",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://chenminhua.github.io/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "硕大的汤姆",
-      "url": "https://chenminhua.github.io/",
-    }
-  }
-</script>
-
-</head>
-
-<body>
-<div class="page layout__page layout__sidebar-second">
-<header class="header layout__header" role="banner">
-<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
-<h1 class="header__site-name">
-<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
-</h1>
-<div class="region header__region">
-
-
-</div>
-</header>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 
 
-<nav class="main-menu layout__navigation" role="navigation">
-<h2 class="visually-hidden">Main menu</h2>
-<ul class="navbar">
-<li><a class="" href="/">Home</a></li>
-<li><a class="" href="/about/">About</a></li>
-<li><a class="" href="/tweets/">Tweets</a></li>
-<li><a class="" href="/cc/">代码大全</a></li>
-<li><a class="active" href="/posts/">Posts</a></li>
-</ul>
-</nav>
+<title>一件让我愤怒的事 | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
-<main class="main layout__main" role="main">
-<h1 class="title ">一件让我愤怒的事</h1>
-<article class="section-posts single-view">
-<header>
-</header>
-<div class="content">
-<p>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&rdquo;terrible programmer&rdquo;。</p>
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">April 18, 2018</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">一件让我愤怒的事</h1>
+  <div class="content">
+    <p>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&rdquo;terrible programmer&rdquo;。</p>
 
 <p>有些程序员不关心自己的代码，能不能被其他人看懂，会不会被别人错误地理解和使用。有些程序员甚至不关心自己的代码能不能被三天后的自己看懂。有些程序员其实根本不知道自己在写什么？他们只是凭借自己的感觉写完代码，然后扔给测试，然后等待测试提bug，然后跑去问别人这边的逻辑应该是什么样的，然后用最“简单”的方式修复这个bug（让这个bug不再发生）。</p>
 
@@ -90,73 +74,19 @@
 
 <p>如果你不关心你的代码，那你永远也写不出好的代码，你的代码也不会成为好的产品。</p>
 
-
+  </div>
 </div>
-</article>
-</main>
+<div class="container has-text-centered">
+    
+</div>
 
-
-
-<aside class="sidebar layout__second-sidebar" role="complementary">
-<section>
-<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
-<ul class="menu">
-<li><a class="" href="/posts/k8s_2/">K8s_2</a></li>
-<li><a class="" href="/posts/k8s_3/">K8s_3</a></li>
-<li><a class="" href="/posts/k8s_1/">K8s_1</a></li>
-<li><a class="" href="/posts/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></li>
-<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
-<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
-<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
-<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
-<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
-<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
-<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
-<li><a class="active" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
-<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
-<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
-<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
-<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
-<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
-<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
-<li><a class="" href="/posts/draft/akka/">Akka</a></li>
-<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
-<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
-<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
-<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
-<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
-<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
-<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
-</ul>
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
 </section>
-</aside>
 
 
-<footer class="footer layout__footer" role="contentinfo">
-<p><span>© 硕大的汤姆</span></p>
-
-
-</footer>
-
-</div>
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-</body>
-</html>

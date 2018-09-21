@@ -1,82 +1,66 @@
 <!DOCTYPE html>
-<html class="nojs" lang="en" dir="ltr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>spring aop中遇到的一个小问题 – 硕大的汤姆</title>
-<meta name="created" content="2018-05-05T18:19:00&#43;0800">
-<meta name="modified" content="2018-05-05T18:19:00&#43;0800">
-
-<meta name="description" content="最近做的一个项目使用了spring&#43;mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。 然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。 一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。 另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。 spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。 起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考stackoverflow。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。 如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。">
-<meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="spring aop中遇到的一个小问题">
-<meta property="og:url" content="https://chenminhua.github.io/posts/annotation/">
-
-<meta name="generator" content="Hugo 0.43" />
-
-<link rel="canonical" href="https://chenminhua.github.io/posts/annotation/">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="style" href="/css/styles.css">
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/print.css" media="print">
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "spring aop中遇到的一个小问题",
-    "datePublished": "2018-05-05T18:19:00+08:00",
-    "dateModified": "2018-05-05T18:19:00+08:00",
-    "url" : "https://chenminhua.github.io/posts/annotation/",
-    "description": "最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。 然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。 一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。 另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。 spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。 起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考stackoverflow。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。 如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://chenminhua.github.io/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "硕大的汤姆",
-      "url": "https://chenminhua.github.io/",
-    }
-  }
-</script>
-
-</head>
-
-<body>
-<div class="page layout__page layout__sidebar-second">
-<header class="header layout__header" role="banner">
-<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
-<h1 class="header__site-name">
-<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
-</h1>
-<div class="region header__region">
-
-
-</div>
-</header>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 
 
-<nav class="main-menu layout__navigation" role="navigation">
-<h2 class="visually-hidden">Main menu</h2>
-<ul class="navbar">
-<li><a class="" href="/">Home</a></li>
-<li><a class="" href="/about/">About</a></li>
-<li><a class="" href="/tweets/">Tweets</a></li>
-<li><a class="" href="/cc/">代码大全</a></li>
-<li><a class="active" href="/posts/">Posts</a></li>
-</ul>
-</nav>
+<title>spring aop中遇到的一个小问题 | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
-<main class="main layout__main" role="main">
-<h1 class="title ">spring aop中遇到的一个小问题</h1>
-<article class="section-posts single-view">
-<header>
-</header>
-<div class="content">
-<p>最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。</p>
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">May 5, 2018</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">spring aop中遇到的一个小问题</h1>
+  <div class="content">
+    <p>最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。</p>
 
 <p>然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。</p>
 
@@ -90,73 +74,19 @@
 
 <p>如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。</p>
 
-
+  </div>
 </div>
-</article>
-</main>
+<div class="container has-text-centered">
+    
+</div>
 
-
-
-<aside class="sidebar layout__second-sidebar" role="complementary">
-<section>
-<h4 class="menu"><a class="" href="/posts/">Posts</a></h4>
-<ul class="menu">
-<li><a class="" href="/posts/k8s_2/">K8s_2</a></li>
-<li><a class="" href="/posts/k8s_3/">K8s_3</a></li>
-<li><a class="" href="/posts/k8s_1/">K8s_1</a></li>
-<li><a class="" href="/posts/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></li>
-<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
-<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
-<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
-<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
-<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
-<li><a class="active" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
-<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
-<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
-<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
-<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
-<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
-<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
-<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
-<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
-<li><a class="" href="/posts/draft/akka/">Akka</a></li>
-<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
-<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
-<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
-<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
-<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
-<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
-<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
-</ul>
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
 </section>
-</aside>
 
 
-<footer class="footer layout__footer" role="contentinfo">
-<p><span>© 硕大的汤姆</span></p>
-
-
-</footer>
-
-</div>
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-</body>
-</html>
