@@ -147,10 +147,6 @@ k describe pod nginx-deployment-67594d6bf6-5qcwh
 kubectl replace -f nginx-deployment.yaml
 </code></pre>
 
-<h2 id="deployment">Deployment</h2>
-
-<p>所谓 Deployment，是一个定义多副本应用（即多个副本 Pod）的对象，此外，Deployment 还负责在 Pod 定义发生变化时，对每个副本进行滚动更新（Rolling Update）。像这样使用一种 API 对象（Deployment）管理另一种 API 对象（Pod）的方法，在 Kubernetes 中，叫作“控制器”模式（controller pattern）。在我们的例子中，Deployment 扮演的正是 Pod 的控制器的角色。</p>
-
 <h2 id="volume">volume</h2>
 
 <p>接下来，我们再在这个 Deployment 中尝试声明一个 Volume。在 Deployment 的 Pod 模板部分添加了一个 volumes 字段，定义了这个 Pod 声明的所有 Volume。它的名字叫作 nginx-vol，类型是 emptyDir。emptyDir 类型其实就等同于我们之前讲过的 Docker 的隐式 Volume 参数，即：不显式声明宿主机目录的 Volume。所以，Kubernetes 也会在宿主机上创建一个临时目录，这个目录将来就会被绑定挂载到容器所声明的 Volume 目录上。而 Pod 中的容器，使用的是 volumeMounts 字段来声明自己要挂载哪个 Volume，并通过 mountPath 字段来定义容器内的 Volume 目录，比如：/usr/share/nginx/html。</p>

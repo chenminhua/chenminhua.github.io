@@ -103,7 +103,13 @@ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: sele
 </header>
 <div class="content">
 本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。
-auzre 首先创建一个新的资源组，名字为 ata-op az group create --name ata-op --location southeastasia 然后创建创建虚拟网络(vnet,名称为 opvnet)和子网(subnet,名称为 opsubnet)。子网为 10.0.0.0/24。也就是说我们可以使用 10.0.0.0 到 10.0.0.255 的 ip az network vnet create -g ata-op -n opvnet --address-prefix 10.0.0.0/24 az network vnet subnet create -g ata-op --vnet-name opvnet -n opsubnet --address-prefix 10.0.0.0/24 检查一下虚拟网络和子网有没有建好 az network vnet subnet list -g ata-op --vnet-name opvnet 我们可以开几个公网 ip，其中--allocation-method Static 表示启用固定的公网 ip 。当然其实你只需要一个公网 ip 就够了。 az network public-ip create -g ata-op -n ata-op-ip1 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip2 --allocation-method Static az network public-ip create -g ata-op -n ata-op-ip3 —allocation-method Static 下一步我们来创建三张网卡(nic)，并且给网卡都配上公网 ip 和内部 ip。 az network nic create -g ata-op --vnet-name opvnet -n ata-op1-nic --subnet opsubnet --private-ip-address 10.
+什么是 K8s 容器编排就是用户通过某些工具或配置完成一组虚拟机以及资源的定义，配置，创建，删除等。
+一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。
+从一开始,k8s 就没有像同期的各种容器云项目一样，把 docker 作为架构的核心，而仅仅把它作为最底层的一个容器运行时实现。k8s 提供了将容器运行在一个给定集群的能力，还提供了路由网关、水平扩展、监控、备份等一系列能力。
+k8s 核心架构和元素 Master 节点： kube-apiserver 负责 api 服务，kube-scheduler 负责调度，kube-controller-manager 负责容器编排。而整个集群的持久化数据则由 kube-apiserver 处理后存在 etcd 中。
+计算节点：核心是一个叫 kubelet 的组件。kubelet 主要负责同容器运行时(docker)打交道，其中依赖一个称为 CRI(container runtime interface)的远程调用接口。此外，kubelet 还通过 grpc 同一个叫 device plugin 的插件进行交互并管理宿主机的硬件。kubelet 的另一个功能是调用网络插件和存储插件为容器配置网络和持久化存储，相应接口分别为 CNI(container networking interface)和 CSI(container storage interface)。
+运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系，并且为将来支持更多种类的关系留有余地。
+pod 是 K8s 中最基础的一个对象，pod 里面的容器共享同一个 network namespace，同一组数据卷。关于 pod 最重要的一点是：它只是一个逻辑概念，具体说，pod 里面所有的容器都共享同一个 network namespace，并且可以声明共享同一个 volume。在每个 pod 中，首先都会有一个 infra 容器，其镜像为 pause。infra 容器永远都是第一个被创建的，而其他容器则通过 join network namespace 的方式加入 pod。一个 pod 只有一个 ip 地址，也就是这个 pod 的 network namespace 对于的 ip 地址。pod 的生命周期也只跟 infra 容器一致。pod 实际上扮演的是传统基础设施中虚拟机的角色。
 </div>
 </article>
 
