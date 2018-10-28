@@ -1,0 +1,187 @@
+<div class="container">
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<main class="container">
+    
+    <h1 class="title is-3">0001</h1>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_13/"></a></h1>
+        <div class="content is-hidden-mobile">
+          API 对象的奥秘 在 Kubernetes 项目中，一个 API 对象在 Etcd 里的完整资源路径，是由：Group（API 组）、Version（API 版本）和 Resource（API 资源类型）三个部分组成的。比如我们之前声明一个 CronJob 对象，在这个 YAML 文件中，“CronJob”就是这个 API 对象的资源类型（Resource），“batch”就是它的组（Group），v2alpha1 就是它的版本（Version）。当我们提交了这个 YAML 文件之后，Kubernetes 就会把这个 YAML 文件里描述的内容，转换成 Kubernetes 里的一个 CronJob 对象。
+首先，APIServer 的第一个功能，就是过滤这个请求，并完成一些前置性的工作，比如授权、超时处理、审计等。然后，请求会进入 MUX 和 Routes 流程。如果你编写过 Web …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_13/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_12/"></a></h1>
+        <div class="content is-hidden-mobile">
+          Istio 在 2017 年 5 月，Google、IBM 和 Lyft 公司，共同宣布了 Istio 开源项目的诞生。很快，这个项目就在技术圈儿里，掀起了一阵名叫“微服务”的热潮，把 Service Mesh 这个新的编排概念推到了风口浪尖。Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器。Envoy 是 Lyft 公司推出的一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。我们知道，Pod 里的所有容器都共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_12/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_11/"></a></h1>
+        <div class="content is-hidden-mobile">
+          撬动离线业务：Job 与 CronJob apiVersion: batch/v1 kind: Job metadata: name: pi spec: backoffLimit: 5 最多失败5次 activeDeadlineSeconds: 1000 最长运行时间，一旦超过，这个 Job 的所有 Pod 都会被终止 parallelism: 2 最大的并行数是 2 completions: 4 最小的完成数是 4 template: spec: containers: - name: pi image: resouer/ubuntu-bc command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo 'scale=10000; 4*a(1)' | bc -l &quot;] restartPolicy: Never 注意， …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_11/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_10/"></a></h1>
+        <div class="content is-hidden-mobile">
+          容器化守护进程的意义：DaemonSet DaemonSet 让你在 Kubernetes 集群里，运行一个 Daemon Pod。这个 Pod 有如下三个特征：
+ 这个 Pod 运行在 Kubernetes 集群里的每一个节点（Node）上； 每个节点上只有一个这样的 Pod 实例； 当有新的节点加入 Kubernetes 集群后，该 Pod 会自动地在新节点上被创建出来。  这个机制听起来很简单，但 Daemon Pod 的意义确实是非常重要的。比如各种网络插件的 Agent 组件，各种存储插件的 Agent 组件，各种监控组件和日志组件，都必须运行在每一个节点上。
+比如这个 DaemonSet 正是一个网络插件的 Agent 组件，开始的时候整个 Kubernetes 集群里还没有可用的容器网络，所有 Worker …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_10/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    
+  </main>
+<section class="section">
+  <div class="container">
+    <nav class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          
+          <a class="button is-rounded" href="/page/4/">
+            <span class="icon is-small is-marginless">
+              <i class="fa fa-angle-left"></i>
+            </span>
+            Newer
+          </a>
+          
+        </div>
+      </div>
+      <div class="level-right is-marginless">
+        <div class="level-item">
+          
+          <a class="button is-rounded" disabled>
+            Older
+            <span class="icon is-small is-marginless">
+              <i class="fa fa-angle-right"></i>
+            </span>
+          </a>
+          
+        </div>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+
+</div>

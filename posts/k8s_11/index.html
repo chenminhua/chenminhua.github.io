@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title> | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+  <div class="content">
+    
+
+<h2 id="撬动离线业务-job-与-cronjob">撬动离线业务：Job 与 CronJob</h2>
+
+<pre><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  backoffLimit: 5   最多失败5次
+  activeDeadlineSeconds: 1000  最长运行时间，一旦超过，这个 Job 的所有 Pod 都会被终止
+  parallelism: 2   最大的并行数是 2
+  completions: 4   最小的完成数是 4
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: resouer/ubuntu-bc
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo 'scale=10000; 4*a(1)' | bc -l &quot;]
+      restartPolicy: Never   注意，离线任务不应该被重启
+  backoffLimit: 4
+</code></pre>
+
+<p>在成功创建后，我们来查看一下这个 Job 对象。可以看到，这个 Job 对象在创建后，它的 Pod 模板，被自动加上了一个 controller-uid=&lt;一个随机字符串&gt;这样的 Label。而这个 Job 对象本身，则被自动加上了这个 Label 对应的 Selector，从而 保证了 Job 与它所管理的 Pod 之间的匹配关系。而 Job Controller 之所以要使用这种携带了 UID 的 Label，就是为了避免不同 Job 对象所管理的 Pod 发生重合。</p>
+
+<blockquote>
+<p>事实上，restartPolicy 在 Job 对象里只允许被设置为 Never 和 OnFailure；而在 Deployment 对象里，restartPolicy 则只允许被设置为 Always。</p>
+</blockquote>
+
+<p><strong>如果定义了 restartPolicy=Never，那么离线作业失败后 Job Controller 就会不断地尝试创建一个新 Pod</strong>。可以看到，这时候会不断地有新 Pod 被创建出来。当然，这个尝试肯定不能无限进行下去。所以，我们就在 Job 对象的 spec.backoffLimit 字段里定义了重试次数为 4（即，backoffLimit=4），而这个字段的默认值是 6。需要注意的是，Job Controller 重新创建 Pod 的间隔是呈指数增加的，即下一次重新创建 Pod 的动作会分别发生在 10 s、20 s、40 s …后。</p>
+
+<p><strong>如果定义的 restartPolicy=OnFailure，那么离线作业失败后，Job Controller 就不会去尝试创建新的 Pod。但是，它会不断地尝试重启 Pod 里的容器</strong>。</p>
+
+<h2 id="cronjob-定时任务">CronJob 定时任务</h2>
+
+<pre><code>apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: &quot;*/1 * * * *&quot;    每分钟执行一次
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+</code></pre>
+
+<p>在这个 YAML 文件中，最重要的关键词就是<strong>jobTemplate</strong>。看到它，你一定恍然大悟，原来 CronJob 是一个 Job 对象的控制器（Controller）！</p>
+
+<p>需要注意的是，由于定时任务的特殊性，很可能某个 Job 还没有执行完，另外一个新 Job 就产生了。这时候，你可以通过 spec.concurrencyPolicy 字段来定义具体的处理策略。比如：</p>
+
+<ol>
+<li><p>concurrencyPolicy=Allow，这也是默认情况，这意味着这些 Job 可以同时存在；</p></li>
+
+<li><p>concurrencyPolicy=Forbid，这意味着不会创建新的 Pod，该创建周期被跳过；</p></li>
+
+<li><p>concurrencyPolicy=Replace，这意味着新产生的 Job 会替换旧的、没有执行完的 Job。</p></li>
+</ol>
+
+<p>而如果某一次 Job 创建失败，这次创建就会被标记为“miss”。当在指定的时间窗口内，miss 的数目达到 100 时，那么 CronJob 会停止再创建这个 Job。</p>
+
+<p>这个时间窗口，可以由 spec.startingDeadlineSeconds 字段指定。比如 startingDeadlineSeconds=200，意味着在过去 200 s 里，如果 miss 的数目达到了 100 次，那么这个 Job 就不会被创建执行了。</p>
+
+<p>可以去了解一下 TensorFlow 社区的 <strong>KubeFlow 项目</strong>。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

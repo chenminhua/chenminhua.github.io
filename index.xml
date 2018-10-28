@@ -6,10 +6,42 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Sep 2018 21:50:31 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Oct 2018 16:13:51 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>聊聊微信读书</title>
+      <link>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</link>
+      <pubDate>Sun, 28 Oct 2018 16:13:51 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</guid>
+      <description>这两天下了几个读书应用，发现市面上类似产品还真不是，比如微信读书，京东阅读，豆瓣阅读等等。我也深度体验了一下微信读书，这里谈谈个人的感受吧。
+社交与用户 很多人都说微信读书试图用社交来撬动阅读，目前看来在这一点上，微信还是非常非常克制的，目前微信并没有大量采用群、朋友圈、小程序之类的流量武器给微信读书导流，但是却机智的使用了微信的通讯录，也就是说让用户在微信读书中看到他的朋友在看什么书（而不是微信中）。
+微信读书也在试图突出用户在读书活动中的地位，并且带动一部分 ugc 内容与书本内容的整合。这是一件有点想象空间的事情，我们可以类比于音乐行业与网易云音乐，网易云虽然在版权上面输给了腾讯，但是其精心维护的社区和评论确实是同类产品中独一无二的，这也成为了他们的核心竞争优势。微信读书也有机会创造这样的一块 ugc 价值出来，并通过社交放大。
+市场 读书的市场和音乐的市场能比吗？不好回答。但从感觉上看，音乐市场是完胜的。It&amp;rsquo;s not even close.
+腾讯音乐在经历一系列整合之后，目前的估值已经达到了 300 亿美元，这简直就是一个天文数字，已经超过了当前网易的市值，离京东也不远了。那书这个行业呢？目前来看，阅文可能是目前最大的头部玩家，市值达到 430 亿港币，虽然和腾讯音乐还有一定的差距，但也是一个超出我想象的数字。
+那么腾讯处在什么位置呢？等等，你仔细看下，阅文集团背后站着的，就是腾讯。腾讯对阅文的持股比重超过了 60%。腾讯音乐在整合音乐版权的时候，面对的上游通常是大型唱片公司；而网络书籍这一块呢，除了部分的出版商外，还有数不清的网络文学作家。我认为对腾讯来说，这简直是一场稳赢的战争，因为腾讯有阅文，他可以轻松的吃下这部分双边市场。但是需要注意一点，阅文的财报并不好看，相比于其市值，它的利润确实不怎么好看，市盈率破百，有很大的被高估风险。
+目前阅文更多切入的是网络文学的市场，而读书市场绝对不仅仅这么简单。我觉得在线读书还有一块很大的可以切的市场是在线教育，比如像现在得到做的精读产品等等，这些产品的边际成本几乎为零，谁的流量成本低，谁就赚的多。那么，谁的流量成本能比微信低呢？
+微信读书会改变什么？ 在微信读书上，你有两种不同的消费方式。你可以选择买一本书，钱货两讫，你付了钱，得到在这个平台上阅读这本电子书的权利。你也可以选择买一份微信读书的订阅(所谓的 netflix 模式)，此时你并没有得到任何书，但是你得到了在一定时间内在这个平台上阅读的权利。
+这种订阅模式并不是什么新鲜玩意儿，相信大家各个平台的会员也都没少买。但是这种订阅模式从一定程度上，确实改变了供求关系。一个最简单的问题就是，平台如何给内容生产者付费？
+平台可以选择买断式，也就是我一次性交付一大笔钱给你，购买你的作品的播放权阅读权，甚至我再多付一点钱，要求独家权利。这样一来，平台的定价权可能就会非常大。还有一种就是平台按照打开次数或者阅读时长等数据来计算费用，这种方式的话，作品价格就会和平台 kpi 直接绑定，谁给平台 kpi 贡献大，谁就多分钱。
+无论如何，如果这种订阅模式成为书的主要渠道的话，都可能会对创作者的创作方式，创作质量产生巨大的影响。</description>
+    </item>
+    
+    <item>
+      <title>K8s_4</title>
+      <link>https://chenminhua.github.io/posts/k8s_4/</link>
+      <pubDate>Sun, 14 Oct 2018 21:50:31 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_4/</guid>
+      <description>凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别的。这些属性描述的是“机器”这个整体，而不是里面运行的“程序”，比如网络存储安全等。
+NodeSelector(供用户将 Pod 与 Node 进行绑定的字段) spec.nodeSelector.disktype: ssd 这样的一个配置，意味着这个 Pod 永远只能运行在携带了“disktype: ssd”标签（Label）的节点上；否则，它将调度失败。
+HostAliases 定义了 Pod 的 hosts 文件（比如/etc/hosts）里的内容，用法如下：
+spec: hostAliases: - ip: &amp;quot;10.1.2.3&amp;quot; hostnames: - &amp;quot;foo.remote&amp;quot; - &amp;quot;bar.remote&amp;quot;  关于 namespace 的属性配置 举个例子，在下面这个 Pod 的 YAML 文件中，我定义了 shareProcessNamespace=true，还定义了两个容器：一个是 nginx 容器，一个是开启了 tty 和 stdin 的 shell 容器。
+apiVersion: v1 kind: Pod metadata: name: nginx spec: shareProcessNamespace: true 这就意味着这个 Pod 里的容器要共享 PID Namespace。 containers: - name: nginx image: nginx - name: shell image: busybox stdin: true tty: true  我们使用 kubectl attach 命令，连接到 shell 容器的 tty 上： k attach -it nginx -c shell。这样，我们就可以在 shell 容器里执行 ps 指令，查看所有正在运行的进程：ps ax</description>
+    </item>
     
     <item>
       <title>K8s_2</title>
@@ -33,10 +65,8 @@ topology subnet  再修改下面这两行，第一行为注释掉，第二行为
       <pubDate>Thu, 20 Sep 2018 21:50:31 +0800</pubDate>
       
       <guid>https://chenminhua.github.io/posts/k8s_3/</guid>
-      <description>运行一个 Nginx 到 k8s Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来：
-kubectl create -f nginx-deployment.yaml  配置文件如下
-apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.7.9 ports: - containerPort: 80  一个 YAML 文件，对应到 Kubernetes 中，就是一个 API Object（API 对象）。当你为这个对象的各个字段填好值并提交给 Kubernetes 之后，Kubernetes 就会负责创建出这些对象所定义的容器或者其他类型的 API 资源。
-这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。</description>
+      <description>运行一个 Nginx 到 k8s apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.7.9 ports: - containerPort: 80  API 对象的定义，大多可以分为 Metadata 和 Spec 两个部分。前者存放的是这个对象的元数据，对所有 API 对象来说，这一部分的字段和格式基本上是一样的；而后者存放的，则是属于这个对象独有的定义，用来描述它所要表达的功能。
+metadata (主要有 labels 和 annotations) label k get pod --show-labels 可以看到所有的label k get pod -l app=nginx 可以筛选一下label  这样的每一个 API 对象都有一个叫作 Metadata 的字段，这个字段就是 API 对象的“标识”，即元数据，它也是我们从 Kubernetes 里找到这个对象的主要依据。这其中最主要使用到的字段是 Labels。Labels 就是一组 key-value 格式的标签。而这个过滤规则的定义，是在 Deployment 的“spec.</description>
     </item>
     
     <item>
@@ -46,12 +76,11 @@ apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: sele
       
       <guid>https://chenminhua.github.io/posts/k8s_1/</guid>
       <description>本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。
-什么是 K8s 容器编排就是用户通过某些工具或配置完成一组虚拟机以及资源的定义，配置，创建，删除等。
-一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。
+什么是 K8s 一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。
 从一开始,k8s 就没有像同期的各种容器云项目一样，把 docker 作为架构的核心，而仅仅把它作为最底层的一个容器运行时实现。k8s 提供了将容器运行在一个给定集群的能力，还提供了路由网关、水平扩展、监控、备份等一系列能力。
+运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系，并且为将来支持更多种类的关系留有余地。
 k8s 核心架构和元素 Master 节点： kube-apiserver 负责 api 服务，kube-scheduler 负责调度，kube-controller-manager 负责容器编排。而整个集群的持久化数据则由 kube-apiserver 处理后存在 etcd 中。
 计算节点：核心是一个叫 kubelet 的组件。kubelet 主要负责同容器运行时(docker)打交道，其中依赖一个称为 CRI(container runtime interface)的远程调用接口。此外，kubelet 还通过 grpc 同一个叫 device plugin 的插件进行交互并管理宿主机的硬件。kubelet 的另一个功能是调用网络插件和存储插件为容器配置网络和持久化存储，相应接口分别为 CNI(container networking interface)和 CSI(container storage interface)。
-运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系，并且为将来支持更多种类的关系留有余地。
 pod 是 K8s 中最基础的一个对象，pod 里面的容器共享同一个 network namespace，同一组数据卷。关于 pod 最重要的一点是：它只是一个逻辑概念，具体说，pod 里面所有的容器都共享同一个 network namespace，并且可以声明共享同一个 volume。在每个 pod 中，首先都会有一个 infra 容器，其镜像为 pause。infra 容器永远都是第一个被创建的，而其他容器则通过 join network namespace 的方式加入 pod。一个 pod 只有一个 ip 地址，也就是这个 pod 的 network namespace 对于的 ip 地址。pod 的生命周期也只跟 infra 容器一致。pod 实际上扮演的是传统基础设施中虚拟机的角色。</description>
     </item>
     
@@ -348,7 +377,14 @@ int main() { int n; cin &amp;gt;&amp;gt; n; int count = 0; int j = 2; while (tru
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>软件开发中，准备工作的中心目标就是降低风险。如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为 1000 倍理论或者 4D 理论。发现错误的时间要尽可能接近引入该错误的时间。
+      <description>逻辑学基本原理： 同一率：事物只能是其本身 排中率：要么是，要么否，没有中间状态 充足理由率(因果原理)：任何事物都有其存在的充足理由 矛盾率：在同一时刻，某个事物不可能在同一方面既是这样又不是这样。
+错误推理通常很有迷惑性，有时甚至比正确推理听起来更合理。错误推理通常以直接作用于人的情感的方式来战胜正确推理。
+有时我们会身陷矛盾而不自知，这是因为我们忽略了它所代表的客观事物。还有的时候，我们故意将观念和事实割裂开来，不去考察观念与事实之间是否相符。
+负面只有在正面已知的情况下才可以被确认为负面。
+每一个原因与其结果之间必然存在根本的相似之处。
+永远不要直接调动人们的情感，要努力让人们自己去发现真相。
+沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
+软件开发中，准备工作的中心目标就是降低风险。如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为 1000 倍理论或者 4D 理论。发现错误的时间要尽可能接近引入该错误的时间。
 明确的需求有助于避免争论，在开始编码之前，需要先把系统的 scope 画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
 确保每个人都知道需求变更的代价。
@@ -365,9 +401,7 @@ Design is about tradeoffs and priorities
 自上而下策略和自下而上策略的最关键区别在于，前者是一种 decomposition 策略，而后者是一种 composition 策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
 什么决定了一个决策的关键程度？答案是变化的成本。
 随机过程要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
-隐马尔科夫模型：任意时刻 t 的状态 st 是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。假设 s1, s2, s3&amp;hellip; 信源发出的信号 o1, o2, o3&amp;hellip; 接收器收到的信号。根据 o1,o2,o3 推测 s1,s2,s3，也就是找到令 p(s1,s2,s3&amp;hellip;|o1,o2,o3&amp;hellip;) 最大的那组 s1,s2,s3&amp;hellip;的值。
-如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。
-在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。</description>
+隐马尔科夫模型：任意时刻 t 的状态 st 是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。假设 s1, s2, s3&amp;hellip; 信源发出的信号 o1, o2, o3&amp;hellip; 接收器收到的信号。根据 o1,o2,o3 推测 s1,s2,s3，也就是找到令 p(s1,s2,s3&amp;hellip;|o1,o2,o3&amp;hellip;) 最大的那组 s1,s2,s3&amp;hellip;的值。</description>
     </item>
     
     <item>
@@ -488,6 +522,180 @@ function outside() { var a = 0; return function inside() { a++; console.log(a); 
 喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是 taquila。
 不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在 bluffing 而已哈哈。
 最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_10/</guid>
+      <description>容器化守护进程的意义：DaemonSet DaemonSet 让你在 Kubernetes 集群里，运行一个 Daemon Pod。这个 Pod 有如下三个特征：
+ 这个 Pod 运行在 Kubernetes 集群里的每一个节点（Node）上； 每个节点上只有一个这样的 Pod 实例； 当有新的节点加入 Kubernetes 集群后，该 Pod 会自动地在新节点上被创建出来。  这个机制听起来很简单，但 Daemon Pod 的意义确实是非常重要的。比如各种网络插件的 Agent 组件，各种存储插件的 Agent 组件，各种监控组件和日志组件，都必须运行在每一个节点上。
+比如这个 DaemonSet 正是一个网络插件的 Agent 组件，开始的时候整个 Kubernetes 集群里还没有可用的容器网络，所有 Worker 节点的状态都是 NotReady（NetworkReady=false）。这种情况下，普通的 Pod 肯定不能运行在这个集群上。所以，这也就意味着 DaemonSet 的设计，必须要有某种“过人之处”才行。
+为了弄清楚 DaemonSet 的工作原理，我们还是按照老规矩，先从它的 API 对象的定义说起。
+apiVersion: apps/v1 kind: DaemonSet metadata: name: fluentd-elasticsearch namespace: kube-system # 注意namespace labels: k8s-app: fluentd-logging spec: selector: matchLabels: name: fluentd-elasticsearch template: metadata: labels: name: fluentd-elasticsearch spec: tolerations: - key: node-role.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_11/</guid>
+      <description>撬动离线业务：Job 与 CronJob apiVersion: batch/v1 kind: Job metadata: name: pi spec: backoffLimit: 5 最多失败5次 activeDeadlineSeconds: 1000 最长运行时间，一旦超过，这个 Job 的所有 Pod 都会被终止 parallelism: 2 最大的并行数是 2 completions: 4 最小的完成数是 4 template: spec: containers: - name: pi image: resouer/ubuntu-bc command: [&amp;quot;sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;echo &#39;scale=10000; 4*a(1)&#39; | bc -l &amp;quot;] restartPolicy: Never 注意，离线任务不应该被重启 backoffLimit: 4  在成功创建后，我们来查看一下这个 Job 对象。可以看到，这个 Job 对象在创建后，它的 Pod 模板，被自动加上了一个 controller-uid=&amp;lt;一个随机字符串&amp;gt;这样的 Label。而这个 Job 对象本身，则被自动加上了这个 Label 对应的 Selector，从而 保证了 Job 与它所管理的 Pod 之间的匹配关系。而 Job Controller 之所以要使用这种携带了 UID 的 Label，就是为了避免不同 Job 对象所管理的 Pod 发生重合。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_12/</guid>
+      <description>Istio 在 2017 年 5 月，Google、IBM 和 Lyft 公司，共同宣布了 Istio 开源项目的诞生。很快，这个项目就在技术圈儿里，掀起了一阵名叫“微服务”的热潮，把 Service Mesh 这个新的编排概念推到了风口浪尖。Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器。Envoy 是 Lyft 公司推出的一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。我们知道，Pod 里的所有容器都共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy 容器的 API，对这个 Envoy 代理进行配置，从而实现微服务治理。
+假设这个 Istio 架构图左边的 Pod 是已经在运行的应用，而右边的 Pod 则是我们刚刚上线的应用的新版本。这时候，Pilot 通过调节这两 Pod 里的 Envoy 容器的配置，从而将 90%的流量分配给旧版本的应用，将 10%的流量分配给新版本应用，并且，还可以在后续的过程中随时调整。这样，一个典型的“灰度发布”的场景就完成了。比如，Istio 可以调节这个流量从 90%-10%，改到 80%-20%，再到 50%-50%，最后到 0%-100%，就完成了这个灰度发布的过程。
+更重要的是，在整个微服务治理的过程中，无论是对 Envoy 容器的部署，还是像上面这样对 Envoy 代理的配置，用户和应用都是完全“无感”的。你可能会有所疑惑：Istio 项目明明需要在每个 Pod 里安装一个 Envoy 容器，又怎么能做到“无感”的呢？实际上，Istio 项目使用的，是 Kubernetes 中的一个非常重要的功能，叫作 Dynamic Admission Control。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_13/</guid>
+      <description>API 对象的奥秘 在 Kubernetes 项目中，一个 API 对象在 Etcd 里的完整资源路径，是由：Group（API 组）、Version（API 版本）和 Resource（API 资源类型）三个部分组成的。比如我们之前声明一个 CronJob 对象，在这个 YAML 文件中，“CronJob”就是这个 API 对象的资源类型（Resource），“batch”就是它的组（Group），v2alpha1 就是它的版本（Version）。当我们提交了这个 YAML 文件之后，Kubernetes 就会把这个 YAML 文件里描述的内容，转换成 Kubernetes 里的一个 CronJob 对象。
+首先，APIServer 的第一个功能，就是过滤这个请求，并完成一些前置性的工作，比如授权、超时处理、审计等。然后，请求会进入 MUX 和 Routes 流程。如果你编写过 Web Server 的话就会知道，MUX 和 Routes 是 APIServer 完成 URL 和 Handler 绑定的场所。而 APIServer 的 Handler 要做的事情，就是按照我刚刚介绍的匹配过程，找到对应的 CronJob 类型定义。接着，APIServer 最重要的职责就来了：根据这个 CronJob 类型定义，使用用户提交的 YAML 文件里的字段，创建一个 CronJob 对象。接下来，APIServer 会先后进行 Admission()和 Validation()操作。比如，我在上一篇文章中提到的 Admission Controller 和 Initializer，就都属于 Admission 的内容。而 Validation，则负责验证这个对象里的各个字段是否合法。这个被验证过的 API 对象，都保存在了 APIServer 里一个叫作 Registry 的数据结构中。也就是说，只要一个 API 对象的定义能在 Registry 里查到，它就是一个有效的 Kubernetes API 对象。最后，APIServer 会把验证过的 API 对象转换成用户最初提交的版本，进行序列化操作，并调用 Etcd 的 API 把它保存起来。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_14/</guid>
+      <description>自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
+接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
+总得来说，编写自定义控制器代码的过程包括：编写 main 函数、编写自定义控制器的定义，以及编写控制器里的业务逻辑三个部分。
+编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom Controller），然后启动它。这部分代码的主要内容如下所示：
+func main() { ... cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig) ... kubeClient, err := kubernetes.NewForConfig(cfg) ... networkClient, err := clientset.NewForConfig(cfg) ... networkInformerFactory := informers.NewSharedInformerFactory(networkClient, ...) controller := NewController(kubeClient, networkClient, networkInformerFactory.Samplecrd().V1().Networks()) go networkInformerFactory.Start(stopCh) if err = controller.Run(2, stopCh); err != nil { glog.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_15/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_15/</guid>
+      <description>RBAC 你可能已经冒出了这样一个想法：控制器模式看起来好像也不难嘛，我能不能自己写一个编排对象呢？答案当然是可以的。而且，这才是 Kubernetes 项目最具吸引力的地方。
+毕竟，在互联网级别的大规模集群里，Kubernetes 内置的编排对象，很难做到完全满足所有需求。所以，很多实际的容器化工作，都会要求你设计一个自己的编排对象，实现自己的控制器模式。
+而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
+我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。
+而在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：
+ Role：角色，它其实是一组规则，定义了一组对 Kubernetes API 对象的操作权限。 Subject：被作用者，既可以是“人”，也可以是“机器”，也可以是你在 Kubernetes 里定义的“用户”。 RoleBinding：定义了“被作用者”和“角色”的绑定关系。  Role 实际上，Role 本身就是一个 Kubernetes 的 API 对象，定义如下所示：
+kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynamespace name: example-role rules: - apiGroups: [&amp;quot;&amp;quot;] resources: [&amp;quot;pods&amp;quot;] verbs: [&amp;quot;get&amp;quot;, &amp;quot;watch&amp;quot;, &amp;quot;list&amp;quot;]  Namespace 是 Kubernetes 项目里的一个逻辑管理单位。不同 Namespace 的 API 对象，在通过 kubectl 命令进行操作的时候，是互相隔离开的。然后，这个 Role 对象的 rules 字段，就是它所定义的权限规则。在上面的例子里，这条规则的含义就是：允许“被作用者”，对 mynamespace 下面的 Pod 对象，进行 GET、WATCH 和 LIST 操作。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_16/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_16/</guid>
+      <description>Operator 工作原理解读
+可能你已经感觉到，在 Kubernetes 中，管理“有状态应用”是一个比较复杂的过程，尤其是编写 Pod 模板的时候，总有一种“在 YAML 文件里编程序”的感觉，让人很不舒服。
+而在 Kubernetes 生态中，还有一个相对更加灵活和编程友好的管理“有状态应用”的解决方案，它就是：Operator。
+接下来，我就以 Etcd Operator 为例，来为你讲解一下 Operator 的工作原理和编写方法。
+Etcd Operator 的使用方法非常简单，只需要两步即可完成：
+第一步，将这个 Operator 的代码 Clone 到本地：
+$ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd Operator 部署在 Kubernetes 集群里。
+不过，在部署 Etcd Operator 的 Pod 之前，你需要先执行这样一个脚本：
+$ example/rbac/create_role.sh  不用我多说你也能够明白：这个脚本的作用，就是为 Etcd Operator 创建 RBAC 规则。这是因为，Etcd Operator 需要访问 Kubernetes 的 APIServer 来创建对象。
+更具体地说，上述脚本为 Etcd Operator 定义了如下所示的权限：
+ 对 Pod、Service、PVC、Deployment、Secret 等 API 对象，有所有权限；
+ 对 CRD 对象，有所有权限；</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_17/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_17/</guid>
+      <description>28 | PV、PVC、StorageClass，这些到底在说啥？
+所以，从今天这篇文章开始，我会通过 4 篇文章为你剖析 Kubernetes 项目处理容器持久化存储的核心原理，从而帮助你更好地理解和使用这部分内容。
+其中，PV 描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
+通常情况下，PV 对象是由运维人员事先创建在 Kubernetes 集群里待用的。比如，运维人员可以定义这样一个 NFS 类型的 PV，如下所示：
+apiVersion: v1 kind: PersistentVolume metadata: name: nfs spec: storageClassName: manual capacity: storage: 1Gi accessModes: - ReadWriteMany nfs: server: 10.244.1.4 path: &amp;quot;/&amp;quot;  而 PVC 描述的，则是 Pod 所希望使用的持久化存储的属性。比如，Volume 存储的大小、可读写权限等等。
+PVC 对象通常由开发人员创建；或者以 PVC 模板的方式成为 StatefulSet 的一部分，然后由 StatefulSet 控制器负责创建带编号的 PVC。
+比如，开发人员可以声明一个 1 GiB 大小的 PVC，如下所示：
+apiVersion: v1 kind: PersistentVolumeClaim metadata: name: nfs spec: accessModes: - ReadWriteMany storageClassName: manual resources: requests: storage: 1Gi  而用户创建的 PVC 要真正被容器使用起来，就必须先和某个符合条件的 PV 进行绑定。这里要检查的条件，包括两部分：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_5/</guid>
+      <description>Pod 对象，其实就是容器的升级版。它对容器进行了组合，添加了更多的属性和字段。这就好比给集装箱四面安装了吊环，使得 Kubernetes 这架“吊车”，可以更轻松地操作它。
+而 Kubernetes 操作这些“集装箱”的逻辑，都由控制器（Controller）完成。我在前面介绍 Kubernetes 架构的时候，曾经提到过一个叫作 kube-controller-manager 的组件。
+实际上，这个组件，就是一系列控制器的集合。我们可以查看一下 Kubernetes 项目的 pkg/controller 目录。这个目录下面的每一个控制器，都以独有的方式负责某种编排功能。而我们的 Deployment，正是这些控制器中的一种。实际上，这些控制器之所以被统一放在 pkg/controller 目录下，就是因为它们都遵循 Kubernetes 项目中的一个通用编排模式，即：控制循环（control loop）。
+在具体实现中，实际状态往往来自于 Kubernetes 集群本身,而期望状态，一般来自于用户提交的 YAML 文件。
+可以看到，一个 Kubernetes 对象的主要编排逻辑，实际上是在第三步的“对比”阶段完成的。这个操作，通常被叫作调谐（Reconcile）。这个调谐的过程，则被称作“Reconcile Loop”（调谐循环）或者“Sync Loop”（同步循环）。所以，如果你以后在文档或者社区中碰到这些词，都不要担心，它们其实指的都是同一个东西：控制循环。而调谐的最终结果，往往都是对被控制对象的某种写操作。
+其实，像 Deployment 这种控制器的设计原理，就是我们前面提到过的，“用一种对象管理另一种对象”的“艺术”。其中，这个控制器对象本身，负责定义被管理对象的期望状态。比如，Deployment 里的 replicas=2 这个字段。而被控制对象的定义，则来自于一个“模板”。比如，Deployment 里的 template 字段。
+可以看到，Deployment 这个 template 字段里的内容，跟一个标准的 Pod 对象的 API 定义，丝毫不差。而所有被这个 Deployment 管理的 Pod 实例，其实都是根据这个 template 字段的内容创建出来的。
+像 Deployment 定义的 template 字段，在 Kubernetes 项目中有一个专有的名字，叫作 PodTemplate（Pod 模板）。这个概念非常重要，因为后面我要讲解到的大多数控制器，都会使用 PodTemplate 来统一定义它所要管理的 Pod。更有意思的是，我们还会看到其他类型的对象模板，比如 Volume 的模板。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_7/</guid>
+      <description>18 | 深入理解 StatefulSet（一）：拓扑状态
+通常来说，容器技术往往被认为不适合有状态应用。但是得益于“控制器模式”的设计思想，Kubernetes 项目很早就在 Deployment 的基础上，扩展出了对“有状态应用”的初步支持。这个编排功能，就是：StatefulSet。
+StatefulSet 的设计其实非常容易理解。它把真实世界里的应用状态，抽象为了两种情况：
+ 拓扑状态。这种情况意味着，应用的多个实例之间不是完全对等的关系。这些应用实例，必须按照某些顺序启动，比如应用的主节点 A 要先于从节点 B 启动。
+ 存储状态。这种情况意味着，应用的多个实例分别绑定了不同的存储数据。对于这些应用实例来说，Pod A 第一次读取到的数据，和隔了十分钟之后再次读取到的数据，应该是同一份，哪怕在此期间 Pod A 被重新创建过。这种情况最典型的例子，就是一个数据库应用的多个存储实例。
+  所以，StatefulSet 的核心功能，就是通过某种方式记录这些状态，然后在 Pod 被重新创建时，能够为新 Pod 恢复这些状态。
+headless service Service 是如何被访问的呢？
+第一种方式，是以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式。比如：当我访问 10.0.23.1 这个 Service 的 IP 地址时，10.0.23.1 其实就是一个 VIP，它会把请求转发到该 Service 所代理的某一个 Pod 上。
+第二种方式，就是以 Service 的 DNS 方式。比如：这时候，只要我访问“my-svc.my-namespace.svc.cluster.local”这条 DNS 记录，就可以访问到名叫 my-svc 的 Service 所代理的某一个 Pod。而在第二种 Service DNS 的方式下，具体还可以分为两种处理方法：
+第一种处理方法，是 Normal Service。这种情况下，你访问“my-svc.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_8/</guid>
+      <description>存储状态 我将继续为你解读 StatefulSet 对存储状态的管理机制。这个机制，主要使用的是一个叫作 Persistent Volume Claim 的功能。
+在前面介绍 Pod 的时候，我曾提到过，要在一个 Pod 里声明 Volume，只要在 Pod 里加上 spec.volumes 字段即可。然后，你就可以在这个字段里定义一个具体类型的 Volume 了，比如：hostPath。
+可是，你有没有想过这样一个场景：如果你并不知道有哪些 Volume 类型可以用，要怎么办呢？
+这也是为什么，在后来的演化中，Kubernetes 项目引入了一组叫作 Persistent Volume Claim（PVC）和 Persistent Volume（PV）的 API 对象，大大降低了用户声明和使用持久化 Volume 的门槛。
+举个例子，有了 PVC 之后，一个开发人员想要使用一个 Volume，只需要简单的两步即可。
+第一步：定义一个 PVC，声明想要的 Volume 的属性：
+kind: PersistentVolumeClaim apiVersion: v1 metadata: name: pv-claim spec: accessModes: - ReadWriteOnce resources: requests: storage: 1Gi  可以看到，在这个 PVC 对象里，不需要任何关于 Volume 细节的字段，只有描述性的属性和定义。比如，storage: 1Gi，表示我想要的 Volume 大小至少是 1 GiB；accessModes: ReadWriteOnce，表示这个 Volume 的挂载方式是可读写，并且只能被挂载在一个节点上而非被多个节点共享。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/k8s_9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/k8s_9/</guid>
+      <description>有状态应用实践 今天我选择的实例是部署一个 MySQL 集群，这也是 Kubernetes 官方文档里的一个经典案例。首先，用自然语言来描述一下我们想要部署的“有状态应用”。是一个“主从复制”（Maser-Slave Replication）的 MySQL 集群；有 1 个主节点（Master）；有多个从节点（Slave）；从节点需要能水平扩展；所有的写操作，只能在主节点上执行；读操作可以在所有节点上执行。
+主要难点：如何让从节点能够拥有主节点的数据，即：如何配置主（Master）从（Slave）节点的复制与同步。
+所以，在安装好 MySQL 的 Master 节点之后，你需要做的第一步工作，就是通过 XtraBackup 将 Master 节点的数据备份到指定目录。
+ 备注：XtraBackup 是业界主要使用的开源 MySQL 备份和恢复工具。
+ 这一步会自动在目标目录里生成一个备份信息文件，名叫：xtrabackup_binlog_info。这个文件一般会包含如下两个信息：
+$ cat xtrabackup_binlog_info TheMaster-bin.000001 481  这两个信息会在接下来配置 Slave 节点的时候用到。
+第二步：配置 Slave 节点。Slave 节点在第一次启动前，需要先把 Master 节点的备份数据，连同备份信息文件，一起拷贝到自己的数据目录（/var/lib/mysql）下。然后，我们执行这样一句 SQL：
+TheSlave|mysql&amp;gt; CHANGE MASTER TO MASTER_HOST=&#39;$masterip&#39;, MASTER_USER=&#39;xxx&#39;, MASTER_PASSWORD=&#39;xxx&#39;, MASTER_LOG_FILE=&#39;TheMaster-bin.000001&#39;, MASTER_LOG_POS=481;  其中，MASTER_LOG_FILE 和 MASTER_LOG_POS，就是该备份对应的二进制日志（Binary Log）文件的名称和开始的位置（偏移量），也正是 xtrabackup_binlog_info 文件里的那两部分内容（即：TheMaster-bin.000001 和 481）。
+第三步，启动 Slave 节点。在这一步，我们需要执行这样一句 SQL：
+TheSlave|mysql&amp;gt; START SLAVE;  这样，Slave 节点就启动了。它会使用备份信息文件中的二进制日志文件和偏移量，与主节点进行数据同步。</description>
     </item>
     
     <item>

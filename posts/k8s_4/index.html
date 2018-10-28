@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>K8s_4 | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">October 14, 2018</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">K8s_4</h1>
+  <div class="content">
+    
+
+<p><strong>凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别的。</strong>这些属性描述的是“机器”这个整体，而不是里面运行的“程序”，比如网络存储安全等。</p>
+
+<h3 id="nodeselector-供用户将-pod-与-node-进行绑定的字段">NodeSelector(供用户将 Pod 与 Node 进行绑定的字段)</h3>
+
+<p>spec.nodeSelector.disktype: ssd 这样的一个配置，意味着这个 Pod 永远只能运行在携带了“disktype: ssd”标签（Label）的节点上；否则，它将调度失败。</p>
+
+<h3 id="hostaliases">HostAliases</h3>
+
+<p>定义了 Pod 的 hosts 文件（比如/etc/hosts）里的内容，用法如下：</p>
+
+<pre><code>spec:
+  hostAliases:
+  - ip: &quot;10.1.2.3&quot;
+    hostnames:
+    - &quot;foo.remote&quot;
+    - &quot;bar.remote&quot;
+</code></pre>
+
+<h3 id="关于-namespace-的属性配置">关于 namespace 的属性配置</h3>
+
+<p>举个例子，在下面这个 Pod 的 YAML 文件中，我定义了 shareProcessNamespace=true，还定义了两个容器：一个是 nginx 容器，一个是开启了 tty 和 stdin 的 shell 容器。</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  shareProcessNamespace: true  这就意味着这个 Pod 里的容器要共享 PID Namespace。
+  containers:
+  - name: nginx
+    image: nginx
+  - name: shell
+    image: busybox
+    stdin: true
+    tty: true
+</code></pre>
+
+<p>我们使用 kubectl attach 命令，连接到 shell 容器的 tty 上： k attach -it nginx -c shell。这样，我们就可以在 shell 容器里执行 ps 指令，查看所有正在运行的进程：ps ax</p>
+
+<p>可以看到，在这个容器里，我们不仅可以看到它本身的 ps ax 指令，还可以看到 nginx 容器的进程，以及 Infra 容器的/pause 进程。这就意味着，整个 Pod 里的每个容器的进程，对于所有容器来说都是可见的：它们共享了同一个 PID Namespace。</p>
+
+<h2 id="使用宿主机的-namespace">使用宿主机的 namespace</h2>
+
+<p>类似地，<strong>凡是 Pod 中的容器要共享宿主机的 Namespace，也一定是 Pod 级别的定义</strong>，在下面这个 Pod 中，我定义了共享宿主机的 Network、IPC 和 PID Namespace。这就意味着，这个 Pod 里的所有容器，会直接使用宿主机的网络、直接与宿主机进行 IPC 通信、看到宿主机里正在运行的所有进程。</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  hostNetwork: true
+  hostIPC: true
+  hostPID: true
+  containers:
+  - name: nginx
+    image: nginx
+  - name: shell
+    image: busybox
+    stdin: true
+    tty: true
+</code></pre>
+
+<h3 id="imagepullpolicy">ImagePullPolicy</h3>
+
+<p>定义了镜像拉取的策略。ImagePullPolicy 的值默认是 Always，即每次创建 Pod 都重新拉取一次镜像。另外，当容器的镜像是类似于 nginx 或者 nginx:latest 这样的名字时，ImagePullPolicy 也会被认为 Always。而如果它的值被定义为 Never 或者 IfNotPresent，则意味着 Pod 永远不会主动拉取这个镜像，或者只在宿主机上不存在这个镜像时才拉取。</p>
+
+<h3 id="lifecycle-poststart-prestop">Lifecycle (postStart, preStop)</h3>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-demo
+spec:
+  containers:
+  - name: lifecycle-demo-container
+    image: nginx
+    lifecycle:
+      postStart:    在容器启动后，立刻执行一个指定的操作。在 Docker 容器 ENTRYPOINT 执行之后。异步。
+        exec:
+          command: [&quot;/bin/sh&quot;, &quot;-c&quot;, &quot;echo Hello from the postStart handler &gt; /usr/share/message&quot;]
+      preStop:      是容器被杀死之前（比如，收到了 SIGKILL 信号），是同步的。所以，会阻塞当前的容器杀死流程，直到这个 Hook 完成之后，才允许容器被杀死。
+        exec:
+          command: [&quot;/usr/sbin/nginx&quot;,&quot;-s&quot;,&quot;quit&quot;]
+</code></pre>
+
+<h3 id="pod-的生命周期">pod 的生命周期</h3>
+
+<p>Pod 生命周期的变化，主要体现在 Pod API 对象的<strong>Status 部分</strong>，这是它除了 Metadata 和 Spec 之外的第三个重要字段。其中，pod.status.phase，就是 Pod 的当前状态，它有如下几种可能的情况：</p>
+
+<pre><code>1.  Pending。YAML 文件已经提交给了 Kubernetes，API 对象已经被创建并保存在 Etcd 当中。但是，这个 Pod 里有些容器因为某种原因而不能被顺利创建。
+2.  Running。这个状态下，Pod 已经调度成功，跟一个具体的节点绑定。
+3.  Succeeded。这个状态意味着，Pod 里的所有容器都正常运行完毕，并且已经退出了。这种情况在运行一次性任务时最为常见。
+4.  Failed。这个状态下，Pod 里至少有一个容器以不正常的状态（非 0 的返回码）退出。这个状态的出现，意味着你得想办法 Debug 这个容器的应用，比如查看 Pod 的 Events 和日志。
+5.  Unknown。这是一个异常状态，意味着 Pod 的状态不能持续地被 kubelet 汇报给 kube-apiserver，这很有可能是主从节点（Master 和 Kubelet）间的通信出现了问题。
+</code></pre>
+
+<p>更进一步地，Pod 对象的 Status 字段，还可以再细分出一组 Conditions。这些细分状态的值包括：PodScheduled、Ready、Initialized，以及 Unschedulable。它们主要用于描述造成当前 Status 的具体原因是什么。比如，Pod 当前的 Status 是 Pending，对应的 Condition 是 Unschedulable，这就意味着它的调度出现了问题。</p>
+
+<p>Pod 的这些状态信息，是我们判断应用运行情况的重要标准，尤其是 Pod 进入了非“Running”状态后，你一定要能迅速做出反应，根据它所代表的异常情况开始跟踪和定位，而不是去手忙脚乱地查阅文档。</p>
+
+<h3 id="源码阅读">源码阅读</h3>
+
+<p>我希望你能仔细阅读$GOPATH/src/k8s.io/kubernetes/vendor/k8s.io/api/core/v1/types.go 里，type Pod struct ，尤其是 PodSpec 部分的内容。争取做到下次看到一个 Pod 的 YAML 文件时，不再需要查阅文档，就能做到把常用字段及其作用信手拈来。</p>
+
+<h3 id="projected-volume">projected volume</h3>
+
+<p>Projected Volume 是 Kubernetes v1.11 之后的新特性</p>
+
+<p>在 Kubernetes 中，有几种特殊的 Volume，它们存在的意义不是为了存放容器里的数据，也不是用来进行容器和宿主机之间的数据交换。这些特殊 Volume 的作用，是为容器提供预先定义好的数据。所以，从容器的角度来看，这些 Volume 里的信息就是仿佛是<strong>被 Kubernetes“投射”（Project）进入容器当中的</strong>。这正是 Projected Volume 的含义。</p>
+
+<p>到目前为止，Kubernetes 支持的 Projected Volume 一共有四种：</p>
+
+<ol>
+<li><p>Secret；帮你把 Pod 想要访问的加密数据，存放到 Etcd 中。然后，你就可以通过在 Pod 的容器里挂载 Volume 的方式，访问到这些 Secret 里保存的信息了。</p></li>
+
+<li><p>ConfigMap；</p></li>
+
+<li><p>Downward API；</p></li>
+
+<li><p>ServiceAccountToken。</p></li>
+</ol>
+
+<h3 id="secret">Secret</h3>
+
+<p>最典型的使用场景，莫过于存放数据库的 Credential 信息，比如下面这个例子：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: test-projected-volume
+spec:
+  containers:
+  - name: test-secret-volume
+    image: busybox
+    args:
+    - sleep
+    - &quot;86400&quot;
+    volumeMounts:
+    - name: mysql-cred
+      mountPath: &quot;/projected-volume&quot;
+      readOnly: true
+    volumes:
+    - name: mysql-cred
+      projected:
+        sources:
+        - secret:
+            name: user
+        - secret:
+            name: pass
+</code></pre>
+
+<p>在这个 Pod 中，我定义了一个简单的容器。它声明挂载的 Volume，并不是常见的 emptyDir 或者 hostPath 类型，而是 projected 类型。而这个 Volume 的数据来源（sources），则是名为 user 和 pass 的 Secret 对象，分别对应的是数据库的用户名和密码。</p>
+
+<p>这里用到的数据库的用户名、密码，正是以 Secret 对象的方式交给 Kubernetes 保存的。完成这个操作的指令，如下所示：</p>
+
+<p>$ cat ./username.txt
+admin
+$ cat ./password.txt
+c1oudc0w!</p>
+
+<p>$ kubectl create secret generic user &ndash;from-file=./username.txt
+$ kubectl create secret generic pass &ndash;from-file=./password.txt</p>
+
+<p>$ kubectl get secrets
+NAME TYPE DATA AGE
+user Opaque 1 51s
+pass Opaque 1 51s</p>
+
+<p>当然，除了使用 kubectl create secret 指令外，我也可以直接通过编写 YAML 文件的方式来创建这个 Secret 对象，比如：</p>
+
+<pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  user: YWRtaW4=
+  pass: MWYyZDFlMmU2N2Rm
+</code></pre>
+
+<p>可以看到，通过编写 YAML 文件创建出来的 Secret 对象只有一个。但它的 data 字段，却以 Key-Value 的格式保存了两份 Secret 数据。其中，“user”就是第一份数据的 Key，“pass”是第二份数据的 Key。</p>
+
+<p>需要注意的是，Secret 对象要求这些数据必须是经过 Base64 转码的，以免出现明文密码的安全隐患。这个转码操作也很简单，比如：</p>
+
+<pre><code>$ echo -n 'admin' | base64
+YWRtaW4=
+$ echo -n '1f2d1e2e67df' | base64
+MWYyZDFlMmU2N2Rm
+</code></pre>
+
+<p>这里需要注意的是，像这样创建的 Secret 对象，它里面的内容仅仅是经过了转码，而并没有被加密。在真正的生产环境中，你需要在 Kubernetes 中开启 Secret 的加密插件，增强数据的安全性。关于开启 Secret 加密插件的内容，我会在后续专门讲解 Secret 的时候，再做进一步说明。</p>
+
+<p>接下来，我们尝试一下创建这个 Pod：</p>
+
+<pre><code>$ kubectl create -f test-projected-volume.yaml
+</code></pre>
+
+<p>当 Pod 变成 Running 状态之后，我们再验证一下这些 Secret 对象是不是已经在容器里了：</p>
+
+<pre><code>$ kubectl exec -it test-projected-volume -- /bin/sh
+$ ls /projected-volume/
+</code></pre>
+
+<p>从返回结果中，我们可以看到，保存在 Etcd 里的用户名和密码信息，已经以文件的形式出现在了容器的 Volume 目录里。更重要是，像这样通过挂载方式进入到容器里的 Secret，一旦其对应的 Etcd 里的数据被更新，这些 Volume 里的文件内容，同样也会被更新。其实，<strong>这是 kubelet 组件在定时维护这些 Volume。</strong></p>
+
+<h3 id="configmap">configMap</h3>
+
+<p><strong>与 Secret 类似的是 ConfigMap</strong>，它与 Secret 的区别在于，ConfigMap 保存的是不需要加密的、应用所需的配置信息。而 ConfigMap 的用法几乎与 Secret 完全相同：你可以使用 kubectl create configmap 从文件或者目录创建 ConfigMap，也可以直接编写 ConfigMap 对象的 YAML 文件。</p>
+
+<pre><code>$ cat example/ui.properties
+color.good=purple
+color.bad=yellow
+allow.textmode=true
+how.nice.to.look=fairlyNice
+
+# 从.properties文件创建ConfigMap
+$ kubectl create configmap ui-config --from-file=example/ui.properties
+
+# 查看这个ConfigMap里保存的信息(data)
+$ kubectl get configmaps ui-config -o yaml
+</code></pre>
+
+<h3 id="downward-api">Downward API</h3>
+
+<p>它的作用是：让 Pod 里的容器能够直接获取到这个 Pod API 对象本身的信息。</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: test-downwardapi-volume
+  labels:
+    zone: us-est-coast
+    cluster: test-cluster1
+    rack: rack-22
+spec:
+  containers:
+    - name: client-container
+      image: k8s.gcr.io/busybox
+      command: [&quot;sh&quot;, &quot;-c&quot;]
+      args:
+      - while true; do
+          if [[ -e /etc/podinfo/labels ]]; then
+            echo -en '\n\n'; cat /etc/podinfo/labels; fi;
+          sleep 5;
+        done;
+      volumeMounts:
+        - name: podinfo
+          mountPath: /etc/podinfo
+          readOnly: false
+  volumes:
+    - name: podinfo
+      projected:
+        sources:
+        - downwardAPI:
+            items:
+              - path: &quot;labels&quot;
+                fieldRef:
+                  fieldPath: metadata.labels
+</code></pre>
+
+<p>通过这样的 Downward API Volume 声明方式，当前 Pod 的 Labels 字段的值，就会被 Kubernetes 自动挂载成为容器里的/etc/podinfo/labels 文件。</p>
+
+<p>目前，Downward API 支持的字段已经非常丰富了，比如：</p>
+
+<pre><code>1. 使用fieldRef可以声明使用:
+spec.nodeName - 宿主机名字
+status.hostIP - 宿主机IP
+metadata.name - Pod的名字
+metadata.namespace - Pod的Namespace
+status.podIP - Pod的IP
+spec.serviceAccountName - Pod的Service Account的名字
+metadata.uid - Pod的UID
+metadata.labels['&lt;KEY&gt;'] - 指定&lt;KEY&gt;的Label值
+metadata.annotations['&lt;KEY&gt;'] - 指定&lt;KEY&gt;的Annotation值
+metadata.labels - Pod的所有Label
+metadata.annotations - Pod的所有Annotation
+
+2. 使用resourceFieldRef可以声明使用:
+容器的CPU limit
+容器的CPU request
+容器的memory limit
+容器的memory request
+</code></pre>
+
+<p>需要注意的是，Downward API 能够获取到的信息，<strong>一定是 Pod 里的容器进程启动之前就能够确定下来的信息</strong>。而如果你想要获取 Pod 容器运行后才会出现的信息，比如，容器进程的 PID，那就肯定不能使用 Downward API 了，而应该考虑在 Pod 里定义一个 sidecar 容器。</p>
+
+<h3 id="容器健康检查-livenessprobe">容器健康检查(livenessProbe)</h3>
+
+<p>在 Kubernetes 中，你可以为 Pod 里的容器定义一个健康检查“探针”（Probe）。这样，kubelet 就会根据这个 Probe 的返回值决定这个容器的状态，而不是直接以容器进行是否运行（来自 Docker 返回的信息）作为依据。这种机制，是生产环境中保证应用健康存活的重要手段。</p>
+
+<p>我们一起来看一个 Kubernetes 文档中的例子。</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: test-liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5     在容器启动 5 s 后开始执行
+      periodSeconds: 5           每 5 s 执行一次（periodSeconds: 5）
+</code></pre>
+
+<p>在这个 Pod 中，我们定义了一个有趣的容器。它在启动之后做的第一件事，就是在/tmp 目录下创建了一个 healthy 文件，以此作为自己已经正常运行的标志。而 30 s 过后，它会把这个文件删除掉。</p>
+
+<p>与此同时，我们定义了一个这样的 livenessProbe（健康检查）。它的类型是 exec，这意味着，它会在容器启动后，在容器里面执行一句我们指定的命令，比如：“cat /tmp/healthy”。这时，如果这个文件存在，这条命令的返回值就是 0，Pod 就会认为这个容器不仅已经启动，而且是健康的。</p>
+
+<p>我们可以看到，这个容器一开始会进入 Running 状态，而 30 s 之后，我们再查看一下 Pod 的 Events，你会发现，这个 Pod 在 Events 报告了一个异常。显然，这个健康检查探查到/tmp/healthy 已经不存在了，可是 Pod 并没有进入 Failed 状态，而是保持了 Running 状态。这是为什么呢？其实，如果你注意到 RESTARTS 字段从 0 到 1 的变化，就明白原因了：这个异常的容器已经被 Kubernetes 重启了。在这个过程中，Pod 保持 Running 状态不变。</p>
+
+<p>除了在容器中执行命令外，livenessProbe 也可以定义为发起 HTTP 或者 TCP 请求的方式。你的 Pod 其实可以暴露一个健康检查 URL（比如/healthz），或者直接让健康检查去检测应用的监听端口。这两种配置方法，在 Web 服务类的应用中非常常用。</p>
+
+<h3 id="恢复机制-pod-spec-restartpolicy">恢复机制(pod.spec.restartPolicy)</h3>
+
+<p>但一定要强调的是，Pod 的恢复过程，永远都是发生在当前节点上，而不会跑到别的节点上去。事实上，一旦一个 Pod 与一个节点（Node）绑定，除非这个绑定发生了变化（pod.spec.node 字段被修改），否则它永远都不会离开这个节点。这也就意味着，如果这个宿主机宕机了，这个 Pod 也不会主动迁移到其他节点上去。</p>
+
+<p>而作为用户，你还可以通过设置 restartPolicy，改变 Pod 的恢复策略。除了 Always，它还有 OnFailure 和 Never 两种情况：</p>
+
+<ul>
+<li>Always：在任何情况下，只要容器不在运行状态，就自动重启容器；</li>
+<li>OnFailure: 只在容器 异常时才自动重启容器；</li>
+<li>Never: 从来不重启容器。</li>
+</ul>
+
+<p>在实际使用时，我们需要根据应用运行的特性，合理设置这三种恢复策略。值得一提的是，Kubernetes 的官方文档，把 restartPolicy 和 Pod 里容器的状态，以及 Pod 状态的对应关系，<a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#example-states">总结了非常复杂的一大堆情况</a>。实际上，你根本不需要死记硬背这些对应关系，只要记住如下两个基本的设计原理即可：</p>
+
+<ol>
+<li><p><strong>只要 Pod 的 restartPolicy 指定的策略允许重启异常的容器（比如：Always），那么这个 Pod 就会保持 Running 状态，并进行容器重启</strong>。否则，Pod 就会进入 Failed 状态 。</p></li>
+
+<li><p><strong>对于包含多个容器的 Pod，只有它里面所有的容器都进入异常状态后，Pod 才会进入 Failed 状态</strong>。在此之前，Pod 都是 Running 状态。此时，Pod 的 READY 字段会显示正常容器的个数，比如：</p>
+
+<p>$ kubectl get pod test-liveness-exec
+NAME READY STATUS RESTARTS AGE
+liveness-exec 0/1 Running 1 1m</p></li>
+</ol>
+
+<h3 id="podpreset-pod-预设置">PodPreset(Pod 预设置)</h3>
+
+<p>这时，你有没有产生这样一个想法：Pod 的字段这么多，我又不可能全记住，Kubernetes 能不能自动给 Pod 填充某些字段呢？这个需求实际上非常实用。比如，开发人员只需要提交一个基本的、非常简单的 Pod YAML，Kubernetes 就可以自动给对应的 Pod 对象加上其他必要的信息，比如 labels，annotations，volumes 等等。而这些信息，可以是运维人员事先定义好的。这么一来，开发人员编写 Pod YAML 的门槛，就被大大降低了。所以，这个叫作 PodPreset（Pod 预设置）的功能 已经出现在了 v1.11 版本的 Kubernetes 中。(需要在 apiServer 开启)</p>
+
+<p>举个例子，现在开发人员编写了如下一个 pod.yaml 文件：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: website
+  labels:
+    app: website
+    role: frontend
+spec:
+  containers:
+    - name: website
+      image: nginx
+      ports:
+        - containerPort: 80
+</code></pre>
+
+<pre><code>apiVersion: settings.k8s.io/v1alpha1
+kind: PodPreset
+metadata:
+  name: allow-database
+spec:
+  selector:
+    matchLabels:
+      role: frontend
+  env:
+    - name: DB_PORT
+      value: &quot;6379&quot;
+  volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+    - name: cache-volume
+      emptyDir: {}
+</code></pre>
+
+<p>在这个 PodPreset 的定义中，首先是一个 selector。这就意味着后面这些追加的定义，只会作用于 selector 所定义的、带有“role: frontend”标签的 Pod 对象，这就可以防止“误伤”。</p>
+
+<p>然后，我们定义了一组 Pod 的 Spec 里的标准字段，以及对应的值。比如，env 里定义了 DB_PORT 这个环境变量，volumeMounts 定义了容器 Volume 的挂载目录，volumes 定义了一个 emptyDir 的 Volume。</p>
+
+<p>接下来，我们假定运维人员先创建了这个 PodPreset，然后开发人员才创建 Pod：</p>
+
+<pre><code>$ kubectl create -f preset.yaml
+$ kubectl create -f pod.yaml
+</code></pre>
+
+<p>这时，Pod 运行起来之后，我们查看一下这个 Pod 的 API 对象：</p>
+
+<pre><code>$ kubectl get pod website -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: website
+  labels:
+    app: website
+    role: frontend
+  annotations:
+    podpreset.admission.kubernetes.io/podpreset-allow-database: &quot;resource version&quot;
+spec:
+  containers:
+    - name: website
+      image: nginx
+      volumeMounts:
+        - mountPath: /cache
+          name: cache-volume
+      ports:
+        - containerPort: 80
+      env:
+        - name: DB_PORT
+          value: &quot;6379&quot;
+  volumes:
+    - name: cache-volume
+      emptyDir: {}
+</code></pre>
+
+<p>这个时候，我们就可以清楚地看到，这个 Pod 里多了新添加的 labels、env、volumes 和 volumeMount 的定义，它们的配置跟 PodPreset 的内容一样。此外，这个 Pod 还被自动加上了一个 annotation 表示这个 Pod 对象被 PodPreset 改动过。</p>
+
+<p>需要说明的是，<strong>PodPreset 里定义的内容，只会在 Pod API 对象被创建之前追加在这个对象本身上，而不会影响任何 Pod 的控制器的定义。</strong></p>
+
+<p>比如，我们现在提交的是一个 nginx-deployment，那么这个 Deployment 对象本身是永远不会被 PodPreset 改变的，被修改的只是这个 Deployment 创建出来的所有 Pod。这一点请务必区分清楚。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</loc>
+    <lastmod>2018-10-28T16:13:51+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_4/</loc>
+    <lastmod>2018-10-14T21:50:31+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chenminhua.github.io/posts/k8s_2/</loc>
     <lastmod>2018-09-20T21:50:31+08:00</lastmod>
   </url>
@@ -148,13 +158,61 @@
   </url>
   
   <url>
+    <loc>https://chenminhua.github.io/posts/k8s_10/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_11/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_12/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_13/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_14/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_15/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_16/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_17/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_5/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_7/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://chenminhua.github.io/posts/k8s_9/</loc>
+  </url>
+  
+  <url>
     <loc>https://chenminhua.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chenminhua.github.io/posts/</loc>
-    <lastmod>2018-09-20T21:50:31+08:00</lastmod>
+    <lastmod>2018-10-28T16:13:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -169,7 +227,7 @@
   
   <url>
     <loc>https://chenminhua.github.io/</loc>
-    <lastmod>2018-09-20T21:50:31+08:00</lastmod>
+    <lastmod>2018-10-28T16:13:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   

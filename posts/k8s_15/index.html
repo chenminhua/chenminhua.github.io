@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title> | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+  <div class="content">
+    
+
+<h2 id="rbac">RBAC</h2>
+
+<p>你可能已经冒出了这样一个想法：控制器模式看起来好像也不难嘛，我能不能自己写一个编排对象呢？答案当然是可以的。而且，这才是 Kubernetes 项目最具吸引力的地方。</p>
+
+<p>毕竟，在互联网级别的大规模集群里，Kubernetes 内置的编排对象，很难做到完全满足所有需求。所以，很多实际的容器化工作，都会要求你设计一个自己的编排对象，实现自己的控制器模式。</p>
+
+<p>而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。</p>
+
+<p>我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。</p>
+
+<p>而<strong>在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC</strong>：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：</p>
+
+<ol>
+<li>Role：角色，它其实是一组规则，定义了一组对 Kubernetes API 对象的操作权限。</li>
+<li>Subject：被作用者，既可以是“人”，也可以是“机器”，也可以是你在 Kubernetes 里定义的“用户”。</li>
+<li>RoleBinding：定义了“被作用者”和“角色”的绑定关系。</li>
+</ol>
+
+<h3 id="role">Role</h3>
+
+<p>实际上，Role 本身就是一个 Kubernetes 的 API 对象，定义如下所示：</p>
+
+<pre><code>kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: mynamespace
+  name: example-role
+rules:
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;pods&quot;]
+  verbs: [&quot;get&quot;, &quot;watch&quot;, &quot;list&quot;]
+</code></pre>
+
+<p>Namespace 是 Kubernetes 项目里的一个逻辑管理单位。不同 Namespace 的 API 对象，在通过 kubectl 命令进行操作的时候，是互相隔离开的。然后，这个 Role 对象的 rules 字段，就是它所定义的权限规则。在上面的例子里，这条规则的含义就是：允许“被作用者”，对 mynamespace 下面的 Pod 对象，进行 GET、WATCH 和 LIST 操作。</p>
+
+<p>那么，这个具体的“被作用者”又是如何指定的呢？这就需要通过 RoleBinding 来实现了。</p>
+
+<h3 id="rolebinding">RoleBinding</h3>
+
+<p>当然，RoleBinding 本身也是一个 Kubernetes 的 API 对象。它的定义如下所示：</p>
+
+<pre><code>kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: example-rolebinding
+  namespace: mynamespace
+subjects:
+- kind: User
+  name: example-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: example-role
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+<p>可以看到，这个 RoleBinding 对象里定义了一个 subjects 字段，即“被作用者”。它的类型是 User，即 Kubernetes 里的用户。这个用户的名字是 example-user。</p>
+
+<p>可是，在 Kubernetes 中，其实并没有一个叫作“User”的 API 对象。而且，我们在前面和部署使用 Kubernetes 的流程里，既不需要 User，也没有创建过 User。</p>
+
+<p>实际上，Kubernetes 里的“User”，也就是“用户”，只是一个授权系统里的逻辑概念。它需要通过外部认证服务，比如 Keystone，来提供。或者，你也可以直接给 APIServer 指定一个用户名、密码文件。那么 Kubernetes 的授权系统，就能够从这个文件里找到对应的“用户”了。当然，在大多数私有的使用环境中，我们只要使用 Kubernetes 提供的内置“用户”，就足够了。这部分知识，我后面马上会讲到。</p>
+
+<p>接下来，我们会看到一个 roleRef 字段。正是通过这个字段，RoleBinding 对象就可以直接通过名字，来引用我们前面定义的 Role 对象（example-role），从而定义了“被作用者（Subject）”和“角色（Role）”之间的绑定关系。</p>
+
+<h2 id="clusterrole-和-clusterrolebinding">clusterRole 和 ClusterRoleBinding</h2>
+
+<p>对于非 Namespaced（Non-namespaced）对象（比如：Node），或者，某一个 Role 想要作用于所有的 Namespace 的时候，我们就必须要使用 ClusterRole 和 ClusterRoleBinding 这两个组合了。这两个 API 对象的用法跟 Role 和 RoleBinding 完全一样。只不过，它们的定义里，没有了 Namespace 字段，如下所示：</p>
+
+<pre><code>kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: example-clusterrole
+rules:
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;pods&quot;]
+  verbs: [&quot;get&quot;, &quot;watch&quot;, &quot;list&quot;]
+
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: example-clusterrolebinding
+subjects:
+- kind: User
+  name: example-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: example-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+<p>上面的例子里的 ClusterRole 和 ClusterRoleBinding 的组合，意味着名叫 example-user 的用户，拥有对所有 Namespace 里的 Pod 进行 GET、WATCH 和 LIST 操作的权限。</p>
+
+<p>更进一步地，在 Role 或者 ClusterRole 里面，如果要赋予用户 example-user 所有权限，那你就可以给它指定一个 verbs 字段的全集，如下所示：</p>
+
+<pre><code>verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;update&quot;, &quot;patch&quot;, &quot;delete&quot;]
+</code></pre>
+
+<p>这些就是当前 Kubernetes（v1.11）里能够对 API 对象进行的所有操作了。</p>
+
+<p>类似的，Role 对象的 rules 字段也可以进一步细化。比如，你可以只针对某一个具体的对象进行权限设置，如下所示：</p>
+
+<pre><code>rules:
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;configmaps&quot;]
+  resourceNames: [&quot;my-config&quot;]
+  verbs: [&quot;get&quot;]
+</code></pre>
+
+<p>这个例子就表示，这条规则的“被作用者”，只对名叫“my-config”的 ConfigMap 对象，有进行 GET 操作的权限。</p>
+
+<h2 id="内置用户-serviceaccount">内置用户 ServiceAccount</h2>
+
+<p>而正如我前面介绍过的，在大多数时候，我们其实都不太使用“用户”这个功能，而是直接使用 Kubernetes 里的“内置用户”。</p>
+
+<p>这个由 Kubernetes 负责管理的“内置用户”，正是我们前面曾经提到过的：ServiceAccount。</p>
+
+<p><strong>首先，我们要定义一个 ServiceAccount</strong>。它的 API 对象非常简单，如下所示：</p>
+
+<pre><code>apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: mynamespace
+  name: example-sa
+</code></pre>
+
+<p>可以看到，一个最简单的 ServiceAccount 对象只需要 Name 和 Namespace 这两个最基本的字段。</p>
+
+<p><strong>然后，我们通过编写 RoleBinding 的 YAML 文件，来为这个 ServiceAccount 分配权限：</strong></p>
+
+<pre><code>kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: example-rolebinding
+  namespace: mynamespace
+subjects:
+- kind: ServiceAccount
+  name: example-sa
+  namespace: mynamespace
+roleRef:
+  kind: Role
+  name: example-role
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+<p>可以看到，在这个 RoleBinding 对象里，subjects 字段的类型（kind），不再是一个 User，而是一个名叫 example-sa 的 ServiceAccount。而 roleRef 引用的 Role 对象，依然名叫 example-role，也就是我在这篇文章一开始定义的 Role 对象。</p>
+
+<p><strong>接着，我们用 kubectl 命令创建这三个对象：</strong></p>
+
+<pre><code>$ kubectl create -f svc-account.yaml
+$ kubectl create -f role-binding.yaml
+$ kubectl create -f role.yaml
+</code></pre>
+
+<p>然后，我们来查看一下这个 ServiceAccount 的详细信息：k get sa -n mynamespace -o yaml。可以看到，Kubernetes 会为一个 ServiceAccount 自动创建并分配一个 Secret 对象。这个 Secret，就是这个 ServiceAccount 对应的、用来跟 APIServer 进行交互的授权文件，我们一般称它为：Token。Token 文件的内容一般是证书或者密码，它以一个 Secret 对象的方式保存在 Etcd 当中。</p>
+
+<p>这时候，用户的 Pod，就可以声明使用这个 ServiceAccount 了，比如下面这个例子：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  namespace: mynamespace
+  name: sa-token-test
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.7.9
+  serviceAccountName: example-sa
+</code></pre>
+
+<p>等这个 Pod 运行起来之后，我们就可以看到，该 ServiceAccount 的 token，也就是一个 Secret 对象，被 Kubernetes 自动挂载到了容器的/var/run/secrets/kubernetes.io/serviceaccount 目录下，如下所示：</p>
+
+<pre><code>$ kubectl describe pod sa-token-test -n mynamespace
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from example-sa-token-vmfg6 (ro)
+</code></pre>
+
+<p>这时候，我们可以通过 kubectl exec 查看到这个目录里的文件：</p>
+
+<pre><code>$ kubectl exec -it sa-token-test -n mynamespace -- /bin/bash
+root@sa-token-test:/# ls /var/run/secrets/kubernetes.io/serviceaccount
+ca.crt namespace  token
+</code></pre>
+
+<p>如上所示，容器里的应用，就可以使用这个 ca.crt 来访问 APIServer 了。更重要的是，此时它只能够做 GET、WATCH 和 LIST 操作。因为 example-sa 这个 ServiceAccount 的权限，已经被我们绑定了 Role 做了限制。</p>
+
+<p>此外，如果一个 Pod 没有声明 serviceAccountName，Kubernetes 会自动在它的 Namespace 下创建一个名叫 default 的默认 ServiceAccount，然后分配给这个 Pod。</p>
+
+<p>但在这种情况下，这个默认 ServiceAccount 并没有关联任何 Role。也就是说，此时它有访问 APIServer 的绝大多数权限。当然，这个访问所需要的 Token，还是默认 ServiceAccount 对应的 Secret 对象为它提供的，如下所示。</p>
+
+<pre><code>kubectl describe sa default
+
+kubectl get secret
+
+kubectl describe secret default-token-s8rbq
+</code></pre>
+
+<p>可以看到，Kubernetes 会自动为默认 ServiceAccount 创建并绑定一个特殊的 Secret：它的类型是<code>kubernetes.io/service-account-token</code>；它的 Annotation 字段，声明了<code>kubernetes.io/service-account.name=default</code>，即这个 Secret 会跟同一 Namespace 下名叫 default 的 ServiceAccount 进行绑定。</p>
+
+<p><strong>所以，在生产环境中，我强烈建议你为所有 Namespace 下的默认 ServiceAccount，绑定一个只读权限的 Role。</strong></p>
+
+<h2 id="用户组">用户组</h2>
+
+<p>除了前面使用的“用户”（User），Kubernetes 还拥有“用户组”（Group）的概念，也就是一组“用户”的意思。如果你为 Kubernetes 配置了外部认证服务的话，这个“用户组”的概念就会由外部认证服务提供。</p>
+
+<p>而对于 Kubernetes 的内置“用户”ServiceAccount 来说，上述“用户组”的概念也同样适用。</p>
+
+<p>实际上，一个 ServiceAccount，在 Kubernetes 里对应的“用户”的名字是：</p>
+
+<pre><code>system:serviceaccount:&lt;ServiceAccount名字&gt;
+</code></pre>
+
+<p>而它对应的内置“用户组”的名字，就是：</p>
+
+<pre><code>system:serviceaccounts:&lt;Namespace名字&gt;
+</code></pre>
+
+<p><strong>这两个对应关系，请你一定要牢记。</strong></p>
+
+<p>比如，现在我们可以在 RoleBinding 里定义如下的 subjects：</p>
+
+<pre><code>subjects:
+- kind: Group
+  name: system:serviceaccounts:mynamespace
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+<p>这就意味着这个 Role 的权限规则，作用于 mynamespace 里的所有 ServiceAccount。这就用到了“用户组”的概念。</p>
+
+<p>而下面这个例子：</p>
+
+<pre><code>subjects:
+- kind: Group
+  name: system:serviceaccounts
+  apiGroup: rbac.authorization.k8s.io
+</code></pre>
+
+<p>就意味着这个 Role 的权限规则，作用于整个系统里的所有 ServiceAccount。</p>
+
+<p>最后，值得一提的是，<strong>在 Kubernetes 中已经内置了很多个为系统保留的 ClusterRole，它们的名字都以 system:开头</strong>。你可以通过 kubectl get clusterroles 查看到它们。</p>
+
+<p>一般来说，这些系统 ClusterRole，是绑定给 Kubernetes 系统组件对应的 ServiceAccount 使用的。</p>
+
+<p>比如，其中一个名叫 system:kube-scheduler 的 ClusterRole，定义的权限规则是 kube-scheduler（Kubernetes 的调度器组件）运行所需要的必要权限。你可以通过如下指令查看这些权限的列表：</p>
+
+<pre><code>$ kubectl describe clusterrole system:kube-scheduler
+Name:         system:kube-scheduler
+...
+PolicyRule:
+  Resources                    Non-Resource URLs Resource Names    Verbs
+  ---------                    -----------------  --------------    -----
+...
+  services                     []                 []                [get list watch]
+  replicasets.apps             []                 []                [get list watch]
+  statefulsets.apps            []                 []                [get list watch]
+  replicasets.extensions       []                 []                [get list watch]
+  poddisruptionbudgets.policy  []                 []                [get list watch]
+  pods/status                  []                 []                [patch update]
+</code></pre>
+
+<p>这个 system:kube-scheduler 的 ClusterRole，就会被绑定给 kube-system Namesapce 下名叫 kube-scheduler 的 ServiceAccount，它正是 Kubernetes 调度器的 Pod 声明使用的 ServiceAccount。</p>
+
+<p>除此之外，Kubernetes 还提供了四个预先定义好的 ClusterRole 来供用户直接使用：</p>
+
+<ol>
+<li><p>cluster-amdin；</p></li>
+
+<li><p>admin；</p></li>
+
+<li><p>edit；</p></li>
+
+<li><p>view。</p></li>
+</ol>
+
+<p>通过它们的名字，你应该能大致猜出它们都定义了哪些权限。比如，这个名叫 view 的 ClusterRole，就规定了被作用者只有 Kubernetes API 的只读权限。</p>
+
+<p>而我还要提醒你的是，上面这个 cluster-amdin 角色，对应的是整个 Kubernetes 项目中的最高权限（verbs=*），如下所示：</p>
+
+<pre><code>$ kubectl describe clusterrole cluster-admin -n kube-system
+Name:         cluster-admin
+Labels:       kubernetes.io/bootstrapping=rbac-defaults
+Annotations:  rbac.authorization.kubernetes.io/autoupdate=true
+PolicyRule:
+  Resources  Non-Resource URLs Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  *.*        []                 []              [*]
+             [*]                []              [*]
+</code></pre>
+
+<p>所以，请你务必要谨慎而小心地使用 cluster-amdin。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>其实，你现在已经能够理解，所谓角色（Role），其实就是一组权限规则列表。而我们分配这些权限的方式，就是通过创建 RoleBinding 对象，将 subject 和 Role 进行绑定。</p>
+
+<p>另外，与之对应的 ClusterRole 和 ClusterRoleBinding，则是 Kubernetes 集群级别的 Role 和 RoleBinding，它们的作用范围不受 Namespace 限制。</p>
+
+<p>而尽管 Subject 可以有很多种（比如，User、Group 等），但在我们平常的使用中，最普遍的用法还是 ServiceAccount。所以，Role + RoleBinding + ServiceAccount 的权限分配方式是你要重点掌握的内容。我们在后面编写和安装各种插件的时候，会经常用到这个组合。</p>
+
+<h2 id="思考题">思考题</h2>
+
+<p>请问，如何为所有 Namespace 下的默认 ServiceAccount（default ServiceAccount），绑定一个只读权限的 Role 呢？请你提供 ClusterRoleBinding（或者 RoleBinding）的 YAML 文件。</p>
+
+<pre><code>
+</code></pre>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

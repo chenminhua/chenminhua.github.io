@@ -66,19 +66,17 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 
 <h2 id="什么是-k8s">什么是 K8s</h2>
 
-<p>容器编排就是用户通过某些工具或配置完成一组虚拟机以及资源的定义，配置，创建，删除等。</p>
-
 <p>一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。</p>
 
 <p>从一开始,k8s 就没有像同期的各种容器云项目一样，把 docker 作为架构的核心，而仅仅把它作为最底层的一个容器运行时实现。k8s 提供了将容器运行在一个给定集群的能力，还提供了路由网关、水平扩展、监控、备份等一系列能力。</p>
+
+<p>运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系，并且为将来支持更多种类的关系留有余地。</p>
 
 <h2 id="k8s-核心架构和元素">k8s 核心架构和元素</h2>
 
 <p>Master 节点： kube-apiserver 负责 api 服务，kube-scheduler 负责调度，kube-controller-manager 负责容器编排。而整个集群的持久化数据则由 kube-apiserver 处理后存在 etcd 中。</p>
 
 <p>计算节点：核心是一个叫 kubelet 的组件。kubelet 主要负责同容器运行时(docker)打交道，其中依赖一个称为 CRI(container runtime interface)的远程调用接口。此外，kubelet 还通过 grpc 同一个叫 device plugin 的插件进行交互并管理宿主机的硬件。kubelet 的另一个功能是调用网络插件和存储插件为容器配置网络和持久化存储，相应接口分别为 CNI(container networking interface)和 CSI(container storage interface)。</p>
-
-<p>运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系，并且为将来支持更多种类的关系留有余地。</p>
 
 <p>pod 是 K8s 中最基础的一个对象，pod 里面的容器共享同一个 network namespace，同一组数据卷。关于 pod 最重要的一点是：它只是一个逻辑概念，具体说，pod 里面所有的容器都共享同一个 network namespace，并且可以声明共享同一个 volume。在每个 pod 中，首先都会有一个 infra 容器，其镜像为 pause。infra 容器永远都是第一个被创建的，而其他容器则通过 join network namespace 的方式加入 pod。一个 pod 只有一个 ip 地址，也就是这个 pod 的 network namespace 对于的 ip 地址。pod 的生命周期也只跟 infra 容器一致。pod 实际上扮演的是传统基础设施中虚拟机的角色。</p>
 
@@ -135,6 +133,7 @@ yum install python-pip -y
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce -y
+systemctl enable docker
 systemctl start docker
 
 ## 临时关闭selinux（不用重启机器）修改/etc/selinux/config 文件,将 SELINUX=enforcing 改为 SELINUX=disabled。重启机器即可
@@ -233,7 +232,7 @@ kubectl get pods -n rook-ceph-system
 kubectl get pods -n rook-ceph
 </code></pre>
 
-<p>这样，一个基于 Rook 持久化存储集群就以容器的方式运行起来了，而接下来在 Kubernetes 项目上创建的所有 Pod 就能够通过 Persistent Volume（PV）和 Persistent Volume Claim（PVC）的方式，在容器里挂载由 Ceph 提供的数据卷了。而 Rook 项目，则会负责这些数据卷的生命周期管理、灾难备份等运维工作。关于这些容器持久化存储的知识，我会在后续章节中专门讲解。</p>
+<p>这样，一个基于 Rook 持久化存储集群就以容器的方式运行起来了，而接下来在 Kubernetes 项目上创建的所有 Pod 就能够通过 Persistent Volume（PV）和 Persistent Volume Claim（PVC）的方式，在容器里挂载由 Ceph 提供的数据卷了。而 Rook 项目，则会负责这些数据卷的生命周期管理、灾难备份等运维工作。</p>
 
   </div>
 </div>

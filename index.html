@@ -63,14 +63,51 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Oct 28</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/">聊聊微信读书</a></h1>
+        <div class="content is-hidden-mobile">
+          这两天下了几个读书应用，发现市面上类似产品还真不是，比如微信读书，京东阅读，豆瓣阅读等等。我也深度体验了一下微信读书，这里谈谈个人的感受吧。
+社交与用户 很多人都说微信读书试图用社交来撬动阅读，目前看来在这一点上，微信还是非常非常克制的，目前微信并没有大量采用群、朋友圈、小程序之类的流量武器给微信读书导流，但是却机智的使用了微信的通讯录，也就是说让用户在微信读书中看到他的朋友在看什么书（而不是微信中）。
+微信读书也在试图突出用户在读书活动中的地位，并且带动一部分 ugc 内容与书本内容的整合。这是一件有点想象空间的事情，我们可以类比于音乐行业与网易云音乐，网易云虽然在版权上面输给了腾讯，但是其精心维护的社区和评论确实是同类产品中独一无二的，这也成为了他们的核心竞争优势。微信读书也有机会创造这样的一块 ugc 价值出来，并通过社交放大。
+市场 读书的市场和音乐的市场能比吗？不好回答。但从感觉 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Oct 14</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_4/">K8s_4</a></h1>
+        <div class="content is-hidden-mobile">
+          凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别的。这些属性描述的是“机器”这个整体，而不是里面运行的“程序”，比如网络存储安全等。
+NodeSelector(供用户将 Pod 与 Node 进行绑定的字段) spec.nodeSelector.disktype: ssd 这样的一个配置，意味着这个 Pod 永远只能运行在携带了“disktype: ssd”标签（Label）的节点上；否则，它将调度失败。
+HostAliases 定义了 Pod 的 hosts 文件（比如/etc/hosts）里的内容，用法如下：
+spec: hostAliases: - ip: &quot;10.1.2.3&quot; hostnames: - &quot;foo.remote&quot; - &quot;bar.remote&quot;  关于 namespace 的属性配置 举个例子， …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_4/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Sep 20</h2>
       </div>
       <div class="column">
         <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_3/">K8s_3</a></h1>
         <div class="content is-hidden-mobile">
-          运行一个 Nginx 到 k8s Kubernetes 跟 Docker 等很多项目最大的不同，就在于它不推荐你使用命令行的方式直接运行容器（虽然 Kubernetes 项目也支持这种方式，比如：kubectl run），而是希望你用 YAML 文件的方式，即：把容器的定义、参数、配置，统统记录在一个 YAML 文件中，然后用这样一句指令把它运行起来：
-kubectl create -f nginx-deployment.yaml  配置文件如下
-apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: …
+          运行一个 Nginx 到 k8s apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: selector: matchLabels: app: nginx replicas: 2 template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.7.9 ports: - containerPort: 80  API 对象的定义，大多可以分为 Metadata 和 Spec 两个部分。前者存放的是这个对象的元数据，对所有 API 对象来说，这一部分的字段和格式基本上是一样的；而后者存放的，则是属于这个对象独有的定义，用来描述它所要表达的功能。
+metadata (主要有 labels …
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_3/">
@@ -113,10 +150,9 @@ cp …
         <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_1/">K8s_1</a></h1>
         <div class="content is-hidden-mobile">
           本系列为 k8s 实战系列，计划在 azure 上从零搭建一套 k8s。
-什么是 K8s 容器编排就是用户通过某些工具或配置完成一组虚拟机以及资源的定义，配置，创建，删除等。
-一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。
+什么是 K8s 一个正在运行的 Linux 容器，可以被一分为二地看待：1.一组联合挂载的 rootfs，这部分为容器镜像，是容器的动态视图；2.一个由 namespace 和 cgroups 构成的隔离环境，这部分为容器运行时，是容器的动态视图。对于一名开发者来说，关注的是容器镜像，而不是容器运行时。
 从一开始,k8s 就没有像同期的各种容器云项目一样，把 docker 作为架构的核心，而仅仅把它作为最底层的一个容器运行时实现。k8s 提供了将容器运行在一个给定集群的能力，还提供了路由网关、水平扩展、监控、备份等一系列能力。
-k8s 核心架构和元素 Master 节点： kube-apiserver 负责 api 服 …
+运行在大规模集群中的各种任务之间实际上存在着各种各样的关系。这些关系的处理才是作业编排和管理系统最困难的地方。k8s 最主要的设计思想是：从更宏观的角度，以统一的方式来定义任务之间的各种关系， …
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_1/">
@@ -227,44 +263,6 @@ k8s 核心架构和元素 Master 节点： kube-apiserver 负责 api 服 …
             </span>
             <p style="padding:0 5px"></p>more</p>
           </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jul 15</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></h1>
-        <div class="content is-hidden-mobile">
-          看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
-谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
-封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不 …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jun 9</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></h1>
-        <div class="content is-hidden-mobile">
-          今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。
-细思极恐。
-看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。很久以来，大学已经渐渐淡化了它原本应该有的职能，大家开始渐渐认同所谓的“大学就是用来为进入社会过渡的”，“大学是教会你怎么解决工作生活问题，学会与人沟通的”，“大学是为你以后工作积累人脉的”，“大学就是用来给你谈恋爱的”之类的论述。
-我不满意这些论述。并不是同意或者反对，就是不满意。
-对我而言，大学四年过的平静而踏实，有过到处厮混的日子，也有过拼命学习的日子。但是回过头去看这四年，乃至加上后面的三年研究生生活，学校教给我的东西真的太少了。比如对于一个所谓的985高校理工科专业强化班（非计算机专业）的学生来说，居然直到毕业都不知道gcc优化这回事，也不知道怎么做好的构建。但是在国外的很多基础的编程课上，无论是课上还是课后的参考资料中，都会有相关的背景 …
           
         </div>
     </article>
