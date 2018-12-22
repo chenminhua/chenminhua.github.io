@@ -6,7 +6,7 @@
 
 
 
-<title>The_rule_of_hole | 硕大的汤姆</title>
+<title> | 硕大的汤姆</title>
 
 <link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
 
@@ -57,23 +57,36 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     </nav>
   </div>
 <div class="container">
-  <h2 class="subtitle is-6">March 24, 2018</h2>
-  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">The_rule_of_hole</h1>
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
   <div class="content">
-    <pre><code>The rule of hole:
+    
 
-If you fall into a hole, don't dig
+<h2 id="安装-vitrualbox">安装 vitrualbox</h2>
+
+<p>wget <a href="http://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo">http://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo</a> -O /etc/yum.repos.d/virtualbox.repo</p>
+
+<p>yum install -y VirtualBox-5.2</p>
+
+<h2 id="安装-kubectl">安装 kubectl</h2>
+
+<pre><code>查看最新版本
+curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
+下载kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.12.2/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mv kubectl /usr/local/bin
 </code></pre>
 
-<p>对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。</p>
+<h2 id="安装-minikube">安装 minikube</h2>
 
-<p>这种心态可以用“沉没成本”理论来解释，说白了，就是我已经走了这么远了，现在掉头的话，前面做的都白做了。前面做的所有努力，都成为了这一刻选择掉头的“沉没成本”，而你走得越远，“沉没成本”就越高。</p>
+<pre><code>curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo cp minikube /usr/local/bin/ &amp;&amp; rm minikube
+</code></pre>
 
-<p>关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。</p>
+<h2 id="启动-minikube">启动 minikube</h2>
 
-<p>上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。</p>
-
-<p>这是我在工作中学到最重要的一件事：掉坑别挖。</p>
+<pre><code>minikube start
+</code></pre>
 
   </div>
 </div>
