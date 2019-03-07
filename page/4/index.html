@@ -63,6 +63,30 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 19</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></h1>
+        <div class="content is-hidden-mobile">
+          从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
+对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
+addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
+person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
+这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开 …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Mar 18</h2>
       </div>
       <div class="column">
@@ -256,30 +280,6 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_14/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_13/"></a></h1>
-        <div class="content is-hidden-mobile">
-          CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
-举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
-它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。
-这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：
-apiVersion: samplecrd.k8s.io/v1 kind: Network …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_13/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>

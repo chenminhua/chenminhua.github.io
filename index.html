@@ -63,6 +63,29 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 7</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/">一场赌局背后的统计学</a></h1>
+        <div class="content is-hidden-mobile">
+          A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
+对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
+贝叶斯学派 贝叶斯学派 …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Mar 6</h2>
       </div>
       <div class="column">
@@ -220,29 +243,6 @@ mc (minio client) mc config host add minio http://localhost:9000 AKIAIOSFODNN7EX
 肉体说，真累。
 灵魂说，你还想不想推倒女神了？
 肉体说，真想。
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jul 23</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></h1>
-        <div class="content is-hidden-mobile">
-          背景 这是一个非常有名的问题，wiki。
-简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。 这时候选手有一次改变自己选择的机会。
-这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
-实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
           
         </div>
     </article>

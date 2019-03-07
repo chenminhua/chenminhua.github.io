@@ -6,10 +6,24 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Mar 2019 16:23:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 Mar 2019 18:06:47 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一场赌局背后的统计学</title>
+      <link>https://chenminhua.github.io/posts/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</link>
+      <pubDate>Thu, 07 Mar 2019 18:06:47 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</guid>
+      <description>A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
+对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
+贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
+在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0.</description>
+    </item>
     
     <item>
       <title>Belief_system</title>
