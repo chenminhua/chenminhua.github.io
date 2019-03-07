@@ -63,6 +63,33 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 6</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/belief_system/">Belief_system</a></h1>
+        <div class="content is-hidden-mobile">
+          《Primal Branding》
+在 Primal Branding 理论中，Hanlon 提到，所有的信仰体系（Belief System）可以被拆解为 7 个关键点。这 7 个关键点分别是 Creation Story（创始故事）、Creed（信条）、Icons(标识）、Rituals（仪式/行为）、Lexicon/Sacred Words（暗号）、Non-Believers（不信你的人/黑粉）Leader（领袖）。它们之间相辅相成，但没有主次之分。
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 6</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%87%AA%E5%BB%BAstorage/">自建storage service</a></h1>
+        <div class="content is-hidden-mobile">
+          原因  s3 真的有点贵。 存在连不上 s3 的场景。  方案 minio
+docker run -p 9000:9000 --name minio \ -e &quot;MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE&quot; \ -e &quot;MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot; \ -v ~/.minio/data:/data \ -v ~/.minio/config:/root/.minio \ minio/minio server /data  登录 localhost:9000 即可。
+mc (minio client) mc config host add minio http://localhost:9000 AKIAIOSFODNN7EXAMPLE …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Jan 31</h2>
       </div>
       <div class="column">
@@ -216,44 +243,6 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
             </span>
             <p style="padding:0 5px"></p>more</p>
           </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jul 15</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></h1>
-        <div class="content is-hidden-mobile">
-          看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
-谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
-封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不 …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jun 9</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></h1>
-        <div class="content is-hidden-mobile">
-          今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。
-细思极恐。
-看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。很久以来，大学已经渐渐淡化了它原本应该有的职能，大家开始渐渐认同所谓的“大学就是用来为进入社会过渡的”，“大学是教会你怎么解决工作生活问题，学会与人沟通的”，“大学是为你以后工作积累人脉的”，“大学就是用来给你谈恋爱的”之类的论述。
-我不满意这些论述。并不是同意或者反对，就是不满意。
-对我而言，大学四年过的平静而踏实，有过到处厮混的日子，也有过拼命学习的日子。但是回过头去看这四年，乃至加上后面的三年研究生生活，学校教给我的东西真的太少了。比如对于一个所谓的985高校理工科专业强化班（非计算机专业）的学生来说，居然直到毕业都不知道gcc优化这回事，也不知道怎么做好的构建。但是在国外的很多基础的编程课上，无论是课上还是课后的参考资料中，都会有相关的背景 …
           
         </div>
     </article>

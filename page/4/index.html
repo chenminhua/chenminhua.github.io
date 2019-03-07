@@ -59,7 +59,42 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
   </div>
 <main class="container">
     
+    <h1 class="title is-3">2018</h1>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 18</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></h1>
+        <div class="content is-hidden-mobile">
+          最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&rdquo;一本让你看起来无所不知的书&rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。
+你听过 The fin 这个乐队吗？
+你知道去年最流行的编程语言是什么吗？
+你连这个游戏都没玩过吗？
+诺兰最新的那部电影你还没看？
+每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing 一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。
+点什么酒最有派头 走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。
+伏特加闻 …
+          
+        </div>
+    </article>
+    
+    
     <h1 class="title is-3">0001</h1>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></h1>
+        <div class="content is-hidden-mobile">
+          描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
+系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps? …
+          
+        </div>
+    </article>
     
     <article class="columns">
       <div class="column is-2">
@@ -254,27 +289,6 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network …
         </div>
     </article>
     
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_12/"></a></h1>
-        <div class="content is-hidden-mobile">
-          Istio Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器 &ndash; 一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。Pod 里的所有容器共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy 容器的 API，对这个 Envoy 代理进行配置，从而实现微服务治理。
-比如说 Pilot 通过调节这两 Pod 里的 Envoy 容器的配置，从而将 90%的流量分配给旧版本的应用，将 10%的流量分配给新版本应用，然后调节这个流量从 90%-10%， …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_12/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
     
   </main>
 <section class="section">
@@ -295,7 +309,7 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network …
       <div class="level-right is-marginless">
         <div class="level-item">
           
-          <a class="button is-rounded" disabled>
+          <a class="button is-rounded" href="/page/5/">
             Older
             <span class="icon is-small is-marginless">
               <i class="fa fa-angle-right"></i>

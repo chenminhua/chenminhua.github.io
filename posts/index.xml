@@ -6,10 +6,31 @@
     <description>Recent content in Posts on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Jan 2019 08:17:29 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Mar 2019 16:23:54 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Belief_system</title>
+      <link>https://chenminhua.github.io/posts/belief_system/</link>
+      <pubDate>Wed, 06 Mar 2019 16:23:54 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/belief_system/</guid>
+      <description>《Primal Branding》
+在 Primal Branding 理论中，Hanlon 提到，所有的信仰体系（Belief System）可以被拆解为 7 个关键点。这 7 个关键点分别是 Creation Story（创始故事）、Creed（信条）、Icons(标识）、Rituals（仪式/行为）、Lexicon/Sacred Words（暗号）、Non-Believers（不信你的人/黑粉）Leader（领袖）。它们之间相辅相成，但没有主次之分。</description>
+    </item>
+    
+    <item>
+      <title>自建storage service</title>
+      <link>https://chenminhua.github.io/posts/%E8%87%AA%E5%BB%BAstorage/</link>
+      <pubDate>Wed, 06 Mar 2019 11:42:54 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/%E8%87%AA%E5%BB%BAstorage/</guid>
+      <description>原因  s3 真的有点贵。 存在连不上 s3 的场景。  方案 minio
+docker run -p 9000:9000 --name minio \ -e &amp;quot;MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE&amp;quot; \ -e &amp;quot;MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&amp;quot; \ -v ~/.minio/data:/data \ -v ~/.minio/config:/root/.minio \ minio/minio server /data  登录 localhost:9000 即可。
+mc (minio client) mc config host add minio http://localhost:9000 AKIAIOSFODNN7EXAMPLE wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</description>
+    </item>
     
     <item>
       <title>Bye,2018</title>
