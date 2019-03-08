@@ -63,6 +63,22 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 23</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/optional/">kotlin中的可空类型</a></h1>
+        <div class="content is-hidden-mobile">
+          最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
+fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
+print(getProject(&quot;no such project&quot;)) // null  返回结果是null!!
+kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
+其实这锅kotlin真不背。了解mybatis的同学应该知 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Mar 19</h2>
       </div>
       <div class="column">
@@ -257,29 +273,6 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_15/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_14/"></a></h1>
-        <div class="content is-hidden-mobile">
-          自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
-接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
-总得来说，编写自定义控制器代码的过程包括：编写 main 函数、编写自定义控制器的定义，以及编写控制器里的业务逻辑三个部分。
-编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_14/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>

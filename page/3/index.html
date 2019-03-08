@@ -63,6 +63,23 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Apr 8</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></h1>
+        <div class="content is-hidden-mobile">
+          不要抽象。
+上面这句是和一个架构师聊天时他说了二十遍的话。这句话对大多数程序员来说，都是非常反直觉的。可以说抽象是计算机软件设计中极为重要的一环，是每个程序员每天都要做的事情。当你在设计一个类来表达一组数据的时候，你正在完成一次抽象；当你设计出一个抽象类或者接口，你正在抽象你的抽象。
+如果你是一个数学家，你应该会对“不要抽象”这四个字嗤之以鼻。数学家喜欢归纳和抽象，并从中发现数学之美。吴军在《数学之美》中甚至直接给出了一个论断：好的数学模型一定简单。
+大量的数学模型都验证了这一点，欧拉公式，傅里叶级数，贝叶斯定理&hellip;所有这些公式在经过一系列推导和符号约减后，都成为一个可以被以最大号字体写在 T 恤胸口位置的公式。在我们为这些公式拍案叫绝的时候，我们往往忘记了：
+That&rsquo;s the good part of the world.
+bad part 真实世界往往没有那 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Apr 7</h2>
       </div>
       <div class="column">
@@ -219,22 +236,6 @@ int main() { int n; cin &gt;&gt; n; int count = 0; int j = 2; while (true) { if 
           swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
 那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
 那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&rdquo;写时复 …
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Mar 23</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/optional/">kotlin中的可空类型</a></h1>
-        <div class="content is-hidden-mobile">
-          最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
-fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
-print(getProject(&quot;no such project&quot;)) // null  返回结果是null!!
-kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
-其实这锅kotlin真不背。了解mybatis的同学应该知 …
           
         </div>
     </article>
