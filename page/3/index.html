@@ -63,6 +63,20 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Apr 11</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/move_slow_and_mend_things/">Move slow and mend things</a></h1>
+        <div class="content is-hidden-mobile">
+          &ldquo;move fast and break things&rdquo; 这是fackbook著名的motto，意思是说，在使用新技术和新工具的时候，尽管其可能会有不稳定的地方，但是为了追求开发速度，应当果断使用那些能够提升开发效率的新技术。由于有了facebook的成功背书，很多初创公司都将其引为自己公司的开发宗旨。
+但是，很多人都误解了这句话，认为只要短期内move fast了，就可以随意的break things，事实上这样做只会让你走得更累也更慢。更重要的一点是著名的破窗理论：“如果你的一扇窗户破了，你不去修复，很快其他窗也会跟着破，房子会变得一片狼藉”。很多人认为为了move fast，就可以稍微放弃一点点对软件质量的要求。但是这样的妥协就像是纵容了一扇破窗，软件会快速腐坏并让你崩溃。
+我也曾经历过由于项目进度紧张而导致没有时间重构代码，没有时间review项目总体设计的 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Apr 8</h2>
       </div>
       <div class="column">
@@ -222,20 +236,6 @@ int main() { int n; cin &gt;&gt; n; int count = 0; int j = 2; while (true) { if 
 这种心态可以用“沉没成本”理论来解释，说白了，就是我已经走了这么远了，现在掉头的话，前面做的都白做了。前面做的所有努力，都成为了这一刻选择掉头的“沉没成本”，而你走得越远，“沉没成本”就越高。
 关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。
 上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时 …
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Mar 24</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/copy_on_write/">Copy_on_write</a></h1>
-        <div class="content is-hidden-mobile">
-          swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
-那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
-那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&rdquo;写时复 …
           
         </div>
     </article>

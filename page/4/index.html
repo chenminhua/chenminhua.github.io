@@ -63,6 +63,20 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 24</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/copy_on_write/">Copy_on_write</a></h1>
+        <div class="content is-hidden-mobile">
+          swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
+那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
+那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&rdquo;写时复 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Mar 23</h2>
       </div>
       <div class="column">
@@ -249,30 +263,6 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_16/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_15/"></a></h1>
-        <div class="content is-hidden-mobile">
-          RBAC 自己写一个编排对象
-而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
-我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。
-而在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：
- Role：角色，它其实是一组规则，定义了一组对 Kubernetes …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_15/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
