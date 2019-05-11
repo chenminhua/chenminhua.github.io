@@ -63,6 +63,21 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
     
     <article class="columns">
       <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Mar 29</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></h1>
+        <div class="content is-hidden-mobile">
+          很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。
+并发与并行 并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）
+并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。
+举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&rdquo;请求&rdquo;，先从A手中接过书，然后 …
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
         <h6 class="is-inline" style="white-space: nowrap">Mar 24</h2>
       </div>
       <div class="column">
@@ -227,30 +242,6 @@ apiVersion: v1 kind: PersistentVolume metadata: name: pv-flex-nfs spec: capacity
           
           <br>
           <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_18/">
-          <span class="icon-link is-small" style="line-height: 100%">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            </span>
-            <p style="padding:0 5px"></p>more</p>
-          </a>
-          
-        </div>
-    </article>
-    
-    <article class="columns">
-      <div class="column is-2">
-        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
-      </div>
-      <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_17/"></a></h1>
-        <div class="content is-hidden-mobile">
-          28 | PV、PVC、StorageClass，这些到底在说啥？
-所以，从今天这篇文章开始，我会通过 4 篇文章为你剖析 Kubernetes 项目处理容器持久化存储的核心原理，从而帮助你更好地理解和使用这部分内容。
-其中，PV 描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
-通常情况下，PV 对象是由运维人员事先创建在 Kubernetes 集群里待用的。比如，运维人员可以定义这样一个 NFS 类型的 PV，如下所示：
-apiVersion: v1 kind: PersistentVolume metadata: name: nfs spec: storageClassName: manual capacity: storage: 1Gi accessModes: - ReadWriteMany nfs: …
-          
-          <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_17/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>

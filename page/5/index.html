@@ -66,6 +66,30 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_17/"></a></h1>
+        <div class="content is-hidden-mobile">
+          28 | PV、PVC、StorageClass，这些到底在说啥？
+所以，从今天这篇文章开始，我会通过 4 篇文章为你剖析 Kubernetes 项目处理容器持久化存储的核心原理，从而帮助你更好地理解和使用这部分内容。
+其中，PV 描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
+通常情况下，PV 对象是由运维人员事先创建在 Kubernetes 集群里待用的。比如，运维人员可以定义这样一个 NFS 类型的 PV，如下所示：
+apiVersion: v1 kind: PersistentVolume metadata: name: nfs spec: storageClassName: manual capacity: storage: 1Gi accessModes: - ReadWriteMany nfs: …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_17/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
         <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_16/"></a></h1>
         <div class="content is-hidden-mobile">
           Operator 工作原理解读
