@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>如何设计一个系统 | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">如何设计一个系统</h1>
+  <div class="content">
+    
+
+<h2 id="描述使用场景">描述使用场景</h2>
+
+<p>设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。</p>
+
+<pre><code>系统需要能够支持用户发送twitter。
+需要能够支持用户follow（unfollow）其他用户。
+用户可以在自己的timeline上面看到自己follow的用户发送的twitter。
+用户是所有在可以访问我们服务的地区的会使用互联网的人。
+希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。
+</code></pre>
+
+<h2 id="设定约束与假设">设定约束与假设</h2>
+
+<p>你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?</p>
+
+<pre><code>1000，000，000活跃用户
+每天有100,000,000用户
+每天会有100，000，000条新twitter
+24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。
+数据的读写大约为20:1
+......
+</code></pre>
+
+<p>根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。</p>
+
+<p>此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。</p>
+
+<h2 id="高级设计">高级设计</h2>
+
+<p>在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。</p>
+
+<p>我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。</p>
+
+<h2 id="设计核心组件">设计核心组件</h2>
+
+<p>对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。</p>
+
+<h2 id="度量设计">度量设计</h2>
+
+<p>完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。</p>
+
+<p>Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working.
+开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

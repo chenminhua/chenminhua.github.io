@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title> | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+  <div class="content">
+    
+
+<h1 id="crd">CRD</h1>
+
+<p>CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。</p>
+
+<p>举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。</p>
+
+<p>它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。</p>
+
+<p>这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：</p>
+
+<pre><code>apiVersion: samplecrd.k8s.io/v1
+kind: Network
+metadata:
+  name: example-network
+spec:
+  cidr: &quot;192.168.0.0/16&quot;
+  gateway: &quot;192.168.0.1&quot;
+</code></pre>
+
+<p>可以看到，我想要描述“网络”的 API 资源类型是 Network；API 组是<code>samplecrd.k8s.io</code>；API 版本是 v1。那么，Kubernetes 又该如何知道这个 API（<code>samplecrd.k8s.io/v1/network</code>）的存在呢？</p>
+
+<p>其实，上面的这个 YAML 文件，就是一个具体的“自定义 API 资源”实例，也叫 CR（Custom Resource）。而为了能够让 Kubernetes 认识这个 CR，你就需要让 Kubernetes 明白这个 CR 的宏观定义是什么，也就是 CRD（Custom Resource Definition）。</p>
+
+<p>所以，接下来，我就先需编写一个 CRD 的 YAML 文件，它的名字叫作 network.yaml，内容如下所示：</p>
+
+<pre><code>apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: networks.samplecrd.k8s.io
+spec:
+  group: samplecrd.k8s.io
+  version: v1
+  names:
+    kind: Network
+    plural: networks
+  scope: Namespaced
+</code></pre>
+
+<p>可以看到，在这个 CRD 中，我指定了“<code>group: samplecrd.k8s.io</code>”“<code>version: v1</code>”这样的 API 信息，也指定了这个 CR 的资源类型叫作 Network，复数（plural）是 networks。然后，我还声明了它的 scope 是 Namespaced，即：我们定义的这个 Network 是一个属于 Namespace 的对象，类似于 Pod。</p>
+
+<p>这就是一个 Network API 资源类型的 API 部分的宏观定义了。这就等同于告诉了计算机：“兔子是哺乳动物”。所以这时候，Kubernetes 就能够认识和处理所有声明了 API 类型是“<code>samplecrd.k8s.io/v1/network</code>”的 YAML 文件了。</p>
+
+<p>接下来，我还需要让 Kubernetes“认识”这种 YAML 文件里描述的“网络”部分，比如“cidr”（网段），“gateway”（网关）这些字段的含义。这就相当于我要告诉计算机：“兔子有长耳朵和三瓣嘴”。</p>
+
+<pre><code>$ tree $GOPATH/src/github.com/&lt;your-name&gt;/k8s-controller-custom-resource
+.
+├── controller.go
+├── crd
+│   └── network.yaml
+├── example
+│   └── example-network.yaml
+├── main.go
+└── pkg
+    └── apis
+        └── samplecrd
+            ├── register.go
+            └── v1
+                ├── doc.go
+                ├── register.go
+                └── types.go
+</code></pre>
+
+<p>其中，pkg/apis/samplecrd 就是 API 组的名字，v1 是版本，而 v1 下面的 types.go 文件里，则定义了 Network 对象的完整描述。我已经把这个项目<a href="https://github.com/resouer/k8s-controller-custom-resource">上传到了 GitHub 上</a>，你可以随时参考。</p>
+
+<p><strong>然后，我在 pkg/apis/samplecrd 目录下创建了一个 register.go 文件，用来放置后面要用到的全局变量</strong>。这个文件的内容如下所示：</p>
+
+<pre><code>package samplecrd
+
+const (
+ GroupName = &quot;samplecrd.k8s.io&quot;
+ Version   = &quot;v1&quot;
+)
+</code></pre>
+
+<p><strong>接着，我需要在 pkg/apis/samplecrd 目录下添加一个 doc.go 文件（Golang 的文档源文件）</strong>。这个文件里的内容如下所示：</p>
+
+<pre><code>// +k8s:deepcopy-gen=package
+
+// +groupName=samplecrd.k8s.io
+package v1
+</code></pre>
+
+<p>在这个文件中，你会看到+<tag_name>[=value]格式的注释，这就是 Kubernetes 进行代码生成要用的 Annotation 风格的注释。</p>
+
+<p>其中，+k8s:deepcopy-gen=package 意思是，请为整个 v1 包里的所有类型定义自动生成 DeepCopy 方法；而<code>+groupName=samplecrd.k8s.io</code>，则定义了这个包对应的 API 组的名字。</p>
+
+<p>可以看到，这些定义在 doc.go 文件的注释，起到的是全局的代码生成控制的作用，所以也被称为 Global Tags。</p>
+
+<p><strong>接下来，我需要添加 types.go 文件</strong>。顾名思义，它的作用就是定义一个 Network 类型到底有哪些字段（比如，spec 字段里的内容）。这个文件的主要内容如下所示：</p>
+
+<pre><code>package v1
+...
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// Network describes a Network resource
+type Network struct {
+ // TypeMeta is the metadata for the resource, like kind and apiversion
+ metav1.TypeMeta `json:&quot;,inline&quot;`
+ // ObjectMeta contains the metadata for the particular object, including
+ // things like...
+ //  - name
+ //  - namespace
+ //  - self link
+ //  - labels
+ //  - ... etc ...
+ metav1.ObjectMeta `json:&quot;metadata,omitempty&quot;`
+
+ Spec networkspec `json:&quot;spec&quot;`
+}
+// networkspec is the spec for a Network resource
+type networkspec struct {
+ Cidr    string `json:&quot;cidr&quot;`
+ Gateway string `json:&quot;gateway&quot;`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// NetworkList is a list of Network resources
+type NetworkList struct {
+ metav1.TypeMeta `json:&quot;,inline&quot;`
+ metav1.ListMeta `json:&quot;metadata&quot;`
+
+ Items []Network `json:&quot;items&quot;`
+}
+</code></pre>
+
+<p>在上面这部分代码里，你可以看到 Network 类型定义方法跟标准的 Kubernetes 对象一样，都包括了 TypeMeta（API 元数据）和 ObjectMeta（对象元数据）字段。</p>
+
+<p>而其中的 Spec 字段，就是需要我们自己定义的部分。所以，在 networkspec 里，我定义了 Cidr 和 Gateway 两个字段。其中，每个字段最后面的部分比如<code>json:&quot;cidr&quot;</code>，指的就是这个字段被转换成 JSON 格式之后的名字，也就是 YAML 文件里的字段名字。</p>
+
+<blockquote>
+<p>如果你不熟悉这个用法的话，可以查阅一下 Golang 的文档。</p>
+</blockquote>
+
+<p>此外，除了定义 Network 类型，你还需要定义一个 NetworkList 类型，用来描述<strong>一组 Network 对象</strong>应该包括哪些字段。之所以需要这样一个类型，是因为在 Kubernetes 中，获取所有 X 对象的 List()方法，返回值都是 List 类型，而不是 X 类型的数组。这是不一样的。</p>
+
+<p>同样地，在 Network 和 NetworkList 类型上，也有代码生成注释。</p>
+
+<p>其中，+genclient 的意思是：请为下面这个 API 资源类型生成对应的 Client 代码（这个 Client，我马上会讲到）。而+genclient:noStatus 的意思是：这个 API 资源类型定义里，没有 Status 字段。否则，生成的 Client 就会自动带上 UpdateStatus 方法。</p>
+
+<p>如果你的类型定义包括了 Status 字段的话，就不需要这句+genclient:noStatus 注释了。比如下面这个例子：</p>
+
+<pre><code>// +genclient
+
+// Network is a specification for a Network resource
+type Network struct {
+ metav1.TypeMeta   `json:&quot;,inline&quot;`
+ metav1.ObjectMeta `json:&quot;metadata,omitempty&quot;`
+
+ Spec   NetworkSpec   `json:&quot;spec&quot;`
+ Status NetworkStatus `json:&quot;status&quot;`
+}
+</code></pre>
+
+<p>需要注意的是，+genclient 只需要写在 Network 类型上，而不用写在 NetworkList 上。因为 NetworkList 只是一个返回值类型，Network 才是“主类型”。</p>
+
+<p>而由于我在 Global Tags 里已经定义了为所有类型生成 DeepCopy 方法，所以这里就不需要再显式地加上+k8s:deepcopy-gen=true 了。当然，这也就意味着你可以用+k8s:deepcopy-gen=false 来阻止为某些类型生成 DeepCopy。</p>
+
+<p>你可能已经注意到，在这两个类型上面还有一句<code>+k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object</code>的注释。它的意思是，请在生成 DeepCopy 的时候，实现 Kubernetes 提供的 runtime.Object 接口。否则，在某些版本的 Kubernetes 里，你的这个类型定义会出现编译错误。这是一个固定的操作，记住即可。</p>
+
+<p>不过，你或许会有这样的顾虑：这些代码生成注释这么灵活，我该怎么掌握呢？</p>
+
+<p>其实，上面我所讲述的内容，已经足以应对 99%的场景了。当然，如果你对代码生成感兴趣的话，我推荐你阅读<a href="https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/">这篇博客</a>，它详细地介绍了 Kubernetes 的代码生成语法。</p>
+
+<p><strong>最后，我需要再编写的一个 pkg/apis/samplecrd/v1/register.go 文件</strong>。</p>
+
+<p>在前面对 APIServer 工作原理的讲解中，我已经提到，“registry”的作用就是注册一个类型（Type）给 APIServer。其中，Network 资源类型在服务器端的注册的工作，APIServer 会自动帮我们完成。但与之对应的，我们还需要让客户端也能“知道”Network 资源类型的定义。这就需要我们在项目里添加一个 register.go 文件。它最主要的功能，就是定义了如下所示的 addKnownTypes()方法：</p>
+
+<pre><code>package v1
+...
+// addKnownTypes adds our types to the API scheme by registering
+// Network and NetworkList
+func addKnownTypes(scheme *runtime.Scheme) error {
+ scheme.AddKnownTypes(
+  SchemeGroupVersion,
+  &amp;Network{},
+  &amp;NetworkList{},
+ )
+
+ // register the type in the scheme
+ metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
+ return nil
+}
+</code></pre>
+
+<p>有了这个方法，Kubernetes 就能够在后面生成客户端的时候，“知道”Network 以及 NetworkList 类型的定义了。</p>
+
+<p>像上面这种<strong>register.go 文件里的内容其实是非常固定的，你以后可以直接使用我提供的这部分代码做模板，然后把其中的资源类型、GroupName 和 Version 替换成你自己的定义即可。</strong></p>
+
+<p>这样，Network 对象的定义工作就全部完成了。可以看到，它其实定义了两部分内容：</p>
+
+<ul>
+<li>第一部分是，自定义资源类型的 API 描述，包括：组（Group）、版本（Version）、资源类型（Resource）等。这相当于告诉了计算机：兔子是哺乳动物。</li>
+<li>第二部分是，自定义资源类型的对象描述，包括：Spec、Status 等。这相当于告诉了计算机：兔子有长耳朵和三瓣嘴。</li>
+</ul>
+
+<p>接下来，我就要使用 Kubernetes 提供的代码生成工具，为上面定义的 Network 资源类型自动生成 clientset、informer 和 lister。其中，clientset 就是操作 Network 对象所需要使用的客户端，而 informer 和 lister 这两个包的主要功能，我会在下一篇文章中重点讲解。</p>
+
+<p>这个代码生成工具名叫<code>k8s.io/code-generator</code>，使用方法如下所示：</p>
+
+<pre><code># 代码生成的工作目录，也就是我们的项目路径
+$ ROOT_PACKAGE=&quot;github.com/resouer/k8s-controller-custom-resource&quot;
+# API Group
+$ CUSTOM_RESOURCE_NAME=&quot;samplecrd&quot;
+# API Version
+$ CUSTOM_RESOURCE_VERSION=&quot;v1&quot;
+
+# 安装k8s.io/code-generator
+$ go get -u k8s.io/code-generator/...
+$ cd $GOPATH/src/k8s.io/code-generator
+
+# 执行代码自动生成，其中pkg/client是生成目标目录，pkg/apis是类型定义目录
+$ ./generate-groups.sh all &quot;$ROOT_PACKAGE/pkg/client&quot; &quot;$ROOT_PACKAGE/pkg/apis&quot; &quot;$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION&quot;
+</code></pre>
+
+<p>代码生成工作完成之后，我们再查看一下这个项目的目录结构：</p>
+
+<pre><code>$ tree
+.
+├── controller.go
+├── crd
+│   └── network.yaml
+├── example
+│   └── example-network.yaml
+├── main.go
+└── pkg
+    ├── apis
+    │   └── samplecrd
+    │       ├── constants.go
+    │       └── v1
+    │           ├── doc.go
+    │           ├── register.go
+    │           ├── types.go
+    │           └── zz_generated.deepcopy.go
+    └── client
+        ├── clientset
+        ├── informers
+        └── listers
+</code></pre>
+
+<p>其中，pkg/apis/samplecrd/v1 下面的 zz_generated.deepcopy.go 文件，就是自动生成的 DeepCopy 代码文件。</p>
+
+<p>而整个 client 目录，以及下面的三个包（clientset、informers、 listers），都是 Kubernetes 为 Network 类型生成的客户端库，这些库会在后面编写自定义控制器的时候用到。</p>
+
+<h2 id="usage">usage</h2>
+
+<p>首先，我们使用 network.yaml 文件创建 crd：k apply -f crd/network.yaml</p>
+
+<p>这个操作，就告诉了 Kubernetes，我现在要添加一个自定义的 API 对象。而这个对象的 API 信息，正是 network.yaml 里定义的内容。我们可以通过 kubectl get 命令，查看这个 CRD：k get crd</p>
+
+<p><strong>然后</strong>，我们就可以创建一个 Network 对象了：k apply -f example/example-network.yaml</p>
+
+<p>通过这个操作，你就在 Kubernetes 集群里创建了一个 Network 对象。它的 API 资源路径是<code>samplecrd.k8s.io/v1/networks</code>。</p>
+
+<p>这时候，你就可以通过 kubectl get 命令，查看到新创建的 Network 对象：k get network</p>
+
+<p>你还可以通过 kubectl describe 命令，看到这个 Network 对象的细节：k describe network example-network</p>
+
+<h2 id="总结">总结</h2>
+
+<p>在今天这篇文章中，我为你详细解析了 Kubernetes 声明式 API 的工作原理，讲解了如何遵循声明式 API 的设计，为 Kubernetes 添加一个名叫 Network 的 API 资源类型。从而达到了通过标准的 kubectl create 和 get 操作，来管理自定义 API 对象的目的。</p>
+
+<p>不过，创建出这样一个自定义 API 对象，我们只是完成了 Kubernetes 声明式 API 的一半工作。</p>
+
+<p>接下来的另一半工作是：为这个 API 对象编写一个自定义控制器（Custom Controller）。这样， Kubernetes 才能根据 Network API 对象的“增、删、改”操作，在真实环境中做出相应的响应。比如，“创建、删除、修改”真正的 Neutron 网络。</p>
+
+<p>而这，正是 Network 这个 API 对象所关注的“业务逻辑”。</p>
+
+<p>这个业务逻辑的实现过程，以及它所使用的 Kubernetes API 编程库的工作原理，就是我要在下一篇文章中讲解的主要内容。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

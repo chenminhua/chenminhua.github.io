@@ -66,7 +66,7 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_17/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_17/"></a></h1>
         <div class="content is-hidden-mobile">
           28 | PV、PVC、StorageClass，这些到底在说啥？
 所以，从今天这篇文章开始，我会通过 4 篇文章为你剖析 Kubernetes 项目处理容器持久化存储的核心原理，从而帮助你更好地理解和使用这部分内容。
@@ -75,7 +75,7 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 apiVersion: v1 kind: PersistentVolume metadata: name: nfs spec: storageClassName: manual capacity: storage: 1Gi accessModes: - ReadWriteMany nfs: …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_17/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_17/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
@@ -90,7 +90,7 @@ apiVersion: v1 kind: PersistentVolume metadata: name: nfs spec: storageClassName
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_16/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_16/"></a></h1>
         <div class="content is-hidden-mobile">
           Operator 工作原理解读
 可能你已经感觉到，在 Kubernetes 中，管理“有状态应用”是一个比较复杂的过程，尤其是编写 Pod 模板的时候，总有一种“在 YAML 文件里编程序”的感觉，让人很不舒服。
@@ -102,7 +102,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
 不过，在部署 Etcd …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_16/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_16/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
@@ -117,7 +117,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_15/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_15/"></a></h1>
         <div class="content is-hidden-mobile">
           RBAC 自己写一个编排对象
 而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
@@ -126,7 +126,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
  Role：角色，它其实是一组规则，定义了一组对 Kubernetes …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_15/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_15/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
@@ -141,7 +141,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_14/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_14/"></a></h1>
         <div class="content is-hidden-mobile">
           自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
 接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
@@ -149,7 +149,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
 编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_14/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_14/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
@@ -164,7 +164,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_13/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_13/"></a></h1>
         <div class="content is-hidden-mobile">
           CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
 举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
@@ -173,7 +173,7 @@ $ git clone https://github.com/coreos/etcd-operator  第二步，将这个 Etcd 
 apiVersion: samplecrd.k8s.io/v1 kind: Network …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_13/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_13/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>
@@ -188,13 +188,13 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network …
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
-        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s_12/"></a></h1>
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_12/"></a></h1>
         <div class="content is-hidden-mobile">
           Istio Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器 &ndash; 一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。Pod 里的所有容器共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy 容器的 API，对这个 Envoy 代理进行配置，从而实现微服务治理。
 比如说 Pilot 通过调节这两 Pod 里的 Envoy 容器的配置，从而将 90%的流量分配给旧版本的应用，将 10%的流量分配给新版本应用，然后调节这个流量从 90%-10%， …
           
           <br>
-          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s_12/">
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_12/">
           <span class="icon-link is-small" style="line-height: 100%">
               <i class="fa fa-angle-double-right" aria-hidden="true"></i>
             </span>

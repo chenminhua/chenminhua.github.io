@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title> | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">January 1, 0001</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+  <div class="content">
+    
+
+<h2 id="istio">Istio</h2>
+
+<p><strong>Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器 &ndash; 一个高性能 C++网络代理</strong>。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。Pod 里的所有容器共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy 容器的 API，对这个 Envoy 代理进行配置，从而实现微服务治理。</p>
+
+<p>比如说 Pilot 通过调节这两 Pod 里的 Envoy 容器的配置，从而将 90%的流量分配给旧版本的应用，将 10%的流量分配给新版本应用，然后调节这个流量从 90%-10%，改到 80%-20%，再到 50%-50%，最后到 0%-100%，从而实现灰度发布。</p>
+
+<p><strong>Istio 项目使用的，是 Kubernetes 中的一个非常重要的功能，叫作 Dynamic Admission Control。</strong></p>
+
+<p>在 Kubernetes 项目中，当一个 Pod 或者任何一个 API 对象被提交给 APIServer 之后，总有一些“初始化”性质的工作需要在它们被 Kubernetes 项目正式处理之前进行。比如，自动为所有 Pod 加上某些标签（Labels）。</p>
+
+<p>而这个“初始化”操作的实现，借助的是一个叫作 Admission 的功能。它其实是 Kubernetes 项目里一组被称为 Admission Controller 的代码，可以选择性地被编译进 APIServer 中，在 API 对象创建之后会被立刻调用到。</p>
+
+<p>但这就意味着，如果你现在想要添加一些自己的规则到 Admission Controller，就会比较困难。因为，这要求重新编译并重启 APIServer。显然，这种使用方法对 Istio 来说，影响太大了。</p>
+
+<p>所以，Kubernetes 项目为我们额外提供了一种“热插拔”式的 Admission 机制，它就是 Dynamic Admission Control，也叫作：Initializer。</p>
+
+<p>现在，我给你举个例子。比如，我有如下所示的一个应用 Pod：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo Hello Kubernetes! &amp;&amp; sleep 3600']
+</code></pre>
+
+<p>可以看到，这个 Pod 里面只有一个用户容器，叫作：myapp-container。</p>
+
+<p>接下来，Istio 项目要做的，就是在这个 Pod YAML 被提交给 Kubernetes 之后，在它对应的 API 对象里自动加上 Envoy 容器的配置，使这个对象变成如下所示的样子：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo Hello Kubernetes! &amp;&amp; sleep 3600']
+  - name: envoy
+    image: lyft/envoy:845747b88f102c0fd262ab234308e9e22f693a1
+    command: [&quot;/usr/local/bin/envoy&quot;]
+    ...
+</code></pre>
+
+<p>那么，Istio 又是如何在用户完全不知情的前提下完成这个操作的呢？Istio 要做的，就是编写一个用来为 Pod“自动注入”Envoy 容器的 Initializer。</p>
+
+<p><strong>首先，Istio 会将这个 Envoy 容器本身的定义，以 ConfigMap 的方式保存在 Kubernetes 当中</strong>。这个 ConfigMap（名叫：envoy-initializer）的定义如下所示：</p>
+
+<pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: envoy-initializer
+data:
+  config: |
+    containers:
+      - name: envoy
+        image: lyft/envoy:845747db88f102c0fd262ab234308e9e22f693a1
+        command: [&quot;/usr/local/bin/envoy&quot;]
+        args:
+          - &quot;--concurrency 4&quot;
+          - &quot;--config-path /etc/envoy/envoy.json&quot;
+          - &quot;--mode serve&quot;
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            cpu: &quot;1000m&quot;
+            memory: &quot;512Mi&quot;
+          requests:
+            cpu: &quot;100m&quot;
+            memory: &quot;64Mi&quot;
+        volumeMounts:
+          - name: envoy-conf
+            mountPath: /etc/envoy
+    volumes:
+      - name: envoy-conf
+        configMap:
+          name: envoy
+</code></pre>
+
+<p>相信你已经注意到了，这个 ConfigMap 的 data 部分，正是一个 Pod 对象的一部分定义。其中，我们可以看到 Envoy 容器对应的 containers 字段，以及一个用来声明 Envoy 配置文件的 volumes 字段。</p>
+
+<p>不难想到，Initializer 要做的工作，就是把这部分 Envoy 相关的字段，自动添加到用户提交的 Pod 的 API 对象里。可是，用户提交的 Pod 里本来就有 containers 字段和 volumes 字段，所以 Kubernetes 在处理这样的更新请求时，就必须使用类似于 git merge 这样的操作，才能将这两部分内容合并在一起。所以说，在 Initializer 更新用户的 Pod 对象的时候，必须使用 PATCH API 来完成。而这种 PATCH API，正是声明式 API 最主要的能力。</p>
+
+<p><strong>接下来，Istio 将一个编写好的 Initializer，作为一个 Pod 部署在 Kubernetes 中</strong>。这个 Pod 的定义非常简单，如下所示：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: envoy-initializer
+  name: envoy-initializer
+spec:
+  containers:
+    - name: envoy-initializer
+      image: envoy-initializer:0.0.1
+      imagePullPolicy: Always
+</code></pre>
+
+<p>我们可以看到，这个 envoy-initializer 使用的 envoy-initializer:0.0.1 镜像，就是一个事先编写好的“自定义控制器”（Custom Controller），而 Initializer 的控制器，不断获取到的“实际状态”，就是用户新创建的 Pod。而它的“期望状态”，则是：这个 Pod 里被添加了 Envoy 容器的定义。也就是如果这个 Pod 里面已经添加过 Envoy 容器，那么就“放过”这个 Pod，进入下一个检查周期。而如果还没有添加过 Envoy 容器的话，它就要进行 Initialize 操作了，即：修改该 Pod 的 API 对象（doSomething 函数）。而 Istio 要往这个 Pod 里合并的字段，正是我们之前保存在 envoy-initializer 这个 ConfigMap 里的数据（即：它的 data 字段的值）。</p>
+
+<p>所以，在 Initializer 控制器的工作逻辑里，它首先会从 APIServer 中拿到这个 ConfigMap，然后，把这个 ConfigMap 里存储的 containers 和 volumes 字段，直接添加进一个空的 Pod 对象里。</p>
+
+<p>Kubernetes 的 API 库，为我们提供了一个方法，使得我们可以直接使用新旧两个 Pod 对象，生成一个 TwoWayMergePatch。<strong>有了这个 TwoWayMergePatch 之后，Initializer 的代码就可以使用这个 patch 的数据，调用 Kubernetes 的 Client，发起一个 PATCH 请求</strong>。</p>
+
+<p>这样，一个用户提交的 Pod 对象里，就会被自动加上 Envoy 容器相关的字段。</p>
+
+<p>当然，Kubernetes 还允许你通过配置，来指定要对什么样的资源进行这个 Initialize 操作，比如下面这个例子：</p>
+
+<pre><code>apiVersion: admissionregistration.k8s.io/v1alpha1
+kind: InitializerConfiguration
+metadata:
+  name: envoy-config
+initializers:
+  // 这个名字必须至少包括两个 &quot;.&quot;
+  - name: envoy.initializer.kubernetes.io
+    rules:
+      - apiGroups:
+          - &quot;&quot; // 前面说过， &quot;&quot;就是core API Group的意思
+        apiVersions:
+          - v1
+        resources:
+          - pods
+</code></pre>
+
+<p>这个配置，就意味着 Kubernetes 要对所有的 Pod 进行这个 Initialize 操作，并且，我们指定了负责这个操作的 Initializer，名叫：envoy-initializer。</p>
+
+<p>而一旦这个 InitializerConfiguration 被创建，Kubernetes 就会把这个 Initializer 的名字，加在所有新创建的 Pod 的 Metadata 上，格式如下所示：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  initializers:
+    pending:
+      - name: envoy.initializer.kubernetes.io
+  name: myapp-pod
+  labels:
+    app: myapp
+...
+</code></pre>
+
+<p>可以看到，每一个新创建的 Pod，都会自动携带了 metadata.initializers.pending 的 Metadata 信息。这个 Metadata，正是接下来 Initializer 的控制器判断这个 Pod 有没有执行过自己所负责的初始化操作的重要依据。</p>
+
+<p><strong>这也就意味着，当你在 Initializer 里完成了要做的操作后，一定要记得将这个 metadata.initializers.pending 标志清除掉。这一点，你在编写 Initializer 代码的时候一定要非常注意。</strong></p>
+
+<p>此外，除了上面的配置方法，你还可以在具体的 Pod 的 Annotation 里添加一个如下所示的字段，从而声明要使用某个 Initializer：</p>
+
+<pre><code>apiVersion: v1
+kind: Pod
+metadata
+  annotations:
+    &quot;initializer.kubernetes.io/envoy&quot;: &quot;true&quot;
+    ...
+</code></pre>
+
+<p>在这个 Pod 里，我们添加了一个 Annotation，写明： <code>initializer.kubernetes.io/envoy=true</code>。这样，就会使用到我们前面所定义的 envoy-initializer 了。</p>
+
+<p>以上，就是关于 Initializer 最基本的工作原理和使用方法了。相信你此时已经明白，<strong>Istio 项目的核心，就是由无数个运行在应用 Pod 中的 Envoy 容器组成的服务代理网格</strong>。这也正是 Service Mesh 的含义。</p>
+
+<blockquote>
+<p>备注：如果你对这个 Demo 感兴趣，可以在<a href="https://github.com/resouer/kubernetes-initializer-tutorial">这个 GitHub 链接</a>里找到它的所有源码和文档。这个 Demo，是我 fork 自 Kelsey Hightower 的一个同名的 Demo。</p>
+</blockquote>
+
+<p>所以说，<strong>声明式 API，才是 Kubernetes 项目编排能力“赖以生存”的核心所在</strong>，希望你能够认真理解。</p>
+
+<p>而在使用 Initializer 的流程中，最核心的步骤，莫过于 Initializer“自定义控制器”的编写过程。它遵循的，正是标准的“Kubernetes 编程范式”，即：</p>
+
+<blockquote>
+<p><strong>如何使用控制器模式，同 Kubernetes 里 API 对象的“增、删、改、查”进行协作，进而完成用户业务逻辑的编写过程。</strong></p>
+</blockquote>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+

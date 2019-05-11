@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<title>三门问题 | 硕大的汤姆</title>
+
+<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<div class="container">
+    <nav class="navbar level">
+      <div class="navbar-brand">
+          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
+      </div>           
+      <div class="navbar-menu has-text-centered is-active">
+          <div class="navbar-end is-centered">
+              
+                <a href="mailto:chenmhgo@gmail.com">
+                  <span class="icon">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </a>
+              
+                <a href="https://chenminhua.github.io/tweets">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                </a>
+              
+                <a href="https://www.weibo.com/chenminhua91">
+                  <span class="icon">
+                    <i class="fab fa-weibo"></i>
+                  </span>
+                </a>
+              
+                <a href="https://github.com/chenminhua">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+              
+           </div>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+  <h2 class="subtitle is-6">July 23, 2018</h2>
+  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">三门问题</h1>
+  <div class="content">
+    
+
+<h2 id="背景">背景</h2>
+
+<p>这是一个非常有名的问题，<a href="https://en.wikipedia.org/wiki/Monty_Hall_problem">wiki</a>。</p>
+
+<p>简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。
+在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。
+这时候选手有一次改变自己选择的机会。</p>
+
+<p>这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。
+下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。</p>
+
+<h2 id="实验">实验</h2>
+
+<pre><code class="language-python">from bayesian.bbn import build_bbn
+
+def f_prize_door(prize_door):
+	return 0.33333333
+
+def f_guest_door(guest_door):
+	return 0.33333333
+
+def f_monty_door(prize_door, guest_door, monty_door):
+	if prize_door == guest_door:
+		if prize_door == monty_door:
+			return 0
+		else: 
+			return 0.5
+	else:
+		if prize_door == monty_door:
+			return 0
+		if guest_door == monty_door:
+			return 0
+		return 1
+
+g = build_bbn(
+		f_prize_door,
+		f_guest_door,
+		f_monty_door,
+		domains=dict(
+				prize_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],
+				guest_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],
+				monty_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]
+			)
+	)
+</code></pre>
+
+<p>然后我们运行一下,假设选手选了A门，而主持人打开了B门</p>
+
+<pre><code>python -i montyHall.py
+g.q(guest_door=&quot;A&quot;, monty_door=&quot;B&quot;)
+</code></pre>
+
+<p>结果如下</p>
+
+<pre><code>+-------------+-------+----------+
+| Node        | Value | Marginal |
++-------------+-------+----------+
+| guest_door  | B     | 0.000000 |
+| guest_door  | C     | 0.000000 |
+| guest_door* | A*    | 1.000000 |
+| monty_door  | A     | 0.000000 |
+| monty_door  | C     | 0.000000 |
+| monty_door* | B*    | 1.000000 |
+| prize_door  | A     | 0.333333 |
+| prize_door  | B     | 0.000000 |
+| prize_door  | C     | 0.666667 |
++-------------+-------+----------+
+</code></pre>
+
+<p>我们发现奖品在A门的概率只有在C门的一半。</p>
+
+  </div>
+</div>
+<div class="container has-text-centered">
+    
+</div>
+
+<div class="container has-text-centered">
+  
+</div>
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+  </div>
+</section>
+
+
