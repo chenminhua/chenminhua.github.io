@@ -66,6 +66,29 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_19/"></a></h1>
+        <div class="content is-hidden-mobile">
+          30 | 编写自己的存储插件：FlexVolume 与 CSI
+在 Kubernetes 中，存储插件的开发有两种方式：FlexVolume 和 CSI。
+FlexVolume 举个例子，现在我们要编写的是一个使用 NFS 实现的 FlexVolume 插件。对于一个 FlexVolume 类型的 PV 来说，它的 YAML 文件如下所示：
+apiVersion: v1 kind: PersistentVolume metadata: name: pv-flex-nfs spec: capacity: storage: 10Gi accessModes: - ReadWriteMany flexVolume: driver: &quot;k8s/nfs&quot; fsType: &quot;nfs&quot; options: server: &quot;10.10.0.25&quot; …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_19/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
         <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_18/"></a></h1>
         <div class="content is-hidden-mobile">
           29 | PV、PVC 体系是不是多此一举？从本地持久化卷谈起
