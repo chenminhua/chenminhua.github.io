@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chenminhua.github.io/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/</loc>
+    <lastmod>2019-05-18T11:37:27+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chenminhua.github.io/posts/math/%E4%BB%80%E4%B9%88%E6%98%AF%E6%A6%82%E7%8E%87/</loc>
     <lastmod>2019-05-12T22:32:00+08:00</lastmod>
   </url>
@@ -228,13 +233,17 @@
   </url>
   
   <url>
+    <loc>https://chenminhua.github.io/posts/programming/ieee754_with_tears/</loc>
+  </url>
+  
+  <url>
     <loc>https://chenminhua.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chenminhua.github.io/posts/</loc>
-    <lastmod>2019-05-12T22:32:00+08:00</lastmod>
+    <lastmod>2019-05-18T11:37:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -249,7 +258,7 @@
   
   <url>
     <loc>https://chenminhua.github.io/</loc>
-    <lastmod>2019-05-12T22:32:00+08:00</lastmod>
+    <lastmod>2019-05-18T11:37:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   

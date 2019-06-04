@@ -66,6 +66,55 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
         <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
       </div>
       <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/mysql/innodb%E7%B4%A2%E5%BC%95/"></a></h1>
+        <div class="content is-hidden-mobile">
+          索引的数据结构 innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段索引为例，度差不多为 1200。假设这棵树高 4 层，则可以存 1200 的 3 次方个值（17 亿）。
+主键索引（primary key，也被称为聚簇索引，clustered index）的叶子节点存储整行数据。主键索引的存储在逻辑上是连续的，但是在物理上却并不是。主键索引的叶子节点上会存储行数据，并存储前向和后向数据的指针，用于优化扫描性能。
+而非主键索引则称为二级索引(secondary index)，其叶子节点上存储的是主键的值。
+有时候即使可以使用辅助索引，优化器也会选择不用索引。因为顺序读要远远快于离散读。只有当使用辅助索引查找的数据量是少量的时，优化器才会选择使用辅助索引。
+覆盖索引 在使用辅助索引的查 …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/mysql/innodb%E7%B4%A2%E5%BC%95/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
+        <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_20/"></a></h1>
+        <div class="content is-hidden-mobile">
+          31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
+在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
+为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
+DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
+我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
+ 备注： …
+          
+          <br>
+          <a class="button is-marginless is-paddingless" href="https://chenminhua.github.io/posts/k8s/k8s_20/">
+          <span class="icon-link is-small" style="line-height: 100%">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
+            <p style="padding:0 5px"></p>more</p>
+          </a>
+          
+        </div>
+    </article>
+    
+    <article class="columns">
+      <div class="column is-2">
+        <h6 class="is-inline" style="white-space: nowrap">Jan 1</h2>
+      </div>
+      <div class="column">
         <h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><a href="https://chenminhua.github.io/posts/k8s/k8s_19/"></a></h1>
         <div class="content is-hidden-mobile">
           30 | 编写自己的存储插件：FlexVolume 与 CSI
@@ -288,6 +337,19 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network …
     <p></p>
   </div>
 </section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-141378858-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 
 
 </div>

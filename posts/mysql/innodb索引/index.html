@@ -62,7 +62,9 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
   <div class="content">
     
 
-<p>innodb的索引采用B+树，具有高扇出，高度平衡的特定。通常B+树的高度在2到4层，也就是说某次查找只需要2到4次IO。以一个整数字段索引为例，度差不多为1200。假设这棵树高4层，则可以存1200的3次方个值（17亿）。</p>
+<h2 id="索引的数据结构">索引的数据结构</h2>
+
+<p>innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段索引为例，度差不多为 1200。假设这棵树高 4 层，则可以存 1200 的 3 次方个值（17 亿）。</p>
 
 <p>主键索引（primary key，也被称为聚簇索引，clustered index）的叶子节点存储整行数据。主键索引的存储在逻辑上是连续的，但是在物理上却并不是。主键索引的叶子节点上会存储行数据，并存储前向和后向数据的指针，用于优化扫描性能。</p>
 
@@ -87,16 +89,11 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 
 <p>在 MySQL 5.6 之前，只能从 ID3 开始一个个回表。到主键索引上找出数据行，再对比字段值。而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。</p>
 
-<h2 id="是否使用自增id做主键">是否使用自增id做主键</h2>
+<h2 id="是否使用自增-id-做主键">是否使用自增 id 做主键</h2>
 
-<h3 id="建议使用自增-id-做主键">建议使用自增 id 做主键</h3>
+<p>建议使用自增 id 做主键，好处在于插入的时候是递增插入，不用挪动其他记录，也就不会遇到页分裂的问题。此外，由于二级索引的叶子节点存的都是主键索引，主键的长度越小，二级索引占用的空间也就越小。</p>
 
-<ol>
-<li>递增插入，都是追加操作，不用挪动其他记录，不涉及页分裂问题。</li>
-<li>二级索引的叶子节点存的是主键索引，主键长度越小，二级索引占用的空间也就越小。</li>
-</ol>
-
-<h3 id="用普通索引还是唯一索引">用普通索引还是唯一索引</h3>
+<h2 id="用普通索引还是唯一索引">用普通索引还是唯一索引</h2>
 
 <p>身份证号较大，不建议做主键，那么是创建唯一索引，还是普通索引？</p>
 
@@ -198,17 +195,6 @@ from SUser;
 
 <p>如果两个表上面字符集不同，在进行两个表进行连接的时候，会导致用不上连接字段上的索引。原因是需要对连接字段做函数操作。</p>
 
-<h2 id="select-查询长时间不返回怎么办">select 查询长时间不返回怎么办</h2>
-
-<p>第一，再等 Mdl 锁。show processlist 看下是不是有人在持有 mdl 写锁。查看 sys.schema_table_lock_waits 表可以看到谁在持有 mdl 写锁。Kill 掉它就好了。</p>
-
-<p>第二，等 flush。show processlist 看下是不是有 waiting for table flush，如果有的话，和可能是某个 flush 操作被堵住了。</p>
-
-<p>第三，等行锁。查看 sys.innodb_lock_waits 表。</p>
-
-<pre><code>select * from t sys.innodb_lock_waits where locked_table = 't'\G
-</code></pre>
-
   </div>
 </div>
 <div class="container has-text-centered">
@@ -223,5 +209,18 @@ from SUser;
     <p></p>
   </div>
 </section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-141378858-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 
 

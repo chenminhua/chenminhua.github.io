@@ -6,10 +6,23 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 May 2019 22:32:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 18 May 2019 11:37:27 +0800</lastBuildDate>
     
 	<atom:link href="https://chenminhua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mysql查询时间很长怎么办？</title>
+      <link>https://chenminhua.github.io/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/</link>
+      <pubDate>Sat, 18 May 2019 11:37:27 +0800</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/</guid>
+      <description> 等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL 读锁，当对表进行表结构变更的时候，加 MDL 写锁。
+我曾经遇到过一次，某个表上面的 sql 都超时了，这时候很容易就想到表被锁了。 马上 show processlist 看下是不是有人在持有 mdl 写锁。查看 sys.schema_table_lock_waits 表可以看到谁在持有 mdl 写锁。如果很急的话，Kill 掉它就好了。
+等 flush show processlist 看下是不是有 waiting for table flush，如果有的话，和可能是某个 flush 操作被堵住了。
+等行锁 查看 sys.innodb_lock_waits 表。
+select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  </description>
+    </item>
     
     <item>
       <title>什么是概率</title>
@@ -529,12 +542,9 @@ int main() { int n; cin &amp;gt;&amp;gt; n; int count = 0; int j = 2; while (tru
       <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
       
       <guid>https://chenminhua.github.io/tweets/</guid>
-      <description>逻辑学基本原理： 同一率：事物只能是其本身 排中率：要么是，要么否，没有中间状态 充足理由率(因果原理)：任何事物都有其存在的充足理由 矛盾率：在同一时刻，某个事物不可能在同一方面既是这样又不是这样。
-错误推理通常很有迷惑性，有时甚至比正确推理听起来更合理。错误推理通常以直接作用于人的情感的方式来战胜正确推理。
+      <description>错误推理通常很有迷惑性，有时甚至比正确推理听起来更合理。错误推理通常以直接作用于人的情感的方式来战胜正确推理。
 有时我们会身陷矛盾而不自知，这是因为我们忽略了它所代表的客观事物。还有的时候，我们故意将观念和事实割裂开来，不去考察观念与事实之间是否相符。
-负面只有在正面已知的情况下才可以被确认为负面。
-每一个原因与其结果之间必然存在根本的相似之处。
-永远不要直接调动人们的情感，要努力让人们自己去发现真相。
+不要直接调动人们的情感，要努力让人们自己去发现真相。
 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
 软件开发中，准备工作的中心目标就是降低风险。如果需求被污染了，就会污染架构，进而又会污染构建。在软件工程领域常称为 1000 倍理论或者 4D 理论。发现错误的时间要尽可能接近引入该错误的时间。
 明确的需求有助于避免争论，在开始编码之前，需要先把系统的 scope 画出来。系统的可扩展性与可维护性很大程度上都取决于有没有隐藏需求。
@@ -551,7 +561,7 @@ Design is about tradeoffs and priorities
 高扇入低扇出的设计。
 信息隐藏包括两大类：隐藏复杂度和隐藏变化源。
 自上而下策略和自下而上策略的最关键区别在于，前者是一种 decomposition 策略，而后者是一种 composition 策略。事实上这两种设计策略并不互斥。设计是一个启发式的过程，你需要反复试验以找到最合适的一种。
-什么决定了一个决策的关键程度？答案是变化的成本。
+一个决定的关键程度取决于推翻这个决定的成本。
 随机过程要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的。比如今天的最高气温可能和之前几天的最高气温是相关的。马尔科夫为了简化问题，提出了一种假设，随机过程中每个状态的概率分布只和其前一个状态有关。
 隐马尔科夫模型：任意时刻 t 的状态 st 是不可见的，所以观测者不能通过观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。假设 s1, s2, s3&amp;hellip; 信源发出的信号 o1, o2, o3&amp;hellip; 接收器收到的信号。根据 o1,o2,o3 推测 s1,s2,s3，也就是找到令 p(s1,s2,s3&amp;hellip;|o1,o2,o3&amp;hellip;) 最大的那组 s1,s2,s3&amp;hellip;的值。</description>
     </item>
@@ -821,7 +831,7 @@ kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storag
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://chenminhua.github.io/posts/mysql/innodb%E7%B4%A2%E5%BC%95/</guid>
-      <description>innodb的索引采用B+树，具有高扇出，高度平衡的特定。通常B+树的高度在2到4层，也就是说某次查找只需要2到4次IO。以一个整数字段索引为例，度差不多为1200。假设这棵树高4层，则可以存1200的3次方个值（17亿）。
+      <description>索引的数据结构 innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段索引为例，度差不多为 1200。假设这棵树高 4 层，则可以存 1200 的 3 次方个值（17 亿）。
 主键索引（primary key，也被称为聚簇索引，clustered index）的叶子节点存储整行数据。主键索引的存储在逻辑上是连续的，但是在物理上却并不是。主键索引的叶子节点上会存储行数据，并存储前向和后向数据的指针，用于优化扫描性能。
 而非主键索引则称为二级索引(secondary index)，其叶子节点上存储的是主键的值。
 有时候即使可以使用辅助索引，优化器也会选择不用索引。因为顺序读要远远快于离散读。只有当使用辅助索引查找的数据量是少量的时，优化器才会选择使用辅助索引。
@@ -830,9 +840,16 @@ kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storag
 索引下推 现在有一个需求：检索出表中“名字第一个字是张，而且年龄是 10 岁的所有男孩”。那么，SQL 语句是这么写的：
 mysql&amp;gt; select * from tuser where name like &#39;张%&#39; and age=10 and ismale=1;  你已经知道了前缀索引规则，所以这个语句在搜索索引树的时候，只能用 “张”，找到第一个满足条件的记录 ID3。当然，这还不错，总比全表扫描要好。然后呢？当然是判断其他条件是否满足。
 在 MySQL 5.6 之前，只能从 ID3 开始一个个回表。到主键索引上找出数据行，再对比字段值。而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。
-是否使用自增id做主键 建议使用自增 id 做主键  递增插入，都是追加操作，不用挪动其他记录，不涉及页分裂问题。 二级索引的叶子节点存的是主键索引，主键长度越小，二级索引占用的空间也就越小。  用普通索引还是唯一索引 身份证号较大，不建议做主键，那么是创建唯一索引，还是普通索引？
-查询 假设，执行查询的语句是 select id from T where k=5。这个查询语句在索引树上查找的过程，先是通过 B+树从树根开始，按层搜索到叶子节点，然后数据页内部通过二分法来定位记录。
- 对于普通索引来说，查找到满足条件的第一个记录(5,500)后，需要查找下一个记录，直到碰到第一个不满足 k=5 条件的记录。 对于唯一索引来说，由于索引定义了唯一性，查找到第一个满足条件的记录后，就会停止继续检索。  这两者的性能差距微乎其微。InnoDB 的数据是按数据页为单位来读写的。也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。在 InnoDB 中，每个数据页的大小默认是 16KB。那么，对于普通索引来说，要多做的那一次“查找和判断下一条记录”的操作，就只需要一次指针寻找和一次计算。对于整型字段，一个数据页可以放近千个 key，所以基本读这个页就够了。</description>
+是否使用自增 id 做主键 建议使用自增 id 做主键，好处在于插入的时候是递增插入，不用挪动其他记录，也就不会遇到页分裂的问题。此外，由于二级索引的叶子节点存的都是主键索引，主键的长度越小，二级索引占用的空间也就越小。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chenminhua.github.io/posts/programming/ieee754_with_tears/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chenminhua.github.io/posts/programming/ieee754_with_tears/</guid>
+      <description></description>
     </item>
     
     <item>
