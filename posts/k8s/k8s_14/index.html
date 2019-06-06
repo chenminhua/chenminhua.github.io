@@ -1,65 +1,141 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+  
+    <title> :: 硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
+接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
+总得来说，编写自定义控制器代码的过程包括：编写 main 函数、编写自定义控制器的定义，以及编写控制器里的业务逻辑三个部分。
+编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom Controller），然后启动它。这部分代码的主要内容如下所示：
+func main() { ... cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig) ... kubeClient, err := kubernetes.NewForConfig(cfg) ... networkClient, err := clientset.NewForConfig(cfg) ... networkInformerFactory := informers.NewSharedInformerFactory(networkClient, ...) controller := NewController(kubeClient, networkClient, networkInformerFactory.Samplecrd().V1().Networks()) go networkInformerFactory.Start(stopCh) if err = controller.Run(2, stopCh); err != nil { glog."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/k8s/k8s_14/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
+接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
+总得来说，编写自定义控制器代码的过程包括：编写 main 函数、编写自定义控制器的定义，以及编写控制器里的业务逻辑三个部分。
+编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom Controller），然后启动它。这部分代码的主要内容如下所示：
+func main() { ... cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig) ... kubeClient, err := kubernetes.NewForConfig(cfg) ... networkClient, err := clientset.NewForConfig(cfg) ... networkInformerFactory := informers.NewSharedInformerFactory(networkClient, ...) controller := NewController(kubeClient, networkClient, networkInformerFactory.Samplecrd().V1().Networks()) go networkInformerFactory.Start(stopCh) if err = controller.Run(2, stopCh); err != nil { glog." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的这篇文章中，我就继续和你一起完成剩下一半的工作，即：为 Network 这个自定义 API 对象编写一个自定义控制器（Custom Controller）。
+接下来，我就和你一起通过编写代码来实现这个过程。这个项目和上一篇文章里的代码是同一个项目，你可以从这个 GitHub 库里找到它们。我在代码里还加上了丰富的注释，你可以随时参考。
+总得来说，编写自定义控制器代码的过程包括：编写 main 函数、编写自定义控制器的定义，以及编写控制器里的业务逻辑三个部分。
+编写 main 函数 main 函数的主要工作就是，定义并初始化一个自定义控制器（Custom Controller），然后启动它。这部分代码的主要内容如下所示：
+func main() { ... cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig) ... kubeClient, err := kubernetes.NewForConfig(cfg) ... networkClient, err := clientset.NewForConfig(cfg) ... networkInformerFactory := informers.NewSharedInformerFactory(networkClient, ...) controller := NewController(kubeClient, networkClient, networkInformerFactory.Samplecrd().V1().Networks()) go networkInformerFactory.Start(stopCh) if err = controller.Run(2, stopCh); err != nil { glog." />
+<meta property="og:url" content="/posts/k8s/k8s_14/" />
+<meta property="og:site_name" content="" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
 
 
 
 
-<title> | 硕大的汤姆</title>
-
-<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
-integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
 
 
 
+
+
+
+
+</head>
+<body class="">
 
 
 <div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="mailto:chenmhgo@gmail.com">
-                  <span class="icon">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                </a>
-              
-                <a href="https://chenminhua.github.io/tweets">
-                  <span class="icon">
-                    <i class="fab fa-twitter"></i>
-                  </span>
-                </a>
-              
-                <a href="https://www.weibo.com/chenminhua91">
-                  <span class="icon">
-                    <i class="fab fa-weibo"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/chenminhua">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
   </div>
-<div class="container">
-  <h2 class="subtitle is-6">January 1, 0001</h2>
-  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
   <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/k8s/k8s_14/"></a></h1>
+  <div class="post-meta">
+    <span class="post-date">
+      0001-01-01
+    </span>
+    
+  </div>
+
+  
+
+  
+
+  <div class="post-content">
     
 
 <h2 id="自定义控制器">自定义控制器</h2>
@@ -521,31 +597,61 @@ I0915 12:54:09.738854   25245 controller.go:183] Successfully synced 'default/ex
 <p>请思考一下，为什么 Informer 和你编写的控制循环之间，一定要使用一个工作队列来进行协作呢？</p>
 
   </div>
-</div>
-<div class="container has-text-centered">
-    
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/k8s/k8s_13/">
+          <span class="button__icon">←</span>
+          <span class="button__text"></span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/k8s/k8s_15/">
+          <span class="button__text"></span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
 </div>
 
-<div class="container has-text-centered">
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
   
 </div>
-<section class="section">
-  <div class="container has-text-centered">
-    <p></p>
-  </div>
-</section>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-141378858-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
+</body>
+</html>

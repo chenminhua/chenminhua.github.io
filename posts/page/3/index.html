@@ -1,297 +1,349 @@
 <!DOCTYPE html>
-<html class="nojs" lang="en" dir="ltr">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-<title>Posts – 硕大的汤姆</title>
-<link rel="alternate" type="application/rss" title="RSS" href="https://chenminhua.github.io/posts/index.xml">
-<meta name="description" content="">
-<meta property="og:site_name" content="硕大的汤姆">
-<meta property="og:title" content="Posts">
-<meta property="og:url" content="https://chenminhua.github.io/posts/">
+  
+    <title>Posts :: 硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/" />
 
-<meta name="generator" content="Hugo 0.43" />
 
-<link rel="canonical" href="https://chenminhua.github.io/posts/">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="style" href="/css/styles.css">
-<link rel="stylesheet" href="/css/styles.css">
-<link rel="stylesheet" href="/css/print.css" media="print">
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "url" : "https://chenminhua.github.io/posts/",
-    "name": "Posts",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://chenminhua.github.io/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "硕大的汤姆",
-      "url": "https://chenminhua.github.io/",
-    }
-</script>
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Posts :: 硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Posts :: 硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="" />
+<meta property="og:url" content="/posts/" />
+<meta property="og:site_name" content="Posts" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+
+
+
+  <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="硕大的汤姆" />
+
+
+
+
+
+
+
+
 
 </head>
-
-<body>
-<div class="page layout__page layout__sidebar-second">
-<header class="header layout__header" role="banner">
-<a href="/" title="Home" rel="home" class="header__logo"><img src="/images/logo.png" alt="Home" class="header__logo-image"></a>
-<h1 class="header__site-name">
-<a href="/" title="Home" class="header__site-link" rel="home"><span>硕大的汤姆</span></a>
-</h1>
-<div class="region header__region">
+<body class="">
 
 
-</div>
-</header>
+<div class="container">
 
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
+  </div>
+</a>
 
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
 
-
-<nav class="main-menu layout__navigation" role="navigation">
-<h2 class="visually-hidden">Main menu</h2>
-<ul class="navbar">
-<li><a class="" href="/">Home</a></li>
-<li><a class="" href="/about/">About</a></li>
-<li><a class="" href="/tweets/">Tweets</a></li>
-<li><a class="" href="/cc/">代码大全</a></li>
-<li><a class="active" href="/posts/">Posts</a></li>
-</ul>
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
 </nav>
 
-
-<main class="main layout__main" role="main">
-<h1 class="title">Posts</h1>
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></h2>
-
+  
 </header>
-<div class="content">
-突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？
-先写个判断一个数是不是质数的函数
-bool isPrime(int n){ if (n == 1){ return false; }else { for (int i = 2; i &lt;= floor(sqrt(n)); i++){ if (n % i == 0){ return false; } } return true; } }  然后调用它
-int main() { int n; cin &gt;&gt; n; int count = 0; int j = 2; while (true) { if (isPrime(j)){ count += 1; cout &lt;&lt; j &lt;&lt; endl; if (count &gt;= n) { break; } } j += 1; } }  结果显示第1124个质数为9043。
+
+
+  <div class="content">
+    
+<div class="posts">
+  
+  
+  
+
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/chitchat/bye2018/">Bye,2018</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2019-01-31
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/chitchat/bye2018/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/">市场营销方法论</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-12-20
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      最近在看美剧《广告狂人》，于是对广告业产生了一些兴趣，进而去了解了一下市场营销的方法论。Marketing 集成了商业的全部功能，并通过广告，销售以及其他市场活动直接和客户打交道。Marketing 是艺术与科学的混合，其中的知识非常广博。
+市场营销过程是一个循环过程，一个市场计划的各个步骤和方面需要相互配合支持来达到目的。在市场计划中，做对一件事情是容易的，但是制定一个内部统一且相互支持的市场计划并不容易。整个市场营销过程主要包括以下几步。
+1.客户分析 2.市场分析 3.竞争对手分析 4.分发渠道分析 5.制定营销组合 6.评估营销效益 7.重复1-6步并不断修正和扩展  客户分析 客户分析是市场营销的第一步。你必须先弄明白你的营销工作的对象是谁，以便对他们展开你的工作。
+理清需求 需求类别是什么？谁需要？为什么需要？比如说电子烟产品吧。使用电子烟的人可能是为了戒烟，也可能是一名电子烟烟雾玩家。可能只是希望让自己看起来更酷一点。
+理清购买者和用户 who is the buyer？ who is the user？ buyer 和 user 很可能不是同一个人，比如男士袜子的购买者常常是女性,所以在运动台推广袜子往往没什么用。
+理清购买过程 购买过程可不是指用户是支付宝付款还是微信付款，而是指用户从产生需求想法到最终完成购买之后的整个过程。不同品类的产品，用户会有完全不同的购买过程。
+比如你需要买一组旅行套装（小包装的牙刷牙膏肥皂等），你家门口正好有一个名创优品或者无印良品，你下班路过的时候直接走进店里，随手拿了一套就结账了。如果使用感受不错，你以后还会反复购买同样的产品。
+比如你想买一个电动牙刷，可能是因为电视剧中的女主角使用电动牙刷的镜头吸引了你。然后你就去淘宝上搜了一下然后直接下单，或者看了两篇评测文章后做出决定。老实说，电动牙刷看起来都差不多，随便选一个品牌的价格较低的产品对你来说不会构成心理负担。大概一个小时内，你自己都没有意识到你已经下单了。
+比如你想买一辆车，首先是你觉得你需要一辆车，而不是因为你路过了一个 4s 店。然后，你可能会咨询一些懂车的朋友，或者去知乎上看看高分的评论，或者去微博上随便搜搜看。终于你锁定了三到五款不同的车，他们各有利弊。A 车的油耗最低，但是外形不好看；B 车最有设计感，但是不太保值；C 车你很满意，但是稍稍有点超出你的预算了；D 车最近在促销感觉很划算，但是这个品牌的口碑不是太好。经过了反复地信息搜集和内心斗争。最终你决定买下其中的某一款。然后在开了两个月后，你开始慢慢评估自己的购买决定，比如我真的太蠢了，或者我真的太明智了。
+总体来说，购买过程往往包括：先感知需求，再信息搜索，再评估替代产品，最后完成购买。其实还有一步，就是评估自己的购买决定。了解购买过程的一个主要方法是进行客户调查。
+理清参与度 你需要弄明白，你卖的是一个高参与度的产品还是低参与度的产品？参与度可以用客户在购买过程中付出的精力和思考来衡量。通常来说，参与度和购买产品的风险有关。
+如果客户在购买商品时感到较高的风险，那这就是一个高参与度的产品，比如买房子肯定是一个非常高参与度的事情。而买纸巾或者矿泉水则往往比较随机，用户对品牌甚至价格都是无感的。
+提高用户参与度也对产品推广很有帮助。可以通过一些有参与度的广告（比如百事，耐克这些产品的广告）。可以给产品加入一些重要特性（killer feature）。
+划分市场 在理清了上面的这些问题之后，你就可以划分市场了。 你可以选择按照地理位置划分，在北方投放羽绒服和取暖器广告的效果肯定比海南强的多。 你可以选择按照人口组成划分，比如划分婴儿、学生、中年人、老年人奶粉市场。
+市场分析 市场分析步骤从更广的角度分析市场规模，发展趋势，竞争环境，行业监管环境。分析的目的是为了判断是否有必要投入精力在这个市场进行营销活动。市场分析需要弄明白三个问题：相关市场，生命周期，竞争因素。
+相关市场 比如你打算向市场推出一种新的牛排产品，请注意，牛排市场不是你的相关市场。（下面的数据都是我乱讲的）假设全球牛排市场年销售总额是 1000 亿，其中中国市场占 10%，也就是 100 亿，而你的牛排产品打算在超市和电商售卖（零售），这部分市场核算下来大约有 50 亿，而且你的牛排产品属于 100 元以上一块的高价位牛排，这个细分市场算下来可能只剩 5 亿美元了。这才是你的相关市场。
+生命周期（PLC） PLC 主要分为引入期，成长期，成熟期，衰退期。
+引入期的时候大家还不太明白产品是什么，比如两年前的区块链。
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/">聊聊微信读书</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-10-28
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-09-12
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      敏捷开发 （2001 至今） 在 2001 年，十七名软件开发人员在犹他州的雪鸟度假村会面，讨论这些轻量级的开发方法，并由 Jeff Sutherland，Ken Schwaber 和 Alistair Cockburn 发起，一同发布了敏捷软件开发宣言。宣言主要包括：
+个体和交互 胜过 过程和工具 可以工作的软件 胜过 面面俱到的文档 客户合作 胜过 合同谈判 响应变化 胜过 遵循计划  敏捷开发就是在一个高度协作的环境中，不断地使用反馈进行自我调整和完善。
+核心  迭代开发，价值优先。你需要经常性的交付对用户有价值的软件。工作的软件是首要的进度衡量标准，你应该使用短迭代，增量发布，不停交付你的软件，让客户做决定。
+ 分解任务，真实进度。你需要分解你的项目工作，准确把控项目的进度。
+ 站立会议，交流畅通。立会能够让团队之间交流更顺畅，彼此知道对方正在进行什么工作，进展如何，是否遇到一些障碍。最有效的交流方式就是面对面。
+ 用户参与，调整方向。同 1，我们不能闭门造车，而是要和用户一起，让用户的需求反映进来。
+ 结对编程，测试驱动，代码评审，保证质量。代码质量非常重要。
+ CI/CD。CICD 要尽早搭建起来，持续集成，持续发布，一切都要自动化。
+ 定期回顾，持续改进。定期反省和调整。
+ 不断学习，提高能力。关注优秀的技能和好的设计。 对团队投资，分享你的知识和你获得知识的方法。 定期举行读书会和讲座。 打破砂锅问到底。为什么用于比怎么做重要。
+  关于会议 会议一定要设立最终期限，防止陷入无休止的辩论。每个会议都要有一个负责人。
+每天早上都要有立会。立会要足够简单有效，每个人需要回答三个问题：我昨天干了啥，我今天准备干啥，我遇到了什么阻塞。猪和鸡中，只有猪可以参加立会。
+关于技术和代码 防微杜渐，不要只想着骗过测试。
+如果你看到别人的一些代码很傻逼，重写掉它。
+如果有人误解了需求，那这个误解可能会被传递下去。确保尽快消除这些误解。
+指责不能修复 bug，我只关心解决问题。提出你的顾虑，而不是否定你的队友。维护你的队友，就算他犯了错，也不要让他在大家面前难堪。
+代码集体所有制，每个人都可以改别人的代码。
+要有一致的编码风格和代码规范，api 规范，非常重要。新人要先适应规则，再贡献代码。
+架构师必须写代码，不要在 ppt 里面编程。主程应该试着承担架构师的角色。程序员拒绝设计，就是在拒绝思考。
+架构师最重要的任务是：通过找到移除软件设计不可逆性的方式，从而去除所谓架构的概念。
+记录问题解决日志。就像海盗的航海日记，飞行员的飞行手册一样。daylog 要可以搜索，可以 comment,记录问题（要详细，什么程序什么版本什么平台），debug 过程和解决方案。
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-08-02
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="pagination">
+  <div class="pagination__buttons">
+    
+      <span class="button previous">
+        <a href="/posts/page/2/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Newer posts</span>
+        </a>
+      </span>
+    
+    
+      <span class="button next">
+        <a href="/posts/page/4/">
+          <span class="button__text">Older posts</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+    
+  </div>
 </div>
-</article>
 
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/draft/akka/">Akka</a></h2>
-
-</header>
-<div class="content">
-akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。
-像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。
-与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
-actors sending messages changing its state changing its behavior creating more actors
-class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .
 </div>
-</article>
 
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></h2>
+  </div>
 
-</header>
-<div class="content">
-很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究竟什么是并发和并行，以及如何实现并发和并行。
-并发与并行 并发（concurrency）用于描述问题。如果一个问题可以被拆分成多个问题进行局部求解，或者更本质的说，如果每个局部的子问题的求解都不因其求解的顺序改变而改变，那么这就是一个可并发的问题。（再次注意：并发描述的是问题）
-并行描述的是解决问题的方法。二十个人一起搬砖也好，二十个CPU核一起计算也好，并行描述的就是将任务分配给多个可以执行任务的执行者，分别执行任务的方式。
-举个简单的例子。大家都应该去过图书馆借书，假设现在图书馆有一个前台管理员，A同学去前台借书，同时B同学去前台还书，C同学在咨询某个问题。这时候，图书管理员可以同时处理你们的&rdquo;请求&rdquo;，先从A手中接过书，然后回到C同学的问题，再用扫码枪扫B同学的书，然后帮A同学办理借书登记。整个过程中，管理员执行的任何一个子任务都不会因为其处理的先后顺序而导致其处理结果的变化。因此我们说，图书管理员的工作是一个可并发的工作（可以&rdquo;同时&rdquo;处理多个任务）。事实上，类比到服务端开发上，图书管理员不过就是一个开放了若干接口（借书，还书，咨询等）的服务器么。
-而随着来图书馆的同学越来越多，尽管图书管理员依旧面对一个可并发的问题，但是其处理问题的速度（计算能力）是有限的，而不停在不同任务之间切换（上下文切换）更增加了他处理问题的时间成本。于是图书馆决定增加两名前台管理员，这就是并行处理问题的方式。
-后端服务通常都是在处理可并发的问题。在不增加计算能力的情况下，通过增加线程（这里的线程是一个抽象的概念，可以理解为一组具有独立上下文的计算资源）的方式可以让服务能够更好的处理并发问题（同时处理多个任务）。当某个任务需要占用较长时间，但并不占用cpu时，服务可以切换去其他任务，让cpu先去处理其他任务，之后再回来。
-矩阵乘法 我们再换个例子，google引以为傲的page rank算法中最关键的一步就是计算两个矩阵的乘积，然后得到不同网页之间的相关性。但是现在的互联网太大了，网页数都是以亿为单位的。计算两个超大矩阵的乘积显然是一个非常耗时的工作。如果用一台计算机算显然是不可能的。
-事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个300,000,000 * 300,000,000的矩阵的乘积，我们可以将其分别划分为9个100,000,000 * 100,000,000的矩阵，一共需要进行27次100,000,000 * 100,000,000的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。
-现在我们的超大矩阵乘法就变成了27个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把100,000,000 * 100,000,000的矩阵继续拆分成 100个10,000,000 * 10,000,000个矩阵，这时候问题就变成了27000个10,000,000 * 10,000,000的矩阵的乘积。
-如果你有27000台服务器的话，这个超大矩阵计算的时间复杂度就降低了27000倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。
-感谢上帝，矩阵乘积是一个可并发问题！！
-一些计算模型 线程与锁：通过开多个线程，我们就可以得到高并发的系统。但是现实往往没有那么简单。在很多时候，多个线程往往会共享同一份数据，这个时候竞态就出现了。为了解决竞态问题，我们可以用锁机制来保护数据的读写。
-函数式编程：不共享可变数据，因此没有副作用，所有的中间状态都是确定的而不是需要通过锁来防止计算过程被影响。由于这些特性，函数式编程天然具备高并发特性，你可以将计算过程分配到不同的地方进行计算，而结果不会有任何改变。这一切看起来是如此完美，而现实往往没有那么简单，现实中的问题也没有这么完美。比如在函数式编程语言haskell中，从类型签名可以看出一个函数是否带有副作用（不纯函数的类型签名都以IO开头）。
-CSP (Communicating Sequential Processes):工作者之间可以通过channel来相互通信，当一个工作者向channel发送信息的时候，默认会阻塞，直到接受者把这条消息拿走。同样接收者也会默认阻塞在拿消息的地方，直到有人向channel发消息并被拿到。CSP的代表语言是golang（但是golang中的channel可以有buffer）
-ACTOR模型：每个工作者都会有一个收件箱,当工作者需要相互通信的时候可以通过向彼此邮箱发消息来实现。和CSP比较来说，可以认为actor是实名邮箱，而csp是匿名邮箱。actor模型的代表语言是erlang。
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/the_rule_of_hole/">The_rule_of_hole</a></h2>
-
-</header>
-<div class="content">
-The rule of hole: If you fall into a hole, don't dig  对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了面子，有时候是为了某些利益，有时候是觉得自己能扭转局面，人会在意识到自己错了之后，继续沿着原路往前走，越陷越深。
-关于如何成为一个职业的程序员，我们常常被教育要说到做到。能就是能，不能就是不能，不要说试试看。当然，我完全同意这些话，但是有些同学会把这句话理解为，如果我接了这个需求，我就一定要做到。
-上面的两种说法看起来差不多，其实换了个角度，表达的意思就完全不同了。在评估需求的时候，我们当然要足够认真仔细，明白什么是你能做到的，什么是你做不到的，什么是你能做到但是让你觉得不对劲的。（如果你只把自己当做一个勤劳的码农，觉得评审需求是产品经理和架构师的事，那你并不是一个合格的工程师。如果你们公司不让你参加需求评审，那还是趁早换个地方吧。）但是当你在开发过程中，发现之前评审的需求中某个地方有逻辑漏洞，或者你发现你必须搞一堆很奇怪的东西（在代码里下毒）才能完成需求，你应该立即站出来，而不是闷着头做下去。
-这是我在工作中学到最重要的一件事：掉坑别挖。
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/copy_on_write/">Copy_on_write</a></h2>
-
-</header>
-<div class="content">
-swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。
-那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。
-那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&rdquo;写时复制&rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。
-cow与引用计数 英文好的同学建议直接读这篇instagram的原文 在instagram停用了python的垃圾回收。
-linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&rdquo;写时复制&rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&hellip;
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/optional/">kotlin中的可空类型</a></h2>
-
-</header>
-<div class="content">
-最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下
-fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode)  上面这个方法根据项目号去数据库拿项目，从类型签名上看，getProject方法返回的是一个ProjectDO类型的对象，而且由于不是可空类型，所以不会是null。但是，如果数据库里面确实没有这个项目号的项目呢？试验一下
-print(getProject(&quot;no such project&quot;)) // null  返回结果是null!!
-kotlin欺骗了我们，明明说好是非空，怎么就返回了一个null给我！
-其实这锅kotlin真不背。了解mybatis的同学应该知道，mybatis采用的是jdk代理的模式来代理Mapper接口。尽管我们在定义mapper接口时写明了返回非空类型的对象，
-projectMapper.getProjectByCode(projectCode): ProjectDO  但是在jvm上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis的mapper的代理对象就返回了一个null给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到null就是null了。
-所以kotlin的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个null来，仍然需要你手动处理。
-by the way，如果你阅读kotlin代码编译后的字节码，会发现其实kotlin在所有不是可空的变量上加上了@NotNull注解，其RetentionPolicy为class
-/** * Annotations are to be recorded in the class file by the compiler * but need not be retained by the VM at run time. This is the default * behavior. */ CLASS,  说白了，它可不会在运行时起作用。
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></h2>
-
-</header>
-<div class="content">
-从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
-对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
-addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
-person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
-这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
-所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
-闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
-从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。
-function outside() { var a = 0; return function inside() { a++; console.log(a); }; } var f = outside(); f(); //1 f(); //2 f(); //3  我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
-其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
-如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。
-日常黑 spring 下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我&rdquo;撕逼&rdquo;。
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></h2>
-
-</header>
-<div class="content">
-最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&rdquo;一本让你看起来无所不知的书&rdquo;。如今这个年代，无所不知几乎已经成为不可能的事情。
-你听过 The fin 这个乐队吗？
-你知道去年最流行的编程语言是什么吗？
-你连这个游戏都没玩过吗？
-诺兰最新的那部电影你还没看？
-每当遇到这种问题，你可以直接了当地回答“不知道，没听过，没兴趣”。或者，你也可以摆出一副嘲笑，满不在乎的表情，bluffing 一下。因为我比较爱酒，所以就认真读了书里关于酒的一部分文字，和大家分享一下。
-点什么酒最有派头 走进任意一间小酒吧，点一份简单的伏特加，或者加冰的波本威士忌，这样的日子已经一去不复返了。记住各种酒的牌子绝对是社交表演中的重要部分，就好比是仪式中一个必不可少的环节。天知道在什么场合，人们就会忽然展开关于名牌伏特加的大讨论。鉴于这种可能性，你可不能毫无准备。
-伏特加闻起来会有点消毒水的味道，在聊到伏特加的时候，你首先要强调：伏特加尝起来都一样。这就避免了有人会说&rdquo;smirnoff 牌伏特加在蒙眼品酒会里被选为最佳&rdquo;这样无聊的内容。真正好的伏特加应该是完全没有味道的。苏联红牌伏特加(stolichnaya)虽然很不错，但是有点过时。芬兰伏特加(finlandia)和绝对伏特加(absolut)一度很流行，但基本也是我们父辈的酒了。时下最火的伏特加要属荷兰的坎特一号(Ketel One)。高级伏特加(luksusowa)来自波兰，原材料是土豆，这种酒让人醉得更彻底。
-苏格兰威士忌要相对简单一点，因为不像伏特加那样会被掺兑得乱七八糟。现在最智慧的喝法，是在纯苏格兰威士忌里面加一点冰块，然后等它融化完。single malt 威士忌现在依然是公认的上选，产地最好是来自高地(highland)或者艾莱岛(Islay)。高地苏格兰威士忌要选 Macallan 纯麦威士忌。如果你喜欢烟熏味的话，可以选择拉加维林。
-除了苏格兰威士忌，还有一种美国产的波本威士忌。关于波本酒，你需要知道的是：1，波本酒很烈。2.杰克丹尼不是真正的波本酒。
-朗姆酒一般适合往酒里加一些水果或者果汁，比如柠檬和酸橙。不妨试试巴西产的卡萨撒(cachaca)或者朗姆酒兑的莫吉托(mojito)鸡尾酒。
-喝龙舌兰(taquila)的窍门在于只喝最好的，最纯的那几种。喝过之后要记得补充水分。龙舌兰是墨西哥的国酒（类似于我们的茅台这类的吧），玛格丽特鸡尾酒的基酒就是 taquila。
-不知不觉，就写了这么多字了。不懂酒的朋友现在一定觉得我是一个很懂酒的人了吧。其实，我啥也不懂，我只是在 bluffing 而已哈哈。
-最后希望大家都能多一些真诚，少一些套路，做一个现充的人。在这样的时代，不知道真的没什么大不了的。
-</div>
-</article>
-
-<article class="section-posts list-view">
-<header>
-<h2 class="title "><a href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></h2>
-
-</header>
-<div class="content">
-描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？未来可能会加入什么功能？是否有隐藏需求的存在？你的用户是谁？你希望他们如何使用你的系统。这些问题都必须被严肃地回答。以设计一个twitter为例。
-系统需要能够支持用户发送twitter。 需要能够支持用户follow（unfollow）其他用户。 用户可以在自己的timeline上面看到自己follow的用户发送的twitter。 用户是所有在可以访问我们服务的地区的会使用互联网的人。 希望用户每天能浏览三次以上时间轴，并在twitter上发现新的朋友，每天花费超过半小时时间在app上。  设定约束与假设 你的系统有多少用户？多少活跃用户?每天会创造多少的数据？数据的分布是怎样的？是否存在明显的热数据？数据的读写比率可能是多少？你需要多大的rps?
-1000，000，000活跃用户 每天有100,000,000用户 每天会有100，000，000条新twitter 24小时内的twitter会被大量的读，7天后的twitter被阅读的频率会比较低。 数据的读写大约为20:1 ......  根据这些约束和假设，你的数据库架构，缓存，服务器，网络等等一系列基础设施配置就都可以开始围绕它们来设计。
-此外，明白什么能做到什么做不到是非常重要的，很多时候你需要做出一些取舍。CAP理论就是一个极好的例子：很多时候你需要放弃一定的可用性来保证一致性，有些时候你又可以放宽一致性的要求，来提升可用性。这些平衡很多时候不取决于你有多少开发资源，而是你在系统设计之初就必须做出的妥协。
-高级设计 在大概了解系统需求以及基础设施的设计轮廓后，我们可以开始着手高级设计。我们需要画出系统主要的组件和连接。这一阶段的设计不需要很详细，但是要尽可能清晰和完整地画出系统的主要组成部分。在这一过程中，需要不断在脑中提醒自己前两个阶段得出的结论，确保不会做出与之相悖的设计。
-我比较喜欢先画出几个关键的服务，然后画出数据库，再画出网关和缓存，当然也不要忘记trace,LB这些。可以用不同形状来表示不同类型的组件。
-设计核心组件 对每一个核心组件进行详细深入的分析。这一个环节的设计关注细节，你需要设计各个服务的接口和数据模型，思考服务间的边界，尽可能的消除服务的隐藏需求和隐藏依赖。
-度量设计 完成细节设计后，你需要重新review你的设计，确认和处理瓶颈以及一些限制，论述可能的解决办法和代价。在实际进入开发和使用后，我们必须时刻关注重要的metrics。机器的性能怎么样？请求的延时是多少？访问是否存在峰谷？每次迭代需要多少时间？有多少bug?bug的平均修复时长是多少？有多少bug的出现来自于最初设计的错误？所有这一切都需要被仔细审视，并在最早的时间发现问题。
-Not using metrics in your development process is like trying to land a plane in a storm with your altimeter not working. 开发过程中如果没有metrics，就像是风暴中降落一台高度计坏了的飞机。
-</div>
-</article>
-
-<nav class="pager">
-<a href="/posts/page/2/" rel="prev" class="pager-item pager-prev">Prev</a>
-</nav>
-
-</main>
-
-
-
-<aside class="sidebar layout__second-sidebar" role="complementary">
-<section>
-<h4 class="menu"><a class="active" href="/posts/">Posts</a></h4>
-<ul class="menu">
-<li><a class="" href="/posts/k8s_2/">K8s_2</a></li>
-<li><a class="" href="/posts/k8s_3/">K8s_3</a></li>
-<li><a class="" href="/posts/k8s_1/">K8s_1</a></li>
-<li><a class="" href="/posts/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/">敏捷开发</a></li>
-<li><a class="" href="/posts/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/">需求变更的一致性</a></li>
-<li><a class="" href="/posts/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/">我的理想工作环境</a></li>
-<li><a class="" href="/posts/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/">灵魂与肉体</a></li>
-<li><a class="" href="/posts/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/">三门问题</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">聊聊面向对象</a></li>
-<li><a class="" href="/posts/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/">糟糕的高等教育</a></li>
-<li><a class="" href="/posts/feature_vs_function/">Feature_vs_function</a></li>
-<li><a class="" href="/posts/annotation/">spring aop中遇到的一个小问题</a></li>
-<li><a class="" href="/posts/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/">相关与因果</a></li>
-<li><a class="" href="/posts/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/">一件让我愤怒的事</a></li>
-<li><a class="" href="/posts/%E5%8D%81%E5%B9%B4/">十年</a></li>
-<li><a class="" href="/posts/move_slow_and_mend_things/">Move slow and mend things</a></li>
-<li><a class="" href="/posts/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/">聊聊抽象</a></li>
-<li><a class="" href="/posts/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/">答案是什么</a></li>
-<li><a class="" href="/posts/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/">数学与经济</a></li>
-<li><a class="" href="/posts/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/">你不需要懂这些??</a></li>
-<li><a class="" href="/posts/%E8%B4%A8%E6%95%B0/">质数</a></li>
-<li><a class="" href="/posts/draft/akka/">Akka</a></li>
-<li><a class="" href="/posts/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/">并发与并行</a></li>
-<li><a class="" href="/posts/the_rule_of_hole/">The_rule_of_hole</a></li>
-<li><a class="" href="/posts/copy_on_write/">Copy_on_write</a></li>
-<li><a class="" href="/posts/optional/">kotlin中的可空类型</a></li>
-<li><a class="" href="/posts/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></li>
-<li><a class="" href="/posts/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></li>
-<li><a class="" href="/posts/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/">如何设计一个系统</a></li>
-</ul>
-</section>
-</aside>
-
-
-<footer class="footer layout__footer" role="contentinfo">
-<p><span>© 硕大的汤姆</span></p>
-
-
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
 </footer>
 
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+  
 </div>
 
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
 </body>
 </html>

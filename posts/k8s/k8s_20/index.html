@@ -1,65 +1,150 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+  
+    <title> :: 硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
+在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
+为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
+DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
+我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
+ 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
+ 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
+kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/k8s/k8s_20/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
+在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
+为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
+DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
+我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
+ 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
+ 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
+kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
+在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
+为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
+DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
+我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
+ 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
+ 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
+kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com." />
+<meta property="og:url" content="/posts/k8s/k8s_20/" />
+<meta property="og:site_name" content="" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
 
 
 
 
-<title> | 硕大的汤姆</title>
-
-<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
-integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
 
 
 
+
+
+
+
+</head>
+<body class="">
 
 
 <div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="mailto:chenmhgo@gmail.com">
-                  <span class="icon">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                </a>
-              
-                <a href="https://chenminhua.github.io/tweets">
-                  <span class="icon">
-                    <i class="fab fa-twitter"></i>
-                  </span>
-                </a>
-              
-                <a href="https://www.weibo.com/chenminhua91">
-                  <span class="icon">
-                    <i class="fab fa-weibo"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/chenminhua">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
   </div>
-<div class="container">
-  <h2 class="subtitle is-6">January 1, 0001</h2>
-  <h2 class="subtitle is-size-4-mobile is-size-3-desktop"></h1>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
   <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/k8s/k8s_20/"></a></h1>
+  <div class="post-meta">
+    <span class="post-date">
+      0001-01-01
+    </span>
+    
+  </div>
+
+  
+
+  
+
+  <div class="post-content">
     
 
 <p>31 | 容器存储实践：CSI 插件编写指南
@@ -549,31 +634,61 @@ spec:
 <p>请你根据编写 FlexVolume 和 CSI 插件的流程，分析一下什么时候该使用 FlexVolume，什么时候应该使用 CSI？</p>
 
   </div>
-</div>
-<div class="container has-text-centered">
-    
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/k8s/k8s_19/">
+          <span class="button__icon">←</span>
+          <span class="button__text"></span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/mysql/innodb%E7%B4%A2%E5%BC%95/">
+          <span class="button__text"></span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
 </div>
 
-<div class="container has-text-centered">
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
   
 </div>
-<section class="section">
-  <div class="container has-text-centered">
-    <p></p>
-  </div>
-</section>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-141378858-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
+</body>
+</html>

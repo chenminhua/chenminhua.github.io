@@ -1,65 +1,144 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+  
+    <title>一场赌局背后的统计学 :: 硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
+对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
+贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
+在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="一场赌局背后的统计学 :: 硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
+对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
+贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
+在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="一场赌局背后的统计学 :: 硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
+对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
+贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
+在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0." />
+<meta property="og:url" content="/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/" />
+<meta property="og:site_name" content="一场赌局背后的统计学" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-03-07 18:06:47 &#43;0800 CST" />
 
 
 
 
-<title>一场赌局背后的统计学 | 硕大的汤姆</title>
-
-<link rel="stylesheet" href="https://chenminhua.github.io//css/styles.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
-integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
 
 
 
+
+
+</head>
+<body class="">
 
 
 <div class="container">
-    <nav class="navbar level">
-      <div class="navbar-brand">
-          <a class="nav-item" href="https://chenminhua.github.io/"><h1 class="title is-3">硕大的汤姆</h1></a>
-      </div>           
-      <div class="navbar-menu has-text-centered is-active">
-          <div class="navbar-end is-centered">
-              
-                <a href="mailto:chenmhgo@gmail.com">
-                  <span class="icon">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                </a>
-              
-                <a href="https://chenminhua.github.io/tweets">
-                  <span class="icon">
-                    <i class="fab fa-twitter"></i>
-                  </span>
-                </a>
-              
-                <a href="https://www.weibo.com/chenminhua91">
-                  <span class="icon">
-                    <i class="fab fa-weibo"></i>
-                  </span>
-                </a>
-              
-                <a href="https://github.com/chenminhua">
-                  <span class="icon">
-                    <i class="fab fa-github"></i>
-                  </span>
-                </a>
-              
-           </div>
-      </div>
-    </nav>
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
   </div>
-<div class="container">
-  <h2 class="subtitle is-6">March 7, 2019</h2>
-  <h2 class="subtitle is-size-4-mobile is-size-3-desktop">一场赌局背后的统计学</h1>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
   <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/">一场赌局背后的统计学</a></h1>
+  <div class="post-meta">
+    <span class="post-date">
+      2019-03-07
+    </span>
+    
+  </div>
+
+  
+
+  
+
+  <div class="post-content">
     
 
 <p>A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。</p>
@@ -101,31 +180,61 @@ integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbi
 <p>既然贝叶斯主义能够提供更加完整的信息，为什么迟迟没有取代频率主义成为主流呢？这就不得不说贝叶斯方法的缺点了：一是对未知变量的积分运算会导致极高的计算复杂度（computation complexity）；二是对先验分布的设定（prior specification）包含一定的主观性，因而一直不招老派的统计学家待见。正是这两个原因限制了贝叶斯方法的广泛应用。</p>
 
   </div>
-</div>
-<div class="container has-text-centered">
-    
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/math/%E8%BA%AB%E9%AB%98%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B/">
+          <span class="button__icon">←</span>
+          <span class="button__text">身高背后的统计模型</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/chitchat/belief_system/">
+          <span class="button__text">Belief_system</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
 </div>
 
-<div class="container has-text-centered">
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
   
 </div>
-<section class="section">
-  <div class="container has-text-centered">
-    <p></p>
-  </div>
-</section>
 
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-141378858-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
+</body>
+</html>

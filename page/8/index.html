@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="generator" content="Hugo 0.48" />
+  
+    <title>硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="A simple, retro theme for Hugo"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="" />
+<meta property="og:url" content="/" />
+<meta property="og:site_name" content="硕大的汤姆" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+
+
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="硕大的汤姆" />
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="posts">
+  
+  
+  
+
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/programming/optional/">kotlin中的可空类型</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-03-23
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/programming/optional/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">我只是想要一个函数啊</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-03-19
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？面向对象的最重要特性有三个：封装，继承，多态。在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。继承则解决了代码复用的问题，并实现了一定程度的抽象。而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。
+对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
+addOneYearAge(person)  我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
+person.growUpOneYear()  这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
+这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
+所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。
+闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
+从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。
+function outside() { var a = 0; return function inside() { a++; console.log(a); }; } var f = outside(); f(); //1 f(); //2 f(); //3  我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。
+日常黑 spring 下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我&rdquo;撕逼&rdquo;。
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">装逼的艺术</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-03-18
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/k8s/k8s_12/"></a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        0001-01-01
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      Istio Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器 &ndash; 一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的应用 Pod 中。Pod 里的所有容器共享同一个 Network Namespace。所以，Envoy 容器就能够通过配置 Pod 里的 iptables 规则，把整个 Pod 的进出流量接管下来。这时候，Istio 的控制层（Control Plane）里的 Pilot 组件，就能够通过调用每个 Envoy 容器的 API，对这个 Envoy 代理进行配置，从而实现微服务治理。
+比如说 Pilot 通过调节这两 Pod 里的 Envoy 容器的配置，从而将 90%的流量分配给旧版本的应用，将 10%的流量分配给新版本应用，然后调节这个流量从 90%-10%，改到 80%-20%，再到 50%-50%，最后到 0%-100%，从而实现灰度发布。
+Istio 项目使用的，是 Kubernetes 中的一个非常重要的功能，叫作 Dynamic Admission Control。
+在 Kubernetes 项目中，当一个 Pod 或者任何一个 API 对象被提交给 APIServer 之后，总有一些“初始化”性质的工作需要在它们被 Kubernetes 项目正式处理之前进行。比如，自动为所有 Pod 加上某些标签（Labels）。
+而这个“初始化”操作的实现，借助的是一个叫作 Admission 的功能。它其实是 Kubernetes 项目里一组被称为 Admission Controller 的代码，可以选择性地被编译进 APIServer 中，在 API 对象创建之后会被立刻调用到。
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/k8s/k8s_12/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="/posts/k8s/k8s_13/"></a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        0001-01-01
+      </span>
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
+举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
+它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。
+这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：
+apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network spec: cidr: &quot;192.168.0.0/16&quot; gateway: &quot;192.168.0.1&quot;  可以看到，我想要描述“网络”的 API 资源类型是 Network；API 组是samplecrd.k8s.io；API 版本是 v1。那么，Kubernetes 又该如何知道这个 API（samplecrd.k8s.io/v1/network）的存在呢？
+其实，上面的这个 YAML 文件，就是一个具体的“自定义 API 资源”实例，也叫 CR（Custom Resource）。而为了能够让 Kubernetes 认识这个 CR，你就需要让 Kubernetes 明白这个 CR 的宏观定义是什么，也就是 CRD（Custom Resource Definition）。
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/k8s/k8s_13/">Read more →</a>
+    </div>
+    
+  </div>
+  
+  <div class="pagination">
+  <div class="pagination__buttons">
+    
+      <span class="button previous">
+        <a href="/page/7/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Newer posts</span>
+        </a>
+      </span>
+    
+    
+      <span class="button next">
+        <a href="/page/9/">
+          <span class="button__text">Older posts</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+    
+  </div>
+</div>
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
