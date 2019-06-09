@@ -120,41 +120,6 @@
   
   <div class="post on-list">
     <h1 class="post-title">
-      <a href="/posts/k8s/k8s_19/"></a></h1>
-    <div class="post-meta">
-      <span class="post-date">
-        0001-01-01
-      </span>
-      
-    </div>
-
-    
-
-    
-
-    <div class="post-content">
-      
-      
-      30 | 编写自己的存储插件：FlexVolume 与 CSI
-在 Kubernetes 中，存储插件的开发有两种方式：FlexVolume 和 CSI。
-FlexVolume 举个例子，现在我们要编写的是一个使用 NFS 实现的 FlexVolume 插件。对于一个 FlexVolume 类型的 PV 来说，它的 YAML 文件如下所示：
-apiVersion: v1 kind: PersistentVolume metadata: name: pv-flex-nfs spec: capacity: storage: 10Gi accessModes: - ReadWriteMany flexVolume: driver: &quot;k8s/nfs&quot; fsType: &quot;nfs&quot; options: server: &quot;10.10.0.25&quot; # 改成你自己的NFS服务器地址 share: &quot;export&quot;  可以看到，这个 PV 定义的 Volume 类型是 flexVolume。并且，我们指定了这个 Volume 的 driver 叫作 k8s/nfs。这个名字很重要，我后面马上会为你解释它的含义。
-而 Volume 的 options 字段，则是一个自定义字段。也就是说，它的类型，其实是 map[string]string。所以，你可以在这一部分自由地加上你想要定义的参数。
-在我们这个例子里，options 字段指定了 NFS 服务器的地址（server: “10.
-      
-      
-    </div>
-
-    
-    <div>
-      <a class="read-more button"
-        href="/posts/k8s/k8s_19/">Read more →</a>
-    </div>
-    
-  </div>
-  
-  <div class="post on-list">
-    <h1 class="post-title">
       <a href="/posts/k8s/k8s_20/"></a></h1>
     <div class="post-meta">
       <span class="post-date">
@@ -170,14 +135,7 @@ apiVersion: v1 kind: PersistentVolume metadata: name: pv-flex-nfs spec: capacity
     <div class="post-content">
       
       
-      31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
-在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
-为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
-DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
-我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
- 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
- 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
-kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &quot;true&quot; provisioner: com.
+      31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。 在上一篇文章中，我已经为你详细讲解
       
       
     </div>
@@ -207,16 +165,7 @@ kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storag
     <div class="post-content">
       
       
-      索引的数据结构 innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段索引为例，度差不多为 1200。假设这棵树高 4 层，则可以存 1200 的 3 次方个值（17 亿）。
-主键索引（primary key，也被称为聚簇索引，clustered index）的叶子节点存储整行数据。主键索引的存储在逻辑上是连续的，但是在物理上却并不是。主键索引的叶子节点上会存储行数据，并存储前向和后向数据的指针，用于优化扫描性能。
-而非主键索引则称为二级索引(secondary index)，其叶子节点上存储的是主键的值。
-有时候即使可以使用辅助索引，优化器也会选择不用索引。因为顺序读要远远快于离散读。只有当使用辅助索引查找的数据量是少量的时，优化器才会选择使用辅助索引。
-覆盖索引 在使用辅助索引的查询情况下，往往需要回表获取索引字段以外的数据。而覆盖索引可以用于避免回表查询。
-在一个市民信息表上，是否有必要将身份证号和名字建立联合索引？我们知道，身份证号是市民的唯一标识。也就是说，如果有根据身份证号查询市民信息的需求，我们只要在身份证号字段上建立索引就够了。而再建立一个（身份证号、姓名）的联合索引，是不是浪费空间？如果现在有一个高频请求，要根据市民的身份证号查询他的姓名和年龄，这个联合索引就有意义了。它可以在这个高频请求上用到覆盖索引，不再需要回表查整行记录，减少语句的执行时间。
-索引下推 现在有一个需求：检索出表中“名字第一个字是张，而且年龄是 10 岁的所有男孩”。那么，SQL 语句是这么写的：
-mysql&gt; select * from tuser where name like &lsquo;张%&rsquo; and age=10 and ismale=1;  你已经知道了前缀索引规则，所以这个语句在搜索索引树的时候，只能用 “张”，找到第一个满足条件的记录 ID3。当然，这还不错，总比全表扫描要好。然后呢？当然是判断其他条件是否满足。
-在 MySQL 5.6 之前，只能从 ID3 开始一个个回表。到主键索引上找出数据行，再对比字段值。而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数。
-是否使用自增 id 做主键 建议使用自增 id 做主键，好处在于插入的时候是递增插入，不用挪动其他记录，也就不会遇到页分裂的问题。此外，由于二级索引的叶子节点存的都是主键索引，主键的长度越小，二级索引占用的空间也就越小。
+      索引的数据结构 innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段
       
       
     </div>
@@ -273,6 +222,8 @@ mysql&gt; select * from tuser where name like &lsquo;张%&rsquo; and age=10 and 
 
     <div class="post-content">
       
+      
+      描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？
       
       
     </div>

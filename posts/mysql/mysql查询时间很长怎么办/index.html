@@ -6,11 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content=" 等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL 读锁，当对表进行表结构变更的时候，加 MDL 写锁。
-我曾经遇到过一次，某个表上面的 sql 都超时了，这时候很容易就想到表被锁了。 马上 show processlist 看下是不是有人在持有 mdl 写锁。查看 sys.schema_table_lock_waits 表可以看到谁在持有 mdl 写锁。如果很急的话，Kill 掉它就好了。
-等 flush show processlist 看下是不是有 waiting for table flush，如果有的话，和可能是某个 flush 操作被堵住了。
-等行锁 查看 sys.innodb_lock_waits 表。
-select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  "/>
+<meta name="description" content="等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/" />
@@ -31,11 +27,7 @@ select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  "/>
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="mysql查询时间很长怎么办？ :: 硕大的汤姆 — A simple, retro theme for Hugo" />
-<meta name="twitter:description" content=" 等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL 读锁，当对表进行表结构变更的时候，加 MDL 写锁。
-我曾经遇到过一次，某个表上面的 sql 都超时了，这时候很容易就想到表被锁了。 马上 show processlist 看下是不是有人在持有 mdl 写锁。查看 sys.schema_table_lock_waits 表可以看到谁在持有 mdl 写锁。如果很急的话，Kill 掉它就好了。
-等 flush show processlist 看下是不是有 waiting for table flush，如果有的话，和可能是某个 flush 操作被堵住了。
-等行锁 查看 sys.innodb_lock_waits 表。
-select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  " />
+<meta name="twitter:description" content="等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL" />
 <meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -44,11 +36,7 @@ select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  " />
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="mysql查询时间很长怎么办？ :: 硕大的汤姆 — A simple, retro theme for Hugo">
-<meta property="og:description" content=" 等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL 读锁，当对表进行表结构变更的时候，加 MDL 写锁。
-我曾经遇到过一次，某个表上面的 sql 都超时了，这时候很容易就想到表被锁了。 马上 show processlist 看下是不是有人在持有 mdl 写锁。查看 sys.schema_table_lock_waits 表可以看到谁在持有 mdl 写锁。如果很急的话，Kill 掉它就好了。
-等 flush show processlist 看下是不是有 waiting for table flush，如果有的话，和可能是某个 flush 操作被堵住了。
-等行锁 查看 sys.innodb_lock_waits 表。
-select * from t sys.innodb_lock_waits where locked_table = &#39;t&#39;\G  " />
+<meta property="og:description" content="等 Mdl 锁 mdl 锁（metadata lock）在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。当对一个表进行增删改查的时候，要加 MDL" />
 <meta property="og:url" content="/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/" />
 <meta property="og:site_name" content="mysql查询时间很长怎么办？" />
 <meta property="og:image" content="">

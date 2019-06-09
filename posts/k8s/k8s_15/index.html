@@ -6,12 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="RBAC 自己写一个编排对象
-而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
-我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。
-而在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：
- Role：角色，它其实是一组规则，定义了一组对 Kubernetes API 对象的操作权限。 Subject：被作用者，既可以是“人”，也可以是“机器”，也可以是你在 Kubernetes 里定义的“用户”。 RoleBinding：定义了“被作用者”和“角色”的绑定关系。  Role 实际上，Role 本身就是一个 Kubernetes 的 API 对象，定义如下所示：
-kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynamespace name: example-role rules: - apiGroups: [&amp;quot;&amp;quot;] resources: [&amp;quot;pods&amp;quot;] verbs: [&amp;quot;get&amp;quot;, &amp;quot;watch&amp;quot;, &amp;quot;list&amp;quot;]  Namespace 是 Kubernetes 项目里的一个逻辑管理单位。不同 Namespace 的 API 对象，在通过 kubectl 命令进行操作的时候，是互相隔离开的。然后，这个 Role 对象的 rules 字段，就是它所定义的权限规则。在上面的例子里，这条规则的含义就是：允许“被作用者”，对 mynamespace 下面的 Pod 对象，进行 GET、WATCH 和 LIST 操作。"/>
+<meta name="description" content="RBAC 自己写一个编排对象 而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="/posts/k8s/k8s_15/" />
@@ -32,12 +27,7 @@ kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynames
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
-<meta name="twitter:description" content="RBAC 自己写一个编排对象
-而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
-我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。
-而在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：
- Role：角色，它其实是一组规则，定义了一组对 Kubernetes API 对象的操作权限。 Subject：被作用者，既可以是“人”，也可以是“机器”，也可以是你在 Kubernetes 里定义的“用户”。 RoleBinding：定义了“被作用者”和“角色”的绑定关系。  Role 实际上，Role 本身就是一个 Kubernetes 的 API 对象，定义如下所示：
-kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynamespace name: example-role rules: - apiGroups: [&amp;quot;&amp;quot;] resources: [&amp;quot;pods&amp;quot;] verbs: [&amp;quot;get&amp;quot;, &amp;quot;watch&amp;quot;, &amp;quot;list&amp;quot;]  Namespace 是 Kubernetes 项目里的一个逻辑管理单位。不同 Namespace 的 API 对象，在通过 kubectl 命令进行操作的时候，是互相隔离开的。然后，这个 Role 对象的 rules 字段，就是它所定义的权限规则。在上面的例子里，这条规则的含义就是：允许“被作用者”，对 mynamespace 下面的 Pod 对象，进行 GET、WATCH 和 LIST 操作。" />
+<meta name="twitter:description" content="RBAC 自己写一个编排对象 而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和" />
 <meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -46,12 +36,7 @@ kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynames
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
-<meta property="og:description" content="RBAC 自己写一个编排对象
-而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和操作 API 对象，那么就必须先了解一个非常重要的知识：RBAC。
-我们知道，Kubernetes 中所有的 API 对象，都保存在 Etcd 里。可是，对这些 API 对象的操作，却一定都是通过访问 kube-apiserver 实现的。其中一个非常重要的原因，就是你需要 APIServer 来帮助你做授权工作。
-而在 Kubernetes 项目中，负责完成授权（Authorization）工作的机制，就是 RBAC：基于角色的访问控制（Role-Based Access Control）。关于 RBAC，你需要了解以下几点：
- Role：角色，它其实是一组规则，定义了一组对 Kubernetes API 对象的操作权限。 Subject：被作用者，既可以是“人”，也可以是“机器”，也可以是你在 Kubernetes 里定义的“用户”。 RoleBinding：定义了“被作用者”和“角色”的绑定关系。  Role 实际上，Role 本身就是一个 Kubernetes 的 API 对象，定义如下所示：
-kind: Role apiVersion: rbac.authorization.k8s.io/v1 metadata: namespace: mynamespace name: example-role rules: - apiGroups: [&amp;quot;&amp;quot;] resources: [&amp;quot;pods&amp;quot;] verbs: [&amp;quot;get&amp;quot;, &amp;quot;watch&amp;quot;, &amp;quot;list&amp;quot;]  Namespace 是 Kubernetes 项目里的一个逻辑管理单位。不同 Namespace 的 API 对象，在通过 kubectl 命令进行操作的时候，是互相隔离开的。然后，这个 Role 对象的 rules 字段，就是它所定义的权限规则。在上面的例子里，这条规则的含义就是：允许“被作用者”，对 mynamespace 下面的 Pod 对象，进行 GET、WATCH 和 LIST 操作。" />
+<meta property="og:description" content="RBAC 自己写一个编排对象 而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和" />
 <meta property="og:url" content="/posts/k8s/k8s_15/" />
 <meta property="og:site_name" content="" />
 <meta property="og:image" content="">

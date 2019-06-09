@@ -6,14 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
-在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
-为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
-DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
-我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
- 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
- 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
-kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com."/>
+<meta name="description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。 在上一篇文章中，我已经为你详细讲解"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="/posts/k8s/k8s_20/" />
@@ -34,14 +27,7 @@ kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storag
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
-<meta name="twitter:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
-在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
-为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
-DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
-我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
- 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
- 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
-kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com." />
+<meta name="twitter:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。 在上一篇文章中，我已经为你详细讲解" />
 <meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -50,14 +36,7 @@ kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storag
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
-<meta property="og:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。
-在上一篇文章中，我已经为你详细讲解了 CSI 插件机制的设计原理。今天我将继续和你一起实践一个 CSI 插件的编写过程。
-为了能够覆盖到 CSI 插件的所有功能，我这一次选择了 DigitalOcean 的块存储（Block Storage）服务，来作为实践对象。
-DigitalOcean 是业界知名的“最简”公有云服务，即：它只提供虚拟机、存储、网络等为数不多的几个基础功能，其他功能一概不管。而这，恰恰就使得 DigitalOcean 成了我们在公有云上实践 Kubernetes 的最佳选择。
-我们这次编写的 CSI 插件的功能，就是：让我们运行在 DigitalOcean 上的 Kubernetes 集群能够使用它的块存储服务，作为容器的持久化存储。
- 备注：在 DigitalOcean 上部署一个 Kubernetes 集群的过程，也很简单。你只需要先在 DigitalOcean 上创建几个虚拟机，然后按照我们在第 11 篇文章《从 0 到 1：搭建一个完整的 Kubernetes 集群》中从 0 到 1 的步骤直接部署即可。
- 而有了 CSI 插件之后，持久化存储的用法就非常简单了，你只需要创建一个如下所示的 StorageClass 对象即可：
-kind: StorageClass apiVersion: storage.k8s.io/v1 metadata: name: do-block-storage namespace: kube-system annotations: storageclass.kubernetes.io/is-default-class: &amp;quot;true&amp;quot; provisioner: com." />
+<meta property="og:description" content="31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。 在上一篇文章中，我已经为你详细讲解" />
 <meta property="og:url" content="/posts/k8s/k8s_20/" />
 <meta property="og:site_name" content="" />
 <meta property="og:image" content="">

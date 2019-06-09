@@ -6,12 +6,7 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
-举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
-它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。
-这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：
-apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network spec: cidr: &amp;quot;192.168.0.0/16&amp;quot; gateway: &amp;quot;192.168.0.1&amp;quot;  可以看到，我想要描述“网络”的 API 资源类型是 Network；API 组是samplecrd.k8s.io；API 版本是 v1。那么，Kubernetes 又该如何知道这个 API（samplecrd.k8s.io/v1/network）的存在呢？
-其实，上面的这个 YAML 文件，就是一个具体的“自定义 API 资源”实例，也叫 CR（Custom Resource）。而为了能够让 Kubernetes 认识这个 CR，你就需要让 Kubernetes 明白这个 CR 的宏观定义是什么，也就是 CRD（Custom Resource Definition）。"/>
+<meta name="description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="/posts/k8s/k8s_13/" />
@@ -32,12 +27,7 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network sp
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
-<meta name="twitter:description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
-举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
-它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。
-这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：
-apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network spec: cidr: &amp;quot;192.168.0.0/16&amp;quot; gateway: &amp;quot;192.168.0.1&amp;quot;  可以看到，我想要描述“网络”的 API 资源类型是 Network；API 组是samplecrd.k8s.io；API 版本是 v1。那么，Kubernetes 又该如何知道这个 API（samplecrd.k8s.io/v1/network）的存在呢？
-其实，上面的这个 YAML 文件，就是一个具体的“自定义 API 资源”实例，也叫 CR（Custom Resource）。而为了能够让 Kubernetes 认识这个 CR，你就需要让 Kubernetes 明白这个 CR 的宏观定义是什么，也就是 CRD（Custom Resource Definition）。" />
+<meta name="twitter:description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源" />
 <meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -46,12 +36,7 @@ apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network sp
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
-<meta property="og:description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源。
-举个例子，我现在要为 Kubernetes 添加一个名叫 Network 的 API 资源类型。
-它的作用是，一旦用户创建一个 Network 对象，那么 Kubernetes 就应该使用这个对象定义的网络参数，调用真实的网络插件，比如 Neutron 项目，为用户创建一个真正的“网络”。这样，将来用户创建的 Pod，就可以声明使用这个“网络”了。
-这个 Network 对象的 YAML 文件，名叫 example-network.yaml，它的内容如下所示：
-apiVersion: samplecrd.k8s.io/v1 kind: Network metadata: name: example-network spec: cidr: &amp;quot;192.168.0.0/16&amp;quot; gateway: &amp;quot;192.168.0.1&amp;quot;  可以看到，我想要描述“网络”的 API 资源类型是 Network；API 组是samplecrd.k8s.io；API 版本是 v1。那么，Kubernetes 又该如何知道这个 API（samplecrd.k8s.io/v1/network）的存在呢？
-其实，上面的这个 YAML 文件，就是一个具体的“自定义 API 资源”实例，也叫 CR（Custom Resource）。而为了能够让 Kubernetes 认识这个 CR，你就需要让 Kubernetes 明白这个 CR 的宏观定义是什么，也就是 CRD（Custom Resource Definition）。" />
+<meta property="og:description" content="CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源" />
 <meta property="og:url" content="/posts/k8s/k8s_13/" />
 <meta property="og:site_name" content="" />
 <meta property="og:image" content="">
