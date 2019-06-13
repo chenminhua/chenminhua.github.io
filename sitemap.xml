@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</loc>
-    <lastmod>2019-06-04T16:15:01+08:00</lastmod>
+    <loc>/posts/chitchat/%E8%B0%88%E8%AE%BA%E6%84%8F%E4%B9%89/</loc>
+    <lastmod>2019-06-13T08:15:01+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/mysql/mysql%E6%9F%A5%E8%AF%A2%E6%97%B6%E9%97%B4%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E/</loc>
-    <lastmod>2019-05-18T11:37:27+08:00</lastmod>
+    <loc>/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</loc>
+    <lastmod>2019-06-04T16:15:01+08:00</lastmod>
   </url>
   
   <url>
@@ -233,6 +233,10 @@
   </url>
   
   <url>
+    <loc>/posts/mysql/%E9%94%81/</loc>
+  </url>
+  
+  <url>
     <loc>/posts/programming/ieee754_with_tears/</loc>
   </url>
   
@@ -243,7 +247,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2019-06-04T16:15:01+08:00</lastmod>
+    <lastmod>2019-06-13T08:15:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -258,7 +262,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-06-04T16:15:01+08:00</lastmod>
+    <lastmod>2019-06-13T08:15:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   

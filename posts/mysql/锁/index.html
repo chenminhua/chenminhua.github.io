@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title> :: 硕大的汤姆 — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="全局锁，表锁，行锁 死锁 全局锁 Flush tables with read lock (FTWRL)。全局锁的典型使用场景是，做全库逻辑备份。 官方自带的逻辑备份工具是 mysqldump。当"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/mysql/%E9%94%81/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="/img/favicon/orange.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="全局锁，表锁，行锁 死锁 全局锁 Flush tables with read lock (FTWRL)。全局锁的典型使用场景是，做全库逻辑备份。 官方自带的逻辑备份工具是 mysqldump。当" />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
+<meta property="og:description" content="全局锁，表锁，行锁 死锁 全局锁 Flush tables with read lock (FTWRL)。全局锁的典型使用场景是，做全库逻辑备份。 官方自带的逻辑备份工具是 mysqldump。当" />
+<meta property="og:url" content="/posts/mysql/%E9%94%81/" />
+<meta property="og:site_name" content="" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    硕大的汤姆
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+        
+          <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+      
+        <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/mysql/%E9%94%81/"></a></h1>
+  <div class="post-meta">
+    <span class="post-date">
+      0001-01-01
+    </span>
+    
+  </div>
+
+  
+
+  
+
+  <div class="post-content">
+    
+
+<p>全局锁，表锁，行锁
+死锁</p>
+
+<h2 id="全局锁">全局锁</h2>
+
+<p>Flush tables with read lock (FTWRL)。<strong>全局锁的典型使用场景是，做全库逻辑备份。</strong></p>
+
+<p><strong>官方自带的逻辑备份工具是 mysqldump。当 mysqldump 使用参数–single-transaction 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</strong></p>
+
+<h2 id="表锁">表锁</h2>
+
+<pre><code>lock tables … read/write。
+</code></pre>
+
+<p>lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。举个例子, 如果在某个线程 A 中执行 lock tables t1 read, t2 write; 这个语句，则其他线程写 t1、读写 t2 的语句都会被阻塞。同时，线程 A 在执行 unlock tables 之前，也只能执行读 t1、写 t2 的操作。</p>
+
+<h2 id="mdl-metadata-lock-表锁">MDL（metadata lock） 表锁</h2>
+
+<p><strong>MDL 不需要显式使用，在访问一个表的时候会被自动加上。</strong>MDL 的作用是，保证读写的正确性(如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构对不上，肯定是不行的)。</p>
+
+<p>当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁。</p>
+
+<p>SHOW status like &lsquo;%lock%&rsquo;;
+SHOW engine innodb status\G;
+show OPEN TABLES where In_use &gt; 0;</p>
+
+<p><strong>MDL 会直到事务提交才释放，在做表结构变更的时候，你一定要小心不要导致锁住线上查询和更新。</strong></p>
+
+<h2 id="行锁功能">行锁功能</h2>
+
+<p>如果你的事务中需要锁多个行，<strong>要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。</strong>简单来说，如果多个事务很有可能同时改某一行，就尽量把它往后放。</p>
+
+<h3 id="死锁和死锁检测">死锁和死锁检测</h3>
+
+<p>你写了一个低价秒杀的活动，但是在活动时间开始的时候，你的 MySQL 就挂了。你登上服务器一看，CPU 消耗接近 100%，但整个数据库每秒就执行不到 100 个事务。这是什么原因呢？这可能和死锁检测有关。</p>
+
+<p>当出现死锁以后，有两种策略：</p>
+
+<ol>
+<li><p>设置 innodb_lock_wait_timeout，默认值是 50s，意味着当出现死锁以后，第一个被锁住的线程要过 50s 才会超时退出，然后其他线程才有可能继续执行。对于在线服务来说，这个等待时间往往是无法接受的。</p></li>
+
+<li><p>发起死锁检测，需要将 innodb_deadlock_detect 设置为 on，默认值本身就是 on。发现死锁后，主动回滚死锁链条中的某一个事务，让其他事务得以继续执行。当然，死锁检测是有额外负担的。假设所有事务都要更新同一行。每个新来的被堵住的线程，都要判断会不会由于自己的加入导致了死锁，这是一个时间复杂度是 O(n)的操作。假设有 1000 个并发线程要同时更新同一行，那么死锁检测操作就是 100 万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要消耗大量的 CPU 资源。</p></li>
+</ol>
+
+<p>怎么解决由这种热点行更新导致的性能问题呢？问题的症结在于，死锁检测要耗费大量的 CPU 资源。解决方案如下：</p>
+
+<ol>
+<li><p>如果你能确保不会出现死锁，就<strong>临时关掉死锁检测</strong>。当关掉死锁检测意味着可能会出现大量的超时，这是业务有损的。</p></li>
+
+<li><p><strong>另一个思路是控制并发度。</strong>根据上面的分析，你会发现如果并发能够控制住，比如同一行同时最多只有 10 个线程在更新，那么死锁检测的成本很低，就不会出现这个问题。如果你有中间件，可以考虑在中间件实现；如果你的团队有能修改 MySQL 源码的人，也可以做在 MySQL 里面。基本思路就是，对于相同行的更新，在进入引擎之前排队。这样在 InnoDB 内部就不会有大量的死锁检测工作了。</p></li>
+
+<li><p>控制并发度的另一种思路。你可以考虑通过将一行改成逻辑上的多行来减少锁冲突。还是以影院账户为例，可以考虑放在多条记录上，比如 10 个记录，影院的账户总额等于这 10 个记录的值的总和。这样每次要给影院账户加金额的时候，随机选其中一条记录来加。</p></li>
+</ol>
+
+<p><strong>减少死锁的主要方向，就是控制访问相同资源的并发事务量。</strong></p>
+
+<h2 id="查锁">查锁</h2>
+
+<p>1.select * from information_schema.INNODB_LOCKS;</p>
+
+<p>2.SHOW ENGINE INNODB STATUS; 看有没有死锁
+或者查看 information_schema 下的表 INNODB_TRX, INNODB_LOCKS, INNODB_LOCK_WAITS 来观察锁的信息。</p>
+
+<p>lock_id 锁 id
+lock_trx_id 事务 id
+lock_mode 锁的模式
+lock_type 锁的类型，行锁还是表锁
+lock_table 要加锁的表
+lock_index 锁住的索引
+lock_space 锁对象的 space id
+lock_page 事务锁定页的数量，如果为表锁则为 NULL
+lock_rec 事务锁定行的数量，如果为表锁则为 NULL
+lock_data 事务锁定记录的主键值，如果为表锁则为 NULL</p>
+
+<h2 id="设置">设置</h2>
+
+<p>innodb_lock_wait_timeout 用来控制阻塞等待的时间</p>
+
+<h2 id="锁的类型">锁的类型</h2>
+
+<ol>
+<li>X 锁：SELECT &hellip; FOR UPDATE;排他锁</li>
+<li>S 锁：SELECT &hellip; LOCK IN SHARE MODE;共享锁</li>
+</ol>
+
+<p>间隙锁</p>
+
+<p>乐观锁与悲观锁</p>
+
+<p>latch: SHOW ENGINE INNODB MUTEX;</p>
+
+<h2 id="什么是一致性锁定读和一致性非锁定读">什么是一致性锁定读和一致性非锁定读</h2>
+
+<p>一致性非锁定读：事务中普通的 select
+一致性锁定读：事务中加锁的 select，分为加 s 锁和加 x 锁</p>
+
+  </div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/mysql/innodb%E7%B4%A2%E5%BC%95/">
+          <span class="button__icon">←</span>
+          <span class="button__text"></span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/programming/ieee754_with_tears/">
+          <span class="button__text"></span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2019 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
