@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/chitchat/%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/</loc>
+    <lastmod>2019-06-23T16:13:51+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/chitchat/%E4%B8%80%E6%AC%A1%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C/</loc>
     <lastmod>2019-06-18T13:20:46+08:00</lastmod>
   </url>
@@ -198,10 +203,6 @@
   </url>
   
   <url>
-    <loc>/posts/chitchat/%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/</loc>
-  </url>
-  
-  <url>
     <loc>/posts/k8s/k8s_12/</loc>
   </url>
   
@@ -256,7 +257,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2019-06-18T13:20:46+08:00</lastmod>
+    <lastmod>2019-06-23T16:13:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -271,7 +272,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-06-18T13:20:46+08:00</lastmod>
+    <lastmod>2019-06-23T16:13:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
