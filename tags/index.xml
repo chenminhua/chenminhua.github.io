@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 硕大的汤姆</title>
+    <title>硕大的汤姆</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on 硕大的汤姆</description>
+    <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
