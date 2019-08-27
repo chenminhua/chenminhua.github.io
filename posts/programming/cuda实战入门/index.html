@@ -99,6 +99,18 @@ if (!doNotTrack) {
         
       
       
+        <ul class="menu__sub-inner">
+          <li class="menu__sub-inner-more-trigger">Show more ▾</li>
+
+          <ul class="menu__sub-inner-more hidden">
+            
+              
+                <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+              
+            
+          </ul>
+        </ul>
+      
     
   </ul>
 
@@ -110,6 +122,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.weibo.com/chenminhua91">weibo</a></li>
+      
+    
+      
+        <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
       
     
   </ul>
@@ -228,7 +244,7 @@ time ./pi
 <ol>
 <li><p>上面的代码中首先我们注意到函数 leib_pi 前面加上了 __global__ 标志，这告诉编译器，此方法是在 gpu 上运行的。而下面的 main 方法则还是在 cpu 上运行。</p></li>
 
-<li><p>cpu 是不能直接访问 gpu 内存的，反过来也不行。在 cuda 中，内存分为 host memory 和 device memory (也称作 gpu memory)，而指向 host momory 的指针被称为 host pointer，指向 device memory 的指针被称为 device memory。</p></li>
+<li><p>cpu 是不能直接访问 gpu 内存的，反过来也不行。在 cuda 中，内存分为 host memory 和 device memory (也称作 gpu memory)，而指向 host memory 的指针被称为 host pointer，指向 device memory 的指针被称为 device memory。</p></li>
 
 <li><p>在上面的代码中我们首先定义了两个指针 h_sum 指向 host memory ，而 g_sum 指向 gpu memory，然后用 malloc 系统调用给 h_sum 分配内存，用 cudamalloc 给 g_sum 分配 gpu 内存。</p></li>
 
@@ -259,6 +275,8 @@ const int bid = blockIdx.x;
 <p>此外，我们应当尽可能多的 launch 线程，这就需要考虑你在使用什么 gpu，并根据 gpu 的 CC 来决定具体参数了。</p>
 
 <p>除此之外，还需要考虑寄存器和共享内存这些资源（这些超出了本文的范围）。</p>
+
+<p>PS: 源码见 <a href="https://github.com/chenminhua/math">github</a>。</p>
 
   </div>
   
