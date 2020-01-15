@@ -6,10 +6,55 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 23 Aug 2019 06:17:29 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jan 2020 21:15:01 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>软件随想录</title>
+      <link>/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
+      <pubDate>Sat, 11 Jan 2020 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
+      <description>这周在地铁上读完了 Joel Spolsky 的《软件随想录》，译者是阮一峰。摘录或提炼一部分有趣的东西于此。 1991 年，Joel Spolsky 加入微软 Excel 开发小组，担任 Program manage</description>
+    </item>
+    
+    <item>
+      <title>Haystack (facebook是怎么存照片的)</title>
+      <link>/posts/chitchat/haystack/</link>
+      <pubDate>Wed, 25 Dec 2019 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/chitchat/haystack/</guid>
+      <description>本文写于 21 世纪 10 年代最后一个圣诞节的晚上，内容为 facebook 的论文 《Finding a needle in Haystack: Facebook&amp;rsquo;s photo storage》的阅读笔记。该论文旨在解决社交网络中海量</description>
+    </item>
+    
+    <item>
+      <title>LSM Tree vs BTree</title>
+      <link>/posts/programming/btree_lsmtree/</link>
+      <pubDate>Tue, 24 Dec 2019 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/programming/btree_lsmtree/</guid>
+      <description>本文为《数据密集型应用系统设计》第三章第一节的读后感 数据需要持久化，将内存中的状态落到磁盘上，就需要使用存储引擎。最简单的存储引擎就是一个数</description>
+    </item>
+    
+    <item>
+      <title>隐马尔科夫链与维特比算法</title>
+      <link>/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</link>
+      <pubDate>Sat, 21 Sep 2019 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</guid>
+      <description>马尔科夫链 明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机</description>
+    </item>
+    
+    <item>
+      <title>P99与蓄水池算法（reservoir sampling）</title>
+      <link>/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</link>
+      <pubDate>Wed, 04 Sep 2019 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</guid>
+      <description>一个监控问题 假设你是一个运维工作人员，维护着一个访问量巨大的服务，然后有一天，老板跑来问你这个服务的 p99 响应时间是多少？（p99 响应时间：系统</description>
+    </item>
     
     <item>
       <title>Cuda实战入门</title>
@@ -108,6 +153,15 @@
       
       <guid>/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
       <description>信息化与自动化 这些年来，&amp;rdquo;工业 4.0&amp;rdquo;，&amp;rdquo;2025 计划&amp;rdquo;等新名词越来越多的出现在人们的视野，</description>
+    </item>
+    
+    <item>
+      <title>我去2020年</title>
+      <link>/posts/%E6%88%91%E5%8E%BB2020%E5%B9%B4/</link>
+      <pubDate>Sun, 10 Mar 2019 08:59:39 +0800</pubDate>
+      
+      <guid>/posts/%E6%88%91%E5%8E%BB2020%E5%B9%B4/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -327,15 +381,6 @@
     </item>
     
     <item>
-      <title>Tweets</title>
-      <link>/tweets/</link>
-      <pubDate>Sun, 01 Apr 2018 23:21:33 +0800</pubDate>
-      
-      <guid>/tweets/</guid>
-      <description>错误推理通常很有迷惑性，有时甚至比正确推理听起来更合理。错误推理通常以直接作用于人的情感的方式来战胜正确推理。 有时我们会身陷矛盾而不自知，这</description>
-    </item>
-    
-    <item>
       <title>Akka</title>
       <link>/posts/draft/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
@@ -396,15 +441,6 @@
       
       <guid>/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
       <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/chitchat/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E4%B8%93%E4%B8%9A%E6%80%A7/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/chitchat/%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E4%B8%93%E4%B8%9A%E6%80%A7/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -517,11 +553,29 @@
     
     <item>
       <title></title>
+      <link>/posts/programming/jvm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/programming/jvm/</guid>
+      <description>jconsole</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/tweets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tweets/</guid>
+      <description>Patience is hard. Being a Knick fan is great practice. 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟</description>
     </item>
     
     <item>
