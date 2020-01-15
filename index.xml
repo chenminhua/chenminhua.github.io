@@ -57,6 +57,15 @@
     </item>
     
     <item>
+      <title>CUDA 入门实战 2：将矩阵乘法速度提升 5000 倍</title>
+      <link>/posts/programming/cuda2/</link>
+      <pubDate>Sat, 24 Aug 2019 21:15:01 +0800</pubDate>
+      
+      <guid>/posts/programming/cuda2/</guid>
+      <description>本实验采用不同的方法来计算 8192 * 8192 的整型矩阵乘法运算。 C 语言版 C 语言是大家公认的高性能语言，那我们就从 C 语言开始吧。 // 用一位数组表示二维矩阵 mat1</description>
+    </item>
+    
+    <item>
       <title>Cuda实战入门</title>
       <link>/posts/programming/cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/</link>
       <pubDate>Fri, 23 Aug 2019 06:17:29 +0800</pubDate>
