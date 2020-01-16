@@ -6,10 +6,19 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 11 Jan 2020 21:15:01 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jan 2020 12:15:01 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>事务</title>
+      <link>/posts/programming/%E4%BA%8B%E5%8A%A1/</link>
+      <pubDate>Thu, 16 Jan 2020 12:15:01 +0800</pubDate>
+      
+      <guid>/posts/programming/%E4%BA%8B%E5%8A%A1/</guid>
+      <description>尽管大多数程序员都认为事务是如此简单和自然，但事实上事务不是一个天然的东西，而是人为创造出来的，目的是为了简化应用层编程。 对应用层来说，底层</description>
+    </item>
     
     <item>
       <title>软件随想录(by Joel Spolsky)</title>
@@ -162,15 +171,6 @@
       
       <guid>/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
       <description>信息化与自动化 这些年来，&amp;rdquo;工业 4.0&amp;rdquo;，&amp;rdquo;2025 计划&amp;rdquo;等新名词越来越多的出现在人们的视野，</description>
-    </item>
-    
-    <item>
-      <title>我去2020年</title>
-      <link>/posts/%E6%88%91%E5%8E%BB2020%E5%B9%B4/</link>
-      <pubDate>Sun, 10 Mar 2019 08:59:39 +0800</pubDate>
-      
-      <guid>/posts/%E6%88%91%E5%8E%BB2020%E5%B9%B4/</guid>
-      <description></description>
     </item>
     
     <item>
