@@ -253,39 +253,7 @@
   </url>
   
   <url>
-    <loc>/posts/k8s/k8s_12/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_13/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_14/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_15/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_16/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_17/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_18/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_19/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/k8s/k8s_20/</loc>
+    <loc>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</loc>
   </url>
   
   <url>
@@ -302,6 +270,10 @@
   
   <url>
     <loc>/posts/programming/jvm/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</loc>
   </url>
   
   <url>

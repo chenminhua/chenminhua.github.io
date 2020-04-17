@@ -454,83 +454,11 @@
     
     <item>
       <title></title>
-      <link>/posts/k8s/k8s_12/</link>
+      <link>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/k8s/k8s_12/</guid>
-      <description>Istio Istio 最根本的组件，是运行在每一个应用 Pod 里的 Envoy 容器 &amp;ndash; 一个高性能 C++网络代理。而 Istio 项目，则把这个代理服务以 sidecar 容器的方式，运行在了每一个被治理的</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_13/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_13/</guid>
-      <description>CRD CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，允许用户在 Kubernetes 中添加一个跟 Pod、Node 类似的、新的 API 资源类型，即：自定义 API 资源</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_14/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_14/</guid>
-      <description>自定义控制器 在上一篇文章中，我和你详细分享了 Kubernetes 中声明式 API 的实现原理，并且通过一个添加 Network 对象的实例，为你讲述了在 Kubernetes 里添加 API 资源的过程。在今天的</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_15/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_15/</guid>
-      <description>RBAC 自己写一个编排对象 而在 Kubernetes 项目里，我们可以基于插件机制来完成这些工作，而完全不需要修改任何一行代码。不过，你要通过一个外部插件，在 Kubernetes 里新增和</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_16/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_16/</guid>
-      <description>Operator 工作原理解读 可能你已经感觉到，在 Kubernetes 中，管理“有状态应用”是一个比较复杂的过程，尤其是编写 Pod 模板的时候，总有一种“在 YAML 文件里编程序”的感觉，</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_17/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_17/</guid>
-      <description>28 | PV、PVC、StorageClass，这些到底在说啥？ 所以，从今天这篇文章开始，我会通过 4 篇文章为你剖析 Kubernetes 项目处理容器持久化存储的核心</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_18/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_18/</guid>
-      <description>29 | PV、PVC 体系是不是多此一举？从本地持久化卷谈起 实际上，如果只是为了职责划分，PV、PVC 体系确实不见得比直接在 Pod 里声明 Volumes 字段有什么优</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_19/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_19/</guid>
-      <description>30 | 编写自己的存储插件：FlexVolume 与 CSI 在 Kubernetes 中，存储插件的开发有两种方式：FlexVolume 和 CSI。 FlexVolume 举个例子，现在我们要编写的</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/k8s/k8s_20/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/k8s/k8s_20/</guid>
-      <description>31 | 容器存储实践：CSI 插件编写指南 你好，我是张磊。今天我和你分享的主题是：容器存储实践之 CSI 插件编写指南。 在上一篇文章中，我已经为你详细讲解</description>
+      <guid>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</guid>
+      <description>与人沟通时，需要想清楚 3 件事： 谁是听众？他们想听什么？他们想怎么听？ 思考，沟通交流，都要突出重点，思路清晰，层次分明，简单易懂，动作规范。 基</description>
     </item>
     
     <item>
@@ -567,6 +495,15 @@
       
       <guid>/posts/programming/jvm/</guid>
       <description>jconsole</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</guid>
+      <description>存储系统可以分成两大类：记录系统和派生数据系统。派生数据系统中的数据是从另一个系统中获取已有数据并以某种方式进行转换或处理的结果。如果派生数</description>
     </item>
     
     <item>
