@@ -102,6 +102,10 @@ if (!doNotTrack) {
           <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
         
       
+        
+          <li><a href="https://chenminhua.github.io/finance">投资</a></li>
+        
+      
       
     
   </ul>
@@ -118,6 +122,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+      
+    
+      
+        <li><a href="https://chenminhua.github.io/finance">投资</a></li>
       
     
   </ul>
@@ -144,62 +152,49 @@ if (!doNotTrack) {
   
 
   <div class="post-content">
-    
-
-<h2 id="背景">背景</h2>
-
+    <h2 id="背景">背景</h2>
 <p>这是一个非常有名的问题，<a href="https://en.wikipedia.org/wiki/Monty_Hall_problem">wiki</a>。</p>
-
 <p>简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。
 在选手做出选择之后，主持人（知道哪扇门后面有奖品）会选择选手没选的两扇中的一扇没有奖品的门打开。
 这时候选手有一次改变自己选择的机会。</p>
-
 <p>这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。
 下面我们用ebay的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。</p>
-
 <h2 id="实验">实验</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> bayesian.bbn <span style="color:#f92672">import</span> build_bbn
 
-<pre><code class="language-python">from bayesian.bbn import build_bbn
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f_prize_door</span>(prize_door):
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.33333333</span>
 
-def f_prize_door(prize_door):
-	return 0.33333333
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f_guest_door</span>(guest_door):
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.33333333</span>
 
-def f_guest_door(guest_door):
-	return 0.33333333
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f_monty_door</span>(prize_door, guest_door, monty_door):
+	<span style="color:#66d9ef">if</span> prize_door <span style="color:#f92672">==</span> guest_door:
+		<span style="color:#66d9ef">if</span> prize_door <span style="color:#f92672">==</span> monty_door:
+			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+		<span style="color:#66d9ef">else</span>: 
+			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.5</span>
+	<span style="color:#66d9ef">else</span>:
+		<span style="color:#66d9ef">if</span> prize_door <span style="color:#f92672">==</span> monty_door:
+			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+		<span style="color:#66d9ef">if</span> guest_door <span style="color:#f92672">==</span> monty_door:
+			<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
 
-def f_monty_door(prize_door, guest_door, monty_door):
-	if prize_door == guest_door:
-		if prize_door == monty_door:
-			return 0
-		else: 
-			return 0.5
-	else:
-		if prize_door == monty_door:
-			return 0
-		if guest_door == monty_door:
-			return 0
-		return 1
-
-g = build_bbn(
+g <span style="color:#f92672">=</span> build_bbn(
 		f_prize_door,
 		f_guest_door,
 		f_monty_door,
-		domains=dict(
-				prize_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],
-				guest_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;],
-				monty_door = [&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]
+		domains<span style="color:#f92672">=</span>dict(
+				prize_door <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;A&#34;</span>,<span style="color:#e6db74">&#34;B&#34;</span>,<span style="color:#e6db74">&#34;C&#34;</span>],
+				guest_door <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;A&#34;</span>,<span style="color:#e6db74">&#34;B&#34;</span>,<span style="color:#e6db74">&#34;C&#34;</span>],
+				monty_door <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;A&#34;</span>,<span style="color:#e6db74">&#34;B&#34;</span>,<span style="color:#e6db74">&#34;C&#34;</span>]
 			)
 	)
-</code></pre>
-
-<p>然后我们运行一下,假设选手选了A门，而主持人打开了B门</p>
-
+</code></pre></div><p>然后我们运行一下,假设选手选了A门，而主持人打开了B门</p>
 <pre><code>python -i montyHall.py
 g.q(guest_door=&quot;A&quot;, monty_door=&quot;B&quot;)
-</code></pre>
-
-<p>结果如下</p>
-
+</code></pre><p>结果如下</p>
 <pre><code>+-------------+-------+----------+
 | Node        | Value | Marginal |
 +-------------+-------+----------+
@@ -213,9 +208,7 @@ g.q(guest_door=&quot;A&quot;, monty_door=&quot;B&quot;)
 | prize_door  | B     | 0.000000 |
 | prize_door  | C     | 0.666667 |
 +-------------+-------+----------+
-</code></pre>
-
-<p>我们发现奖品在A门的概率只有在C门的一半。</p>
+</code></pre><p>我们发现奖品在A门的概率只有在C门的一半。</p>
 
   </div>
   
@@ -257,7 +250,7 @@ g.q(guest_door=&quot;A&quot;, monty_door=&quot;B&quot;)
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
     

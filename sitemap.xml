@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</loc>
+    <lastmod>2020-04-20T10:19:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-04-20T10:19:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-04-20T10:19:46+08:00</lastmod>
+  </url>
   
   <url>
     <loc>/posts/programming/%E4%BA%8B%E5%8A%A1/</loc>
@@ -248,12 +263,8 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>/finance/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</loc>
   </url>
   
   <url>
@@ -282,32 +293,19 @@
   
   <url>
     <loc>/tweets/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-01-16T12:15:01+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/posts/programming/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</loc>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-01-16T12:15:01+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

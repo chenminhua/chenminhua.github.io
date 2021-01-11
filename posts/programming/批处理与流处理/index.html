@@ -102,6 +102,10 @@ if (!doNotTrack) {
           <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
         
       
+        
+          <li><a href="https://chenminhua.github.io/finance">投资</a></li>
+        
+      
       
     
   </ul>
@@ -118,6 +122,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+      
+    
+      
+        <li><a href="https://chenminhua.github.io/finance">投资</a></li>
       
     
   </ul>
@@ -144,26 +152,17 @@ if (!doNotTrack) {
   
 
   <div class="post-content">
-    
-
-<p>存储系统可以分成两大类：记录系统和派生数据系统。派生数据系统中的数据是从另一个系统中获取已有数据并以某种方式进行转换或处理的结果。如果派生数据丢失，用户可以从原始数据源进行重建。一个典型的例子是缓存。非规范化数值，索引和物化视图也都是派生数据类型，而推荐系统中，预测性的汇总数据通常源于使用日志。</p>
-
+    <p>存储系统可以分成两大类：记录系统和派生数据系统。派生数据系统中的数据是从另一个系统中获取已有数据并以某种方式进行转换或处理的结果。如果派生数据丢失，用户可以从原始数据源进行重建。一个典型的例子是缓存。非规范化数值，索引和物化视图也都是派生数据类型，而推荐系统中，预测性的汇总数据通常源于使用日志。</p>
 <p>派生数据通常是冗余的，非规范化的，通常对于获得良好的查询性能非常重要。</p>
-
 <p>系统一般可以分为三类：</p>
-
 <ul>
 <li>在线服务，服务等待请求到达并立即发回响应。响应时间往往是在线服务的关键指标。</li>
 <li>批处理系统，也称离线系统。通常是定期运行一些批量作业，这些作业通常要读取大量数据，并运行很长时间才能得到结果。批处理主要性能是吞吐量。</li>
 <li>流处理系统，也称近实时系统。与批处理一样，流处理系统处理输入并产生输出（而不是响应请求）。但是流处理作业在事件发生不久后就可对事件进行处理，而批处理对一组固定输入进行操作。</li>
 </ul>
-
 <h2 id="mapreduce与分布式文件系统">MapReduce与分布式文件系统</h2>
-
 <p>unix使用stdin和stdout作为输入输出，而MapReduce作业在HDFS上读写文件。HDFS基于无共享原则。</p>
-
 <p>HDFS包含一个在每台机器上运行的守护进程，通过网络允许其他节点访问存储在该机器上的文件。NameNode的中央服务器会跟踪哪个文件块存储在哪台机器。</p>
-
 <p>考虑到磁盘容错，文件块被复制到多台机器上，复制意味着多个副本。而相比于复制技术，纠删码可以以更低的存储开销来恢复数据。</p>
 
   </div>
@@ -206,7 +205,7 @@ if (!doNotTrack) {
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
     

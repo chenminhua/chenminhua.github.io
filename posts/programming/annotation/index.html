@@ -102,6 +102,10 @@ if (!doNotTrack) {
           <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
         
       
+        
+          <li><a href="https://chenminhua.github.io/finance">投资</a></li>
+        
+      
       
     
   </ul>
@@ -118,6 +122,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+      
+    
+      
+        <li><a href="https://chenminhua.github.io/finance">投资</a></li>
       
     
   </ul>
@@ -145,17 +153,11 @@ if (!doNotTrack) {
 
   <div class="post-content">
     <p>最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服务启动时，让spring去扫这些接口，并为这些接口生成代理对象，也就是DAO，这些DAO会实现mapper接口。同时这些dao都被spring IOC注入到相应的service中。</p>
-
 <p>然后有一天，我们遇到了一个需求，某几个mapper中的某几个方法需要做一些特殊判断逻辑，并且需要改掉返回的数据。</p>
-
 <p>一种方案是直接去改使用mapper的地方，但是以现有的架构来看，mapper和service之间没有新的分层了，这会导致这个奇葩的需求需要写到service中的各个角落。如果有一天你想用删掉这些代码，或者修改这部分逻辑，后果不堪设想。</p>
-
 <p>另一种方案是加切面，这样这部分逻辑就被集中到了代码主流程的外部，灵活度更高。</p>
-
 <p>spring aop有两种常用的给方法加切面的方式。一种是给方法加annotation，另一种是用execute()表达式。</p>
-
 <p>起初我的想法是用annotation的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个annotation加在mapper接口的某个方法签名上，然后去拦截这个annotation注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来annotation不能从interface继承过来。参考<a href="https://stackoverflow.com/questions/4745798/why-java-classes-do-not-inherit-annotations-from-implemented-interfaces">stackoverflow</a>。简单来说就是@Inherited只能在superclass上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为java单继承多实现的设计，如果去拿接口的annotaion可能会导致冲突。另外要注意的一点是，annotation的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。</p>
-
 <p>如果换成使用execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查annotation，而是直接找到实现该接口的指定方法去拦截。</p>
 
   </div>
@@ -198,7 +200,7 @@ if (!doNotTrack) {
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
     

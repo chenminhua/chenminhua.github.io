@@ -6,7 +6,22 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="Patience is hard. Being a Knick fan is great practice. 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟"/>
+<meta name="description" content="Patience is hard. Being a Knick fan is great practice.
+沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据 schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。系统架构的目标是解决利益相关者的关注点。
+Design is about tradeoffs and priorities
+mZ单性可以通过两种:q方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源。
+如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。
+在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。
+Surround yourself with people who inspire you is as important as being talented or working hard
+prefer duplication over the wrong abstraction
+找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
+到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
+使用 c&#43;&#43;，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。"/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
 <link rel="canonical" href="/tweets/" />
@@ -27,7 +42,22 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo" />
-<meta name="twitter:description" content="Patience is hard. Being a Knick fan is great practice. 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟" />
+<meta name="twitter:description" content="Patience is hard. Being a Knick fan is great practice.
+沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据 schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。系统架构的目标是解决利益相关者的关注点。
+Design is about tradeoffs and priorities
+mZ单性可以通过两种:q方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源。
+如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。
+在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。
+Surround yourself with people who inspire you is as important as being talented or working hard
+prefer duplication over the wrong abstraction
+找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
+到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
+使用 c&#43;&#43;，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。" />
 <meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image" content="">
@@ -36,7 +66,22 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content=" :: 硕大的汤姆 — A simple, retro theme for Hugo">
-<meta property="og:description" content="Patience is hard. Being a Knick fan is great practice. 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟" />
+<meta property="og:description" content="Patience is hard. Being a Knick fan is great practice.
+沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据 schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。系统架构的目标是解决利益相关者的关注点。
+Design is about tradeoffs and priorities
+mZ单性可以通过两种:q方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源。
+如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。
+在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。
+Surround yourself with people who inspire you is as important as being talented or working hard
+prefer duplication over the wrong abstraction
+找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
+到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
+使用 c&#43;&#43;，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。" />
 <meta property="og:url" content="/tweets/" />
 <meta property="og:site_name" content="" />
 <meta property="og:image" content="">
@@ -102,6 +147,10 @@ if (!doNotTrack) {
           <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
         
       
+        
+          <li><a href="https://chenminhua.github.io/finance">投资</a></li>
+        
+      
       
     
   </ul>
@@ -118,6 +167,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+      
+    
+      
+        <li><a href="https://chenminhua.github.io/finance">投资</a></li>
       
     
   </ul>
@@ -145,90 +198,68 @@ if (!doNotTrack) {
 
   <div class="post-content">
     <p>Patience is hard. Being a Knick fan is great practice.</p>
-
 <p>沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。</p>
-
 <p>问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。</p>
-
 <p>确保每个人都知道需求变更的代价。</p>
-
 <p>架构设计的重要组成部分：数据 schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。</p>
-
 <p>好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。系统架构的目标是解决利益相关者的关注点。</p>
-
 <p>Design is about tradeoffs and priorities</p>
-
 <p>mZ单性可以通过两种:q方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度。</p>
-
 <p>信息隐藏包括两大类：隐藏复杂度和隐藏变化源。</p>
-
 <p>如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。</p>
-
 <p>在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。</p>
-
 <p>Surround yourself with people who inspire you is as important as being talented or working hard</p>
-
 <p><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">prefer duplication over the wrong abstraction</a></p>
-
 <p>找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？</p>
-
 <p>到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。</p>
-
 <p>使用 c++，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。</p>
-
 <p>面向过程和面向对象一个很重要的区别在于，面向对象强调在运行时（而非编译时）进行决策。</p>
-
 <p>自动化测试带来的一个极好的作用是判断一个类是否是易于修改的。当一个类依赖在测试中难以使用的东西时，这个类就是难以修改的。</p>
-
 <p>无论什么东西工作得很欢乐（可能是硬件或驱动问题）时可以试试 dmesg，查看一下内核 ring buffer 中的日志</p>
-
-<p>想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试 strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看 accept 系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个 pid 的系统调用呢？ strace -p <pid>。它的兄弟 ltrace 则可以帮你跟踪库函数调用，也很有用。</p>
-
+<p>想知道你的程序在使用了哪些系统调用吗？现在又正在进行哪些系统调用？可以试试 strace。用法很简单，比如 strace python -m SimpleHTTPServer。如果你只想看 accept 系统调用呢？strace -e accept python -m SimpleHTTPServer。如果你想看某个 pid 的系统调用呢？ strace -p <!-- raw HTML omitted -->。它的兄弟 ltrace 则可以帮你跟踪库函数调用，也很有用。</p>
 <p>Programming takes discipline. Good programming takes a large number of principles, and standard, defensive ways of doing things right.</p>
-
 <p>nginx 在 linux 上使用了 sendfile 系统调用，这个系统调用可以将磁盘上的数据直接发送到网络上（不需要通过用户态）</p>
-
 <p>nginx 与 apache 相比最大的优势在于减少了上下文切换和内存占用</p>
-
 <p>上下文切换：内核切换 CPU 让其在不同的地址空间上做操作。中断：由物理设备发送给内核的信号，通常是请求 I/O 服务。</p>
-
 <p>在高并发竞态场景下使用 CAS (compare-and-swap) 可以防止被 block 后挂起再恢复，这能有效减少不必要的上下文切换，提高 performance。其实和数据库乐观锁是一个道理。在很多类似场景下，使用 atomic 要优于 synchronized</p>
-
 <p>为什么像 goroutine 或者其他一些协程实现在性能上要优于多线程（这里指系统线程而非用户线程）？本质原因是协程是用户态的，或者说协程是在用户态进行调度的，因此其上下文切换非常之快。但是也正因如此，协程只能跑在一个核上，而且一旦某个协程被阻塞，可能导致整个进程不可用。（但是 goroutine 却是可以用多核的，因为 golang 在运行时会起多个线程，并把 goroutine 调度到线程上）</p>
-
 <p>内核的进程调度器维护着各种状态的进程队列，包括一个所有可运行进程的队列，以及一个包括所有休眠进程和僵尸进程的列表。进程调度器的一个重要工作就是决定下一个运行的进程。</p>
-
 <p>cat /proc/loadavg 可以查看系统负载。当系统负载为 0.00 时，说明任何进程只有就绪后就可以马上获得 CPU,不需要等待。</p>
-
 <p>nginx 官方介绍声称，nginx 维持 1000 个非活跃 http 持久连接只需要 2.5M 的内存。这得益于其单进程的计算模型（各个 worker 可以共享内存资源）</p>
-
 <p>请用最快的速度想出十种可能提高网站加载和响应速度的方案：1.增加服务器带宽。2.水平扩展，增加服务数。3.使用 CDN。4.使用数据缓存。5.检查并干掉数据库慢查询。6.增加数据库缓冲池。7.减少前端静态文件数量。8.开启 server push。9.使用浏览器缓存。10.切分后端接口和前端组件，分批拉取数据，分批渲染组件。</p>
-
 <p>性能问题有趣的地方在于，努力不一定有用。处理性能问题的关键在于找到问题所在，是 IO 太慢？是带宽不够？是计算能力不够？是数据库可用连接太少？是数据库缓冲池太小导致 IO 太多？等你找到问题的时候，问题已经解决一大半了。</p>
-
 <p>如果你的用户一直在查文档，那你一定是做错了什么。如果你的用户一直找不到正确的文档，那你&hellip;</p>
-
 <p>BPM (Business process management)的一个例子：bpm 收到一个抵押贷款的请求后，发送事件给三个不同的服务: 收入检查，信用检查，房屋评估。这三个服务将它们的结果发给风险管理服务。而风险管理服务再将结果返回给 funding 服务。我们可以说，bpm 将各个业务逻辑步骤外包给了其他服务。</p>
-
 <p>性能领域有一条著名的 USE(utilization, saturation, errors)方法&mdash;-对于所有的资源，查看它的使用率，饱和度和错误。</p>
-
 <p>有的人扭曲事实来适应理论，有的人改变理论来适应事实。</p>
-
 <p>试图用尽可能通俗的方式讲明白 CAP 的文章到处都是，这篇是我看过的中写的最好的<a href="http://ksat.me/a-plain-english-introduction-to-cap-theorem/">CAP</a></p>
-
-<p>[微服务 get started]<a href="https://cloudncode.blog/2016/07/22/msa-getting-started/">https://cloudncode.blog/2016/07/22/msa-getting-started/</a></p>
-
+<p>[微服务 get started]https://cloudncode.blog/2016/07/22/msa-getting-started/</p>
 <p>[微服务之坑] 微服务所说的每个服务单独开发和部署听起来很美，但是很多时候服务拆分的不好，增加一个 feature 需要同时更新五个服务。。。当然团队里面可不止你一个 feature 等着上线。。。事情就会非常糟糕。</p>
-
 <p>比如命名规则，rest 规范，数据库规范等等，应该在所有项目开始之前进行，尤为重要的是服务间的接口命名规则。可以编写一份正式文档，并要求所有程序员按照这份规范编写代码。如果程序员遇到文档没有覆盖到的命名需求，则需要拿出来大家一起讨论，并将结果加入文档。</p>
-
 <p>I don&rsquo;t plan. If I do, I plan to fail。这句话用在软件架构领域再恰当不过。所有的决策都要有退路，所有的 update 都要可以 rollback。</p>
-
 <p>Infrastructure should be an afterthought, Models should be unified, Pipelines should be portable.</p>
-
 <p>By the same token if you can only deploy your system with micro-services, then you have coupled your architecture to that particular deployment model; and that’s just as bad.
 What I am trying to convince you to do is to ignore any particular deployment model.  Treat the deployment model as a detail, and leave the options open.  Build your system so that you can deploy it into jars, or into micro-services, or anywhere in between.</p>
 
+  </div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/finance/">
+          <span class="button__icon">←</span>
+          <span class="button__text"></span>
+        </a>
+      </span>
+      
+      
+    </div>
   </div>
   
 
@@ -243,7 +274,7 @@ What I am trying to convince you to do is to ignore any particular deployment mo
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
     

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>硕大的汤姆</title>
@@ -6,10 +6,15 @@
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 16 Jan 2020 12:15:01 +0800</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 20 Apr 2020 10:19:46 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finite and Infinite Games</title>
+      <link>/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</link>
+      <pubDate>Mon, 20 Apr 2020 10:19:46 +0800</pubDate>
+      
+      <guid>/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</guid>
+      <description>《Finite and Infinite Games》是 James P. Carse 于 1986 年出版的书。詹姆斯·卡斯，纽约大学宗教历史系教授。 卡斯本人是一个无神论者，他把自己的信仰描述为「着</description>
+    </item>
     
     <item>
       <title>事务</title>
@@ -134,7 +139,7 @@
       <pubDate>Tue, 04 Jun 2019 16:15:01 +0800</pubDate>
       
       <guid>/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</guid>
-      <description>昨天看到 slack 里面有个网友说：&amp;rdquo;这是我下午看《洞察》的时候突然冒出来一个问题：钱有许多称呼，比如阿堵物、孔方兄等，可是既然它们指的都</description>
+      <description>昨天看到 slack 里面有个网友说：&amp;ldquo;这是我下午看《洞察》的时候突然冒出来一个问题：钱有许多称呼，比如阿堵物、孔方兄等，可是既然它们指的都</description>
     </item>
     
     <item>
@@ -170,7 +175,7 @@
       <pubDate>Sun, 10 Mar 2019 08:59:39 +0800</pubDate>
       
       <guid>/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
-      <description>信息化与自动化 这些年来，&amp;rdquo;工业 4.0&amp;rdquo;，&amp;rdquo;2025 计划&amp;rdquo;等新名词越来越多的出现在人们的视野，</description>
+      <description>信息化与自动化 这些年来，&amp;ldquo;工业 4.0&amp;rdquo;，&amp;ldquo;2025 计划&amp;quot;等新名词越来越多的出现在人们的视野，工</description>
     </item>
     
     <item>
@@ -323,7 +328,7 @@
       <pubDate>Wed, 18 Apr 2018 23:28:35 +0800</pubDate>
       
       <guid>/posts/programming/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</guid>
-      <description>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;rdquo;terrib</description>
+      <description>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;quot;terribl</description>
     </item>
     
     <item>
@@ -449,16 +454,19 @@
       <pubDate>Sun, 18 Mar 2018 23:46:50 +0800</pubDate>
       
       <guid>/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
-      <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;rdquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无</description>
+      <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;ldquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无</description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</link>
+      <link>/finance/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/chitchat/%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86/</guid>
-      <description>与人沟通时，需要想清楚 3 件事： 谁是听众？他们想听什么？他们想怎么听？ 思考，沟通交流，都要突出重点，思路清晰，层次分明，简单易懂，动作规范。 基</description>
+      <guid>/finance/</guid>
+      <description>2021.01.11 如何构建投资组合 投资的本质，就是在**管理好最大回撤的基础上获得最大的长期收益。**收益相同，则波动越小水平越高。我个人的投资组合建议（for小白选手）：
+ 20%的美股指数 + 20%的A股指数 （买进世界最大的两个市场的大盘，是小白选手资产管理的核心） 10%的板块基金 （for 价值投资） 15%的纯债基金 （对冲一下） 10%的黄金指数 （for 乱世买黄金，现在黄金感觉在高位，可适当调整） 10%的房地产信托或基金 （for 房价上涨跟车） 15%的货币基金+短期理财（for 流动性）  2021.01.10  今天我妈打电话给我，说她的朋友推荐她买了一个新发基金。 你看到的听到的往往不完全是真话，而是对说话的人最有利的话。你不一定能搞清别人说的对不对，但你要理解他为什么什么说。看财经新闻有感，也适用于其他事情。理财顾问关心怎么把理财产品卖给你，甚至是怎么把佣金更高的产品卖给你，而不是怎么帮你赚钱。 听取别人建议前，要先判断对方在其中是什么利益关系，以及对方的建议是否有感情因素在其中。  2021.01.08  最近很多人都在市场里面赚到钱了。 运气好有一个很大的缺点，就是你不可能永远运气好。 人人都在说着「价值投资」、「长期主义」，却还是忍不住在朋友圈里晒他们的「短期收益」。  2020.01.07  特斯拉空头血亏401亿美元为有史以来最大损失
+ 我相信有效市场理论，但市场可以保持非理性的时间远远长于你可以保持不破产的时间。所以，保持流动性，控制仓位，即使你觉得对手一手烂牌，也不要轻易上牌桌。
+2020.01.04  市场提供的回报在时间上是非常不均匀的，可能一年的收益就在一周里面发生，择时很可能让你错过那关键的一周。所以，不要择时。 不要对资产类型有明显偏好。今年是白酒和新能源，明年可能是原油。 不要有宏观迷信。很多人都说股市在新闻联播里，结果分析一通，股市却并没有按你的宏观分析发展。因为：1.因素太多，变数太大；2.你的信息往往是滞后于市场的。  2020.12.20 如何看待投资  投资应当是一件孤独的事，你必须有你自己的判断。想要拿到超越市场的收益，你必须正确，并且与他人不同。（而这是最难的） 不要总想着靠投资理财实现财务自由，把它想象成一场自己和世界之间的游戏。 make it an infinite game. 保持场外赚钱的能力。越不需要靠投资赚钱的人，越有可能靠投资赚钱。  </description>
     </item>
     
     <item>
@@ -494,7 +502,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/programming/jvm/</guid>
-      <description>jconsole</description>
+      <description>jconsole </description>
     </item>
     
     <item>
@@ -521,7 +529,22 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tweets/</guid>
-      <description>Patience is hard. Being a Knick fan is great practice. 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟</description>
+      <description>Patience is hard. Being a Knick fan is great practice.
+沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
+问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
+确保每个人都知道需求变更的代价。
+架构设计的重要组成部分：数据 schema，业务规则，UI，资源管理（进程，线程，内存，IO），安全性，性能，吞吐量，scalability，高可用性，可集成性，容错性 。
+好的架构应该与待解决的问题和谐一致。维持系统的概念完整性。系统架构的目标是解决利益相关者的关注点。
+Design is about tradeoffs and priorities
+mZ单性可以通过两种:q方式来获得：一是减少同时关注的本质性复杂度的量，二是避免生成不必要的偶然的复杂度。
+信息隐藏包括两大类：隐藏复杂度和隐藏变化源。
+如何才算得上是精通某项技艺？关键是要具备“信心”和“出错感知能力”。
+在实际的使用中，可以在实现 Cloneable 的类中提供 public 的 clone 方法。但这是一个很危险的操作：在没有调用构造器的情况下创建了一个对象。其实在很多时候，更好的方法不是实现 Cloneable 和 clone 方法，而是提供一个 copy 构造器或 copy 工厂方法。
+Surround yourself with people who inspire you is as important as being talented or working hard
+prefer duplication over the wrong abstraction
+找到一个让你钦佩的人，模仿他。想想你和他之间的差距，想想他是怎么做的，怎么才能做到比他更好？
+到场：一种非常模糊的领导特征。它包含一种无法估量的才能，就是让别人感觉到你的确在场，尤其是在面对面的情况下。让别人感受到你的领导力。
+使用 c++，如何在进入 main 函数前执行一些东西？有一种办法被成为 bootstrap 方法，其实就是在 main 函数外面创建一个全局变量，在这个全局变量的默认构造器里面调用你需要执行的各种 bootstrap 方法。</description>
     </item>
     
     <item>

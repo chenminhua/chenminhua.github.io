@@ -102,6 +102,10 @@ if (!doNotTrack) {
           <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
         
       
+        
+          <li><a href="https://chenminhua.github.io/finance">投资</a></li>
+        
+      
       
     
   </ul>
@@ -118,6 +122,10 @@ if (!doNotTrack) {
     
       
         <li><a href="https://www.zhihu.com/people/chenminhua">zhihu</a></li>
+      
+    
+      
+        <li><a href="https://chenminhua.github.io/finance">投资</a></li>
       
     
   </ul>
@@ -144,21 +152,13 @@ if (!doNotTrack) {
   
 
   <div class="post-content">
-    
-
-<h2 id="swift中的cow">swift中的cow</h2>
-
+    <h2 id="swift中的cow">swift中的cow</h2>
 <p>swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，struct是值类型，而class是引用类型。换句话说，struct在传递的过程中是值传递，而class传的则是引用。</p>
-
 <p>那么为什么需要这两种传值机制呢？从编码角度看，值传递似乎是一种更安全的选择。因为值传递在每次传递过程中，对象都会被拷贝一份，这样可以防止对象被意外修改。在多并发情况下，值传递更安全。但是在很多情况下，或许用户确实需要一个对象在不同的执行块共享，甚至共同修改，这时候引用传递显然更适合。更重要的是，引用传递是一种开销更小的传递方式，程序不需要为这次传递申请一块新的内存并拷贝对象，也不用考虑对象失去全部有效引用时回收这块新开辟的内存。</p>
-
-<p>那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&rdquo;写时复制&rdquo;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。</p>
-
+<p>那有没有可能实现一种技术，让我们同时享受值传递和引用传递的优点呢？答案是&quot;写时复制&quot;(cow, copy-on-write)。顾名思义，cow就是说当使用值传递的时候，在新的代码块中依旧引用原来的对象，直到改变(写)对象的时候，才复制一份对象并引用新对象。在swift中，你可以使用mutating关键字来标识struct的某个方法是否会改变这个对象。当调用一个mutating方法时，才会真的复制一份对象。</p>
 <h2 id="cow与引用计数">cow与引用计数</h2>
-
 <p>英文好的同学建议直接读这篇instagram的原文 <a href="https://engineering.instagram.com/dismissing-python-garbage-collection-at-instagram-4dca40b29172">在instagram停用了python的垃圾回收</a>。</p>
-
-<p>linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&rdquo;写时复制&rdquo;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&hellip;</p>
+<p>linux内核有一个这样的机制：子进程启动时会共享父进程的内存页，但是只有当子进程试图去写这些内存页的时候，才会把这些内存拷贝到新的内存页，也就是我们说的&quot;写时复制&quot;。但是在python中，由于python使用引用计数来进行垃圾回收，这导致了每次读一个对象，都需要去写这个对象的引用数(加1)，所以所有的读就都变成了写，cow机制就失效了。为此，instagram关掉了python的gc&hellip;</p>
 
   </div>
   
@@ -200,7 +200,7 @@ if (!doNotTrack) {
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
     
