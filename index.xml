@@ -2,468 +2,469 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>硕大的汤姆</title>
-    <link>/</link>
+    <link>/posts/</link>
     <description>Recent content on 硕大的汤姆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 20 Apr 2020 10:19:46 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Apr 2020 10:19:46 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Finite and Infinite Games</title>
-      <link>/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</link>
+      <link>/posts/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</link>
       <pubDate>Mon, 20 Apr 2020 10:19:46 +0800</pubDate>
       
-      <guid>/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</guid>
+      <guid>/posts/posts/%E6%9C%89%E9%99%90%E6%B8%B8%E6%88%8F%E4%B8%8E%E6%97%A0%E9%99%90%E6%9C%89%E9%99%90/</guid>
       <description>《Finite and Infinite Games》是 James P. Carse 于 1986 年出版的书。詹姆斯·卡斯，纽约大学宗教历史系教授。 卡斯本人是一个无神论者，他把自己的信仰描述为「着</description>
     </item>
     
     <item>
       <title>事务</title>
-      <link>/posts/programming/%E4%BA%8B%E5%8A%A1/</link>
+      <link>/posts/posts/programming/%E4%BA%8B%E5%8A%A1/</link>
       <pubDate>Thu, 16 Jan 2020 12:15:01 +0800</pubDate>
       
-      <guid>/posts/programming/%E4%BA%8B%E5%8A%A1/</guid>
+      <guid>/posts/posts/programming/%E4%BA%8B%E5%8A%A1/</guid>
       <description>尽管大多数程序员都认为事务是如此简单和自然，但事实上事务不是一个天然的东西，而是人为创造出来的，目的是为了简化应用层编程。 对应用层来说，底层</description>
     </item>
     
     <item>
       <title>软件随想录(by Joel Spolsky)</title>
-      <link>/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
+      <link>/posts/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
       <pubDate>Sat, 11 Jan 2020 21:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
+      <guid>/posts/posts/chitchat/%E8%BD%AF%E4%BB%B6%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
       <description>这周在地铁上读完了 Joel Spolsky 的《软件随想录》，译者是阮一峰。摘录或提炼一部分有趣的东西于此。 1991 年，Joel Spolsky 加入微软 Excel 开发小组，担任 Program manage</description>
     </item>
     
     <item>
       <title>Haystack (facebook是怎么存照片的)</title>
-      <link>/posts/chitchat/haystack/</link>
+      <link>/posts/posts/chitchat/haystack/</link>
       <pubDate>Wed, 25 Dec 2019 21:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/haystack/</guid>
+      <guid>/posts/posts/chitchat/haystack/</guid>
       <description>本文写于 21 世纪 10 年代最后一个圣诞节的晚上，内容为 facebook 的论文 《Finding a needle in Haystack: Facebook&amp;rsquo;s photo storage》的阅读笔记。该论文旨在解决社交网络中海量</description>
     </item>
     
     <item>
       <title>LSM Tree vs BTree</title>
-      <link>/posts/programming/btree_lsmtree/</link>
+      <link>/posts/posts/programming/btree_lsmtree/</link>
       <pubDate>Tue, 24 Dec 2019 21:15:01 +0800</pubDate>
       
-      <guid>/posts/programming/btree_lsmtree/</guid>
+      <guid>/posts/posts/programming/btree_lsmtree/</guid>
       <description>本文为《数据密集型应用系统设计》第三章第一节的读后感 数据需要持久化，将内存中的状态落到磁盘上，就需要使用存储引擎。最简单的存储引擎就是一个数</description>
     </item>
     
     <item>
       <title>隐马尔科夫链与维特比算法</title>
-      <link>/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</link>
+      <link>/posts/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</link>
       <pubDate>Sat, 21 Sep 2019 21:15:01 +0800</pubDate>
       
-      <guid>/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</guid>
+      <guid>/posts/posts/programming/hmm_and_%E7%BB%B4%E7%89%B9%E6%AF%94/</guid>
       <description>马尔科夫链 明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机</description>
     </item>
     
     <item>
       <title>P99与蓄水池算法（reservoir sampling）</title>
-      <link>/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</link>
+      <link>/posts/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</link>
       <pubDate>Wed, 04 Sep 2019 21:15:01 +0800</pubDate>
       
-      <guid>/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</guid>
+      <guid>/posts/posts/programming/p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0/</guid>
       <description>一个监控问题 假设你是一个运维工作人员，维护着一个访问量巨大的服务，然后有一天，老板跑来问你这个服务的 p99 响应时间是多少？（p99 响应时间：系统</description>
     </item>
     
     <item>
       <title>CUDA 入门实战 2：将矩阵乘法速度提升 5000 倍</title>
-      <link>/posts/programming/cuda2/</link>
+      <link>/posts/posts/programming/cuda2/</link>
       <pubDate>Sat, 24 Aug 2019 21:15:01 +0800</pubDate>
       
-      <guid>/posts/programming/cuda2/</guid>
+      <guid>/posts/posts/programming/cuda2/</guid>
       <description>本实验采用不同的方法来计算 8192 * 8192 的整型矩阵乘法运算。 C 语言版 C 语言是大家公认的高性能语言，那我们就从 C 语言开始吧。 // 用一位数组表示二维矩阵 mat1</description>
     </item>
     
     <item>
       <title>Cuda实战入门</title>
-      <link>/posts/programming/cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/</link>
+      <link>/posts/posts/programming/cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/</link>
       <pubDate>Fri, 23 Aug 2019 06:17:29 +0800</pubDate>
       
-      <guid>/posts/programming/cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/</guid>
+      <guid>/posts/posts/programming/cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/</guid>
       <description>CUDA (compute unified device architecture) 是 NVIDIA 所推出的一种并行计算平台和并行计算 api。 CUDA 在并行计算上可以大显神威，因此，我们先要找到一个可并行的问题。一个很简单的可并行问</description>
     </item>
     
     <item>
       <title>为什么拒绝掉前37%的追求者是错的</title>
-      <link>/posts/math/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E4%B8%8D%E8%AF%A5%E6%8B%92%E7%BB%9D%E6%8E%89%E5%89%8D37%E7%9A%84%E8%BF%BD%E6%B1%82%E8%80%85/</link>
+      <link>/posts/posts/math/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E4%B8%8D%E8%AF%A5%E6%8B%92%E7%BB%9D%E6%8E%89%E5%89%8D37%E7%9A%84%E8%BF%BD%E6%B1%82%E8%80%85/</link>
       <pubDate>Sun, 14 Jul 2019 10:17:02 +0800</pubDate>
       
-      <guid>/posts/math/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E4%B8%8D%E8%AF%A5%E6%8B%92%E7%BB%9D%E6%8E%89%E5%89%8D37%E7%9A%84%E8%BF%BD%E6%B1%82%E8%80%85/</guid>
+      <guid>/posts/posts/math/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E4%B8%8D%E8%AF%A5%E6%8B%92%E7%BB%9D%E6%8E%89%E5%89%8D37%E7%9A%84%E8%BF%BD%E6%B1%82%E8%80%85/</guid>
       <description>Problem Formulation 假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶</description>
     </item>
     
     <item>
       <title>机器学习视角下的软件工程过拟合问题</title>
-      <link>/posts/chitchat/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/</link>
+      <link>/posts/posts/chitchat/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sun, 30 Jun 2019 08:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/</guid>
+      <guid>/posts/posts/chitchat/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/</guid>
       <description>软件工程中充斥着过拟合，它不但刻画了我们在构建系统时常常掉入的思维陷阱，也刻画了我们日常生活中思考与行动的方方面面。 什么是过拟合 在机器学习中</description>
     </item>
     
     <item>
       <title>自我觉知的能力与做事的态度</title>
-      <link>/posts/chitchat/%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/</link>
+      <link>/posts/posts/chitchat/%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/</link>
       <pubDate>Sun, 23 Jun 2019 16:13:51 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/</guid>
+      <guid>/posts/posts/chitchat/%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/</guid>
       <description>最近对自己的行为模式进行了一些观察，发现自己很容易在遇到硬骨头的时候出现拖延症的现象。比如在进入某一主题的学习时，发现该主题内容非常丰富，且</description>
     </item>
     
     <item>
       <title>Got a PC</title>
-      <link>/posts/chitchat/%E4%B8%80%E6%AC%A1%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C/</link>
+      <link>/posts/posts/chitchat/%E4%B8%80%E6%AC%A1%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Tue, 18 Jun 2019 13:20:46 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E4%B8%80%E6%AC%A1%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C/</guid>
+      <guid>/posts/posts/chitchat/%E4%B8%80%E6%AC%A1%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C/</guid>
       <description>从 15 年初购入人生第一台 mbp 之后，再也没有使用过 PC 了。最近趁着 618 组了一台电脑，平时的主力机器是 mbp，然后家里放了台 mac mini，但是最近为了在家</description>
     </item>
     
     <item>
       <title>当我们谈论杜兰特，我们其实是在谈自己</title>
-      <link>/posts/chitchat/%E8%B0%88%E8%AE%BA%E6%84%8F%E4%B9%89/</link>
+      <link>/posts/posts/chitchat/%E8%B0%88%E8%AE%BA%E6%84%8F%E4%B9%89/</link>
       <pubDate>Thu, 13 Jun 2019 08:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%B0%88%E8%AE%BA%E6%84%8F%E4%B9%89/</guid>
+      <guid>/posts/posts/chitchat/%E8%B0%88%E8%AE%BA%E6%84%8F%E4%B9%89/</guid>
       <description>人们谈论问题容易陷入对意义的讨论，这种试图对本质的窥探虽然“有用”，却也十分危险。 早上看到杜兰特跟腱受伤的新闻，各大媒体纷纷表示，杜兰特在总</description>
     </item>
     
     <item>
       <title>语言的雅俗</title>
-      <link>/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</link>
+      <link>/posts/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</link>
       <pubDate>Tue, 04 Jun 2019 16:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</guid>
+      <guid>/posts/posts/chitchat/%E8%AF%AD%E8%A8%80%E7%9A%84%E9%9B%85%E4%BF%97/</guid>
       <description>昨天看到 slack 里面有个网友说：&amp;ldquo;这是我下午看《洞察》的时候突然冒出来一个问题：钱有许多称呼，比如阿堵物、孔方兄等，可是既然它们指的都</description>
     </item>
     
     <item>
       <title>什么是概率</title>
-      <link>/posts/math/%E4%BB%80%E4%B9%88%E6%98%AF%E6%A6%82%E7%8E%87/</link>
+      <link>/posts/posts/math/%E4%BB%80%E4%B9%88%E6%98%AF%E6%A6%82%E7%8E%87/</link>
       <pubDate>Sun, 12 May 2019 22:32:00 +0800</pubDate>
       
-      <guid>/posts/math/%E4%BB%80%E4%B9%88%E6%98%AF%E6%A6%82%E7%8E%87/</guid>
+      <guid>/posts/posts/math/%E4%BB%80%E4%B9%88%E6%98%AF%E6%A6%82%E7%8E%87/</guid>
       <description>假设我们现在要扔一枚硬币，我问你这枚硬币正面朝上的概率是多少？你一定知道是 0.5。但是让我们来仔细想想，概率为 0.5 到底意味着什么呢？一种常见的</description>
     </item>
     
     <item>
       <title>生活中的弹力系统设计</title>
-      <link>/posts/programming/%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E5%BC%B9%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+      <link>/posts/posts/programming/%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E5%BC%B9%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Sat, 11 May 2019 10:51:34 +0800</pubDate>
       
-      <guid>/posts/programming/%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E5%BC%B9%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>/posts/posts/programming/%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E5%BC%B9%E5%8A%9B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
       <description>艺术来源于生活，系统架构也是如此。 基于微服务的分布式系统架构所面临的挑战非常巨大，充满了各种不确定性。为了能够提高SLA，我们需要让系统能够</description>
     </item>
     
     <item>
       <title>关于麻将能不能进入奥运会的讨论</title>
-      <link>/posts/math/%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E9%BA%BB%E5%B0%86%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E5%A5%A5%E8%BF%90%E4%BC%9A%E7%9A%84%E8%AE%A8%E8%AE%BA/</link>
+      <link>/posts/posts/math/%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E9%BA%BB%E5%B0%86%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E5%A5%A5%E8%BF%90%E4%BC%9A%E7%9A%84%E8%AE%A8%E8%AE%BA/</link>
       <pubDate>Fri, 19 Apr 2019 17:02:36 +0800</pubDate>
       
-      <guid>/posts/math/%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E9%BA%BB%E5%B0%86%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E5%A5%A5%E8%BF%90%E4%BC%9A%E7%9A%84%E8%AE%A8%E8%AE%BA/</guid>
+      <guid>/posts/posts/math/%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E%E9%BA%BB%E5%B0%86%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E5%A5%A5%E8%BF%90%E4%BC%9A%E7%9A%84%E8%AE%A8%E8%AE%BA/</guid>
       <description>这篇文章来源于一群软件工程师在晚餐时的讨论，论题是中国麻将能不能进入奥运会。这类问题在不同的群体间相信已经发生过无数次，这次当然也毫无例外的</description>
     </item>
     
     <item>
       <title>信息化与自动化</title>
-      <link>/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
+      <link>/posts/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
       <pubDate>Sun, 10 Mar 2019 08:59:39 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
+      <guid>/posts/posts/chitchat/%E4%BF%A1%E6%81%AF%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
       <description>信息化与自动化 这些年来，&amp;ldquo;工业 4.0&amp;rdquo;，&amp;ldquo;2025 计划&amp;quot;等新名词越来越多的出现在人们的视野，工</description>
     </item>
     
     <item>
       <title>模型设计的两大准则：NFL与奥卡姆剃刀</title>
-      <link>/posts/math/nfl%E4%B8%8E%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</link>
+      <link>/posts/posts/math/nfl%E4%B8%8E%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</link>
       <pubDate>Fri, 08 Mar 2019 11:37:27 +0800</pubDate>
       
-      <guid>/posts/math/nfl%E4%B8%8E%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</guid>
+      <guid>/posts/posts/math/nfl%E4%B8%8E%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</guid>
       <description>NFL(无免费午餐)定理 模型的合理性很大程度上取决于待解决问题本身的特征。 无免费午餐（No Free Lunch, NFL）定理证明了任何模型在所有问题上的性能都</description>
     </item>
     
     <item>
       <title>身高背后的统计模型</title>
-      <link>/posts/math/%E8%BA%AB%E9%AB%98%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B/</link>
+      <link>/posts/posts/math/%E8%BA%AB%E9%AB%98%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Fri, 08 Mar 2019 10:17:02 +0800</pubDate>
       
-      <guid>/posts/math/%E8%BA%AB%E9%AB%98%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>/posts/posts/math/%E8%BA%AB%E9%AB%98%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%9E%8B/</guid>
       <description>给同年龄的一百个小孩量身高，已经量了 99 个，请问最后一个小孩的身高有 99%的概率会小于多少。 我们只知道这些数据来自同一个总体（服从同一个分布）</description>
     </item>
     
     <item>
       <title>一场赌局背后的统计学</title>
-      <link>/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</link>
+      <link>/posts/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</link>
       <pubDate>Thu, 07 Mar 2019 18:06:47 +0800</pubDate>
       
-      <guid>/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</guid>
+      <guid>/posts/posts/math/%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/</guid>
       <description>A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终</description>
     </item>
     
     <item>
       <title>Bye,2018</title>
-      <link>/posts/chitchat/bye2018/</link>
+      <link>/posts/posts/chitchat/bye2018/</link>
       <pubDate>Thu, 31 Jan 2019 08:17:29 +0800</pubDate>
       
-      <guid>/posts/chitchat/bye2018/</guid>
+      <guid>/posts/posts/chitchat/bye2018/</guid>
       <description>如果需要用一个词来总结 2018 年，这可能是我人生中最平淡的一年，就是那种如果有一天我要写回忆录，这一年似乎都没什么可写的那种平淡。 坦白说，今年的工</description>
     </item>
     
     <item>
       <title>市场营销方法论</title>
-      <link>/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <link>/posts/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
       <pubDate>Thu, 20 Dec 2018 13:06:26 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <guid>/posts/posts/chitchat/%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
       <description>最近在看美剧《广告狂人》，于是对广告业产生了一些兴趣，进而去了解了一下市场营销的方法论。Marketing 集成了商业的全部功能，并通过广告，</description>
     </item>
     
     <item>
       <title>聊聊微信读书</title>
-      <link>/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</link>
+      <link>/posts/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</link>
       <pubDate>Sun, 28 Oct 2018 16:13:51 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</guid>
+      <guid>/posts/posts/chitchat/%E8%81%8A%E8%81%8A%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6/</guid>
       <description>这两天下了几个读书应用，发现市面上类似产品还真不是，比如微信读书，京东阅读，豆瓣阅读等等。我也深度体验了一下微信读书，这里谈谈个人的感受吧。</description>
     </item>
     
     <item>
       <title>敏捷开发</title>
-      <link>/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</link>
+      <link>/posts/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</link>
       <pubDate>Wed, 12 Sep 2018 14:30:11 +0800</pubDate>
       
-      <guid>/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</guid>
+      <guid>/posts/posts/programming/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/</guid>
       <description>在 2001 年，十七名软件开发人员在犹他州的雪鸟度假村会面，讨论这些轻量级的开发方法，并由 Jeff Sutherland，Ken Schwaber 和 Alistair Cockburn 发起，一同发布了敏捷</description>
     </item>
     
     <item>
       <title>需求变更的一致性</title>
-      <link>/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+      <link>/posts/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</link>
       <pubDate>Thu, 02 Aug 2018 15:43:44 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+      <guid>/posts/posts/chitchat/%E9%9C%80%E6%B1%82%E5%8F%98%E6%9B%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
       <description>最近在工作中遇到一次重大需求变更，对业务模型的设计也产生了非常大的影响。基本上就是在地基上挖个洞的那种变更。目前迭代还在进行中，但是我觉得是</description>
     </item>
     
     <item>
       <title>我的理想工作环境</title>
-      <link>/posts/chitchat/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</link>
+      <link>/posts/posts/chitchat/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Tue, 31 Jul 2018 19:15:01 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</guid>
+      <guid>/posts/posts/chitchat/%E6%88%91%E7%9A%84%E7%90%86%E6%83%B3%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83/</guid>
       <description>一台顺畅运行并安装完整生产力工具的最新款 macbook pro。 两块 4k 显示器。 一张人体工学座椅。 一张懒人沙发。 一个大阳台。 一根弹力绳。 无糖可乐，或者茶。 一</description>
     </item>
     
     <item>
       <title>灵魂与肉体</title>
-      <link>/posts/chitchat/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/</link>
+      <link>/posts/posts/chitchat/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/</link>
       <pubDate>Sun, 29 Jul 2018 18:54:20 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/</guid>
+      <guid>/posts/posts/chitchat/%E7%81%B5%E9%AD%82%E4%B8%8E%E8%82%89%E4%BD%93%E8%83%BD%E5%88%86%E5%BC%80%E5%90%97/</guid>
       <description>灵魂说，红烧肉你少吃两块吧。 肉体说，真香。 灵魂说，早点起床别睡懒觉。 肉体说，真困。 灵魂说，快去健身房练背和腿。 肉体说，真累。 灵魂说，你还想不</description>
     </item>
     
     <item>
       <title>三门问题</title>
-      <link>/posts/math/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</link>
+      <link>/posts/posts/math/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 23 Jul 2018 22:32:00 +0800</pubDate>
       
-      <guid>/posts/math/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</guid>
+      <guid>/posts/posts/math/%E4%B8%89%E9%97%A8%E9%97%AE%E9%A2%98/</guid>
       <description>背景 这是一个非常有名的问题，wiki。 简单说就是，有三扇门，一扇后面有奖，两扇后面有山羊。如果选手猜中有奖的门，就可以拿走奖品。 在选手做出选</description>
     </item>
     
     <item>
       <title>聊聊面向对象</title>
-      <link>/posts/programming/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+      <link>/posts/posts/programming/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
       <pubDate>Sun, 15 Jul 2018 10:19:46 +0800</pubDate>
       
-      <guid>/posts/programming/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
+      <guid>/posts/posts/programming/%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
       <description>看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也</description>
     </item>
     
     <item>
       <title>糟糕的高等教育</title>
-      <link>/posts/chitchat/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</link>
+      <link>/posts/posts/chitchat/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</link>
       <pubDate>Sat, 09 Jun 2018 22:14:04 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</guid>
+      <guid>/posts/posts/chitchat/%E7%B3%9F%E7%B3%95%E7%9A%84%E9%AB%98%E7%AD%89%E6%95%99%E8%82%B2/</guid>
       <description>今天是高考的最后一天，不知不觉我这个老逼也高中毕业八年了。 细思极恐。 看到微博上有个话题是说：你现在做的事情和你学的专业有多大关系？有点讽刺。</description>
     </item>
     
     <item>
       <title>Feature_vs_function</title>
-      <link>/posts/chitchat/feature_vs_function/</link>
+      <link>/posts/posts/chitchat/feature_vs_function/</link>
       <pubDate>Thu, 10 May 2018 12:49:25 +0800</pubDate>
       
-      <guid>/posts/chitchat/feature_vs_function/</guid>
+      <guid>/posts/posts/chitchat/feature_vs_function/</guid>
       <description>最近看到一段关于微服务的视频拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。 大多数项目在一开始往往</description>
     </item>
     
     <item>
       <title>spring aop中遇到的一个小问题</title>
-      <link>/posts/programming/annotation/</link>
+      <link>/posts/posts/programming/annotation/</link>
       <pubDate>Sat, 05 May 2018 18:19:00 +0800</pubDate>
       
-      <guid>/posts/programming/annotation/</guid>
+      <guid>/posts/posts/programming/annotation/</guid>
       <description>最近做的一个项目使用了spring+mybatis的技术栈。实现很简单，在数据访问层写一系列mapper接口，定义一系列数据查询的方法。在服</description>
     </item>
     
     <item>
       <title>相关与因果</title>
-      <link>/posts/math/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</link>
+      <link>/posts/posts/math/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</link>
       <pubDate>Wed, 02 May 2018 16:22:24 +0800</pubDate>
       
-      <guid>/posts/math/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</guid>
+      <guid>/posts/posts/math/%E7%9B%B8%E5%85%B3%E4%B8%8E%E5%9B%A0%E6%9E%9C/</guid>
       <description>人类天生善于从噪声中寻找模式，这是一种与生俱来的能力。比如发现直角边的平方和等于斜边的平方，比如发现十二平均律以及五度音，比如发现一年有三百</description>
     </item>
     
     <item>
       <title>一件让我愤怒的事</title>
-      <link>/posts/programming/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</link>
+      <link>/posts/posts/programming/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</link>
       <pubDate>Wed, 18 Apr 2018 23:28:35 +0800</pubDate>
       
-      <guid>/posts/programming/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</guid>
+      <guid>/posts/posts/programming/%E4%B8%80%E4%BB%B6%E8%AE%A9%E6%88%91%E6%84%A4%E6%80%92%E7%9A%84%E4%BA%8B/</guid>
       <description>最近在工作中遇到一些事情，让我有点不爽，或者说是愤怒。我觉得很多程序员根本称不上是engineer，只能勉强算是个&amp;quot;terribl</description>
     </item>
     
     <item>
       <title>十年</title>
-      <link>/posts/chitchat/%E5%8D%81%E5%B9%B4/</link>
+      <link>/posts/posts/chitchat/%E5%8D%81%E5%B9%B4/</link>
       <pubDate>Wed, 11 Apr 2018 23:22:55 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E5%8D%81%E5%B9%B4/</guid>
+      <guid>/posts/posts/chitchat/%E5%8D%81%E5%B9%B4/</guid>
       <description>github十年了，这个被戏称为同性交友网站的章鱼猫，度过了十周岁生日。 十年前，我还在读高一，凯尔特人三巨头即将捧起奥布莱恩杯，利物浦在欧冠</description>
     </item>
     
     <item>
       <title>Move slow and mend things</title>
-      <link>/posts/programming/move_slow_and_mend_things/</link>
+      <link>/posts/posts/programming/move_slow_and_mend_things/</link>
       <pubDate>Wed, 11 Apr 2018 15:16:31 +0800</pubDate>
       
-      <guid>/posts/programming/move_slow_and_mend_things/</guid>
+      <guid>/posts/posts/programming/move_slow_and_mend_things/</guid>
       <description>&amp;ldquo;move fast and break things&amp;rdquo; 这是fackbook著名的motto，意思是说，在使用新技术和新工具的时候，尽管其可能会有不稳定的地方，但是为了追求开发速度，应当</description>
     </item>
     
     <item>
       <title>聊聊抽象</title>
-      <link>/posts/programming/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</link>
+      <link>/posts/posts/programming/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</link>
       <pubDate>Sun, 08 Apr 2018 13:54:57 +0800</pubDate>
       
-      <guid>/posts/programming/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</guid>
+      <guid>/posts/posts/programming/%E8%81%8A%E8%81%8A%E6%8A%BD%E8%B1%A1/</guid>
       <description>不要抽象。 上面这句是和一个架构师聊天时他说了二十遍的话。这句话对大多数程序员来说，都是非常反直觉的。可以说抽象是计算机软件设计中极为重要的一</description>
     </item>
     
     <item>
       <title>答案是什么</title>
-      <link>/posts/chitchat/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</link>
+      <link>/posts/posts/chitchat/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</link>
       <pubDate>Sat, 07 Apr 2018 23:46:03 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
+      <guid>/posts/posts/chitchat/%E7%AD%94%E6%A1%88%E6%98%AF%E4%BB%80%E4%B9%88/</guid>
       <description>在《认知开发潜能》一书中，我曾读到这样一段关于树的话，大意是：你可以把一棵树看作一个单独的，离散的对象。但事实上，一棵树至少由两个主要系统连</description>
     </item>
     
     <item>
       <title>数学与经济</title>
-      <link>/posts/math/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</link>
+      <link>/posts/posts/math/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</link>
       <pubDate>Fri, 06 Apr 2018 22:57:15 +0800</pubDate>
       
-      <guid>/posts/math/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</guid>
+      <guid>/posts/posts/math/%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BB%8F%E6%B5%8E/</guid>
       <description>数学的优势在于，它需要精确定义，而且为多样化的领域提供了共同语言，但是它也有局限性。公式与其基本假设，往往夸大了可以从经济理论预测出来的精密</description>
     </item>
     
     <item>
       <title>你不需要懂这些??</title>
-      <link>/posts/chitchat/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</link>
+      <link>/posts/posts/chitchat/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</link>
       <pubDate>Tue, 03 Apr 2018 17:48:20 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</guid>
+      <guid>/posts/posts/chitchat/%E4%BD%A0%E4%B8%8D%E9%9C%80%E8%A6%81%E6%87%82%E8%BF%99%E4%BA%9B/</guid>
       <description>之前有一阵在写c++，发现指针是一个48位二进制数。我们都知道指针是用来做内存寻址的，而我的机器是64位的，而且如果你去查看一个指针占用的内</description>
     </item>
     
     <item>
       <title>质数</title>
-      <link>/posts/math/%E8%B4%A8%E6%95%B0/</link>
+      <link>/posts/posts/math/%E8%B4%A8%E6%95%B0/</link>
       <pubDate>Mon, 02 Apr 2018 23:11:22 +0800</pubDate>
       
-      <guid>/posts/math/%E8%B4%A8%E6%95%B0/</guid>
+      <guid>/posts/posts/math/%E8%B4%A8%E6%95%B0/</guid>
       <description>突然想知道第n个质数是多少，比如说我的生日是11月24日，那么属于我的那个质数是多少呢？ 先写个判断一个数是不是质数的函数 bool isPrime(int n){ if (n == 1){ return false; }else</description>
     </item>
     
     <item>
       <title>Akka</title>
-      <link>/posts/draft/akka/</link>
+      <link>/posts/posts/draft/akka/</link>
       <pubDate>Sun, 01 Apr 2018 18:19:00 +0800</pubDate>
       
-      <guid>/posts/draft/akka/</guid>
+      <guid>/posts/posts/draft/akka/</guid>
       <description>akka 不是一个framework，而是一个toolkit或者说运行时，用于在jvm上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作</description>
     </item>
     
     <item>
       <title>并发与并行</title>
-      <link>/posts/programming/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
+      <link>/posts/posts/programming/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</link>
       <pubDate>Thu, 29 Mar 2018 12:38:39 +0800</pubDate>
       
-      <guid>/posts/programming/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
+      <guid>/posts/posts/programming/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C/</guid>
       <description>很多初级程序员都会把并发和并行搞混在一起，或者认为并发和并行根本就是一回事。而其实并发和并行压根就不是在讨论一个问题。本文我们就一起来看看究</description>
     </item>
     
     <item>
       <title>The_rule_of_hole</title>
-      <link>/posts/chitchat/the_rule_of_hole/</link>
+      <link>/posts/posts/chitchat/the_rule_of_hole/</link>
       <pubDate>Sat, 24 Mar 2018 16:52:45 +0800</pubDate>
       
-      <guid>/posts/chitchat/the_rule_of_hole/</guid>
+      <guid>/posts/posts/chitchat/the_rule_of_hole/</guid>
       <description>The rule of hole: If you fall into a hole, don&#39;t dig 对很多人来说，承认自己错了并不是一件容易办到的事情，即使他们看上去并不是一个固执的人。有时候是因为害羞，有时候是为了</description>
     </item>
     
     <item>
       <title>Copy_on_write</title>
-      <link>/posts/programming/copy_on_write/</link>
+      <link>/posts/posts/programming/copy_on_write/</link>
       <pubDate>Sat, 24 Mar 2018 08:17:29 +0800</pubDate>
       
-      <guid>/posts/programming/copy_on_write/</guid>
+      <guid>/posts/posts/programming/copy_on_write/</guid>
       <description>swift中的cow swift中有struct和class这两种数据结构，很多入门教程都会介绍说，struct和class最大的区别是，st</description>
     </item>
     
     <item>
       <title>kotlin中的可空类型</title>
-      <link>/posts/programming/optional/</link>
+      <link>/posts/posts/programming/optional/</link>
       <pubDate>Fri, 23 Mar 2018 19:17:45 +0800</pubDate>
       
-      <guid>/posts/programming/optional/</guid>
+      <guid>/posts/posts/programming/optional/</guid>
       <description>最近在公司使用Kotlin写后端服务（spring + mybatis），遇到optional的小问题，如下 fun getProject(projectCode: String): ProjectDO = projectMapper.getProjectByCode(projectCode) 上面这个方法根据项目号去</description>
     </item>
     
     <item>
       <title>我只是想要一个函数啊</title>
-      <link>/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
+      <link>/posts/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</link>
       <pubDate>Mon, 19 Mar 2018 00:52:54 +0800</pubDate>
       
-      <guid>/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
+      <guid>/posts/posts/programming/%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/</guid>
       <description>从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？面向对象的最重要特</description>
     </item>
     
     <item>
       <title>装逼的艺术</title>
-      <link>/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
+      <link>/posts/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</link>
       <pubDate>Sun, 18 Mar 2018 23:46:50 +0800</pubDate>
       
-      <guid>/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
+      <guid>/posts/posts/chitchat/%E8%A3%85%E9%80%BC%E7%9A%84%E8%89%BA%E6%9C%AF/</guid>
       <description>最近意外买到一本很有意思的书，叫做《假装的艺术》。这本书有个副标题，&amp;ldquo;一本让你看起来无所不知的书&amp;rdquo;。如今这个年代，无</description>
     </item>
     
     <item>
       <title></title>
-      <link>/finance/</link>
+      <link>/posts/finance/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/finance/</guid>
-      <description>2021.01.11 如何构建投资组合 投资的本质，就是在**管理好最大回撤的基础上获得最大的长期收益。**收益相同，则波动越小水平越高。我个人的投资组合建议（for小白选手）：
+      <guid>/posts/finance/</guid>
+      <description>2021.01.15 wishful thinking 不要幻想，要回归现实，忠于理性。
+2021.01.11 如何构建投资组合 投资的本质，就是在**管理好最大回撤的基础上获得最大的长期收益。**收益相同，则波动越小水平越高。我个人的投资组合建议（for小白选手）：
  20%的美股指数 + 20%的A股指数 （买进世界最大的两个市场的大盘，是小白选手资产管理的核心） 10%的板块基金 （for 价值投资） 15%的纯债基金 （对冲一下） 10%的黄金指数 （for 乱世买黄金，现在黄金感觉在高位，可适当调整） 10%的房地产信托或基金 （for 房价上涨跟车） 15%的货币基金+短期理财（for 流动性）  2021.01.10  今天我妈打电话给我，说她的朋友推荐她买了一个新发基金。 你看到的听到的往往不完全是真话，而是对说话的人最有利的话。你不一定能搞清别人说的对不对，但你要理解他为什么什么说。看财经新闻有感，也适用于其他事情。理财顾问关心怎么把理财产品卖给你，甚至是怎么把佣金更高的产品卖给你，而不是怎么帮你赚钱。 听取别人建议前，要先判断对方在其中是什么利益关系，以及对方的建议是否有感情因素在其中。  2021.01.08  最近很多人都在市场里面赚到钱了。 运气好有一个很大的缺点，就是你不可能永远运气好。 人人都在说着「价值投资」、「长期主义」，却还是忍不住在朋友圈里晒他们的「短期收益」。  2020.01.07  特斯拉空头血亏401亿美元为有史以来最大损失
  我相信有效市场理论，但市场可以保持非理性的时间远远长于你可以保持不破产的时间。所以，保持流动性，控制仓位，即使你觉得对手一手烂牌，也不要轻易上牌桌。
 2020.01.04  市场提供的回报在时间上是非常不均匀的，可能一年的收益就在一周里面发生，择时很可能让你错过那关键的一周。所以，不要择时。 不要对资产类型有明显偏好。今年是白酒和新能源，明年可能是原油。 不要有宏观迷信。很多人都说股市在新闻联播里，结果分析一通，股市却并没有按你的宏观分析发展。因为：1.因素太多，变数太大；2.你的信息往往是滞后于市场的。  2020.12.20 如何看待投资  投资应当是一件孤独的事，你必须有你自己的判断。想要拿到超越市场的收益，你必须正确，并且与他人不同。（而这是最难的） 不要总想着靠投资理财实现财务自由，把它想象成一场自己和世界之间的游戏。 make it an infinite game. 保持场外赚钱的能力。越不需要靠投资赚钱的人，越有可能靠投资赚钱。  </description>
@@ -471,65 +472,66 @@
     
     <item>
       <title></title>
-      <link>/posts/mysql/innodb%E7%B4%A2%E5%BC%95/</link>
+      <link>/posts/posts/mysql/innodb%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/mysql/innodb%E7%B4%A2%E5%BC%95/</guid>
+      <guid>/posts/posts/mysql/innodb%E7%B4%A2%E5%BC%95/</guid>
       <description>索引的数据结构 innodb 的索引采用 B+树，具有高扇出，高度平衡的特定。通常 B+树的高度在 2 到 4 层，也就是说某次查找只需要 2 到 4 次 IO。以一个整数字段</description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/mysql/%E9%94%81/</link>
+      <link>/posts/posts/mysql/%E9%94%81/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/mysql/%E9%94%81/</guid>
+      <guid>/posts/posts/mysql/%E9%94%81/</guid>
       <description>全局锁，表锁，行锁 死锁 全局锁 Flush tables with read lock (FTWRL)。全局锁的典型使用场景是，做全库逻辑备份。 官方自带的逻辑备份工具是 mysqldump。当</description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/programming/ieee754_with_tears/</link>
+      <link>/posts/posts/programming/ieee754_with_tears/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/programming/ieee754_with_tears/</guid>
+      <guid>/posts/posts/programming/ieee754_with_tears/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/programming/jvm/</link>
+      <link>/posts/posts/programming/jvm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/programming/jvm/</guid>
+      <guid>/posts/posts/programming/jvm/</guid>
       <description>jconsole </description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</link>
+      <link>/posts/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</guid>
+      <guid>/posts/posts/programming/%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E%E6%B5%81%E5%A4%84%E7%90%86/</guid>
       <description>存储系统可以分成两大类：记录系统和派生数据系统。派生数据系统中的数据是从另一个系统中获取已有数据并以某种方式进行转换或处理的结果。如果派生数</description>
     </item>
     
     <item>
       <title></title>
-      <link>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</link>
+      <link>/posts/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</guid>
+      <guid>/posts/posts/%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E2b%E4%B8%9A%E5%8A%A1/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>/tweets/</link>
+      <link>/posts/tweets/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tweets/</guid>
-      <description>Patience is hard. Being a Knick fan is great practice.
+      <guid>/posts/tweets/</guid>
+      <description>直播电商在卖什么？衣服，零食，酒水，3C，化妆护肤。
+Patience is hard. Investing in chinese stock market is great practice.
 沟通的维度很重要，反驳别人要从低维度，而说服别人要从高维度。
 问题定义非常重要，比如“我们需要优化数据自动采集系统，使之跟上客户的订单”是一个糟糕的问题定义。因为他提出了一个解决方案，而屏蔽了真正的问题和其他可能的方案。
 确保每个人都知道需求变更的代价。
@@ -549,10 +551,10 @@ prefer duplication over the wrong abstraction
     
     <item>
       <title>如何设计一个系统</title>
-      <link>/posts/programming/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</link>
+      <link>/posts/posts/programming/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/programming/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>/posts/posts/programming/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F/</guid>
       <description>描述使用场景 设计任何系统之前，首先需要搞清楚这个系统的功能是什么。这是任何系统设计中最重要的一步，你必须非常谨慎。你的系统需要完成什么功能？</description>
     </item>
     
