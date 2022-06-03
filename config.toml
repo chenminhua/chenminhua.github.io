@@ -1,4 +1,4 @@
-baseURL = 'https://chenminhua.github.io'
+baseURL = 'https://chenminhua.github.io/'
 languageCode = 'en-us'
 title = '硕大的汤姆'
 theme = 'ink-free'
