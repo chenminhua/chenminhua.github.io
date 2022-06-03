@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>聊聊面向对象 - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="聊聊面向对象">
+<meta itemprop="description" content="看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
+谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
+封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
+首先，封装是面向对象独有的吗？
+c 语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象 c 语言》）。但是事实上，c 语言有着非常好的封装特性。c 程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会 include 这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
+struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack); 使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack 有哪些域？计算 size 的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
+c&#43;&#43;可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了 public，private 这些个访问控制符。相比于 c 语言，我们开始拥有了类这个概念。c&#43;&#43;程序员喜欢把类定义写在头文件里面，而将 c 语言里面的各种函数变成类的成员方法。c&#43;&#43;之于 c 的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
+template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements  public: void push(T const&amp;); // push element  void pop(); // pop element  T top() const; // return top element  bool empty() const { // return true if empty."><meta itemprop="datePublished" content="2018-07-15T20:00:08+08:00" />
+<meta itemprop="dateModified" content="2018-07-15T20:00:08+08:00" />
+<meta itemprop="wordCount" content="427">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="聊聊面向对象" />
+<meta property="og:description" content="看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
+谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
+封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
+首先，封装是面向对象独有的吗？
+c 语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象 c 语言》）。但是事实上，c 语言有着非常好的封装特性。c 程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会 include 这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
+struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack); 使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack 有哪些域？计算 size 的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
+c&#43;&#43;可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了 public，private 这些个访问控制符。相比于 c 语言，我们开始拥有了类这个概念。c&#43;&#43;程序员喜欢把类定义写在头文件里面，而将 c 语言里面的各种函数变成类的成员方法。c&#43;&#43;之于 c 的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
+template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements  public: void push(T const&amp;); // push element  void pop(); // pop element  T top() const; // return top element  bool empty() const { // return true if empty." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/2018_%E8%81%8A%E8%81%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-07-15T20:00:08+08:00" />
+<meta property="article:modified_time" content="2018-07-15T20:00:08+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="聊聊面向对象"/>
+<meta name="twitter:description" content="看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。
+谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。
+封装 一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？
+首先，封装是面向对象独有的吗？
+c 语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象 c 语言》）。但是事实上，c 语言有着非常好的封装特性。c 程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会 include 这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。
+struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack); 使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack 有哪些域？计算 size 的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
+c&#43;&#43;可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了 public，private 这些个访问控制符。相比于 c 语言，我们开始拥有了类这个概念。c&#43;&#43;程序员喜欢把类定义写在头文件里面，而将 c 语言里面的各种函数变成类的成员方法。c&#43;&#43;之于 c 的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
+template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements  public: void push(T const&amp;); // push element  void pop(); // pop element  T top() const; // return top element  bool empty() const { // return true if empty."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="http://example.org/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="http://example.org/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">15</span>
+							<span class="rest">Jul 2018</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">聊聊面向对象</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>看到这个标题，可能很多朋友都会呵呵一笑。面向对象谁不知道？可是事实上，能正确理解和使用面向对象编程范式的人并不多，在不同语言背景下的程序员也往往对面向对象有不同的理解。我看过很多有一定经验的程序员写的代码，用着所谓面向对象的编程语言，写出来的代码却是根本无法维护的。为什么呢？因为他的代码没有隐藏该隐藏的信息，没有保护变化源。所以，OO 根本不是为了什么更好地模拟现实世界（那是给培训班用的卖点），而是为了隐藏信息，拥抱变化。</p>
+<p>谈到 OO，就不得不提其三个基本特征：封装，继承，多态。下面我们就一起来看看这三个特性。</p>
+<h2 id="封装">封装</h2>
+<p>一个比较流行的关于封装的定义是，隐藏对象的属性和实现细节，外部程序只能通过公开的接口来访问内部数据与方法。这种设计方式在硬件设计中是不言自明的，你拿到一个芯片，只需要阅读其说明书，知道每个管脚的作用，而不必知道其内部是如何实现的。在编程领域呢？封装是面向对象独有的吗？如何在不同的编程范式中实现封装呢？</p>
+<p>首先，封装是面向对象独有的吗？</p>
+<p>c 语言显然不是我们所认为的面向对象编程语言（尽管有一本很经典的编程书籍叫《面向对象 c 语言》）。但是事实上，c 语言有着非常好的封装特性。c 程序员喜欢将一堆方法签名写在一个头文件中，而需要使用这个模块的程序员会 include 这个头文件，事实上他们可能只能看到这个头文件。假设我们要实现一个栈。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> Stack;
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Stack Stack;
+Stack <span style="color:#f92672">*</span><span style="color:#a6e22e">newStack</span>();
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">destoryStack</span>(Stack <span style="color:#f92672">*</span> stack);
+<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">popStack</span>();
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pushStack</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> ele);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sizeOfStack</span>(Stack <span style="color:#f92672">*</span>stack);
+</code></pre></div><p>使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack 有哪些域？计算 size 的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。</p>
+<p>c++可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了 public，private 这些个访问控制符。相比于 c 语言，我们开始拥有了类这个概念。c++程序员喜欢把类定义写在头文件里面，而将 c 语言里面的各种函数变成类的成员方法。c++之于 c 的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Stack</span> {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> elems;    <span style="color:#75715e">// elements
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">void</span> push(T <span style="color:#66d9ef">const</span><span style="color:#f92672">&amp;</span>);  <span style="color:#75715e">// push element
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pop</span>();               <span style="color:#75715e">// pop element
+</span><span style="color:#75715e"></span>  T <span style="color:#a6e22e">top</span>() <span style="color:#66d9ef">const</span>;            <span style="color:#75715e">// return top element
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">empty</span>() <span style="color:#66d9ef">const</span> {      <span style="color:#75715e">// return true if empty.
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> elems.empty();
+  }
+};
+</code></pre></div><p>使用这个栈的程序员同样 include 了这个类，但是这时候他其实已经知道了,这个栈底层是用 stl 里面的 vector 实现的。幸运的是，他不能直接操作这个 vector，因为这个域是 private 的。</p>
+<p>那么对 java 来说呢？在数据封装层面上来看，java 和 c++是一脉单传的。java 程序员喜欢将所有的数据域都写成 private 的，然后再给他们加上 getter 和 setter。这也让 java 代码看起来到处都是这些“没有营养，没有技术含量”的东西，而这些代码又确实是“无趣而又不得不做”的。</p>
+<p>java 程序设计一定要最小化 accessibility。通常都有这样几个原则：1.能不提供 mutators 就不提供。2.能 final class 就 final。不要让别人继承。3.能 final field 就 final，这样也可以避免同步，因为不可变类是线程安全的。4.能 private field 就 private，控制访问。</p>
+<p>what about javascript？连 martin fowler 的《重构》第二版都打算用 javascript 写了，js 已经是编程界不可回避的话题。然而 js 确实是一门标准极为混乱的语言，当我们讨论 js 的时候，我们必须先搞清楚我们在谈论什么。显然单纯的 js 对象是没有所谓的封装这种特性的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">foo</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;foo&#34;</span>,
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
+};
+</code></pre></div><p>你可以任意访问一个对象的域，甚至当你访问一个不存在的域时，它也只会客客气气地返回给你一个”undefined”，没有编译时检查，没有可用的类型系统。。。于是 js，python 这些动态类型语言的程序员慢慢形成了这样一种共识，如果一个域是__开头的，则千万不要在外面访问它，算是一种“人工代替编译器”的封装检查吧。幸运的是，es6 开始有 class，同时 babel 也让 js 的编译时检查变得可能。而 typescript 更进一步地引入了访问控制符和更好的类型系统，一切都越来越像 java 了。</p>
+<p>简单总结一下，首先，封装并不是面向对象编程语言带来的，c 语言程序员写的代码有着非常完美的封装，这种封装不是依赖编译器检查实现的，而是一种”you physically can’t”。c++，java 等经典意义上的面向对象语言在引入 class 之后，通过访问控制符来限制对象数据的访问，这种限制是在编译时实现的（通过一些反射机制，可以在运行时绕过这些访问限制符的控制）。而像 js 等脚本语言，则在数据封装上做的比较糟糕。</p>
+<p>最后来聊聊为啥封装如此重要？其实本质上，封装是信息隐藏的一种手段，那么为什么需要隐藏这些信息呢？隐藏信息最重要的价值在于隐藏变化源。还是以上面栈的例子来说，如果客户端程序员知道了栈的底层是由 vector 实现的，并且直接拿到了这个 vector，当有一天你想把 vector 改成 array，你需要检查所有客户程序。而隐藏掉底部实现细节则让客户程序不需要关心实现上的变化，这是封装最重要的原因。此外封装对你的代码可读性也会有很好的帮助。</p>
+<h2 id="继承">继承</h2>
+<p>继承通常是指几个类之间的关系：1.子类存储了基类的数据成员，2.子类可以使用基类的方法，3.子类有其自己的构造函数，4.子类可以根据需要添加额外的数据成员和成员函数。5.基类指针（或引用）可以在不进行显式转换的情况下指向派生类对象，当然基类指针只能调用基类方法。</p>
+<p>还是先来说说 c 语言，c 语言里面连类都没有，怎么可能会有继承机制呢？事实上，c 语言也有办法实现继承，尽管实现起来不够直观，但是在早期的 GUI 编程里面确实是被大量使用的。感兴趣的朋友可以去看《面向对象 c 语言》第四章。有机会我也会写一篇文章来结束一下 c 语言如何实现继承。</p>
+<p>而在 c++中，继承就被玩出了花来。c++的类继承对初学者是非常不友好的。这里举一个简单的例子：如果一个类同时继承两个父类会发生什么？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> funcA() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;};
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">bool</span> funcB() {std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;};
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> A, <span style="color:#66d9ef">public</span> B{};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    C c;
+    c.funcA();
+    c.funcB();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>上面的代码运行没什么问题，但是如果两个父类有同样的函数呢？如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> func() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;};
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">bool</span> func() {std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;};
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> A, <span style="color:#66d9ef">public</span> B{};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    C c;
+    c.func();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>上面这段代码是编译不过的，因为编译器在处理 c.func()时不知道应该给你链接哪个函数进来。当然还是有办法的，比如在类 C 里面实现一个 func 函数，这样编译器就不用去父类里面找函数链接进来。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> A, <span style="color:#66d9ef">public</span> B{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> func() {
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;C&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    };
+};
+</code></pre></div><p>c++的语法非常复杂，就类继承这一块而言，就有多重继承，虚继承等等不同用法。说实话这让 c++的学习使用门槛明显高于其他语言。对于 c++的学习和使用，我一直觉得普通使用者不必强迫自己去背下所有这些语法特性，只用你用得着的部分，尽可能保证代码的可读性。当你需要使用一些复杂特性的时候再去找手册查看就好。</p>
+<p>相比起 c++而言，java 语法实在是简单太多了，当然付出的代价是你需要去学很多 jvm 方面的东西，以及可能牺牲一点性能。请大家思考一个问题，为啥 java 没有多继承？</p>
+<p>java 没有多继承其实还是之前谈到的那个困境：当一个子类继承了两个父类时，如果其试图调用一个两个父类都有的函数时，应该选择哪个实现？对于 c++来说，编译器在编译时会进行一些函数链接，因此这样类型的编程错误会在编译器被发现。但是对于 java 来说，继承的方法是在运行时连接过来的，这会导致更严重的运行时错误。当然，如果 java 愿意的话，是可以让编译器检查这种错误并提醒程序员的，但是 Gosling 的品味让他觉得不应该让程序员写出多继承的类结构，而是应该用其他方法去解决。</p>
+<p>然而，从 java8 开始，java 中的 interface 开始可以提供默认方法，这就导致 java 也会出现多继承问题。此时编译器会迫使用户去 override 冲突的方法，也就是像上面 c++的例子里面，在子类里面自己实现方法，而不是在运行时去选。</p>
+<p>javascript 也有继承，不过不像 c++,java 那种基于类的继承方式，js 使用的是一种基于原型链的继承实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">o</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">a</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>,
+  <span style="color:#a6e22e">m</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+  },
+};
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">o</span>.<span style="color:#a6e22e">m</span>()); <span style="color:#75715e">// 3
+</span><span style="color:#75715e">// 当调用 o.m 时,&#39;this&#39;指向了o.
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">o</span>);
+<span style="color:#75715e">// p是一个继承自 o 的对象
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 创建 p 的自身属性 a
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>()); <span style="color:#75715e">// 5
+</span></code></pre></div><p>在 es6 中，也开始引入了 class，extends 等关键字，显然是因为基于类的 OO 编程有着更好的市场，更容易被程序员接受。</p>
+<p>《设计模式》也好，《代码大全》也好，各种编程圣经都提到一个很重要的设计原则就是：组合优于继承。原因是继承违反了封装。子类依赖了父类的实现细节。如果父类的实现改变了，可能会 break 掉子类。当然，继承在很多情况下还是很有意义的。继承提供了很好的代码重用，在有些情况下使用组合尽管也能实现这些代码重用，但是并没有继承来的直观。此外，继承的设计也有助于多态的实现。当你的类结构有明显的 A is a B 的范式时，还是应当考虑使用继承。</p>
+<h2 id="多态">多态</h2>
+<p>面向对象为我们带来的真正最有价值的东西，其实是多态。并非是说封装和继承不重要，就像前文所说的，封装和继承都是早已有之的东西，c 语言也可以有着非常良好的封装，而继承在很多时候都不如使用组合来的好。简单一点解释多态就是：“你有一只会叫又会跑的宠物，它可以是一只猫，也可以是一只狗，你让它叫，你听到了汪汪或者喵喵”。</p>
+<p>多态往往是被程序员严重忽视的，即使是有些写了几年代码，看过《设计模式》的程序员也会搞不清楚多态。当然，他们知道什么是多态，他们知道什么叫早期绑定，什么叫晚期绑定。但是 c++里面什么时候应该使用虚函数？java 中函数的参数类型应该是类还是接口？他们可能就说不清楚了。他们有着一定的代码经验，知道在什么情况下会一般应该怎么写。但是他们不知道为什么要这样做，不这样做的坏处是什么。</p>
+<p><strong>多态最重要的作用，是打断依赖，也就是我们整天说的解耦</strong>。假设我们需要写一个打印机程序，我们设计了一个打印机的类，其中有一个 print 方法接受一个 File 类的对象，并打印其内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Printer</span> <span style="color:#f92672">{</span>
+  func <span style="color:#a6e22e">print</span><span style="color:#f92672">(</span>File s<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    ByteArray content <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">()</span>
+    <span style="color:#f92672">...</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>这段代码有什么问题？问题就在依赖里面，你的打印机依赖了 File 类，你的高层模块（Printer）一路调用到底层模块(File)，当 File 发生改变的时候，你不得不去检查所有使用 File 的模块是否依旧可以工作。</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+<script>feather.replace()</script>
+</body>
+</html>

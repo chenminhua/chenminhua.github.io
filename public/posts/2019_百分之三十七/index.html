@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>为什么拒绝掉前37%的追求者是错的 - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="为什么拒绝掉前37%的追求者是错的">
+<meta itemprop="description" content="Problem Formulation 假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶；而如果你选择拒绝，则不能反悔，只能在后面的潜在配偶中选择，这也意味着如果你不小心拒绝了 the right one，你永远不能再和 TA 在一起了。现在的问题是，选择和第几个潜在追求者在一起是最佳策略？
+这个问题的原型是 Secretary problem。而答案则是，一个神奇的数字–37%。数学家证明了，你应该先拒绝掉前 37%的人，然后从这开始，只要遇到一个比这前 37%的人都好的任何一个人，就选 TA。
+而有一些文章说，找对象也和找秘书一样，服从这个 37%的魔数。
+你可以这么来理解，假设起初你是个懵懵懂懂的男生，你对女孩儿一般都啥样一无所知，也不知道谈恋爱是干什么的，这时候你对女生的信念是无从建立的（我喜欢用信念这个词，其实就是概率分布的意思）。所以你应该干嘛呢？你应该采样，先采集一些样本，对女生建立起一种信念，这样你就知道女生一般都啥样儿，好姑娘大概啥样儿，矫情的姑娘啥样儿等等。
+再说一遍，被你拒绝掉的前 37%，其实就是你的样本空间，用于刻画在你身边潜在的女生的概率分布，这帮助你在未来能客观地评价你遇到的每一个妹子。
+批判 我可不是来给这种择偶方式来点赞的，而是来批判它的，从数学角度批判它。这种择偶方式存在很多漏洞，而这些漏洞都源自于其基于错误的假设。
+首先，你不知道你这辈子会遇到多少潜在对象，所以你不知道哪个是第 37%个。
+其次，谁说你不能反悔的，如果你找到了 80%的地方，却发现还是第一个最好，那就找第一个呗。
+上面两条都不是最重要的，这种方式最大的错误是它基于一种 「所有人都满足同一个分布」的巨大错误假设。如果你是变化的，你的环境是变化的，那你遇到的潜在对象就不是同分布的，你在高中遇到的女生和你在工作中遇到的女生就不是同分布的。
+你带着不同的目的会遇到不同分布的潜在对象；你在不同的年龄和状态会遇到不同分布的潜在对象；你通过不同的途径也会遇到不同分布的潜在对象。
+所以比拒掉前 37% 更有用的，是找到那个更好的分布，而不是只盯着样本。这反映了人们对待统计的一个巨大的认识误区：大家往往认为是样本形成了分布，其实是分布 generate 了样本。分布才是根本，而样本只是偶然的表象。
+其实，这篇文章才不是在讲怎么找对象呢。"><meta itemprop="datePublished" content="2019-07-14T20:00:08+08:00" />
+<meta itemprop="dateModified" content="2019-07-14T20:00:08+08:00" />
+<meta itemprop="wordCount" content="36">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="为什么拒绝掉前37%的追求者是错的" />
+<meta property="og:description" content="Problem Formulation 假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶；而如果你选择拒绝，则不能反悔，只能在后面的潜在配偶中选择，这也意味着如果你不小心拒绝了 the right one，你永远不能再和 TA 在一起了。现在的问题是，选择和第几个潜在追求者在一起是最佳策略？
+这个问题的原型是 Secretary problem。而答案则是，一个神奇的数字–37%。数学家证明了，你应该先拒绝掉前 37%的人，然后从这开始，只要遇到一个比这前 37%的人都好的任何一个人，就选 TA。
+而有一些文章说，找对象也和找秘书一样，服从这个 37%的魔数。
+你可以这么来理解，假设起初你是个懵懵懂懂的男生，你对女孩儿一般都啥样一无所知，也不知道谈恋爱是干什么的，这时候你对女生的信念是无从建立的（我喜欢用信念这个词，其实就是概率分布的意思）。所以你应该干嘛呢？你应该采样，先采集一些样本，对女生建立起一种信念，这样你就知道女生一般都啥样儿，好姑娘大概啥样儿，矫情的姑娘啥样儿等等。
+再说一遍，被你拒绝掉的前 37%，其实就是你的样本空间，用于刻画在你身边潜在的女生的概率分布，这帮助你在未来能客观地评价你遇到的每一个妹子。
+批判 我可不是来给这种择偶方式来点赞的，而是来批判它的，从数学角度批判它。这种择偶方式存在很多漏洞，而这些漏洞都源自于其基于错误的假设。
+首先，你不知道你这辈子会遇到多少潜在对象，所以你不知道哪个是第 37%个。
+其次，谁说你不能反悔的，如果你找到了 80%的地方，却发现还是第一个最好，那就找第一个呗。
+上面两条都不是最重要的，这种方式最大的错误是它基于一种 「所有人都满足同一个分布」的巨大错误假设。如果你是变化的，你的环境是变化的，那你遇到的潜在对象就不是同分布的，你在高中遇到的女生和你在工作中遇到的女生就不是同分布的。
+你带着不同的目的会遇到不同分布的潜在对象；你在不同的年龄和状态会遇到不同分布的潜在对象；你通过不同的途径也会遇到不同分布的潜在对象。
+所以比拒掉前 37% 更有用的，是找到那个更好的分布，而不是只盯着样本。这反映了人们对待统计的一个巨大的认识误区：大家往往认为是样本形成了分布，其实是分布 generate 了样本。分布才是根本，而样本只是偶然的表象。
+其实，这篇文章才不是在讲怎么找对象呢。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/2019_%E7%99%BE%E5%88%86%E4%B9%8B%E4%B8%89%E5%8D%81%E4%B8%83/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-14T20:00:08+08:00" />
+<meta property="article:modified_time" content="2019-07-14T20:00:08+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为什么拒绝掉前37%的追求者是错的"/>
+<meta name="twitter:description" content="Problem Formulation 假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶；而如果你选择拒绝，则不能反悔，只能在后面的潜在配偶中选择，这也意味着如果你不小心拒绝了 the right one，你永远不能再和 TA 在一起了。现在的问题是，选择和第几个潜在追求者在一起是最佳策略？
+这个问题的原型是 Secretary problem。而答案则是，一个神奇的数字–37%。数学家证明了，你应该先拒绝掉前 37%的人，然后从这开始，只要遇到一个比这前 37%的人都好的任何一个人，就选 TA。
+而有一些文章说，找对象也和找秘书一样，服从这个 37%的魔数。
+你可以这么来理解，假设起初你是个懵懵懂懂的男生，你对女孩儿一般都啥样一无所知，也不知道谈恋爱是干什么的，这时候你对女生的信念是无从建立的（我喜欢用信念这个词，其实就是概率分布的意思）。所以你应该干嘛呢？你应该采样，先采集一些样本，对女生建立起一种信念，这样你就知道女生一般都啥样儿，好姑娘大概啥样儿，矫情的姑娘啥样儿等等。
+再说一遍，被你拒绝掉的前 37%，其实就是你的样本空间，用于刻画在你身边潜在的女生的概率分布，这帮助你在未来能客观地评价你遇到的每一个妹子。
+批判 我可不是来给这种择偶方式来点赞的，而是来批判它的，从数学角度批判它。这种择偶方式存在很多漏洞，而这些漏洞都源自于其基于错误的假设。
+首先，你不知道你这辈子会遇到多少潜在对象，所以你不知道哪个是第 37%个。
+其次，谁说你不能反悔的，如果你找到了 80%的地方，却发现还是第一个最好，那就找第一个呗。
+上面两条都不是最重要的，这种方式最大的错误是它基于一种 「所有人都满足同一个分布」的巨大错误假设。如果你是变化的，你的环境是变化的，那你遇到的潜在对象就不是同分布的，你在高中遇到的女生和你在工作中遇到的女生就不是同分布的。
+你带着不同的目的会遇到不同分布的潜在对象；你在不同的年龄和状态会遇到不同分布的潜在对象；你通过不同的途径也会遇到不同分布的潜在对象。
+所以比拒掉前 37% 更有用的，是找到那个更好的分布，而不是只盯着样本。这反映了人们对待统计的一个巨大的认识误区：大家往往认为是样本形成了分布，其实是分布 generate 了样本。分布才是根本，而样本只是偶然的表象。
+其实，这篇文章才不是在讲怎么找对象呢。"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="http://example.org/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="http://example.org/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">14</span>
+							<span class="rest">Jul 2019</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">为什么拒绝掉前37%的追求者是错的</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<h2 id="problem-formulation">Problem Formulation</h2>
+<p>假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶；而如果你选择拒绝，则不能反悔，只能在后面的潜在配偶中选择，这也意味着如果你不小心拒绝了 the right one，你永远不能再和 TA 在一起了。现在的问题是，选择和第几个潜在追求者在一起是最佳策略？</p>
+<p>这个问题的原型是 Secretary problem。而答案则是，一个神奇的数字–37%。数学家证明了，你应该先拒绝掉前 37%的人，然后从这开始，只要遇到一个比这前 37%的人都好的任何一个人，就选 TA。</p>
+<p>而有一些文章说，找对象也和找秘书一样，服从这个 37%的魔数。</p>
+<p>你可以这么来理解，假设起初你是个懵懵懂懂的男生，你对女孩儿一般都啥样一无所知，也不知道谈恋爱是干什么的，这时候你对女生的信念是无从建立的（我喜欢用信念这个词，其实就是概率分布的意思）。所以你应该干嘛呢？你应该采样，先采集一些样本，对女生建立起一种信念，这样你就知道女生一般都啥样儿，好姑娘大概啥样儿，矫情的姑娘啥样儿等等。</p>
+<p>再说一遍，被你拒绝掉的前 37%，其实就是你的样本空间，用于刻画在你身边潜在的女生的概率分布，这帮助你在未来能客观地评价你遇到的每一个妹子。</p>
+<h2 id="批判">批判</h2>
+<p>我可不是来给这种择偶方式来点赞的，而是来批判它的，从数学角度批判它。这种择偶方式存在很多漏洞，而这些漏洞都源自于其基于错误的假设。</p>
+<p>首先，你不知道你这辈子会遇到多少潜在对象，所以你不知道哪个是第 37%个。</p>
+<p>其次，谁说你不能反悔的，如果你找到了 80%的地方，却发现还是第一个最好，那就找第一个呗。</p>
+<p>上面两条都不是最重要的，这种方式最大的错误是它基于一种 「<strong>所有人都满足同一个分布</strong>」的巨大错误假设。如果你是变化的，你的环境是变化的，那你遇到的潜在对象就不是同分布的，你在高中遇到的女生和你在工作中遇到的女生就不是同分布的。</p>
+<p>你带着不同的目的会遇到不同分布的潜在对象；你在不同的年龄和状态会遇到不同分布的潜在对象；你通过不同的途径也会遇到不同分布的潜在对象。</p>
+<p>所以比拒掉前 37% 更有用的，是<strong>找到那个更好的分布，而不是只盯着样本</strong>。这反映了人们对待统计的一个巨大的认识误区：<strong>大家往往认为是样本形成了分布，其实是分布 generate 了样本</strong>。分布才是根本，而样本只是偶然的表象。</p>
+<p>其实，这篇文章才不是在讲怎么找对象呢。</p>
+
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+<script>feather.replace()</script>
+</body>
+</html>

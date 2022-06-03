@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>akka - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="akka">
+<meta itemprop="description" content="akka 不是一个 framework，而是一个 toolkit 或者说运行时，用于在 jvm 上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。
+像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。
+与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
+actors sending messages changing its state changing its behavior creating more actors
+class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() ."><meta itemprop="datePublished" content="2018-04-01T20:00:08+08:00" />
+<meta itemprop="dateModified" content="2018-04-01T20:00:08+08:00" />
+<meta itemprop="wordCount" content="186">
+<meta itemprop="keywords" content="" /><meta property="og:title" content="akka" />
+<meta property="og:description" content="akka 不是一个 framework，而是一个 toolkit 或者说运行时，用于在 jvm 上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。
+像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。
+与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
+actors sending messages changing its state changing its behavior creating more actors
+class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/2018_akka/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-01T20:00:08+08:00" />
+<meta property="article:modified_time" content="2018-04-01T20:00:08+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="akka"/>
+<meta name="twitter:description" content="akka 不是一个 framework，而是一个 toolkit 或者说运行时，用于在 jvm 上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。
+像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。
+与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
+actors sending messages changing its state changing its behavior creating more actors
+class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() ."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="http://example.org/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="http://example.org/">
+				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">01</span>
+							<span class="rest">Apr 2018</span>
+						</div>
+					</div>
+				
+				<div class="matter">
+					<h1 class="title">akka</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>akka 不是一个 framework，而是一个 toolkit 或者说运行时，用于在 jvm 上构建高并发、分布式、弹性、消息驱动的应用。Actor 执行操作来响应消息。这些操作包括更改 actor 自己的内部状态，以及发出其他消息和创建其他 actor。所有消息都是异步交付的，因此将消息发送方与接收方分开。这种分离，使得 actor 系统具有内在的并发性：可以不受限制地并行执行任何拥有输入消息的 actor。</p>
+<p>像真实世界的演员一样，Akka actor 也需要一定程度的隐私。您不能直接将消息发送给 Akka actor。相反，需要将消息发送给等同于邮政信箱的 actor 引用。然后通过该引用将传入的消息路由到 actor 的邮箱，以后再传送给 actor。Akka actor 甚至要求所有传入的消息都是不可变的。</p>
+<p>与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。</p>
+<h2 id="actors">actors</h2>
+<p>sending messages changing its state changing its behavior creating more actors</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Activity</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Disable</span><span style="color:#f92672">(</span>val password<span style="color:#f92672">:</span> String<span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Enable</span><span style="color:#f92672">(</span>val password<span style="color:#f92672">:</span> String<span style="color:#f92672">)</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Alarm</span><span style="color:#f92672">(</span>val password<span style="color:#f92672">:</span> String<span style="color:#f92672">):</span> AbstractLoggingActor<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    override fun <span style="color:#a6e22e">createReceive</span><span style="color:#f92672">():</span> Receive <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> disabled
+    <span style="color:#f92672">}</span>
+
+    val enabled <span style="color:#f92672">=</span> receiveBuilder<span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>Activity<span style="color:#f92672">::</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">java</span><span style="color:#f92672">,</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onActivity</span><span style="color:#f92672">(</span>it<span style="color:#f92672">)</span> <span style="color:#f92672">})</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>Disable<span style="color:#f92672">::</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">java</span><span style="color:#f92672">,</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onDisable</span><span style="color:#f92672">(</span>it<span style="color:#f92672">)</span> <span style="color:#f92672">})</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">()</span>
+
+    val disabled <span style="color:#f92672">=</span> receiveBuilder<span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">match</span><span style="color:#f92672">(</span>Enable<span style="color:#f92672">::</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">java</span><span style="color:#f92672">,</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onEnable</span><span style="color:#f92672">(</span>it<span style="color:#f92672">)</span> <span style="color:#f92672">}).</span><span style="color:#a6e22e">build</span><span style="color:#f92672">()</span>
+
+    <span style="color:#66d9ef">private</span> fun <span style="color:#a6e22e">onDisable</span><span style="color:#f92672">(</span>disable<span style="color:#f92672">:</span> Disable<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>password <span style="color:#f92672">==</span> disable<span style="color:#f92672">.</span><span style="color:#a6e22e">password</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">().</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;alarm disabled&#34;</span><span style="color:#f92672">)</span>
+            context<span style="color:#f92672">.</span><span style="color:#a6e22e">become</span><span style="color:#f92672">(</span>disabled<span style="color:#f92672">)</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">().</span><span style="color:#a6e22e">warning</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;wrong password&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> fun <span style="color:#a6e22e">onEnable</span><span style="color:#f92672">(</span>enable<span style="color:#f92672">:</span> Enable<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>password <span style="color:#f92672">==</span> enable<span style="color:#f92672">.</span><span style="color:#a6e22e">password</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">().</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;alarm enabled&#34;</span><span style="color:#f92672">)</span>
+            context<span style="color:#f92672">.</span><span style="color:#a6e22e">become</span><span style="color:#f92672">(</span>enabled<span style="color:#f92672">)</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">().</span><span style="color:#a6e22e">warning</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;failed to enable the alarm&#34;</span><span style="color:#f92672">)</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> fun <span style="color:#a6e22e">onActivity</span><span style="color:#f92672">(</span>a<span style="color:#f92672">:</span> Activity<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        log<span style="color:#f92672">().</span><span style="color:#a6e22e">warning</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;alarm&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+
+    companion object <span style="color:#f92672">{</span>
+        fun <span style="color:#a6e22e">props</span><span style="color:#f92672">(</span>password<span style="color:#f92672">:</span> String<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> Props<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>Alarm<span style="color:#f92672">::</span>class<span style="color:#f92672">.</span><span style="color:#a6e22e">java</span><span style="color:#f92672">,</span> password<span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+fun <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>args<span style="color:#f92672">:</span> Array<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;)</span> <span style="color:#f92672">{</span>
+    val system <span style="color:#f92672">=</span> ActorSystem<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">()</span>
+
+    val alarm <span style="color:#f92672">=</span> system<span style="color:#f92672">.</span><span style="color:#a6e22e">actorOf</span><span style="color:#f92672">(</span>Alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">props</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pass&#34;</span><span style="color:#f92672">),</span> <span style="color:#e6db74">&#34;alarm&#34;</span><span style="color:#f92672">)</span>
+
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Activity<span style="color:#f92672">(),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Enable<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;puss&#34;</span><span style="color:#f92672">),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Enable<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pass&#34;</span><span style="color:#f92672">),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Activity<span style="color:#f92672">(),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Disable<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;puss&#34;</span><span style="color:#f92672">),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+    alarm<span style="color:#f92672">.</span><span style="color:#a6e22e">tell</span><span style="color:#f92672">(</span>Disable<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;pass&#34;</span><span style="color:#f92672">),</span> ActorRef<span style="color:#f92672">.</span><span style="color:#a6e22e">noSender</span><span style="color:#f92672">())</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
+			</div>
+
+			<div class="tags">
+				
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+<script>feather.replace()</script>
+</body>
+</html>
