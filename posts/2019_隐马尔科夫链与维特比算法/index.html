@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>隐马尔科夫链与维特比算法 - 硕大的汤姆</title><meta name=viewport content="width=device-width,initial-scale=1"><meta itemprop=name content="隐马尔科夫链与维特比算法"><meta itemprop=description content="马尔科夫链 明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机过程）。
+对随机过程的研究要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的，而我们要研究不同时刻的状态之间的相关性就变得非常复杂。比如今天的最高气温可能和之前几天的最高气温都是相关的，这让模型的建立变得复杂。马尔科夫为了简化问题，提出了一种假设，即
+随机过程中每个状态的概率分布只和其前一个状态有关。
+注意，我们不能否认前天的天气和今天天气的相关性。马尔科夫链并不是直接否认前一时刻的状态与后一时刻状态之间的相关性，而是说明了在当前时刻状态已知的前提下，下一时刻的状态只与当前时刻有关，而和之前的时刻无关。
+隐马尔科夫模型(HMM) 马尔科夫模型极大得简化了随机过程的研究，但是在现实问题中，我们常常无法直接获得随机过程中各个时刻的状态。比如语音识别，当你听到“li hai”，可能是在说「厉害」，也可能是在说「里海」。听到的“li hai”是观测到的现象，而背后的信息才是我们要研究的随机过程的状态。这就是隐马尔科夫模型
+任意时刻 t 的状态 st 是不可见的，观测者不能直接观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。
+状态转移矩阵 与 发射矩阵 如果 HMM 模型的状态是离散的，而观察状态也是离散的，我们就可以得到两个关键的矩阵。一个是状态转移矩阵，其表示模型在不同状态间跳转的概率。比如状态为「不感冒」和「感冒」，则[[0.7, 0.3], [0.4, 0.6]]表示
+如果昨天不感冒，则今天 70%不感冒，30%感冒 如果昨天感冒了，则今天 40%不感冒，60%感冒 另一个矩阵叫做发射矩阵，其表示在不同的状态下产生不同观测值的概率，比如
+如果不感冒，则有 50%的概率表现正常，有 40%概率觉得冷，有 10%的概率感觉头晕 如果感冒了，则有 10%的概率表现正常，有 30%概率觉得冷，有 60%概率觉得头晕 除此之外，我们还有一些先验知识。比如人有 60%的概率处于健康状态，有 40%的概率处于感冒状态。
+请问，假设我第一天感觉正常，第二天感觉有点冷，第三天感觉有点 dizzy，我这三天最可能的状态分别是什么呢？
+维特比算法 这个问题可以被建模为图遍历的问题。也就是从第一天开始一直到今天，状态流转的路径中可能性最大的路径。而没过一层的可能性都有「状态数的平方」那么多，所以整个图求解也是复杂度非常高的。
+而维特比算法就是解决这个问题的一种动态规划算法。其核心思想在于
+到达今天各个状态的最大概率，是由到达昨天的各个状态的最大概率，与今天的观测情况决定的。
+比如今天感觉有点冷吧，如果昨天身体好的很，那么今天很可能并没有感冒，但是如果昨天就感冒了，那今天感冒的概率就很大。
+那么在感觉冷的情况下今天感冒的概率是多少呢？
+我们要知道昨天感冒的概率，昨天感冒且今天感冒的转移概率 我们要知道昨天没感冒的概率，昨天没感冒且今天感冒的转移概率 我们要知道感冒导致感觉冷的概率 P(今天感冒) = 常数 * max(P(昨天感冒)*P(今天感冒|昨天感冒)*P(觉得冷|感冒), P(昨天没感冒)*P(今天感冒|昨天没感冒)\*P(觉得冷|感冒)) 同样我们也可以算出今天没有感冒的概率。通过动态规划，我们可以算出整个随机过程的 path 下最可能的状态转移路径。
+(小知识：维特比算法的发明人安德鲁维特比在 1985 年创立了高通公司。)"><meta itemprop=datePublished content="2019-09-21T20:00:08+08:00"><meta itemprop=dateModified content="2019-09-21T20:00:08+08:00"><meta itemprop=wordCount content="189"><meta itemprop=keywords content><meta property="og:title" content="隐马尔科夫链与维特比算法"><meta property="og:description" content="马尔科夫链 明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机过程）。
+对随机过程的研究要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的，而我们要研究不同时刻的状态之间的相关性就变得非常复杂。比如今天的最高气温可能和之前几天的最高气温都是相关的，这让模型的建立变得复杂。马尔科夫为了简化问题，提出了一种假设，即
+随机过程中每个状态的概率分布只和其前一个状态有关。
+注意，我们不能否认前天的天气和今天天气的相关性。马尔科夫链并不是直接否认前一时刻的状态与后一时刻状态之间的相关性，而是说明了在当前时刻状态已知的前提下，下一时刻的状态只与当前时刻有关，而和之前的时刻无关。
+隐马尔科夫模型(HMM) 马尔科夫模型极大得简化了随机过程的研究，但是在现实问题中，我们常常无法直接获得随机过程中各个时刻的状态。比如语音识别，当你听到“li hai”，可能是在说「厉害」，也可能是在说「里海」。听到的“li hai”是观测到的现象，而背后的信息才是我们要研究的随机过程的状态。这就是隐马尔科夫模型
+任意时刻 t 的状态 st 是不可见的，观测者不能直接观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。
+状态转移矩阵 与 发射矩阵 如果 HMM 模型的状态是离散的，而观察状态也是离散的，我们就可以得到两个关键的矩阵。一个是状态转移矩阵，其表示模型在不同状态间跳转的概率。比如状态为「不感冒」和「感冒」，则[[0.7, 0.3], [0.4, 0.6]]表示
+如果昨天不感冒，则今天 70%不感冒，30%感冒 如果昨天感冒了，则今天 40%不感冒，60%感冒 另一个矩阵叫做发射矩阵，其表示在不同的状态下产生不同观测值的概率，比如
+如果不感冒，则有 50%的概率表现正常，有 40%概率觉得冷，有 10%的概率感觉头晕 如果感冒了，则有 10%的概率表现正常，有 30%概率觉得冷，有 60%概率觉得头晕 除此之外，我们还有一些先验知识。比如人有 60%的概率处于健康状态，有 40%的概率处于感冒状态。
+请问，假设我第一天感觉正常，第二天感觉有点冷，第三天感觉有点 dizzy，我这三天最可能的状态分别是什么呢？
+维特比算法 这个问题可以被建模为图遍历的问题。也就是从第一天开始一直到今天，状态流转的路径中可能性最大的路径。而没过一层的可能性都有「状态数的平方」那么多，所以整个图求解也是复杂度非常高的。
+而维特比算法就是解决这个问题的一种动态规划算法。其核心思想在于
+到达今天各个状态的最大概率，是由到达昨天的各个状态的最大概率，与今天的观测情况决定的。
+比如今天感觉有点冷吧，如果昨天身体好的很，那么今天很可能并没有感冒，但是如果昨天就感冒了，那今天感冒的概率就很大。
+那么在感觉冷的情况下今天感冒的概率是多少呢？
+我们要知道昨天感冒的概率，昨天感冒且今天感冒的转移概率 我们要知道昨天没感冒的概率，昨天没感冒且今天感冒的转移概率 我们要知道感冒导致感觉冷的概率 P(今天感冒) = 常数 * max(P(昨天感冒)*P(今天感冒|昨天感冒)*P(觉得冷|感冒), P(昨天没感冒)*P(今天感冒|昨天没感冒)\*P(觉得冷|感冒)) 同样我们也可以算出今天没有感冒的概率。通过动态规划，我们可以算出整个随机过程的 path 下最可能的状态转移路径。
+(小知识：维特比算法的发明人安德鲁维特比在 1985 年创立了高通公司。)"><meta property="og:type" content="article"><meta property="og:url" content="https://chenminhua.github.io/posts/2019_%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E4%B8%8E%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-09-21T20:00:08+08:00"><meta property="article:modified_time" content="2019-09-21T20:00:08+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="隐马尔科夫链与维特比算法"><meta name=twitter:description content="马尔科夫链 明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机过程）。
+对随机过程的研究要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的，而我们要研究不同时刻的状态之间的相关性就变得非常复杂。比如今天的最高气温可能和之前几天的最高气温都是相关的，这让模型的建立变得复杂。马尔科夫为了简化问题，提出了一种假设，即
+随机过程中每个状态的概率分布只和其前一个状态有关。
+注意，我们不能否认前天的天气和今天天气的相关性。马尔科夫链并不是直接否认前一时刻的状态与后一时刻状态之间的相关性，而是说明了在当前时刻状态已知的前提下，下一时刻的状态只与当前时刻有关，而和之前的时刻无关。
+隐马尔科夫模型(HMM) 马尔科夫模型极大得简化了随机过程的研究，但是在现实问题中，我们常常无法直接获得随机过程中各个时刻的状态。比如语音识别，当你听到“li hai”，可能是在说「厉害」，也可能是在说「里海」。听到的“li hai”是观测到的现象，而背后的信息才是我们要研究的随机过程的状态。这就是隐马尔科夫模型
+任意时刻 t 的状态 st 是不可见的，观测者不能直接观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。
+状态转移矩阵 与 发射矩阵 如果 HMM 模型的状态是离散的，而观察状态也是离散的，我们就可以得到两个关键的矩阵。一个是状态转移矩阵，其表示模型在不同状态间跳转的概率。比如状态为「不感冒」和「感冒」，则[[0.7, 0.3], [0.4, 0.6]]表示
+如果昨天不感冒，则今天 70%不感冒，30%感冒 如果昨天感冒了，则今天 40%不感冒，60%感冒 另一个矩阵叫做发射矩阵，其表示在不同的状态下产生不同观测值的概率，比如
+如果不感冒，则有 50%的概率表现正常，有 40%概率觉得冷，有 10%的概率感觉头晕 如果感冒了，则有 10%的概率表现正常，有 30%概率觉得冷，有 60%概率觉得头晕 除此之外，我们还有一些先验知识。比如人有 60%的概率处于健康状态，有 40%的概率处于感冒状态。
+请问，假设我第一天感觉正常，第二天感觉有点冷，第三天感觉有点 dizzy，我这三天最可能的状态分别是什么呢？
+维特比算法 这个问题可以被建模为图遍历的问题。也就是从第一天开始一直到今天，状态流转的路径中可能性最大的路径。而没过一层的可能性都有「状态数的平方」那么多，所以整个图求解也是复杂度非常高的。
+而维特比算法就是解决这个问题的一种动态规划算法。其核心思想在于
+到达今天各个状态的最大概率，是由到达昨天的各个状态的最大概率，与今天的观测情况决定的。
+比如今天感觉有点冷吧，如果昨天身体好的很，那么今天很可能并没有感冒，但是如果昨天就感冒了，那今天感冒的概率就很大。
+那么在感觉冷的情况下今天感冒的概率是多少呢？
+我们要知道昨天感冒的概率，昨天感冒且今天感冒的转移概率 我们要知道昨天没感冒的概率，昨天没感冒且今天感冒的转移概率 我们要知道感冒导致感觉冷的概率 P(今天感冒) = 常数 * max(P(昨天感冒)*P(今天感冒|昨天感冒)*P(觉得冷|感冒), P(昨天没感冒)*P(今天感冒|昨天没感冒)\*P(觉得冷|感冒)) 同样我们也可以算出今天没有感冒的概率。通过动态规划，我们可以算出整个随机过程的 path 下最可能的状态转移路径。
+(小知识：维特比算法的发明人安德鲁维特比在 1985 年创立了高通公司。)"><link rel=stylesheet type=text/css media=screen href=https://chenminhua.github.iocss/normalize.css><link rel=stylesheet type=text/css media=screen href=https://chenminhua.github.iocss/main.css><link id=dark-scheme rel=stylesheet type=text/css href=https://chenminhua.github.iocss/dark.css><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://chenminhua.github.iojs/main.js></script></head><body><div class="container wrapper"><div class=header><div class=avatar><a href=https://chenminhua.github.io><img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt=硕大的汤姆></a></div><h1 class=site-title><a href=https://chenminhua.github.io>硕大的汤姆</a></h1><div class=site-description><p>The official website of Minhua Chen</p><nav class="nav social"><ul class=flat><li><a href=https://github.com/knadh/hugo-ink title=Github><i data-feather=github></i></a></li><li><a href=/index.xml title=RSS><i data-feather=rss></i></a></li></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post><div class=post-header><div class=meta><div class=date><span class=day>21</span>
+<span class=rest>Sep 2019</span></div></div><div class=matter><h1 class=title>隐马尔科夫链与维特比算法</h1></div></div><div class=markdown><h2 id=马尔科夫链>马尔科夫链</h2><p>明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机过程）。</p><p>对随机过程的研究要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st 都是随机的，而我们要研究不同时刻的状态之间的相关性就变得非常复杂。比如今天的最高气温可能和之前几天的最高气温都是相关的，这让模型的建立变得复杂。马尔科夫为了简化问题，提出了一种假设，即</p><blockquote><p>随机过程中每个状态的概率分布只和其前一个状态有关。</p></blockquote><p>注意，我们不能否认前天的天气和今天天气的相关性。马尔科夫链并不是直接否认前一时刻的状态与后一时刻状态之间的相关性，而是说明了在当前时刻状态已知的前提下，下一时刻的状态只与当前时刻有关，而和之前的时刻无关。</p><p>隐马尔科夫模型(HMM) 马尔科夫模型极大得简化了随机过程的研究，但是在现实问题中，我们常常无法直接获得随机过程中各个时刻的状态。比如语音识别，当你听到“li hai”，可能是在说「厉害」，也可能是在说「里海」。听到的“li hai”是观测到的现象，而背后的信息才是我们要研究的随机过程的状态。这就是隐马尔科夫模型</p><blockquote><p>任意时刻 t 的状态 st 是不可见的，观测者不能直接观察状态序列来推测状态转移模型的参数。但是隐马尔科夫模型在每个时刻都会输出 ot,而且 ot 仅和 st 相关（独立输出假设）。</p></blockquote><h3 id=状态转移矩阵-与-发射矩阵>状态转移矩阵 与 发射矩阵</h3><p>如果 HMM 模型的状态是离散的，而观察状态也是离散的，我们就可以得到两个关键的矩阵。一个是状态转移矩阵，其表示模型在不同状态间跳转的概率。比如状态为「不感冒」和「感冒」，则[[0.7, 0.3], [0.4, 0.6]]表示</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>如果昨天不感冒，则今天 70%不感冒，30%感冒
+</span></span><span style=display:flex><span>如果昨天感冒了，则今天 40%不感冒，60%感冒
+</span></span></code></pre></div><p>另一个矩阵叫做发射矩阵，其表示在不同的状态下产生不同观测值的概率，比如</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>如果不感冒，则有 50%的概率表现正常，有 40%概率觉得冷，有 10%的概率感觉头晕
+</span></span><span style=display:flex><span>如果感冒了，则有 10%的概率表现正常，有 30%概率觉得冷，有 60%概率觉得头晕
+</span></span></code></pre></div><p>除此之外，我们还有一些先验知识。比如人有 60%的概率处于健康状态，有 40%的概率处于感冒状态。</p><p>请问，假设我第一天感觉正常，第二天感觉有点冷，第三天感觉有点 dizzy，我这三天最可能的状态分别是什么呢？</p><h2 id=维特比算法>维特比算法</h2><p>这个问题可以被建模为图遍历的问题。也就是从第一天开始一直到今天，状态流转的路径中可能性最大的路径。而没过一层的可能性都有「状态数的平方」那么多，所以整个图求解也是复杂度非常高的。</p><p>而维特比算法就是解决这个问题的一种动态规划算法。其核心思想在于</p><blockquote><p>到达今天各个状态的最大概率，是由到达昨天的各个状态的最大概率，与今天的观测情况决定的。</p></blockquote><p>比如今天感觉有点冷吧，如果昨天身体好的很，那么今天很可能并没有感冒，但是如果昨天就感冒了，那今天感冒的概率就很大。</p><p>那么在感觉冷的情况下今天感冒的概率是多少呢？</p><ul><li>我们要知道昨天感冒的概率，昨天感冒且今天感冒的转移概率</li><li>我们要知道昨天没感冒的概率，昨天没感冒且今天感冒的转移概率</li><li>我们要知道感冒导致感觉冷的概率</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>P<span style=color:#f92672>(</span>今天感冒<span style=color:#f92672>)</span> <span style=color:#f92672>=</span> 常数 * max<span style=color:#f92672>(</span>P<span style=color:#f92672>(</span>昨天感冒<span style=color:#f92672>)</span>*P<span style=color:#f92672>(</span>今天感冒|昨天感冒<span style=color:#f92672>)</span>*P<span style=color:#f92672>(</span>觉得冷|感冒<span style=color:#f92672>)</span>,
+</span></span><span style=display:flex><span>P<span style=color:#f92672>(</span>昨天没感冒<span style=color:#f92672>)</span>*P<span style=color:#f92672>(</span>今天感冒|昨天没感冒<span style=color:#f92672>)</span><span style=color:#ae81ff>\*</span>P<span style=color:#f92672>(</span>觉得冷|感冒<span style=color:#f92672>))</span>
+</span></span></code></pre></div><p>同样我们也可以算出今天没有感冒的概率。通过动态规划，我们可以算出整个随机过程的 path 下最可能的状态转移路径。</p><p>(小知识：维特比算法的发明人安德鲁维特比在 1985 年创立了高通公司。)</p><h2 id=实战>实战</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Viterbi</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> __init__(self, start_p, trans_p, emission_p):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>start_p <span style=color:#f92672>=</span> start_p
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>trans_p <span style=color:#f92672>=</span> trans_p
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>emission_p <span style=color:#f92672>=</span> emission_p
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>state_count <span style=color:#f92672>=</span> len(start_p)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>ob_count <span style=color:#f92672>=</span> len(self<span style=color:#f92672>.</span>emission_p[<span style=color:#ae81ff>0</span>])
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>round <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>path <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>V_last <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>obs <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>next</span>(self, ob):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>obs<span style=color:#f92672>.</span>append(ob)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>round <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>V_last <span style=color:#f92672>=</span> [self<span style=color:#f92672>.</span>start_p[i] <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>emission_p[i][ob] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>state_count) ]
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>path <span style=color:#f92672>=</span> [[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>state_count)]
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            newPath <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>            newV_last <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> y <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>state_count):
+</span></span><span style=display:flex><span>                (prob, state) <span style=color:#f92672>=</span> max([(self<span style=color:#f92672>.</span>V_last[y0] <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>trans_p[y0][y] <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>emission_p[y][ob], y0)
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>for</span> y0 <span style=color:#f92672>in</span> range(self<span style=color:#f92672>.</span>state_count)])
+</span></span><span style=display:flex><span>                newV_last<span style=color:#f92672>.</span>append(prob)
+</span></span><span style=display:flex><span>                newPath<span style=color:#f92672>.</span>append(self<span style=color:#f92672>.</span>path[state] <span style=color:#f92672>+</span> [y])
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>V_last <span style=color:#f92672>=</span> newV_last
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>path <span style=color:#f92672>=</span> newPath
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>round <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>viterbi <span style=color:#f92672>=</span> Viterbi(
+</span></span><span style=display:flex><span>    [<span style=color:#ae81ff>0.6</span>, <span style=color:#ae81ff>0.4</span>],
+</span></span><span style=display:flex><span>    [[<span style=color:#ae81ff>0.7</span>, <span style=color:#ae81ff>0.3</span>], [<span style=color:#ae81ff>0.4</span>, <span style=color:#ae81ff>0.6</span>]],
+</span></span><span style=display:flex><span>    [[<span style=color:#ae81ff>0.5</span>, <span style=color:#ae81ff>0.4</span>, <span style=color:#ae81ff>0.1</span>], [<span style=color:#ae81ff>0.1</span>, <span style=color:#ae81ff>0.3</span>, <span style=color:#ae81ff>0.6</span>]])
+</span></span><span style=display:flex><span>viterbi<span style=color:#f92672>.</span>next(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>viterbi<span style=color:#f92672>.</span>next(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>viterbi<span style=color:#f92672>.</span>next(<span style=color:#ae81ff>2</span>)
+</span></span></code></pre></div><p>第一天正常，第二天感觉冷，第三天感觉头晕，其最可能的 path 为 “健康->健康->感冒”。</p></div><div class=tags></div><div class=back><a href=https://chenminhua.github.io><span aria-hidden=true>← Back</span></a></div><div class=back></div></div></div><div class="footer wrapper"><nav class=nav><div>2019</div></nav></div><script>feather.replace()</script></body></html>
