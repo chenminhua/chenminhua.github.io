@@ -1,0 +1,1 @@
+### Design functions and methods to receive interfaces whenever possible.
