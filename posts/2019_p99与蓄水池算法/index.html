@@ -23,10 +23,10 @@ for (long i = 0; i < LOOP_NUM; i++) { if (i < SAMPLE_NUM) { samples.push_back(n(
 <script src=https://chenminhua.github.io/js/main.js></script></head><body><div class="container wrapper"><div class=header><div class=avatar><a href=https://chenminhua.github.io/><img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt=硕大的汤姆></a></div><h1 class=site-title><a href=https://chenminhua.github.io/>硕大的汤姆</a></h1><div class=site-description><p>The official website of Minhua Chen</p><nav class="nav social"><ul class=flat><li><a href=https://github.com/knadh/hugo-ink title=Github><i data-feather=github></i></a></li><li><a href=/index.xml title=RSS><i data-feather=rss></i></a></li></ul></nav></div><nav class=nav><ul class=flat><li><a href=/>Home</a></li><li><a href=/posts>All posts</a></li><li><a href=/about>About</a></li><li><a href=/algo>Algo</a></li><li><a href=/principles>原则</a></li><li><a href=/tags>Tags</a></li></ul></nav></div><div class=post><div class=post-header><div class=meta><div class=date><span class=day>04</span>
 <span class=rest>Sep 2019</span></div></div><div class=matter><h1 class=title>P99与蓄水池算法(reservoir sampling)</h1></div></div><div class=markdown><h2 id=一个监控问题>一个监控问题</h2><p>假设你是一个运维工作人员，维护着一个访问量巨大的服务，然后有一天，老板跑来问你这个服务的 p99 响应时间是多少？（p99 响应时间：系统 99%的请求都快于这个时间，而 1%的请求则慢于这个时间。即响应时间的 99% 分位点。）</p><p>一个简单的算法是直接对所有请求的访问时间进行排序，然后取出 99%位置的请求的访问时间。但是由于系统访问量巨大，每天都有上亿的请求，而一般的排序算法的时间复杂度为 O(n * log(n))，在这样的数据量级上，算法的空间复杂度也很高。怎么优化这个算法呢？</p><h2 id=抽样>抽样</h2><p>上亿的数据实在太多了，但是假设我们的系统是相对稳定的，则所有数据应该是同分布的，那我们应该可以通过随机采样的方式，选出一部分样本来，用这些样本来描述总体。比如说我知道今天会有一亿个请求，然后我就可以按千分之一来进行数据抽样，即每个数据都按照千分之一的概率抽取到样本集中。</p><p>这里就遇到另一个关键性的问题，我不知道今天会有多少请求，即我不知道总体有多大，更讨厌的是，总体在不断变大，那样本集也会不断变大，排序会越来越困难。</p><p>这时候，你应该打开 John Bentley 所著的《编程珠玑》，翻到第十二章，那里有这个问题的答案。</p><p>答案就是蓄水池算法，具体可参考《编程珠玑》或 wiki。https://en.wikipedia.org/wiki/Reservoir_sampling , 算法如下。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>long</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> LOOP_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
-</span></span><span style=display:flex><span>            samples.push_back(n(e));
+</span></span><span style=display:flex><span>            samples.<span style=color:#a6e22e>push_back</span>(<span style=color:#a6e22e>n</span>(e));
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> randint(<span style=color:#ae81ff>0</span>, i);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> n(e);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> <span style=color:#a6e22e>randint</span>(<span style=color:#ae81ff>0</span>, i);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> <span style=color:#a6e22e>n</span>(e);
 </span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (r <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
 </span></span><span style=display:flex><span>                samples[r] <span style=color:#f92672>=</span> ne;
 </span></span><span style=display:flex><span>            }
@@ -36,11 +36,11 @@ for (long i = 0; i < LOOP_NUM; i++) { if (i < SAMPLE_NUM) { samples.push_back(n(
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> q1_cap <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (SAMPLE_NUM <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.01</span>);
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> SAMPLE_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> q1_cap) {
-</span></span><span style=display:flex><span>            q1.push(v[i]);
+</span></span><span style=display:flex><span>            q1.<span style=color:#a6e22e>push</span>(v[i]);
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.top()) {
-</span></span><span style=display:flex><span>                q1.push(v[i]);
-</span></span><span style=display:flex><span>                q1.pop();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.<span style=color:#a6e22e>top</span>()) {
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>push</span>(v[i]);
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
@@ -50,40 +50,40 @@ for (long i = 0; i < LOOP_NUM; i++) { if (i < SAMPLE_NUM) { samples.push_back(n(
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
 </span></span><span style=display:flex><span>priority_queue<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span>, std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span>, std<span style=color:#f92672>::</span>greater<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;&gt;</span> q1; <span style=color:#75715e>// 最小堆
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>std<span style=color:#f92672>::</span>normal_distribution<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span> n(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>); <span style=color:#75715e>//均值为 0, 方差为 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>std<span style=color:#f92672>::</span>normal_distribution<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>n</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>); <span style=color:#75715e>//均值为 0, 方差为 1
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>std<span style=color:#f92672>::</span>default_random_engine e; <span style=color:#75715e>//random engine
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>std<span style=color:#f92672>::</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span> v;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    clock_t t1 <span style=color:#f92672>=</span> clock();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>clock_t</span> t1 <span style=color:#f92672>=</span> <span style=color:#a6e22e>clock</span>();
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// reservoir sampling
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>long</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> LOOP_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
-</span></span><span style=display:flex><span>            v.push_back(n(e));
+</span></span><span style=display:flex><span>            v.<span style=color:#a6e22e>push_back</span>(<span style=color:#a6e22e>n</span>(e));
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> randint(<span style=color:#ae81ff>0</span>, i);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> n(e);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> <span style=color:#a6e22e>randint</span>(<span style=color:#ae81ff>0</span>, i);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> <span style=color:#a6e22e>n</span>(e);
 </span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (r <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
 </span></span><span style=display:flex><span>                v[r] <span style=color:#f92672>=</span> ne;
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    clock_t t2 <span style=color:#f92672>=</span> clock();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>clock_t</span> t2 <span style=color:#f92672>=</span> <span style=color:#a6e22e>clock</span>();
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>//最小堆
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> q1_cap <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (SAMPLE_NUM <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.01</span>);
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> SAMPLE_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> q1_cap) {
-</span></span><span style=display:flex><span>            q1.push(v[i]);
+</span></span><span style=display:flex><span>            q1.<span style=color:#a6e22e>push</span>(v[i]);
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.top()) {
-</span></span><span style=display:flex><span>                q1.push(v[i]);
-</span></span><span style=display:flex><span>                q1.pop();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.<span style=color:#a6e22e>top</span>()) {
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>push</span>(v[i]);
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    clock_t t3 <span style=color:#f92672>=</span> clock();
-</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> q1.top() <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>clock_t</span> t3 <span style=color:#f92672>=</span> <span style=color:#a6e22e>clock</span>();
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> q1.<span style=color:#a6e22e>top</span>() <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
 </span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;sampling time &#34;</span> <span style=color:#f92672>&lt;&lt;</span> (t2 <span style=color:#f92672>-</span> t1) <span style=color:#f92672>/</span> <span style=color:#ae81ff>1000000.</span> <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
 </span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;heap time &#34;</span> <span style=color:#f92672>&lt;&lt;</span> (t3 <span style=color:#f92672>-</span> t2) <span style=color:#f92672>/</span> <span style=color:#ae81ff>1000000.</span> <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
@@ -91,11 +91,11 @@ for (long i = 0; i < LOOP_NUM; i++) { if (i < SAMPLE_NUM) { samples.push_back(n(
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>最终结果为 2.32081。堆化非常快，只用了 2.5ms。我们知道标准正态分布的上 0.01 分位点是 2.327，已经非常接近了。</p><p>同时请注意，我们的采样算法不需要知道总体样本数，也就是说，我们继续向其中加入一亿数据，应该还是非常接近 2.327 的。我们试试在上面的 return 前加入如下代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=display:flex><span>    ....
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>long</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> LOOP_NUM; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> n(e);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>float</span> ne <span style=color:#f92672>=</span> <span style=color:#a6e22e>n</span>(e);
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
-</span></span><span style=display:flex><span>            v.push_back(ne);
+</span></span><span style=display:flex><span>            v.<span style=color:#a6e22e>push_back</span>(ne);
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> randint(<span style=color:#ae81ff>0</span>, i <span style=color:#f92672>+</span> LOOP_NUM);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>long</span> r <span style=color:#f92672>=</span> <span style=color:#a6e22e>randint</span>(<span style=color:#ae81ff>0</span>, i <span style=color:#f92672>+</span> LOOP_NUM);
 </span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (r <span style=color:#f92672>&lt;</span> SAMPLE_NUM) {
 </span></span><span style=display:flex><span>                v[r] <span style=color:#f92672>=</span> ne;
 </span></span><span style=display:flex><span>            }
@@ -103,15 +103,15 @@ for (long i = 0; i < LOOP_NUM; i++) { if (i < SAMPLE_NUM) { samples.push_back(n(
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> SAMPLE_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>&lt;</span> q1_cap) {
-</span></span><span style=display:flex><span>            q1.push(v[i]);
+</span></span><span style=display:flex><span>            q1.<span style=color:#a6e22e>push</span>(v[i]);
 </span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.top()) {
-</span></span><span style=display:flex><span>                q1.push(v[i]);
-</span></span><span style=display:flex><span>                q1.pop();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (v[i] <span style=color:#f92672>&gt;</span> q1.<span style=color:#a6e22e>top</span>()) {
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>push</span>(v[i]);
+</span></span><span style=display:flex><span>                q1.<span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>            }
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> q1.top() <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
+</span></span><span style=display:flex><span>    std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> q1.<span style=color:#a6e22e>top</span>() <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
 </span></span><span style=display:flex><span>}

@@ -50,25 +50,25 @@ gcc pi_number.c -O3 -opi time ."><link rel=stylesheet type=text/css media=screen
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> pi_v <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// allocate host memory
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    h_sum <span style=color:#f92672>=</span> (<span style=color:#66d9ef>double</span><span style=color:#f92672>*</span>) malloc(<span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>) <span style=color:#f92672>*</span> BLOCK_NUM <span style=color:#f92672>*</span> THREAD_NUM);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    h_sum <span style=color:#f92672>=</span> (<span style=color:#66d9ef>double</span><span style=color:#f92672>*</span>) <span style=color:#a6e22e>malloc</span>(<span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>) <span style=color:#f92672>*</span> BLOCK_NUM <span style=color:#f92672>*</span> THREAD_NUM);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// Allocate device memory
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    cudaMalloc((<span style=color:#66d9ef>void</span> <span style=color:#f92672>**</span>)<span style=color:#f92672>&amp;</span>g_sum, <span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>) <span style=color:#f92672>*</span> BLOCK_NUM <span style=color:#f92672>*</span> THREAD_NUM);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>cudaMalloc</span>((<span style=color:#66d9ef>void</span> <span style=color:#f92672>**</span>)<span style=color:#f92672>&amp;</span>g_sum, <span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>) <span style=color:#f92672>*</span> BLOCK_NUM <span style=color:#f92672>*</span> THREAD_NUM);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// Execute kernels
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>    leib_pi<span style=color:#f92672>&lt;&lt;&lt;</span>BLOCK_NUM,THREAD_NUM<span style=color:#f92672>&gt;&gt;&gt;</span>(g_sum);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// Transfer output from device memory to host
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    cudaMemcpy(h_sum, g_sum, <span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>*</span>BLOCK_NUM<span style=color:#f92672>*</span>THREAD_NUM, cudaMemcpyDeviceToHost);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>cudaMemcpy</span>(h_sum, g_sum, <span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>double</span>)<span style=color:#f92672>*</span>BLOCK_NUM<span style=color:#f92672>*</span>THREAD_NUM, cudaMemcpyDeviceToHost);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> BLOCK_NUM <span style=color:#f92672>*</span> THREAD_NUM; i<span style=color:#f92672>++</span>) {
 </span></span><span style=display:flex><span>        pi_v <span style=color:#f92672>+=</span> h_sum[i];
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;calculate %.10f</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, pi_v<span style=color:#f92672>*</span><span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;calculate %.10f</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, pi_v<span style=color:#f92672>*</span><span style=color:#ae81ff>4</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    cudaFree(g_sum);
-</span></span><span style=display:flex><span>    free(h_sum);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cudaFree</span>(g_sum);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>free</span>(h_sum);
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>下面我们编译并运行代码，结果显示，程序只用了 0.07s 就跑完了。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>nvcc pi_number.cu -o pi
 </span></span><span style=display:flex><span>time ./pi
