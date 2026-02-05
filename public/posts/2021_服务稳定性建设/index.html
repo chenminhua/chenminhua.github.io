@@ -36,13 +36,13 @@
 当前压测服务自身资源瓶颈，cpu，内存等。 下游服务资源瓶颈。 依赖存储瓶颈。 如果当前压测服务与其他服务共享下游服务或存储，则可能需要联合压测。
 压测可以通过线上流量集中的方案来实现，也可以使用提前录制流量的方案来实现（前提是请求没有副作用）。 如果是写接口，还可以考虑创建影子表等方式来进行压测。
 问题定位与处理能力 服务日志要完整。这一点依赖研发工作经验，以及 code review 的负责程度。 内部整理 case 排查指南，问题记录与分享，每周组织学习。 设立 oncall 机制，创建 oncall handbook。 当发现问题时，需要有明确 sop，并通过演练确保所有人都能处理线上事故。 当线上出现事故时，有两种可能，一种是用户反馈发现问题；一种是监控报警发现问题。 无论是哪种情况，首先要对问题严重性有一个基本的判断。（这个也依赖经验和组内分享，比如少量的服务调用报错报警，可能只是网络抖动，但如果用用户反馈说他的账户余额不对，则可能就很严重了） 如果判断出来这是一个需要处理的线上问题，第一步要找同学帮忙，立即成立应急小组，明确分工。比如A同学负责拉群（需要周知到各个职能线），建立会议，并建立事故处理文档；B同学负责定位问题；当然，如果明确知道发生事故前有线上操作（通常都有），比如有代码上线，动态配置，实验开启等，一律先进行线上止损（回滚，或关闭实验）。 事故应急处理负责人需要实时同步事故处理进展。 事故后需要有复盘和todo。 需要有机制check todo落实。 降级开关 容灾预案">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -50,12 +50,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

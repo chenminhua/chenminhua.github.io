@@ -54,13 +54,13 @@
 这很像我们在网上买东西，快递员给你送过来，结果你说你今天出差不在家，让他明天再来。于是快递员明天又来了一回，你拿到了你买的东西，交易事务也就成功了。
 补偿模式 补偿模式则是处理牺牲强一致性而追求更高可用性的另一种设计模式，通常会和重试模式配合使用。还在上面的例子，A 系统状态更新成功了，但是在请求 B 系统的时候，B 系统却报了个错，表示这个交易无法完成（对方账户没了啊，商品库存不够了啊，商品已经下架了啊）。这时候无论你怎么进行重试，事务都不可能完成了。那怎么办呢？你需要去补偿 A 系统。你要告诉 A 系统：”有内鬼，交易终止”，然后让 A 系统补偿之前的状态更新操作（账号上把钱加回来啊啥的）。
 当然，你一定会想到，如果补偿也失败了呢？而且是那种业务上完全无法完成的补偿，这时候咋办？理论上来说，我觉得这个问题是无解的。比如 A 让你把钱交给 B，但是在你给到 B 之前 B 被人杀了，你想把钱还给 A，结果发现 A 也被杀了，那么这件把 A 的钱转交给 B 的事务就用于没法被”做完”，或者被”没做”。对于这种问题，我们只能说减小它发生的概率（比如设计一些两阶段提交之类的东西，当然这显然增加了系统的复杂度，而我们讨厌复杂度），并且设计好兜底方案。如果说你的业务真的无法接受这件事情的发生的话，恐怕你只能让 A 自己直接把钱交给 B 了（不要拆分这两个系统）。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -68,12 +68,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

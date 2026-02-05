@@ -72,13 +72,13 @@
 我们要知道昨天感冒的概率，昨天感冒且今天感冒的转移概率 我们要知道昨天没感冒的概率，昨天没感冒且今天感冒的转移概率 我们要知道感冒导致感觉冷的概率 P(今天感冒) = 常数 * max(P(昨天感冒)*P(今天感冒|昨天感冒)*P(觉得冷|感冒), P(昨天没感冒)*P(今天感冒|昨天没感冒)\*P(觉得冷|感冒)) 同样我们也可以算出今天没有感冒的概率。通过动态规划，我们可以算出整个随机过程的 path 下最可能的状态转移路径。
 (小知识：维特比算法的发明人安德鲁维特比在 1985 年创立了高通公司。)
 实战 class Viterbi: def __init__(self, start_p, trans_p, emission_p): self.start_p = start_p self.trans_p = trans_p self.emission_p = emission_p self.state_count = len(start_p) self.ob_count = len(self.emission_p[0]) self.round = 0 self.path = {} self.V_last = [] self.obs = [] def next(self, ob): self.obs.append(ob) if self.round == 0: self.V_last = [self.start_p[i] * self.emission_p[i][ob] for i in range(self.state_count) ] self.path = [[i] for i in range(self.state_count)] else: newPath = [] newV_last = [] for y in range(self.state_count): (prob, state) = max([(self.V_last[y0] * self.trans_p[y0][y] * self.emission_p[y][ob], y0) for y0 in range(self.state_count)]) newV_last.append(prob) newPath.append(self.path[state] &#43; [y]) self.V_last = newV_last self.path = newPath self.round &#43;= 1 viterbi = Viterbi( [0.6, 0.4], [[0.7, 0.3], [0.4, 0.6]], [[0.5, 0.4, 0.1], [0.1, 0.3, 0.6]]) viterbi.next(0) viterbi.next(1) viterbi.next(2) 第一天正常，第二天感觉冷，第三天感觉头晕，其最可能的 path 为 “健康-&gt;健康-&gt;感冒”。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -86,12 +86,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

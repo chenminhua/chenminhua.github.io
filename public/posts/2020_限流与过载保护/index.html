@@ -51,13 +51,13 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。 DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
 限流 单实例限流 简单的令牌桶就可以实现，可以基于 mesh 实现，或者基于服务框架实现。
 分布式限流 常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。 key = fmt.Sprintf(&#34;%s%d&#34;, key, time.Now().Unix()) 自适应限流（出口流量治理优化） 解决突发流量打挂下游服务，甚至存储服务的问题。起到保护下游，熔断下游以隔离故障的作用。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -65,12 +65,12 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

@@ -42,13 +42,13 @@ kotlin 欺骗了我们，明明说好是非空，怎么就返回了一个 null �
 projectMapper.getProjectByCode(projectCode): ProjectDO 但是在 jvm 上运行的时候，运行时类型可没有什么非空不非空的。查不到数据，mybatis 的 mapper 的代理对象就返回了一个 null 给调用者，调用的地方拿这个对象赋值也好，返回也好，也不存在可空类型，拿到 null 就是 null 了。
 所以 kotlin 的可空类型，只能在编译时帮你搞定一些程序员搞出来的空指针异常。而在一些使用了代理技术的地方，运行时还是会给你跑出一个 null 来，仍然需要你手动处理。
 by the way，如果你阅读 kotlin 代码编译后的字节码，会发现其实 kotlin 在所有不是可空的变量上加上了@NotNull 注解，其 RetentionPolicy 为 class">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -56,12 +56,12 @@ by the way，如果你阅读 kotlin 代码编译后的字节码，会发现其�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

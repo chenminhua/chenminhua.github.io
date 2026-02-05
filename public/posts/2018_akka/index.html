@@ -33,13 +33,13 @@ class Activity class Disable(val password: String) class Enable(val password: St
 与一些真实世界中演员的需求不同，Akka 中由于某种原因而存在一些看似强制要求的限制。 使用 actor 的引用可阻止交换消息以外的任何交互，这些交互可能破坏 actor 模型核心上的解耦本质。 Actor 在执行上是单线程的（不超过 1 个线程执行一个特定的 actor 实例），所以邮箱充当着一个缓冲器，在处理消息前会一直保存这些消息。 消息的不可变性意味着根本无需担心可能影响 actor 之间各种共享的数据的同步问题。
 actors sending messages changing its state changing its behavior creating more actors
 class Activity class Disable(val password: String) class Enable(val password: String) class Alarm(val password: String): AbstractLoggingActor() { override fun createReceive(): Receive { return disabled } val enabled = receiveBuilder() .match(Activity::class.java, { this.onActivity(it) }) .match(Disable::class.java, { this.onDisable(it) }) .build() val disabled = receiveBuilder() .match(Enable::class.java, { this.onEnable(it) }).build() private fun onDisable(disable: Disable) { if (password == disable.password) { log().info(&#34;alarm disabled&#34;) context.become(disabled) } else { log().warning(&#34;wrong password&#34;) } } private fun onEnable(enable: Enable) { if (password == enable.password) { log().info(&#34;alarm enabled&#34;) context.become(enabled) } else { log().warning(&#34;failed to enable the alarm&#34;) } } private fun onActivity(a: Activity) { log().warning(&#34;alarm&#34;) } companion object { fun props(password: String) = Props.create(Alarm::class.java, password) } } fun main(args: Array&lt;String&gt;) { val system = ActorSystem.create() val alarm = system.actorOf(Alarm.props(&#34;pass&#34;), &#34;alarm&#34;) alarm.tell(Activity(), ActorRef.noSender()) alarm.tell(Enable(&#34;puss&#34;), ActorRef.noSender()) alarm.tell(Enable(&#34;pass&#34;), ActorRef.noSender()) alarm.tell(Activity(), ActorRef.noSender()) alarm.tell(Disable(&#34;puss&#34;), ActorRef.noSender()) alarm.tell(Disable(&#34;pass&#34;), ActorRef.noSender()) }">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -47,12 +47,12 @@ class Activity class Disable(val password: String) class Enable(val password: St
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

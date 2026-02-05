@@ -33,13 +33,13 @@ CUDA 在并行计算上可以大显神威，因此，我们先要找到一个可
 c 实现莱布尼兹级数版 pi #define LOOP_N 8192000000 double pi() { double pi_qv = 1.0; int flag = -1; for (long i = 1; i &lt; LOOP_N; i&#43;&#43;) { pi_qv &#43;= flag * (1./(2 * i &#43; 1)); flag = -flag; } return pi_qv * 4; } 下面我们编译并运行此程序，并用 time 来测量程序运行时间，在我的机器上差不多需要 8s 吧。
 gcc pi_number.c -O3 -opi time ./pi cuda 实现莱布尼兹级数版 pi 我们再试试用 cuda 来编写并运行代码
 #include&lt;stdio.h&gt; #include&lt;cuda.h&gt; #include&lt;cuda_runtime.h&gt; #define BLOCK_NUM 32 //块数量 #define THREAD_NUM 256 // 每个块中的线程数 #define LOOP_N BLOCK_NUM * THREAD_NUM * 1000000 __global__ void leib_pi(double* g_sum) { const int tid = threadIdx.x; const int bid = blockIdx.x; double tmp = 0; int flag = -1; int idx = bid * THREAD_NUM &#43; tid; int start = idx * 100000 &#43; 1; int end = start &#43; 100000; for (int i = start; i &lt; end; i&#43;&#43;) { tmp &#43;= flag * (1./(2 * i &#43; 1)); flag = -flag; } g_sum[bid*THREAD_NUM&#43;tid] = tmp; } int main(){ double *h_sum, *g_sum; double pi_v = 1; // allocate host memory h_sum = (double*) malloc(sizeof(double) * BLOCK_NUM * THREAD_NUM); // Allocate device memory cudaMalloc((void **)&amp;g_sum, sizeof(double) * BLOCK_NUM * THREAD_NUM); // Execute kernels leib_pi&lt;&lt;&lt;BLOCK_NUM,THREAD_NUM&gt;&gt;&gt;(g_sum); // Transfer output from device memory to host cudaMemcpy(h_sum, g_sum, sizeof(double)*BLOCK_NUM*THREAD_NUM, cudaMemcpyDeviceToHost); for (int i = 0; i &lt; BLOCK_NUM * THREAD_NUM; i&#43;&#43;) { pi_v &#43;= h_sum[i]; } printf(&#34;calculate %.10f\n&#34;, pi_v*4); cudaFree(g_sum); free(h_sum); } 下面我们编译并运行代码，结果显示，程序只用了 0.07s 就跑完了。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -47,12 +47,12 @@ gcc pi_number.c -O3 -opi time ./pi cuda 实现莱布尼兹级数版 pi 我们再
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

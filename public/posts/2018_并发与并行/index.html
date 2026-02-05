@@ -48,13 +48,13 @@
 事实上这压根不是一个计算机问题，而是一个矩阵乘积计算的数学问题。简单来说，两个矩阵的乘积可以由其各自的部分子矩阵的乘积组合而乘（非常基础的线性代数知识）。假设我们要计算两个 300,000,000 _ 300,000,000 的矩阵的乘积，我们可以将其分别划分为 9 个 100,000,000 _ 100,000,000 的矩阵，一共需要进行 27 次 100,000,000 * 100,000,000 的矩阵的乘法和若干次矩阵加法（相比于矩阵乘法而言，矩阵加法的时间复杂度要低很多，可以暂且忽略）。
 现在我们的超大矩阵乘法就变成了 27 个稍微小一点的矩阵的乘法了。尽管看上去没什么了不起，但是这个特性却是决定性的，因为我们可以把矩阵乘法拆分到不同的机器上计算，再集合到一起就行了。事实上，你可以继续拆分，把 100,000,000 _ 100,000,000 的矩阵继续拆分成 100 个 10,000,000 _ 10,000,000 个矩阵，这时候问题就变成了 27000 个 10,000,000 * 10,000,000 的矩阵的乘积。
 如果你有 27000 台服务器的话，这个超大矩阵计算的时间复杂度就降低了 27000 倍！！原本需要计算一个月的问题现在只需要一分半钟就可以解决。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -62,12 +62,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

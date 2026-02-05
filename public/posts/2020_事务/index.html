@@ -63,13 +63,13 @@ trx1: select balance from accounts where id = 1; 返回 500 美元。 - 下面�
 读倾斜 读提交会带来一些数据不一致的问题，我们来看下面这个例子。
 假设 Alice 在银行有 1000 美元存款，分两个账号，各 500 美元。然后她从账号 1 转了 100 美元到账号 2。但是在转账的过程中，她有可能在查自己账户的时候，会发现自己只有 900 美元了。
 trx1: select balance from accounts where id = 1; 返回 500 美元。 - 下面事务 2 开始转账 trx2: begin; trx2: update accounts set balance = balance &#43; 100 where id = 1; trx2: update accounts set balance = balance - 100 where id = 2; trx2: commit; - 事务 2 转账结束，并提交 trx1: select balance from accounts where id = 2; 返回 400 美元。 这种现象就是读倾斜(read skew)，也叫不可重复读。在有些场景下，不可重复读不是什么大问题，但是有时候，可能会带来灾难。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -77,12 +77,12 @@ trx1: select balance from accounts where id = 1; 返回 500 美元。 - 下面�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

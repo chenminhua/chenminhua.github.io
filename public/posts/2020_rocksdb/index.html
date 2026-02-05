@@ -21,13 +21,13 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="RocksDB">
   <meta name="twitter:description" content="认识 RocksDB RocksDB 是什么? 一个嵌入式的 lsm style 的 kv 存储引擎，一个 c&#43;&#43;的库。 key 和 value 都是 byte streams，key 按序存储。 高度可定制，能通过组装不同模块的方式适应不同类型的磁盘，负载。 能够通过增加 cpu core 以及 IOPs 进行线性 scale。 为 flash 和内存做优化。 RocksDB 不是什么？ rocksdb 没有 server code，用户需要自己实现 server 的部分来得到 c-s 架构的数据库。 RocksDB 不是分布式数据库，没有 fault-tolerance 和 replication 机制，也没有实现 data-sharding。 Not distributed，No failover.No HA, if machine dies you lose your data. 为什么需要 RocksDB 基于 flash 存储的 ssd 普及，网络 latency 在 query workload latency 中占据的比例越来越高。embeded 数据库变得受欢迎。 dhruba 尝试比较 HBase/HDFS 和 mysql 在 query serving workload 上的表现。经过多次优化后，在机械硬盘上，几 pb 的数据集下，hbase 可以达到比 Mysql 慢两倍的查询速度。但是在 ssd 上，hdfs/hbase 等 hadoop 生态存储在当时还不能高效利用 flash，因此 dhruba 开始试图探索新的存储引擎。（dhruba 开始试图扩展 hdfs/hbase 的能力，使其能 serve query workload。但是随着 flash 的普及，他发现 hdfs 对 flash 的使用效率不高。并且将 hdfs/hbase 改成嵌入式的难度太高，因此他决定开发新的数据库存储引擎。） 当时市面上有一些嵌入式数据库，leveldb 是其中的佼佼者。http://leveldb.googlecode.com/svn/trunk/doc/benchmark.html benchmark 显示，leveldb 是其中最快的一个。但是，leveldb 不是为 server workload 设计的。虽然乍一看 leveldb 的 benchmark 很棒，但是 dhruba 很快意识到，leveldb 是为那些小数据集（小于内存）设计的。 但是 leveldb 存在的问题：">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -35,12 +35,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

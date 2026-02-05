@@ -39,13 +39,13 @@ spring aop 有两种常用的给方法加切面的方式。一种是给方法加
 spring aop 有两种常用的给方法加切面的方式。一种是给方法加 annotation，另一种是用 execute()表达式。
 起初我的想法是用 annotation 的方式。原因是这样更显式，在以后改代码的时候能够给自己一个提醒，其他伙伴改代码的时候也能知道这个方法会被拦截。于是我就写了个 annotation 加在 mapper 接口的某个方法签名上，然后去拦截这个 annotation 注解的方法。但是，拦截并没有生效。做了一番调查之后，我发现原来 annotation 不能从 interface 继承过来。参考 stackoverflow。简单来说就是@Inherited 只能在 superclass 上的注解才能起作用，而在接口上不起作用（不会往上追溯到接口）。这种设计的考虑可能是因为 java 单继承多实现的设计，如果去拿接口的 annotaion 可能会导致冲突。另外要注意的一点是，annotation 的继承并不能在运行时通过反射的方式直接在类上看到，而是通过类继承树向上查找的方式实现的。
 如果换成使用 execute()表达式的方法，对既有代码的侵入性更低（有好处也有坏处），也确实可以解决问题。因为在拦截对象方法的时候，不用去查 annotation，而是直接找到实现该接口的指定方法去拦截。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -53,12 +53,12 @@ spring aop 有两种常用的给方法加切面的方式。一种是给方法加
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

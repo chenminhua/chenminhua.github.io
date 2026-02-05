@@ -36,13 +36,13 @@
 贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
 在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
 换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0.0909。如果用蒙特卡洛法（Monte Carlo method）进行数值仿真的话，你会发现这个 0.0909 才是符合真实情况的概率。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -50,12 +50,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

@@ -30,13 +30,13 @@
 简单来说，传统文件系统会给每个文件建立 metadata，比如 inode 这种数据结构，在访问文件的时候，需要先从磁盘找到 inode，然后从 inode 里面查到文件真正的位置，再去拿文件，于是 metadata lookup 就成了瓶颈。而 haystack 所做的就是尽可能减少磁盘访问。
 当然，那文件的那次磁盘 IO 是跑不掉的，那有没有可能省掉 metadata lookup 这一此磁盘 IO 呢？有点难，因为要处理海量的小文件，他们的 metadata 也是非常非常大的，内存肯定放不下。所以思路就到了怎么压缩 metadata，以使其能够放入内存中去。
 具体是怎么做的呢？卖个关子，去我的知乎专栏看吧~ https://zhuanlan.zhihu.com/p/99388774">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -44,12 +44,12 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

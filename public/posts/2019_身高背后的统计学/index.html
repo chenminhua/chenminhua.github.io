@@ -72,13 +72,13 @@ http://www2.math.uu.se/~thulin/mm/breiman.pdf 统计模型，两种不同的文�
 生成模型与判别模型 还有另一种针对学习对象的划分方式，那就是生成模型和判别模型之分。简单地说，生成模型学习的对象是输入 xx 和输出 yy 的联合分布 p(x,y)p(x,y)，判别模型学习的则是已知输入 xx 的条件下，输出 yy 的条件分布 p(y|x)p(y|x)。两个分布可以通过贝叶斯定理建立联系。
 生成模型和判别模型的区别可以这样来理解：假如我被分配了一个任务，要判断一个陌生人说的是什么语言。如果用生成模型来解决的话，我就需要把这个老外可能说的所有语言都学会，再根据他的话来判定语言的种类。但可能等我学完这些语言时，这个陌生人都说不出话了。可是用判别模型就简单多了，我只需要掌握不同语言的区别就足够了。即使不会西班牙语或者德语的任何一个单词，单凭语感也可以区分出这两种语言，这就是判别模型的优势。
 针对生成模型和判别模型的利弊，支持向量机的奠基者弗拉基米尔·瓦普尼克（Vladimir Vapnik）有句名言：“（解决分类问题）应该直截了当，不要用兜圈子的方式，搞一个更难的问题（比如求解似然概率）做为中间步骤”。一般来说，生成模型的求解更加复杂，当数据量趋于无穷大时，渐进条件下的精确性也更差，但其收敛的速度更快，在较少数据的训练后就可以收敛到错误的下界。相比之下，判别模型的形式更加简单，在分类问题上的表现也更出色，却不能提供关于数据生成机制的信息。有些情况下，生成模型和判别模型会成对出现。例如在分类问题中，朴素贝叶斯和逻辑回归就是一对生成 - 判别分类器。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -86,12 +86,12 @@ http://www2.math.uu.se/~thulin/mm/breiman.pdf 统计模型，两种不同的文�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

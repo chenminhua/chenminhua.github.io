@@ -27,13 +27,13 @@ func levelOrder(root *Node) [][]int { res := [][]int{} if root == nil {return re
   <meta name="twitter:description" content="遍历 leetcode 94, 144, 145 easy
 func inorderTraversal(root *TreeNode) []int { arr := []int{} var helper func(*TreeNode) helper = func(root *TreeNode) { if root == nil {return} helper(root.Left) arr = append(arr, root.Val) helper(root.Right) } helper(root) return arr } N叉树的层序遍历 leetcode 429
 func levelOrder(root *Node) [][]int { res := [][]int{} if root == nil {return res} q := []*Node{root} for len(q) &gt; 0 { length := len(q) tmp := make([]int, length) for i := 0; i &lt; length; i&#43;&#43; { node := q[i] tmp[i] = node.Val for _, c := range node.Children { q = append(q, c) } } q = q[length:] res = append(res, tmp) } return res } N叉树的前/后序遍历 func preorder(root *Node) []int { res := []int{} var helper func(root *Node) helper = func(root *Node) { if root == nil {return} res = append(res, root.Val) for _, n := range root.Children { helper(n) } } helper(root) return res } 二叉树的垂序遍历 我们可以从根节点开始，对整棵树进行一次遍历，在遍历的过程中使用数组 nodes 记录下每个节点的行号列号以及值 。在遍历完成后，我们按照 col 为第一关键字升序，row 为第二关键字升序，value 为第三关键字升序，对所有的节点进行排序即可。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -41,12 +41,12 @@ func levelOrder(root *Node) [][]int { res := [][]int{} if root == nil {return re
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

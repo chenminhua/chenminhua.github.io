@@ -27,13 +27,13 @@ C 语言版 C 语言是大家公认的高性能语言，那我们就从 C 语言
   <meta name="twitter:description" content="本实验采用不同的方法来计算 8192 * 8192 的整型矩阵乘法运算。
 C 语言版 C 语言是大家公认的高性能语言，那我们就从 C 语言开始吧。
 // 用一位数组表示二维矩阵 mat1 = (int*) malloc(m_size * m_size * sizeof(int)); mat2 = (int*) malloc(m_size * m_size * sizeof(int)); result = (int*) malloc(m_size * m_size * sizeof(int)); // initialize for (int i = 0; i &lt; m_size * m_size; i&#43;&#43;) { mat1[i] = rand()/1000000; mat2[i] = rand()/1000000; result[i] = 0; } for (int r = 0; r &lt; m_size; r&#43;&#43;) { for (int c = 0; c &lt; m_size; c&#43;&#43;) { for (int n = 0; n &lt; m_size; n&#43;&#43;) { result[r*m_size &#43; c] &#43;= mat1[r*m_size&#43;n] * mat2[n*m_size&#43;c]; } } } 这代码没什么可说的，值得一提的可能就是用一维数组来存二维矩阵，这样可以让矩阵在内存中的分布更连续。很容易估算出来这段代码需要进行万亿级别的乘法或加法运算，倘若使用 1950 年冯.诺依曼用来预测天气的计算机（每秒 5000 次计算），大概要算个六七年吧。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -41,12 +41,12 @@ C 语言版 C 语言是大家公认的高性能语言，那我们就从 C 语言
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

@@ -42,13 +42,13 @@ c 语言显然不是我们所认为的面向对象编程语言（尽管有一本
 struct Stack; typedef struct Stack Stack; Stack *newStack(); void destoryStack(Stack * stack); void * popStack(); void pushStack(void * ele); int sizeOfStack(Stack *stack); 使用这个栈的程序员看到的源代码只有这么多。他不知道你是怎么实现这个栈的。是用了数组还是链表？struct Stack 有哪些域？计算 size 的时候是遍历了所有元素还是在每次变更的时候去统计栈的长度？客户程序员对此一无所知。多么完美的封装啊。
 c&#43;&#43;可能是大多数程序员入门面向对象编程的语言了吧。在这里我们第一次学到了 public，private 这些个访问控制符。相比于 c 语言，我们开始拥有了类这个概念。c&#43;&#43;程序员喜欢把类定义写在头文件里面，而将 c 语言里面的各种函数变成类的成员方法。c&#43;&#43;之于 c 的另一个重大改变是泛型编程，但这不是本文讨论的重点。下面我们还是来看看栈这个例子。
 template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // elements public: void push(T const&amp;); // push element void pop(); // pop element T top() const; // return top element bool empty() const { // return true if empty. return elems.empty(); } }; 使用这个栈的程序员同样 include 了这个类，但是这时候他其实已经知道了,这个栈底层是用 stl 里面的 vector 实现的。幸运的是，他不能直接操作这个 vector，因为这个域是 private 的。">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -56,12 +56,12 @@ template &lt;class T&gt; class Stack { private: std::vector&lt;T&gt; elems; // e
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>

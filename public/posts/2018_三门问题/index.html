@@ -33,13 +33,13 @@ python -i montyHall.py g.q(guest_door=&#34;A&#34;, monty_door=&#34;B&#34;) 结�
 这时候，有人提出，选手改变选择能提高其获奖概率。起初这一观点遭到了强烈抨击。后来无数实验证明，这个观点是对的。 下面我们用 ebay 的一个开源库来证明一下，选手改变选择确实能提高其获奖概率。
 实验 from bayesian.bbn import build_bbn def f_prize_door(prize_door): return 0.33333333 def f_guest_door(guest_door): return 0.33333333 def f_monty_door(prize_door, guest_door, monty_door): if prize_door == guest_door: if prize_door == monty_door: return 0 else: return 0.5 else: if prize_door == monty_door: return 0 if guest_door == monty_door: return 0 return 1 g = build_bbn( f_prize_door, f_guest_door, f_monty_door, domains=dict( prize_door = [&#34;A&#34;,&#34;B&#34;,&#34;C&#34;], guest_door = [&#34;A&#34;,&#34;B&#34;,&#34;C&#34;], monty_door = [&#34;A&#34;,&#34;B&#34;,&#34;C&#34;] ) ) 然后我们运行一下,假设选手选了 A 门，而主持人打开了 B 门
 python -i montyHall.py g.q(guest_door=&#34;A&#34;, monty_door=&#34;B&#34;) 结果如下">
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
+	<link id="dark-scheme" rel="stylesheet" type="text/css" href="/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://localhost:1313/js/main.js"></script>
+		<script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -47,12 +47,12 @@ python -i montyHall.py g.q(guest_door=&#34;A&#34;, monty_door=&#34;B&#34;) 结�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://localhost:1313/">
+			<a href="/">
 				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<h1 class="site-title"><a href="/">硕大的汤姆</a></h1>
 	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
 			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>
