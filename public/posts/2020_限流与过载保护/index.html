@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>限流与过载保护 - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta itemprop="name" content="限流与过载保护">
-<meta itemprop="description" content="过载保护 微信的这篇论文有个很好的介绍
+	
+  <meta itemprop="name" content="限流与过载保护">
+  <meta itemprop="description" content="过载保护 微信的这篇论文有个很好的介绍
 过载控制往往需要对不同的服务进行专门设计，但是这种过于细致的过载控制对于整个系统来说是不利的，开发者很难估计每个服务应该可以承受的负载。
 为此，微信采用了一种名为 DAGOR 的过载控制设计，在 service 粒度上管理过载，使得每个微服务的负载能被实时监控。
 由于服务之间复杂的依赖关系，比如一个请求依赖 k 个服务，而这些服务都有 p 的概率拒绝服务，那么这个请求成功的概率就是 (1-p)^k。如果 k 比较大的话，服务的 sla 会明显下降。
 DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务优先级和红黑优先级，根据这个优先级使得它下游的服务可以强制接受或者拒绝这个请求。每个服务都有一个自己的优先级阈值，并根据其检测到的当前负载情况调整阈值。
 过载检测 另一个问题是，服务如何判断自己是否处于过载状态？DAGOR 采用等待队列里的平均等待时间（简称排队时间（queuing time））来检测负载状况。
- 排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
- 为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
- 对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。  DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
+排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
+为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
+对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。 DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
 限流 单实例限流 简单的令牌桶就可以实现，可以基于 mesh 实现，或者基于服务框架实现。
-分布式限流  常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。  key = fmt."><meta itemprop="datePublished" content="2020-10-22T20:00:08+08:00" />
-<meta itemprop="dateModified" content="2020-10-22T20:00:08+08:00" />
-<meta itemprop="wordCount" content="176">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="限流与过载保护" />
-<meta property="og:description" content="过载保护 微信的这篇论文有个很好的介绍
+分布式限流 常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。 key = fmt.Sprintf(&#34;%s%d&#34;, key, time.Now().Unix()) 自适应限流（出口流量治理优化） 解决突发流量打挂下游服务，甚至存储服务的问题。起到保护下游，熔断下游以隔离故障的作用。">
+  <meta itemprop="datePublished" content="2020-10-22T20:00:08+08:00">
+  <meta itemprop="dateModified" content="2020-10-22T20:00:08+08:00">
+  <meta itemprop="wordCount" content="176"><meta property="og:url" content="http://localhost:1313/posts/2020_%E9%99%90%E6%B5%81%E4%B8%8E%E8%BF%87%E8%BD%BD%E4%BF%9D%E6%8A%A4/">
+  <meta property="og:site_name" content="硕大的汤姆">
+  <meta property="og:title" content="限流与过载保护">
+  <meta property="og:description" content="过载保护 微信的这篇论文有个很好的介绍
 过载控制往往需要对不同的服务进行专门设计，但是这种过于细致的过载控制对于整个系统来说是不利的，开发者很难估计每个服务应该可以承受的负载。
 为此，微信采用了一种名为 DAGOR 的过载控制设计，在 service 粒度上管理过载，使得每个微服务的负载能被实时监控。
 由于服务之间复杂的依赖关系，比如一个请求依赖 k 个服务，而这些服务都有 p 的概率拒绝服务，那么这个请求成功的概率就是 (1-p)^k。如果 k 比较大的话，服务的 sla 会明显下降。
 DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务优先级和红黑优先级，根据这个优先级使得它下游的服务可以强制接受或者拒绝这个请求。每个服务都有一个自己的优先级阈值，并根据其检测到的当前负载情况调整阈值。
 过载检测 另一个问题是，服务如何判断自己是否处于过载状态？DAGOR 采用等待队列里的平均等待时间（简称排队时间（queuing time））来检测负载状况。
- 排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
- 为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
- 对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。  DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
+排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
+为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
+对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。 DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
 限流 单实例限流 简单的令牌桶就可以实现，可以基于 mesh 实现，或者基于服务框架实现。
-分布式限流  常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。  key = fmt." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/2020_%E9%99%90%E6%B5%81%E4%B8%8E%E8%BF%87%E8%BD%BD%E4%BF%9D%E6%8A%A4/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-10-22T20:00:08+08:00" />
-<meta property="article:modified_time" content="2020-10-22T20:00:08+08:00" />
+分布式限流 常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。 key = fmt.Sprintf(&#34;%s%d&#34;, key, time.Now().Unix()) 自适应限流（出口流量治理优化） 解决突发流量打挂下游服务，甚至存储服务的问题。起到保护下游，熔断下游以隔离故障的作用。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-10-22T20:00:08+08:00">
+    <meta property="article:modified_time" content="2020-10-22T20:00:08+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="限流与过载保护"/>
-<meta name="twitter:description" content="过载保护 微信的这篇论文有个很好的介绍
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="限流与过载保护">
+  <meta name="twitter:description" content="过载保护 微信的这篇论文有个很好的介绍
 过载控制往往需要对不同的服务进行专门设计，但是这种过于细致的过载控制对于整个系统来说是不利的，开发者很难估计每个服务应该可以承受的负载。
 为此，微信采用了一种名为 DAGOR 的过载控制设计，在 service 粒度上管理过载，使得每个微服务的负载能被实时监控。
 由于服务之间复杂的依赖关系，比如一个请求依赖 k 个服务，而这些服务都有 p 的概率拒绝服务，那么这个请求成功的概率就是 (1-p)^k。如果 k 比较大的话，服务的 sla 会明显下降。
 DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务优先级和红黑优先级，根据这个优先级使得它下游的服务可以强制接受或者拒绝这个请求。每个服务都有一个自己的优先级阈值，并根据其检测到的当前负载情况调整阈值。
 过载检测 另一个问题是，服务如何判断自己是否处于过载状态？DAGOR 采用等待队列里的平均等待时间（简称排队时间（queuing time））来检测负载状况。
- 排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
- 为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
- 对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。  DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
+排队时间 = 请求开始被处理的时刻 - 请求到达此服务的时刻。
+为什么不用 response time 或者 cpu 利用率 来检测负载情况呢？
+对于一个服务来说，responese time 不止收到其自身处理请求速度（自身负载）的影响，也受下游服务处理时间的影响。 cpu 利用率即使很高，但如果请求能被及时处理，我们也不应该认为服务进入过载状态。 而 queuing time 则仅受本服务处理能力的影响。如果一个服务有足够的资源来处理请求，queuing time 就会很小，及时下游返回慢，本服务 queuing time 也不会被影响。 DAGOR 的过载检测是基于窗口的，比如在微信系统中，每秒或者每 2000 个请求，server 就会刷新它的监控状态。微信中平均的 queuing time 阈值为 20ms，超过了就意味着服务过载了。
 限流 单实例限流 简单的令牌桶就可以实现，可以基于 mesh 实现，或者基于服务框架实现。
-分布式限流  常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。  key = fmt."/>
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+分布式限流 常规手段还是使用 redis 计数，但是由于热 key 的问题，一般只适合于 qps 有限（小于 1w）的场景。 如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。 如果是高 qps 并且需要精确限流，方案比较复杂。 key = fmt.Sprintf(&#34;%s%d&#34;, key, time.Now().Unix()) 自适应限流（出口流量治理优化） 解决突发流量打挂下游服务，甚至存储服务的问题。起到保护下游，熔断下游以隔离故障的作用。">
+<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://example.org/js/main.js"></script>
+		<script src="http://localhost:1313/js/main.js"></script>
 </head>
 
 <body>
@@ -62,15 +65,16 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://example.org/">
-				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			<a href="http://localhost:1313/">
+				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
-	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
-			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>
+		
 	</div>
 
 	<nav class="nav">
@@ -86,6 +90,14 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 			
 			<li>
 				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/algo">Algo</a>
+			</li>
+			
+			<li>
+				<a href="/principles">原则</a>
 			</li>
 			
 			<li>
@@ -111,6 +123,9 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 					<h1 class="title">限流与过载保护</h1>
 				</div>
 			</div>
+
+			
+			
 					
 			<div class="markdown">
 				<h2 id="过载保护">过载保护</h2>
@@ -141,8 +156,8 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 <li>如果是高 qps 场景，通常都不需要精准限流，可以考虑退化到单实例限流模式。</li>
 <li>如果是高 qps 并且需要精确限流，方案比较复杂。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">key</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s%d&#34;</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Unix</span>())
-</code></pre></div><h3 id="自适应限流出口流量治理优化">自适应限流（出口流量治理优化）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">key</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s%d&#34;</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Unix</span>())
+</span></span></code></pre></div><h3 id="自适应限流出口流量治理优化">自适应限流（出口流量治理优化）</h3>
 <p>解决突发流量打挂下游服务，甚至存储服务的问题。起到保护下游，熔断下游以隔离故障的作用。</p>
 <p>BBR 算法的目标是寻找当前系统同时具备 最大吞吐量和最低时延 的工作点，将流量发送速率控制在这个工作点附近。</p>
 <p><a href="https://medium.com/google-cloud/tcp-bbr-magic-dust-for-network-performance-57a5f1ccf437">https://medium.com/google-cloud/tcp-bbr-magic-dust-for-network-performance-57a5f1ccf437</a></p>
@@ -166,14 +181,26 @@ DAGOR DAGOR 的基本机制是：当请求到达时，为其分配一个业务�
 				
 					
 				
+			</div>
+
+			
+			
+			<div class="back">
+				<a href="http://localhost:1313/"><span aria-hidden="true">← Back</span></a>
+			</div>
+			
+
+			<div class="back">
+				
 			</div></div>
+		
 	</div>
+	
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+		<div>2020 </div>
+		
 	</nav>
-</div>
-
-<script>feather.replace()</script>
+</div><script>feather.replace()</script>
 </body>
 </html>

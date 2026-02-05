@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>一场赌局背后的统计学 - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta itemprop="name" content="一场赌局背后的统计学">
-<meta itemprop="description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+	
+  <meta itemprop="name" content="一场赌局背后的统计学">
+  <meta itemprop="description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
 概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
 对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
 贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
 在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
-换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0."><meta itemprop="datePublished" content="2019-03-07T20:00:08+08:00" />
-<meta itemprop="dateModified" content="2019-03-07T20:00:08+08:00" />
-<meta itemprop="wordCount" content="105">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="一场赌局背后的统计学" />
-<meta property="og:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0.0909。如果用蒙特卡洛法（Monte Carlo method）进行数值仿真的话，你会发现这个 0.0909 才是符合真实情况的概率。">
+  <meta itemprop="datePublished" content="2019-03-07T20:00:08+08:00">
+  <meta itemprop="dateModified" content="2019-03-07T20:00:08+08:00">
+  <meta itemprop="wordCount" content="105"><meta property="og:url" content="http://localhost:1313/posts/2019_%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/">
+  <meta property="og:site_name" content="硕大的汤姆">
+  <meta property="og:title" content="一场赌局背后的统计学">
+  <meta property="og:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
 概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
 对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
 贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
 在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
-换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/2019_%E4%B8%80%E5%9C%BA%E8%B5%8C%E5%B1%80%E8%83%8C%E5%90%8E%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%AD%A6/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-03-07T20:00:08+08:00" />
-<meta property="article:modified_time" content="2019-03-07T20:00:08+08:00" />
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0.0909。如果用蒙特卡洛法（Monte Carlo method）进行数值仿真的话，你会发现这个 0.0909 才是符合真实情况的概率。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-03-07T20:00:08+08:00">
+    <meta property="article:modified_time" content="2019-03-07T20:00:08+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="一场赌局背后的统计学"/>
-<meta name="twitter:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="一场赌局背后的统计学">
+  <meta name="twitter:description" content="A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。
 概率学派 频率学派认定待估计的参数是固定不变的常量，这里也就是硬币正面朝上的概率，用 p 来表示。频率学派认为，A 之所以 5：3 领先，是因为 5：3 这种情况出现的概率高，所以 p 应该是能够让 5：3 出现的概率最高的值。而求这个值的方法通常是最大似然法。此处似然函数为 L=p^5(1-p)^3,令一阶导=0 得出 p=5/8。而 B 获胜的概率就是 B 连胜三局，也就是答案是 27 / 512。
 对于频率学派来说，估计值本质上是利用数据构造出来的函数，既然数据是随机分布的，估计值肯定也是随机的。参数是确定的，数据是随机的，利用随机的数据推断确定的参数，得到的结果也是随机的。
 贝叶斯学派 贝叶斯学派的核心是贝叶斯定理，用于计算后验概率。P(H|D)=P(D|H)⋅P(H) / P(D)。式中的 P(H) 被称为先验概率（prior probability）；P(D|H) 被称为似然概率（likelihood probability）；P(H|D) 被称为后验概率（posterior probability）。
 在贝叶斯学派看来，5：3 的结果不能证明硬币正面朝上的概率更高，只能证明硬币正面朝上的概率更高的概率更高（仔细体会这句话），可能只是这次 B 运气不太好。因此，处理参数 p 的方式应该从变量的角度去观察，考虑所有可能的取值，再计算在所有可能的取值下 B 获胜概率的数学期望，从而消除 p 的不确定性对结果的影响。
-换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0."/>
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+换句话说，我们应当考虑 p 在不同的取值情况下的概率（请再次理解为什么 5:3 只能证明硬币正面朝上的概率更高的概率更高）分布，并以此来对不同 p 值情况加权。在这样的思想下，B 获胜的概率就可以写成 E=∫(1−p)^3 P(p|A=5,B=3)dp 利用贝叶斯定理可以求得结果为 0.0909。如果用蒙特卡洛法（Monte Carlo method）进行数值仿真的话，你会发现这个 0.0909 才是符合真实情况的概率。">
+<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://example.org/js/main.js"></script>
+		<script src="http://localhost:1313/js/main.js"></script>
 </head>
 
 <body>
@@ -47,15 +50,16 @@
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://example.org/">
-				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			<a href="http://localhost:1313/">
+				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
-	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
-			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>
+		
 	</div>
 
 	<nav class="nav">
@@ -71,6 +75,14 @@
 			
 			<li>
 				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/algo">Algo</a>
+			</li>
+			
+			<li>
+				<a href="/principles">原则</a>
 			</li>
 			
 			<li>
@@ -96,6 +108,9 @@
 					<h1 class="title">一场赌局背后的统计学</h1>
 				</div>
 			</div>
+
+			
+			
 					
 			<div class="markdown">
 				<p>A 和 B 两人进行一场赌局，方式是抛一枚特制的硬币。如果硬币正面朝上，则 A 得一分，反之 B 得一分，先得六分的获胜。假设现在 A 以 5：3 领先，请问最终 B 获胜的概率要多高。</p>
@@ -124,14 +139,26 @@
 				
 					
 				
+			</div>
+
+			
+			
+			<div class="back">
+				<a href="http://localhost:1313/"><span aria-hidden="true">← Back</span></a>
+			</div>
+			
+
+			<div class="back">
+				
 			</div></div>
+		
 	</div>
+	
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+		<div>2019 </div>
+		
 	</nav>
-</div>
-
-<script>feather.replace()</script>
+</div><script>feather.replace()</script>
 </body>
 </html>

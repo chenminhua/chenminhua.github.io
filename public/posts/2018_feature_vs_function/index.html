@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>feature vs function - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta itemprop="name" content="feature vs function">
-<meta itemprop="description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
+	
+  <meta itemprop="name" content="feature vs function">
+  <meta itemprop="description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
 大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
 关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。stackexchange 上的这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
 在日常的开发中，我们也常常会混用这两个词，加个 feature 和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。"><meta itemprop="datePublished" content="2018-05-10T20:00:08+08:00" />
-<meta itemprop="dateModified" content="2018-05-10T20:00:08+08:00" />
-<meta itemprop="wordCount" content="29">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="feature vs function" />
-<meta property="og:description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
+function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。">
+  <meta itemprop="datePublished" content="2018-05-10T20:00:08+08:00">
+  <meta itemprop="dateModified" content="2018-05-10T20:00:08+08:00">
+  <meta itemprop="wordCount" content="29"><meta property="og:url" content="http://localhost:1313/posts/2018_feature_vs_function/">
+  <meta property="og:site_name" content="硕大的汤姆">
+  <meta property="og:title" content="feature vs function">
+  <meta property="og:description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
 大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
 关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。stackexchange 上的这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
 在日常的开发中，我们也常常会混用这两个词，加个 feature 和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/2018_feature_vs_function/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-05-10T20:00:08+08:00" />
-<meta property="article:modified_time" content="2018-05-10T20:00:08+08:00" />
+function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-05-10T20:00:08+08:00">
+    <meta property="article:modified_time" content="2018-05-10T20:00:08+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="feature vs function"/>
-<meta name="twitter:description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="feature vs function">
+  <meta name="twitter:description" content="最近看到一段关于微服务的视频：拆分单体应用，其中有一段话引起了我的注意：split code by feature not by functionality。
 大多数项目在一开始往往都只有一个后端服务。但是随着团队的扩展，业务需求的增加，单服务的可扩展性问题就会开始困扰你。如何拆分服务就成为了一个重要的问题。
 关于上面那段话：split code by feature not by functionality。我查了一些资料，自己也做了一些思考，但是还是感觉很模糊。stackexchange 上的这个问题甚至被直接关闭了，理由是这个问题的答案很主观。
 在日常的开发中，我们也常常会混用这两个词，加个 feature 和加个功能听起来是一回事，如果不分语境地强行去区分这两者，感觉没什么意义。但是在服务拆分的语境下面，区分这两个词或许是有意义的，甚至是有必要的。
-function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。"/>
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+function 更接近于描述我们想要的功能，比如记账的功能，汇率转换的功能，聊天的功能。而 feature 更接近于我们实现功能的方式，比如自动记账，手动记账，扫码记账。function 更为抽象，而 feature 更为具体。function 更稳定，而 feature 更易变。">
+<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://example.org/js/main.js"></script>
+		<script src="http://localhost:1313/js/main.js"></script>
 </head>
 
 <body>
@@ -44,15 +47,16 @@ function 更接近于描述我们想要的功能，比如记账的功能，汇�
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://example.org/">
-				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			<a href="http://localhost:1313/">
+				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
-	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
-			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>
+		
 	</div>
 
 	<nav class="nav">
@@ -68,6 +72,14 @@ function 更接近于描述我们想要的功能，比如记账的功能，汇�
 			
 			<li>
 				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/algo">Algo</a>
+			</li>
+			
+			<li>
+				<a href="/principles">原则</a>
 			</li>
 			
 			<li>
@@ -93,6 +105,9 @@ function 更接近于描述我们想要的功能，比如记账的功能，汇�
 					<h1 class="title">feature vs function</h1>
 				</div>
 			</div>
+
+			
+			
 					
 			<div class="markdown">
 				<p>最近看到一段关于微服务的视频：<a href="https://www.youtube.com/watch?v=k9QZ4oIOHnk&amp;list=WL&amp;index=3">拆分单体应用</a>，其中有一段话引起了我的注意：<strong>split code by feature not by functionality</strong>。</p>
@@ -107,14 +122,26 @@ function 更接近于描述我们想要的功能，比如记账的功能，汇�
 				
 					
 				
+			</div>
+
+			
+			
+			<div class="back">
+				<a href="http://localhost:1313/"><span aria-hidden="true">← Back</span></a>
+			</div>
+			
+
+			<div class="back">
+				
 			</div></div>
+		
 	</div>
+	
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+		<div>2018 </div>
+		
 	</nav>
-</div>
-
-<script>feather.replace()</script>
+</div><script>feather.replace()</script>
 </body>
 </html>

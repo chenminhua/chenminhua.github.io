@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>我只是想要一个函数啊 - 硕大的汤姆</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta itemprop="name" content="我只是想要一个函数啊">
-<meta itemprop="description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
+	
+  <meta itemprop="name" content="我只是想要一个函数啊">
+  <meta itemprop="description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
 面向对象的最重要特性有三个：封装，继承，多态。
- 在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。  对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
+在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。 对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
 addOneYearAge(person) 我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
 person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
 这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
@@ -14,13 +15,19 @@ person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一
 闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
 从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。
 function outside() { var a = 0; return function inside() { a&#43;&#43;; console.log(a); }; } var f = outside(); f(); //1 f(); //2 f(); //3 我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。
-通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。"><meta itemprop="datePublished" content="2018-03-19T20:00:08+08:00" />
-<meta itemprop="dateModified" content="2018-03-19T20:00:08+08:00" />
-<meta itemprop="wordCount" content="113">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="我只是想要一个函数啊" />
-<meta property="og:description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
+通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+(如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。)
+日常黑 spring 下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我”撕逼”。
+最近公司的后端技术栈正在尝试从 nodejs 转到 spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码 smooth 的感觉一下消失了。当我需要一个函数的时候，我需要写一个接口，再写一个类，再把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我 too yong，让我去了解一下 oop 再说，或者找 uncle bob 的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去 autowire 一个单例的对象。">
+  <meta itemprop="datePublished" content="2018-03-19T20:00:08+08:00">
+  <meta itemprop="dateModified" content="2018-03-19T20:00:08+08:00">
+  <meta itemprop="wordCount" content="113"><meta property="og:url" content="http://localhost:1313/posts/2018_%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/">
+  <meta property="og:site_name" content="硕大的汤姆">
+  <meta property="og:title" content="我只是想要一个函数啊">
+  <meta property="og:description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
 面向对象的最重要特性有三个：封装，继承，多态。
- 在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。  对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
+在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。 对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
 addOneYearAge(person) 我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
 person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
 这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
@@ -28,17 +35,22 @@ person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一
 闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
 从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。
 function outside() { var a = 0; return function inside() { a&#43;&#43;; console.log(a); }; } var f = outside(); f(); //1 f(); //2 f(); //3 我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。
-通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/2018_%E6%88%91%E5%8F%AA%E6%98%AF%E6%83%B3%E8%A6%81%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%95%8A/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-03-19T20:00:08+08:00" />
-<meta property="article:modified_time" content="2018-03-19T20:00:08+08:00" />
+通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+(如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。)
+日常黑 spring 下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我”撕逼”。
+最近公司的后端技术栈正在尝试从 nodejs 转到 spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码 smooth 的感觉一下消失了。当我需要一个函数的时候，我需要写一个接口，再写一个类，再把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我 too yong，让我去了解一下 oop 再说，或者找 uncle bob 的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去 autowire 一个单例的对象。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-03-19T20:00:08+08:00">
+    <meta property="article:modified_time" content="2018-03-19T20:00:08+08:00">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="我只是想要一个函数啊"/>
-<meta name="twitter:description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="我只是想要一个函数啊">
+  <meta name="twitter:description" content="从面向对象说起 显然，面向对象编程在很长一段时间内，都是最主流的一种编程范式。那到底什么是面向对象呢？为什么我们需要对象呢？
 面向对象的最重要特性有三个：封装，继承，多态。
- 在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。  对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
+在我看来，多态无疑是这三者中最为重要的特性，它解决了软件架构中最为复杂的依赖问题，也就是我们常说的解耦。 继承则解决了代码复用的问题，并实现了一定程度的抽象。 而封装则使数据变得更安全，同时也隐藏了数据的存储结构与类型。 对象的本质 假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是
 addOneYearAge(person) 我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是
 person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。
 这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，我觉得他们是一样的（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为你控制了数据的改变（如果你知道你在做什么的话）。
@@ -46,15 +58,18 @@ person.growUpOneYear() 这里我们有一个对象，然后给对象发送了一
 闭包 为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？
 从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：对象和闭包是同一事物的两面。下面是一段简单的 js 中使用了闭包的代码。
 function outside() { var a = 0; return function inside() { a&#43;&#43;; console.log(a); }; } var f = outside(); f(); //1 f(); //2 f(); //3 我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。
-通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。"/>
-<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
+通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。
+其实，我们可以认为对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。
+(如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。)
+日常黑 spring 下面开启吐槽时间，热爱 java 或者 spring 的同学请迅速撤离，或者准备好和我”撕逼”。
+最近公司的后端技术栈正在尝试从 nodejs 转到 spring（主要是为了好招人吧）。可能是写的还不够多，反正以前那种写代码 smooth 的感觉一下消失了。当我需要一个函数的时候，我需要写一个接口，再写一个类，再把它装配进来。为什么我不能直接使用这个函数呢！！！为什么我要写那么多没有任何数据存在的类！！！ 肯定有人要说我 too yong，让我去了解一下 oop 再说，或者找 uncle bob 的视频看看。但我真的真的只想要一个写了一堆函数还有一些常量的包，而不是去 autowire 一个单例的对象。">
+<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.css" />
 
-        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://example.org/css/dark.css" />
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-		<script src="http://example.org/js/main.js"></script>
+		<script src="http://localhost:1313/js/main.js"></script>
 </head>
 
 <body>
@@ -62,15 +77,16 @@ function outside() { var a = 0; return function inside() { a&#43;&#43;; console.
 		<div class="header">
 	
 		<div class="avatar">
-			<a href="http://example.org/">
-				<img src="https://image.freepik.com/free-vector/young-man-head-with-beard-avatar-character_24877-36786.jpg" alt="硕大的汤姆" />
+			<a href="http://localhost:1313/">
+				<img src="https://avatars.githubusercontent.com/u/10234400?v=4" alt="硕大的汤姆" />
 			</a>
 		</div>
 	
-	<h1 class="site-title"><a href="http://example.org/">硕大的汤姆</a></h1>
-	<div class="site-description"><p>Crisp, minimal personal <a href="https://github.com/knadh/hugo-ink">blog theme for Hugo</a></p><nav class="nav social">
-			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><li><a href="#" class="scheme-toggle" id="scheme-toggle"></a></li></ul>
+	<h1 class="site-title"><a href="http://localhost:1313/">硕大的汤姆</a></h1>
+	<div class="site-description"><p>The official website of Minhua Chen</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/knadh/hugo-ink" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li></ul>
 		</nav>
+		
 	</div>
 
 	<nav class="nav">
@@ -86,6 +102,14 @@ function outside() { var a = 0; return function inside() { a&#43;&#43;; console.
 			
 			<li>
 				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/algo">Algo</a>
+			</li>
+			
+			<li>
+				<a href="/principles">原则</a>
 			</li>
 			
 			<li>
@@ -111,6 +135,9 @@ function outside() { var a = 0; return function inside() { a&#43;&#43;; console.
 					<h1 class="title">我只是想要一个函数啊</h1>
 				</div>
 			</div>
+
+			
+			
 					
 			<div class="markdown">
 				<h2 id="从面向对象说起">从面向对象说起</h2>
@@ -123,28 +150,28 @@ function outside() { var a = 0; return function inside() { a&#43;&#43;; console.
 </ul>
 <h2 id="对象的本质">对象的本质</h2>
 <p>假设我们现在要写一个人员管理的软件，需要实现一个给人员年龄加 1 的功能。非面向对象的写法可能是</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">addOneYearAge(person)
-</code></pre></div><p>我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">person<span style="color:#f92672">.</span><span style="color:#a6e22e">growUpOneYear</span><span style="color:#f92672">()</span>
-</code></pre></div><p>这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">addOneYearAge</span>(person)
+</span></span></code></pre></div><p>我们拿到一个数据的引用，然后给其年龄加一。而面向对象的方式则可能是</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>person.<span style="color:#a6e22e">growUpOneYear</span>()
+</span></span></code></pre></div><p>这里我们有一个对象，然后给对象发送了一个消息，通知它发生一些变化。</p>
 <p>这两种写法都能实现我们的目标，那么那种更好呢？如果我们抛开运行性能，抛开运行时函数入口跳转等等奇怪的字眼，单纯的看看上面两段代码，<strong>我觉得他们是一样的</strong>（我相信肯定有人会说第二种更好，或许也有人会支持第一种）。但是，<strong>当你的数据有二十种改变的方式的时候，第一种写法会崩溃的更快</strong>，各种改变 person 的函数会被写在你永远想象不到的地方，而第二种写法则相对容易管理，因为<strong>你控制了数据的改变</strong>（如果你知道你在做什么的话）。</p>
 <p>所以，对象是什么已经很显而易见了。对象是一堆数据的集合，以及可以操作这些数据的方法。</p>
 <h2 id="闭包">闭包</h2>
 <p>为什么要从面向对象扯到闭包？这两个东西八竿子打不着啊？</p>
 <p>从前我也是这么认为的，直到有一天我读了 ruby 作者松本行宏的书《代码的本质》。他说：<strong>对象和闭包是同一事物的两面</strong>。下面是一段简单的 js 中使用了闭包的代码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outside</span>() {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">inside</span>() {
-    <span style="color:#a6e22e">a</span><span style="color:#f92672">++</span>;
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>);
-  };
-}
-
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">outside</span>();
-<span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//1
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//2
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//3
-</span></code></pre></div><p>我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outside</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">inside</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">a</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>);
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">outside</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">f</span>(); <span style="color:#75715e">//3
+</span></span></span></code></pre></div><p>我们可以看到 outside 函数返回了一个 inside 函数，inside 函数可以访问 outside 函数作用域内声明的变量 a。</p>
 <p>通常情况下，我们认为当函数返回时，其调用栈的栈帧(stack frame)以及其上的变量就会被销毁，所以当 outside 返回的时候，a 就应该不能访问了，但事实是 inside 函数可以始终访问到 a 变量。关于闭包可能导致的内存泄露问题不是本文讨论的重点。真正让我觉得有趣的依然是松本先生的那句话：对象和闭包是同一事物的两面。</p>
 <p>其实，我们可以认为<strong>对象是通过类机制将过程（方法）封装到了数据里面，而闭包是通过作用域将数据封装到过程（方法）里面</strong>。它们的本质都是将数据与操作数据的过程（方法）放到一起，将数据与计算放在一起罢了。</p>
 <p>(如果你还是不能理解这段内容，请仔细阅读《sicp》的第二章。)</p>
@@ -160,14 +187,26 @@ function outside() { var a = 0; return function inside() { a&#43;&#43;; console.
 				
 					
 				
+			</div>
+
+			
+			
+			<div class="back">
+				<a href="http://localhost:1313/"><span aria-hidden="true">← Back</span></a>
+			</div>
+			
+
+			<div class="back">
+				
 			</div></div>
+		
 	</div>
+	
 	<div class="footer wrapper">
 	<nav class="nav">
-		<div>2022  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+		<div>2018 </div>
+		
 	</nav>
-</div>
-
-<script>feather.replace()</script>
+</div><script>feather.replace()</script>
 </body>
 </html>
