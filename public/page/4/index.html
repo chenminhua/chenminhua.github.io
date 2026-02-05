@@ -83,16 +83,16 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">18</span>
-							<span class="rest">Jan 2026</span>
+									<span class="day">24</span>
+							<span class="rest">Dec 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2026_%E7%A9%BA%E8%85%B9%E7%9A%84%E5%A5%87%E5%A6%99%E8%87%AA%E6%84%88%E5%8A%9B/">空腹的奇妙自愈力</a>
+									<a href="/posts/2019_lsm_tree_vs_btree/">LSM Tree vs B-Tree</a>
 								</h4>
 								<h4 class="title small smaller">
-									33 words, ~0 min read 
+									92 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -100,9 +100,9 @@
 								<span class="description">
 									
 										
-这是一本关于断食的书。
+本文为《数据密集型应用系统设计》第三章第一节的读后感
 
-一日三餐让我们的消化系统变成了永不休息的机器，为了消化源源不断的食物，胰腺不停分泌着胰岛素，肝脏则忙于代谢解毒，肠胃在不停蠕动...而间歇性断食则给我们的消化系统、代谢系统乃至每一个细胞一个宝贵的“休整”机会。当...
+数据需要持久化，将内存中的状态落到磁盘上，就需要使用存储引擎。最简单的存储引擎就是一个数据文件呗，每次写入就写到文件上，而读操作就去数据文件上找数据。但是数据量大了，把所有文件找一遍...
 									
 								</span>
 							</div>
@@ -113,16 +113,16 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">16</span>
-							<span class="rest">Jan 2026</span>
+									<span class="day">21</span>
+							<span class="rest">Sep 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2026_12_rules/">12 Rules for Life</a>
+									<a href="/posts/2019_%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E4%B8%8E%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95/">隐马尔科夫链与维特比算法</a>
 								</h4>
 								<h4 class="title small smaller">
-									288 words, ~1 min read 
+									189 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -130,7 +130,107 @@
 								<span class="description">
 									
 										
-去年，在我儿子出生的前几天，我看到了 Jordan Peterson 的一个演讲，内容就是他的书《人生十二法则》。老爷子的演讲风趣幽默，又和蔼可亲。你能感觉到，他是真的希望你能过好自己的一生。最近又翻出他的书来看，每一条 rule 都简单...
+## 马尔科夫链
+
+明天的天气怎么样？明天的股市怎么样？用户下一个输入的单词会是什么？这些问题都是一个随机过程的问题（就是「随机过程随机过」的那个随机过程）。
+
+对随机过程的研究要比随机变量复杂得多，在任何一个时刻 t，对应的状态 st ...
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">04</span>
+							<span class="rest">Sep 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/posts/2019_p99%E4%B8%8E%E8%93%84%E6%B0%B4%E6%B1%A0%E7%AE%97%E6%B3%95/">P99与蓄水池算法(reservoir sampling)</a>
+								</h4>
+								<h4 class="title small smaller">
+									407 words, ~1 min read 
+								</h4>
+								<h4 class="title small smaller">
+									
+								</h4>
+								<span class="description">
+									
+										
+## 一个监控问题
+
+假设你是一个运维工作人员，维护着一个访问量巨大的服务，然后有一天，老板跑来问你这个服务的 p99 响应时间是多少？（p99 响应时间：系统 99%的请求都快于这个时间，而 1%的请求则慢于这个时间。即响应时间的 99...
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">24</span>
+							<span class="rest">Aug 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/posts/2019_cuda%E5%85%A5%E9%97%A82/">Cuda实战入门2: 将矩阵乘法速度提升 5000 倍</a>
+								</h4>
+								<h4 class="title small smaller">
+									589 words, ~2 min read 
+								</h4>
+								<h4 class="title small smaller">
+									
+								</h4>
+								<span class="description">
+									
+										
+本实验采用不同的方法来计算 8192 \* 8192 的整型矩阵乘法运算。
+
+## C 语言版
+
+C 语言是大家公认的高性能语言，那我们就从 C 语言开始吧。
+
+```c
+    // 用一位数组表示二维矩阵
+    mat1 = (in...
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">23</span>
+							<span class="rest">Aug 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/posts/2019_cuda%E5%AE%9E%E6%88%98%E5%85%A5%E9%97%A8/">Cuda实战入门</a>
+								</h4>
+								<h4 class="title small smaller">
+									440 words, ~1 min read 
+								</h4>
+								<h4 class="title small smaller">
+									
+								</h4>
+								<span class="description">
+									
+										
+CUDA (compute unified device architecture) 是 NVIDIA 所推出的一种并行计算平台和并行计算 api。
+
+CUDA 在并行计算上可以大显神威，因此，我们先要找到一个可并行的问题。一个很简单的可...
 									
 								</span>
 							</div>
@@ -142,15 +242,15 @@
 							<div class="meta">
 								<div class="date">
 									<span class="day">14</span>
-							<span class="rest">Jan 2026</span>
+							<span class="rest">Jul 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2026_the_art_of_spending_money/">The Art of Spending Money</a>
+									<a href="/posts/2019_%E7%99%BE%E5%88%86%E4%B9%8B%E4%B8%89%E5%8D%81%E4%B8%83/">为什么拒绝掉前37%的追求者是错的</a>
 								</h4>
 								<h4 class="title small smaller">
-									319 words, ~1 min read 
+									36 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -158,9 +258,9 @@
 								<span class="description">
 									
 										
-- 有些人在终于得到他们想要的东西后才明白，幸福远比当初以为的复杂得多，这实在令人感慨万千。 
-- 最糟糕的事莫过于得偿所愿；得到了自己想要的东西，却没得到自己真正需要的东西。 
-- 我见过一些富人，金钱从他们身上“索取”的远比他们从金钱...
+## Problem Formulation
+
+假设你一辈子可以遇到 100 个潜在配偶，在遇到每一个潜在配偶的时候，你只能选择接受或者拒绝。如果你选择接受，则意味着你放弃了后面所有潜在的配偶；而如果你选择拒绝，则不能反悔，只能在后面的潜...
 									
 								</span>
 							</div>
@@ -171,16 +271,16 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">10</span>
-							<span class="rest">Jan 2026</span>
+									<span class="day">23</span>
+							<span class="rest">Jun 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2026_%E9%B1%BC%E4%B8%8D%E5%AD%98%E5%9C%A8/">鱼不存在</a>
+									<a href="/posts/2019_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%87%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/">机器学习视角下的软件工程过拟合问题</a>
 								</h4>
 								<h4 class="title small smaller">
-									16 words, ~0 min read 
+									39 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -188,9 +288,11 @@
 								<span class="description">
 									
 										
-最近读了Lulu Miller 的《鱼不存在》（Why Fish Don&#39;t Exist）。非常喜欢。这本书讲了斯坦福首任校长，大卫·斯塔尔·乔丹的故事。
+软件工程中充斥着过拟合，它不但刻画了我们在构建系统时常常掉入的思维陷阱，也刻画了我们日常生活中思考与行动的方方面面。
 
-大卫是一个鱼类分类学家，他的毕生都在致力于给自然界分类，试图在混沌中建立秩序。大...
+## 什么是过拟合
+
+在机器学习中，当训练集的数据量比较少，而模型又较为复杂的时候，模型可能会出现在训练集上 fit ...
 									
 								</span>
 							</div>
@@ -201,16 +303,16 @@
 						<div class="post-header">
 							<div class="meta">
 								<div class="date">
-									<span class="day">09</span>
-							<span class="rest">Jan 2026</span>
+									<span class="day">23</span>
+							<span class="rest">Jun 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2026_inner_game_of_tennis/">The Inner Game of Tennis</a>
+									<a href="/posts/2019_%E8%87%AA%E6%88%91%E8%A7%89%E7%9F%A5%E7%9A%84%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%81%9A%E4%BA%8B%E7%9A%84%E6%80%81%E5%BA%A6/">自我觉知的能力与做事的态度</a>
 								</h4>
 								<h4 class="title small smaller">
-									28 words, ~0 min read 
+									13 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -218,133 +320,7 @@
 								<span class="description">
 									
 										
-这是一本关于关于心理的书。作者加尔韦提出了一个概念，一场网球比赛里面其实有两个比赛：内在游戏和外在游戏。在外在游戏中，你的对手是
-
-球网另一端的人；在内在游戏中，对手则是你自己。
-
-**内在游戏是为了克服所有妨碍优秀绩效表现的心理习惯而存...
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">09</span>
-							<span class="rest">Jan 2026</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/posts/2026_outlive/">超越百岁</a>
-								</h4>
-								<h4 class="title small smaller">
-									276 words, ~1 min read 
-								</h4>
-								<h4 class="title small smaller">
-									
-								</h4>
-								<span class="description">
-									
-										
-最近读了 Peter Attia 的书 &#34;Outlive -- The Science &amp; Art of Longevity&#34;，中文名为”超越百岁“。本文为一些摘录与读书笔记。
-
-&gt; 解决这个问题的唯一方法不是去更好地接住鸡蛋，而是去阻止...
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">01</span>
-							<span class="rest">Jul 2025</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/posts/2025_%E4%B8%A4%E7%A7%8D%E8%83%BD%E5%8A%9B/">两种能力</a>
-								</h4>
-								<h4 class="title small smaller">
-									8 words, ~0 min read 
-								</h4>
-								<h4 class="title small smaller">
-									
-								</h4>
-								<span class="description">
-									
-										
-要想在篮球场上抢到更多的篮板，有两个天赋很重要，一个是身高（或者垂直摸高），一个是弹跳。
-
-篮球届有一个名言：You can’t teach height，身高这玩意儿纯看天赋，后天努力对结果的影响很小。而弹跳相对而言则是可以被训练的，你...
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">30</span>
-							<span class="rest">Jun 2025</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/posts/2025_%E9%A3%8E%E9%99%A9/">风险</a>
-								</h4>
-								<h4 class="title small smaller">
-									15 words, ~0 min read 
-								</h4>
-								<h4 class="title small smaller">
-									
-								</h4>
-								<span class="description">
-									
-										
-最近有个朋友推荐了个股票给我，“数据很好，能涨三倍”。
-
-我将信将疑地打开了软件，公司还在亏损，市值不高，最近涨了两倍多（情绪很高）。很像是那种炒作割韭菜的股票。当然，还有一种可能，公司在未来一段时间可能有好消息要出来，当然市场还没有完全...
-									
-								</span>
-							</div>
-						</div>
-					</div>
-				
-					<div class="post">
-						<div class="post-header">
-							<div class="meta">
-								<div class="date">
-									<span class="day">13</span>
-							<span class="rest">Feb 2023</span>
-								</div>
-							</div>
-							<div class="matter">
-								<h4 class="title small">
-									<a href="/posts/2023_%E5%85%88%E6%9C%89%E9%B8%A1%E8%BF%98%E6%98%AF%E5%85%88%E6%9C%89%E8%9B%8B/">先有鸡还是先有蛋</a>
-								</h4>
-								<h4 class="title small smaller">
-									21 words, ~0 min read 
-								</h4>
-								<h4 class="title small smaller">
-									
-								</h4>
-								<span class="description">
-									
-										
-### 1. 先有某个语言的编译器还是先有编程语言？
-
-在编译器领域有个概念叫自举（bootstrapping），也就是用一门语言实现该语言的编译器/解释器，然后用自己的编译器编译出自己的新编译器/解释器。
-
-这是一个经典的鸡与蛋的问题，...
+最近对自己的行为模式进行了一些观察，发现自己很容易在遇到硬骨头的时候出现拖延症的现象。比如在进入某一主题的学习时，发现该主题内容非常丰富，且需要大量背景知识，于是当场演奏起了一段退堂鼓，或者浅尝辄止地看了些基本知识，成为一名“知道分子”。...
 									
 								</span>
 							</div>
@@ -356,15 +332,15 @@
 							<div class="meta">
 								<div class="date">
 									<span class="day">18</span>
-							<span class="rest">Nov 2022</span>
+							<span class="rest">Jun 2019</span>
 								</div>
 							</div>
 							<div class="matter">
 								<h4 class="title small">
-									<a href="/posts/2022_%E8%91%AC%E7%A4%BC%E9%9A%8F%E7%AC%94/">葬礼随笔</a>
+									<a href="/posts/2019_got_a_pc/">Got a PC</a>
 								</h4>
 								<h4 class="title small smaller">
-									10 words, ~0 min read 
+									144 words, ~0 min read 
 								</h4>
 								<h4 class="title small smaller">
 									
@@ -372,9 +348,37 @@
 								<span class="description">
 									
 										
-2022年，我失去了三个亲人，人生第一次如此近距离地感受到了死亡。
+从 15 年初购入人生第一台 mbp 之后，再也没有使用过 PC 了。最近趁着 618 组了一台电脑，平时的主力机器是 mbp，然后家里放了台 mac mini，但是最近为了在家里跑一些深度学习的模型，而 mac 的显卡实在是让人一言难尽...
+									
+								</span>
+							</div>
+						</div>
+					</div>
+				
+					<div class="post">
+						<div class="post-header">
+							<div class="meta">
+								<div class="date">
+									<span class="day">13</span>
+							<span class="rest">Jun 2019</span>
+								</div>
+							</div>
+							<div class="matter">
+								<h4 class="title small">
+									<a href="/posts/2019_%E5%BD%93%E6%88%91%E4%BB%AC%E8%B0%88%E8%AE%BA%E6%9D%9C%E5%85%B0%E7%89%B9/">当我们谈论杜兰特，我们其实是在谈自己</a>
+								</h4>
+								<h4 class="title small smaller">
+									15 words, ~0 min read 
+								</h4>
+								<h4 class="title small smaller">
+									
+								</h4>
+								<span class="description">
+									
+										
+**人们谈论问题容易陷入对意义的讨论，这种试图对本质的窥探虽然“有用”，却也十分危险**。
 
-今年4月份，外公去世了。我被封在上海家里，没能送他最后一程。前几天，爷爷奶奶也因为意外离世，我第一时间赶了回去送他们，这也是我人生中参加的第一次葬礼。一直保持稳定平静的...
+早上看到杜兰特跟腱受伤的新闻，各大媒体纷纷表示，杜兰特在总决赛第五场不应该复出，并指责勇士队在第五场让杜兰特上场的决定（从结果上看，这确实是一个...
 									
 								</span>
 							</div>
@@ -386,10 +390,12 @@
 <ul class="pagination">
 	<li class="page-item page-prev">
 	
+    <a href="/page/3/" class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev page</span></a>
+	
 	</li>
 	<li class="page-item page-next">
 	
-    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">Next page →</span></a>
+    <a href="/page/5/" class="page-link" aria-label="Next"><span aria-hidden="true">Next page →</span></a>
 	
 	</li>
 </ul>
