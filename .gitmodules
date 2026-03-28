@@ -4,3 +4,6 @@
 [submodule "themes/hugo-ink"]
 	path = themes/hugo-ink
 	url = https://github.com/knadh/hugo-ink.git
+[submodule "themes/nostyleplease"]
+	path = themes/nostyleplease
+	url = https://github.com/hanwenguo/hugo-theme-nostyleplease.git

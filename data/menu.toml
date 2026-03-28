@@ -1,0 +1,29 @@
+[[entries]]
+title = "Readlog"
+url = "https://chenmh.fun/readlog"
+
+[[entries]]
+title = "Vita"
+url = "https://chenmh.fun/vita"
+
+[[entries]]
+title = "Quotes"
+url = "https://chenmh.fun/quotes"
+
+[[entries]]
+title = "GitHub"
+url = "https://github.com/chenminhua"
+
+[[entries]]
+title = "Posts"
+
+  [entries.post_list]
+  section = "posts"
+  limit = 12
+  show_more = true
+  show_more_text = "All posts..."
+  show_more_url = "posts"
+
+[[entries]]
+title = "RSS"
+url = "index.xml"

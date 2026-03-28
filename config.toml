@@ -1,67 +1,50 @@
 baseURL = 'https://chenminhua.github.io/'
 languageCode = 'en-us'
 title = '硕大的汤姆'
-theme = 'ink-free'
+theme = 'nostyleplease'
 
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = '0.41.0'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'rrt'
+    tabWidth = 4
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
 
 [params]
-	subtitle = "The official website of Minhua Chen"
+  description = 'The official website of Minhua Chen'
 
-	# Optional 64x64 avatar image.
-	avatar = "https://avatars.githubusercontent.com/u/10234400?v=4"
-
-	# Content types to disable Disqus on.
-	disableDisqusTypes = ["page"]
-
-	wpm = 250
-	
-	featherIconsCDN = true
-
-	mode = "auto" # "dark" or "auto"
-	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
-	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
-	# customJS = ["js/custom.js", "js/custom1.js"]  # Custom JS scripts.
-
-# Nav.
-[[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[menu.main]]
-name = "All posts"
-url = "/posts"
-weight = 2
-
-[[menu.main]]
-name = "About"
-url = "/about"
-weight = 3
-
-[[menu.main]]
-name = "原则"
-url = "/principles"
-weight = 3
-
-[[menu.main]]
-name = "Algo"
-url = "/algo"
-weight = 3
-
-[[menu.main]]
-name = "Tags"
-url = "/tags"
-weight = 4
-
-[[params.social]]
-name = "Github"
-icon = "github"
-url = "https://github.com/knadh/hugo-ink"
-
-[[params.social]]
-name = "RSS"
-icon = "rss"
-url = "/index.xml"
+  [params.theme_config]
+    appearance = 'auto'
+    back_home_text = '← home'
+    date_format = '2006-01-02'
+    isListGroupByDate = false
+    isShowFooter = false
+    show_description = true
 
 [taxonomies]
-   tag = "tags"
+  tag = 'tags'
